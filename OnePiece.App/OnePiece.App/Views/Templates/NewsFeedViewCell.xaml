@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ViewCell xmlns="http://xamarin.com/schemas/2014/forms"
+          xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+          xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+          prism:ViewModelLocator.AutowireViewModel="True"
+          xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+          xmlns:transformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+          xmlns:iconize="clr-namespace:FormsPlugin.Iconize;assembly=FormsPlugin.Iconize"
+          xmlns:rox="clr-namespace:Rox;assembly=Rox.Xamarin.Video.Portable"
+          xmlns:converters="clr-namespace:OnePiece.App.Converters;assembly=OnePiece.App"
+          x:Class="OnePiece.App.Views.Templates.NewsFeedViewCell">
+  <Grid RowSpacing="0" BackgroundColor="White" Margin="0,0,0,10" Padding="5">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="40" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+    </Grid.RowDefinitions>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="40" />
+      <ColumnDefinition Width="*" />
+      <ColumnDefinition Width="*" />
+    </Grid.ColumnDefinitions>
+
+    <Grid Grid.Row="0" Grid.Column="0">
+      <forms:CachedImage x:Name="Avatar" Source="icon"
+                         Aspect="Fill">
+        <forms:CachedImage.Transformations>
+          <transformations:CircleTransformation />
+        </forms:CachedImage.Transformations>
+      </forms:CachedImage>
+    </Grid>
+
+    <StackLayout x:Name="PublishInfo" Grid.Row="0" Grid.ColumnSpan="2" Grid.Column="1" Spacing="0">
+      <Label Text="Troy" FontSize="12" FontAttributes="Bold" TextColor="#45686E" 
+             Margin="5,0,0,0" VerticalOptions="Center" />
+
+      <Label Text="just now" FontSize="12" TextColor="#45686E" 
+             Margin="5,0,0,0" VerticalOptions="Center" />
+    </StackLayout>
+
+    <Label Text="{Binding Title}" IsVisible="{Binding Title, Converter={x:Static converters:IsVisibleConverter.Instance}}" FontSize="22" TextColor="#45686E" Grid.Row="2" Grid.Column="0" 
+               Grid.ColumnSpan="3"
+               VerticalOptions="Center" />
+
+    <Label Text="{Binding Description}" IsVisible="{Binding Description, Converter={x:Static converters:IsVisibleConverter.Instance}}" FontSize="14" TextColor="#45686E" Grid.Row="3" Grid.Column="0" 
+           Grid.ColumnSpan="3"
+           VerticalOptions="Center" />
+
+    <Grid x:Name="GifPanel" Grid.Row="4" Grid.ColumnSpan="3" Grid.Column="0" WidthRequest="{Binding Width}" HeightRequest="{Binding Height}" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
+      <ActivityIndicator Grid.Row="0" x:Name="ActivityIndicator" IsRunning="False" HeightRequest="30" WidthRequest="30" VerticalOptions="Center" HorizontalOptions="Center"/>
+      <rox:VideoView Grid.Row="0" x:Name="Video" Source="{Binding Gif}" AutoPlay="True" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
+      <!--<forms:CachedImage Grid.Row="0" x:Name="Thumbnail" Source="{Binding Url}" LoadingPlaceholder="loading" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>-->
+      <!--<iconize:IconLabel Grid.Row="0" x:Name="PlayButton" IsVisible="True" Text="fa-play-circle" FontSize="60" TextColor="White" BackgroundColor="Transparent" HorizontalOptions="Center" VerticalOptions="Center" />-->
+    </Grid>
+  </Grid>
+</ViewCell>
