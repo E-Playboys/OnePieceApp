@@ -61,31 +61,109 @@ namespace OnePiece.App.ViewModels
             {
                 new NewsFeed()
                 {
-                    Gif = "http://res.cloudinary.com/bongvl/image/upload/v1471705758/ccrrzjhmrgnlfxez65wy.mp4",
-                    Image = "http://res.cloudinary.com/bongvl/image/upload/v1471705758/ccrrzjhmrgnlfxez65wy.png",
-                    Width = 639,
-                    Height = 387
+                    Gifs = new ObservableCollection<Gif>(){
+                        new Gif()
+                        {
+                            Url = "https://68.media.tumblr.com/fd8a4da6212583efe07c32be813dcd40/tumblr_oiqpc4Ktd71t1yvcko1_500.gif",
+                            Width = 500,
+                            Height = 500
+                        }
+                    }
                 },
                 new NewsFeed()
                 {
-                    Gif = "http://res.cloudinary.com/bongvl/image/upload/v1469802320/joo4zhusnhe9ygthpqsn.mp4",
-                    Image = "http://res.cloudinary.com/bongvl/image/upload/v1469802320/joo4zhusnhe9ygthpqsn.png",
-                    Width = 639,
-                    Height = 431
+                    Gifs = new ObservableCollection<Gif>()
+                    {
+                        new Gif()
+                        {
+                            Url = "https://68.media.tumblr.com/dd2d46bfe7ce8659acb419fc5bd31075/tumblr_oinzd6QdMM1usyygio1_540.gif",
+                            Width = 540,
+                            Height = 304
+                        },
+                        new Gif()
+                        {
+                            Url = "https://68.media.tumblr.com/8e854222867e41d572d041b4a6710e36/tumblr_oinzd6QdMM1usyygio2_540.gif",
+                            Width = 540,
+                            Height = 304
+                        }
+                    },
+                    Title = "Nico Robin",
+                    Description = "Sweet smile ;)."
                 },
                 new NewsFeed()
                 {
-                    Gif = "http://res.cloudinary.com/bongvl/image/upload/v1467095733/mfnyjj3mh2u3hapalyeh.mp4",
-                    Image = "http://res.cloudinary.com/bongvl/image/upload/v1467095733/mfnyjj3mh2u3hapalyeh.png",
-                    Width = 639,
-                    Height = 357
+                    Gifs = new ObservableCollection<Gif>()
+                    {
+                        new Gif()
+                        {
+                            Url = "https://68.media.tumblr.com/3e2913c0c5035552db72db9a814266b4/tumblr_oik9hsWrgi1v6xsm2o2_540.gif",
+                            Width = 540,
+                            Height = 304
+                        },
+                        new Gif()
+                        {
+                            Url = "https://68.media.tumblr.com/dda0ca8d51ff2a7ceacacaa9a530bbf4/tumblr_oik9hsWrgi1v6xsm2o1_540.gif",
+                            Width = 540,
+                            Height = 304
+                        },
+                        new Gif()
+                        {
+                            Url = "https://68.media.tumblr.com/ae87f92f2bfcf1d02ff3a175f7ed3e61/tumblr_oik9hsWrgi1v6xsm2o4_540.gif",
+                            Width = 540,
+                            Height = 304
+                        },
+                        new Gif()
+                        {
+                            Url = "https://68.media.tumblr.com/09dd472ed41138fd587ac56103a32048/tumblr_oik9hsWrgi1v6xsm2o6_540.gif",
+                            Width = 540,
+                            Height = 304
+                        },
+                        new Gif()
+                        {
+                            Url = "https://68.media.tumblr.com/fb92bb2da1e0d959e4cfe23261483aa4/tumblr_oik9hsWrgi1v6xsm2o3_540.gif",
+                            Width = 540,
+                            Height = 304
+                        },
+                        new Gif()
+                        {
+                            Url = "https://68.media.tumblr.com/11458265ca6144f92924c0c391a4a2de/tumblr_oik9hsWrgi1v6xsm2o5_540.gif",
+                            Width = 540,
+                            Height = 304
+                        }
+                    },
+                    Title = "This is a real title"
                 },
                 new NewsFeed()
                 {
-                    Gif = "https://media.giphy.com/media/PjYfyarIEsNGM/giphy.mp4",
-                    Image = "https://media.giphy.com/media/PjYfyarIEsNGM/giphy.gif",
-                    Width = 480,
-                    Height = 364
+                    Gifs = new ObservableCollection<Gif>()
+                    {
+                        new Gif()
+                        {
+                            Url = "https://68.media.tumblr.com/3c563608501ef46c4a1410ae7974d39c/tumblr_oigawa1j5t1sg8uefo4_540.gif",
+                            Width = 540,
+                            Height = 300
+                        },
+                        new Gif()
+                        {
+                            Url = "https://68.media.tumblr.com/78e870fa2629da2c7daed71810303820/tumblr_oigawa1j5t1sg8uefo1_540.gif",
+                            Width = 540,
+                            Height = 300
+                        },
+                        new Gif()
+                        {
+                            Url = "https://68.media.tumblr.com/9011deefab11c3294957d9829c8390a7/tumblr_oigawa1j5t1sg8uefo3_540.gif",
+                            Width = 540,
+                            Height = 300
+                        },
+                        new Gif()
+                        {
+                            Url = "https://68.media.tumblr.com/8ffabf156de3853deb49819fb4be790f/tumblr_oigawa1j5t1sg8uefo2_540.gif",
+                            Width = 540,
+                            Height = 300
+                        }
+                    },
+                    Title = "This is a real title",
+                    Description = "This is a real description. Sure, it's real. It's not fake description. Because it's real data."
                 },
             };
 

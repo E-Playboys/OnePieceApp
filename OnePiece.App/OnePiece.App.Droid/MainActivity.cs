@@ -1,8 +1,10 @@
 ﻿using Android.App;
 using Android.Content.PM;
 using Android.OS;
+using Felipecsl.GifImageViewLibrary;
 using FormsPlugin.Iconize.Droid;
 using Microsoft.Practices.Unity;
+using OnePiece.App.Droid.Renderers;
 using Plugin.Iconize.Fonts;
 using Prism.Unity;
 
@@ -21,6 +23,7 @@ namespace OnePiece.App.Droid
             FFImageLoading.Forms.Droid.CachedImageRenderer.Init();
             IconControls.Init(Resource.Id.toolbar, Resource.Id.sliding_tabs);
             Plugin.Iconize.Iconize.With(new MaterialModule()).With(new TypiconsModule());
+            GifImageViewRenderer.Init();
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
             LoadApplication(new App(new AndroidInitializer()));

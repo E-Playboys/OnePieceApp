@@ -21,7 +21,13 @@ namespace OnePiece.App.Views.Templates
             var context = BindingContext as NewsFeed;
             if (context != null)
             {
-                GifPanel.HeightRequest = GifPanel.Width * context.Height / context.Width;
+                var gifPanelHeight = 0;
+                foreach (var gif in context.Gifs)
+                {
+                    var gifHeight = GifPanel.Width * gif.Height / gif.Width;
+                    gifPanelHeight = gifPanelHeight + (int)gifHeight + 5;
+                }
+                GifPanel.HeightRequest = gifPanelHeight - 5;
             }
         }
     }

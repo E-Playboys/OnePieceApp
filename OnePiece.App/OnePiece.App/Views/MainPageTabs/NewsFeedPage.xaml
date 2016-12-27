@@ -7,13 +7,12 @@
                          x:Class="OnePiece.App.Views.NewsFeedPage">
   <StackLayout>
     <controls:ExtendedListView x:Name="NewsFeedListView"
-                BackgroundColor="#ECEFF4"
+                SeparatorVisibility="None"
                 ItemsSource="{Binding NewsFeeds}"
                 HasUnevenRows="true"
                 IsPullToRefreshEnabled="true"
                 RefreshCommand="{Binding RefreshCommand}"
                 IsRefreshing="{Binding IsBusy}"
-                LoadMoreCommand="{Binding LoadMoreCommand}"
                 HorizontalOptions="FillAndExpand"
                 VerticalOptions="FillAndExpand">
       <x:Arguments>

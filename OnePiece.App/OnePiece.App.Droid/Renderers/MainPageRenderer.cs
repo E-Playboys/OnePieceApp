@@ -174,7 +174,7 @@ namespace OnePiece.App.Droid.Renderers
             //bar.UseFixedMode();
             bar.UseDarkTheme();
             PopulateBottomBarItems(bar, pageIntents);
-            bar.ItemContainer.SetBackgroundColor(Android.Graphics.Color.Rgb(244, 67, 54));
+            bar.ItemContainer.SetBackgroundColor(Android.Graphics.Color.Rgb(30, 38, 43));
             bar.SetTextAppearance(Resource.Style.BottomBarTitle);
 
             return bar;
