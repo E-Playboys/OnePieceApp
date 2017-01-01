@@ -1,6 +1,36 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <controls:TabContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                                        xmlns:controls="clr-namespace:OnePiece.App.Controls;assembly=OnePiece.App"
+                                       xmlns:converters="clr-namespace:OnePiece.App.Converters;assembly=OnePiece.App"
+                                       xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+                                       prism:ViewModelLocator.AutowireViewModel="True"
                                        x:Class="OnePiece.App.Views.VideoPage">
-  <Label Text="Video" />
+  <Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+    <ActivityIndicator IsRunning="{Binding IsBusy}" VerticalOptions="CenterAndExpand"/>
+    <controls:ExtendedListView AllowSelectItem="False" ItemsSource="{Binding Videos}"
+                               RowHeight="80"
+                               IsVisible="{Binding IsBusy, Converter={x:Static converters:InverseBoolConverter.Instance}}"
+                               ItemClickCommand="{Binding ViewVideoCommand}">
+      <x:Arguments>
+        <ListViewCachingStrategy>RecycleElement</ListViewCachingStrategy>
+      </x:Arguments>
+      <controls:ExtendedListView.ItemTemplate>
+        <DataTemplate>
+          <ViewCell>
+            <Grid BackgroundColor="White">
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="80"/>
+                <ColumnDefinition Width="*"/>
+              </Grid.ColumnDefinitions>
+
+              <StackLayout Grid.Column="0" BackgroundColor="Blue"/>
+              <StackLayout Grid.Column="1">
+                <Label Text="{Binding Title}"/>
+              </StackLayout>
+            </Grid>
+          </ViewCell>
+        </DataTemplate>
+      </controls:ExtendedListView.ItemTemplate>
+    </controls:ExtendedListView>
+  </Grid>
 </controls:TabContentPage>
