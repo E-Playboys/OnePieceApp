@@ -47,6 +47,7 @@
     <Compile Include="Controls\TabNavigationPage.cs" />
     <Compile Include="Converters\InverseBoolConverter.cs" />
     <Compile Include="Converters\IsVisibleConverter.cs" />
+    <Compile Include="Messages.cs" />
     <Compile Include="Models\Anime.cs" />
     <Compile Include="Models\Gif.cs" />
     <Compile Include="Models\NewsFeed.cs" />

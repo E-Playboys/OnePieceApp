@@ -1,15 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Prism.Mvvm;
+using Xamarin.Forms;
 
 namespace OnePiece.App.Models
 {
-    public class Gif
+    public class Gif : BindableBase
     {
-        public string Url { get; set; }
         public int Width { get; set; }
         public int Height { get; set; }
+
+        private string _url;
+        public string Url
+        {
+            get { return _url; }
+            set { SetProperty(ref _url, value); }
+        }
     }
 }

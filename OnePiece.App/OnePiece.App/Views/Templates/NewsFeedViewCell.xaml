@@ -19,7 +19,7 @@
       <RowDefinition Height="Auto" />
     </Grid.RowDefinitions>
 
-    <Grid Grid.Row="0" Padding="10">
+    <Grid Grid.Row="0" RowSpacing="0" ColumnSpacing="0" Padding="10">
       <Grid.RowDefinitions>
         <RowDefinition Height="25" />
         <RowDefinition Height="25"/>
@@ -38,9 +38,9 @@
       <Label Grid.Row="1" Grid.Column="1" Text="just now" FontSize="12" TextColor="#D8DADA" Margin="10,0,0,0" VerticalOptions="Start" />
     </Grid>
 
-    <Label Text="{Binding Title}" IsVisible="{Binding Title, Converter={x:Static converters:IsVisibleConverter.Instance}}" FontSize="22" TextColor="#D8DADA" Grid.Row="2" VerticalTextAlignment="Center" Margin="10,0,10,10"/>
+    <Label Text="{Binding Title}" IsVisible="{Binding Title, Converter={x:Static converters:IsVisibleConverter.Instance}}" FontSize="22" TextColor="#D8DADA" Grid.Row="2" VerticalOptions="Center" Margin="10,0,10,5"/>
 
-    <Label Text="{Binding Description}" IsVisible="{Binding Description, Converter={x:Static converters:IsVisibleConverter.Instance}}" FontSize="14" TextColor="#D8DADA" Grid.Row="3" VerticalTextAlignment="Center" Margin="10,0,10,10"/>
+    <Label Text="{Binding Description}" IsVisible="{Binding Description, Converter={x:Static converters:IsVisibleConverter.Instance}}" FontSize="14" TextColor="#D8DADA" Grid.Row="3" VerticalOptions="Center" Margin="10,0,10,5"/>
 
     <controls:BindableGrid x:Name="GifPanel" Grid.Row="4"
                 ItemsSource="{Binding Gifs}"
@@ -48,7 +48,7 @@
                 VerticalOptions="FillAndExpand">
       <controls:BindableGrid.ItemTemplate>
         <DataTemplate>
-          <controls:GifImage Source="{Binding Url}" BackgroundColor="#4CAF50" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
+          <controls:GifImage Url="{Binding Url}" BackgroundColor="#4CAF50" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
         </DataTemplate>
       </controls:BindableGrid.ItemTemplate>
     </controls:BindableGrid>
