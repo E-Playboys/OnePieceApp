@@ -58,7 +58,18 @@ namespace OnePiece.App.Droid.Renderers
                         {
                             _gif.StartAnimation();
                         }
-                        
+
+                        _gif.Click += (o, args) =>
+                        {
+                            if (_gif.IsAnimating)
+                            {
+                                _gif.StopAnimation();
+                            }
+                            else
+                            {
+                                _gif.StartAnimation();
+                            }
+                        };
                         _loaded = true;
                         _loading = false;
                     }
@@ -71,14 +82,21 @@ namespace OnePiece.App.Droid.Renderers
                             return;
                         }
 
-                        var appearingUrls = message.AppearingUrls;
-                        if (appearingUrls.Contains(s))
+                        try
                         {
-                            _gif.StartAnimation();
+                            var appearingUrls = message.AppearingUrls;
+                            if (appearingUrls.Contains(s))
+                            {
+                                _gif.StartAnimation();
+                            }
+                            else
+                            {
+                                _gif.StopAnimation();
+                            }
                         }
-                        else
+                        catch (Exception)
                         {
-                            _gif.StopAnimation();
+                            // ignored
                         }
                     });
                 }
