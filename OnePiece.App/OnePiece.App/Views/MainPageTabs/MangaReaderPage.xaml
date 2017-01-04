@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                 xmlns:controls="clr-namespace:OnePiece.App.Controls;assembly=OnePiece.App"
+                 xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+                 xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+                 prism:ViewModelLocator.AutowireViewModel="True"
+                 xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+                 x:Class="OnePiece.App.Views.MainPageTabs.MangaReaderPage">
+  <StackLayout>
+    <Button Text="Close" TextColor="#000000" Clicked="OnClose" VerticalOptions="Start"></Button>
+    <Label Text="{Binding MangaBook.Title}" VerticalOptions="Center" HorizontalOptions="Center" />
+
+    <controls:ExtendedListView x:Name="MangaPagesView"
+                SeparatorVisibility="Default"
+                ItemsSource="{Binding MangaBook.Pages}"
+                HasUnevenRows="true"
+                IsRefreshing="{Binding IsBusy}"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand">
+      <x:Arguments>
+        <ListViewCachingStrategy>RecycleElement</ListViewCachingStrategy>
+      </x:Arguments>
+      <controls:ExtendedListView.ItemTemplate>
+        <DataTemplate>
+          <ViewCell>
+            <forms:CachedImage Source="{Binding ImageUrl}" Aspect="AspectFill" />
+          </ViewCell>
+        </DataTemplate>
+      </controls:ExtendedListView.ItemTemplate>
+    </controls:ExtendedListView>
+  </StackLayout>
+</pages:PopupPage>
