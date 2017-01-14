@@ -9,17 +9,17 @@ namespace OnePiece.App.Controls
 
         public TabNavigationPage(Page root) : base(root)
         {
-            _root = (TabContentPage)root;
+            _root = root as TabContentPage;
         }
 
         public void SendAppearing()
         {
-            _root.SendAppearing();
+            _root?.SendAppearing();
         }
 
         public void SendDisappearing()
         {
-            _root.SendDisappearing();
+            _root?.SendDisappearing();
         }
     }
 }

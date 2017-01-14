@@ -4,8 +4,44 @@
              xmlns:unity="clr-namespace:Prism.Unity;assembly=Prism.Unity.Forms"
              x:Class="OnePiece.App.App">
   <Application.Resources>
+    <ResourceDictionary>
+      <Style TargetType="Label" x:Key="VideoListItemTitle">
+        <Setter Property="FontAttributes" Value="Bold"/>
+      </Style>
 
-    <!-- Application resource dictionary -->
+      <Style TargetType="Label" x:Key="VideoListItemDescription">
+      </Style>
 
+      <Style TargetType="Image" x:Key="VideoListItemThumbnail">
+        <Setter Property="BackgroundColor" Value="Black"/>
+      </Style>
+
+      <Style TargetType="Label" x:Key="SeasonListItemTitle">
+        <Setter Property="FontAttributes" Value="Bold"/>
+      </Style>
+
+      <Style TargetType="Label" x:Key="SeasonListItemDescription">
+      </Style>
+
+      <Style TargetType="Image" x:Key="SeasonListItemThumbnail">
+        <Setter Property="BackgroundColor" Value="Black"/>
+      </Style>
+
+      <Style TargetType="Label" x:Key="FeaturedVideoTitle" BasedOn="{StaticResource VideoListItemTitle}">
+        <Setter Property="TextColor" Value="White"/>
+      </Style>
+
+      <Style TargetType="Label" x:Key="FeaturedVideoDescription" BasedOn="{StaticResource VideoListItemDescription}">
+        <Setter Property="TextColor" Value="White"/>
+      </Style>
+
+      <Style TargetType="Image" x:Key="FeaturedVideoThumbnail" BasedOn="{StaticResource VideoListItemThumbnail}">
+      </Style>
+      
+      <OnPlatform x:Key="IconToolbarItemColor" x:TypeArguments="Color">
+        <OnPlatform.iOS>Default</OnPlatform.iOS>
+        <OnPlatform.Android>White</OnPlatform.Android>
+      </OnPlatform>
+    </ResourceDictionary>
   </Application.Resources>
 </unity:PrismApplication>

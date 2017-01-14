@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:OnePiece.App.Controls;assembly=OnePiece.App"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             xmlns:converters="clr-namespace:OnePiece.App.Converters;assembly=OnePiece.App"
+             xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:iconize="clr-namespace:FormsPlugin.Iconize;assembly=FormsPlugin.Iconize"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="OnePiece.App.Views.VideoListPage">
+  <ContentPage.ToolbarItems>
+    <iconize:IconToolbarItem Icon="md-refresh" Command="{Binding RefreshDataCommand}" IconColor="{StaticResource IconToolbarItemColor}"/>
+  </ContentPage.ToolbarItems>
+
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="Auto"/>
+    </Grid.RowDefinitions>
+
+    <!-- Multi-season -->
+    <Grid Grid.Row="0" IsVisible="{Binding IsMultiSeason}">
+      <Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+        <ActivityIndicator IsRunning="{Binding IsBusy}" VerticalOptions="CenterAndExpand"/>
+
+        <Grid IsVisible="{Binding IsBusy, Converter={x:Static converters:InverseBoolConverter.Instance}}">
+          <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="2*"/>
+          </Grid.RowDefinitions>
+
+          <Grid Grid.Row="0" BindingContext="{Binding FeaturedVideo}">
+            <Grid.RowDefinitions>
+              <RowDefinition Height="2*"/>
+              <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <ffimage:CachedImage Grid.Row="0" Grid.RowSpan="2" Aspect="AspectFit" DownsampleToViewSize="true" Source="{Binding Thumbnail}" Style="{StaticResource FeaturedVideoThumbnail}"/>
+            <StackLayout Grid.Row="1" BackgroundColor="#80000000">
+              <Label Text="{Binding Title}" Style="{StaticResource FeaturedVideoTitle}"/>
+              <Label Text="{Binding Description}" Style="{StaticResource FeaturedVideoDescription}"/>
+            </StackLayout>
+          </Grid>
+
+          <controls:ExtendedListView Grid.Row="1" AllowSelectItem="False" ItemsSource="{Binding Seasons}"
+                                   RowHeight="80"
+                                   ItemClickCommand="{Binding ViewSeasonCommand}"
+                                   IsPullToRefreshEnabled="True"
+                                   IsRefreshing="{Binding IsRefreshingData}"
+                                   RefreshCommand="{Binding RefreshDataCommand}">
+            <x:Arguments>
+              <ListViewCachingStrategy>RecycleElement</ListViewCachingStrategy>
+            </x:Arguments>
+            <controls:ExtendedListView.ItemTemplate>
+              <DataTemplate>
+                <ViewCell>
+                  <Grid BackgroundColor="White">
+                    <Grid.ColumnDefinitions>
+                      <ColumnDefinition Width="80"/>
+                      <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <ffimage:CachedImage Grid.Column="0" DownsampleToViewSize="true" Source="{Binding Thumbnail}" Style="{StaticResource SeasonListItemThumbnail}"/>
+                    <StackLayout Grid.Column="1">
+                      <Label Text="{Binding Title}" Style="{StaticResource SeasonListItemTitle}"/>
+                      <Label Text="{Binding Description}" Style="{StaticResource SeasonListItemDescription}"/>
+                      <Label Text="{Binding EpisodeInfo, StringFormat='Ep. {0}'}" Style="{StaticResource SeasonListItemDescription}"/>
+                    </StackLayout>
+                  </Grid>
+                </ViewCell>
+              </DataTemplate>
+            </controls:ExtendedListView.ItemTemplate>
+          </controls:ExtendedListView>
+        </Grid>
+      </Grid>
+    </Grid>
+
+    <!-- Single season -->
+    <Grid Grid.Row="1" IsVisible="{Binding IsMultiSeason, Converter={x:Static converters:InverseBoolConverter.Instance}}">
+      <Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+        <ActivityIndicator IsRunning="{Binding IsBusy}" VerticalOptions="CenterAndExpand"/>
+
+        <Grid IsVisible="{Binding IsBusy, Converter={x:Static converters:InverseBoolConverter.Instance}}">
+          <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="2*"/>
+          </Grid.RowDefinitions>
+
+          <Grid Grid.Row="0" BindingContext="{Binding FeaturedVideo}">
+            <Grid.RowDefinitions>
+              <RowDefinition Height="2*"/>
+              <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            
+            <ffimage:CachedImage Grid.Row="0" Grid.RowSpan="2" Aspect="AspectFit" DownsampleToViewSize="true" Source="{Binding Thumbnail}" Style="{StaticResource FeaturedVideoThumbnail}"/>
+            <StackLayout Grid.Row="1" BackgroundColor="#80000000">
+              <Label Text="{Binding Title}" Style="{StaticResource FeaturedVideoTitle}"/>
+              <Label Text="{Binding Description}" Style="{StaticResource FeaturedVideoDescription}"/>
+            </StackLayout>
+          </Grid>
+
+          <controls:ExtendedListView Grid.Row="1" AllowSelectItem="False" ItemsSource="{Binding Videos}"
+                                   RowHeight="80"
+                                   ItemClickCommand="{Binding ViewVideoCommand}"
+                                   IsPullToRefreshEnabled="True"
+                                   IsRefreshing="{Binding IsRefreshingData}"
+                                   RefreshCommand="{Binding RefreshDataCommand}">
+            <x:Arguments>
+              <ListViewCachingStrategy>RecycleElement</ListViewCachingStrategy>
+            </x:Arguments>
+            <controls:ExtendedListView.ItemTemplate>
+              <DataTemplate>
+                <ViewCell>
+                  <Grid BackgroundColor="White">
+                    <Grid.ColumnDefinitions>
+                      <ColumnDefinition Width="80"/>
+                      <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <ffimage:CachedImage Grid.Column="0" DownsampleToViewSize="true" Source="{Binding Thumbnail}" Style="{StaticResource VideoListItemThumbnail}"/>
+                    <StackLayout Grid.Column="1">
+                      <Label Text="{Binding Title}" Style="{StaticResource VideoListItemTitle}"/>
+                      <Label Text="{Binding Description}" Style="{StaticResource VideoListItemDescription}"/>
+                    </StackLayout>
+                  </Grid>
+                </ViewCell>
+              </DataTemplate>
+            </controls:ExtendedListView.ItemTemplate>
+          </controls:ExtendedListView>
+        </Grid>
+      </Grid>
+    </Grid>
+  </Grid>
+</ContentPage>

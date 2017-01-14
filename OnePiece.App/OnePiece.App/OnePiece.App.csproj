@@ -51,14 +51,21 @@
     <Compile Include="Models\Anime.cs" />
     <Compile Include="Models\Gif.cs" />
     <Compile Include="Models\NewsFeed.cs" />
+    <Compile Include="Models\Season.cs" />
     <Compile Include="Models\Video.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AppService.cs" />
+    <Compile Include="Utilities\ObservableCollectionEx.cs" />
+    <Compile Include="Utilities\ObservableRangeCollection.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="ViewModels\Common\VideoListPageViewModel.cs" />
     <Compile Include="ViewModels\MainPageTabs\AnimePageViewModel.cs" />
     <Compile Include="ViewModels\MainPageTabs\NewsFeedPageViewModel.cs" />
     <Compile Include="ViewModels\MainPageTabs\VideoPageViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
+    <Compile Include="Views\Common\VideoListPage.xaml.cs">
+      <DependentUpon>VideoListPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\LeftMenu.xaml.cs">
       <DependentUpon>LeftMenu.xaml</DependentUpon>
     </Compile>
@@ -199,6 +206,13 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Common\VideoListPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Forms.2.3.3.175\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.3.3.175\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

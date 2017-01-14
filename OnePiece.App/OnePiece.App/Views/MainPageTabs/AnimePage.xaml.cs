@@ -1,9 +1,10 @@
 ﻿using OnePiece.App.Controls;
 using OnePiece.App.ViewModels;
+using Xamarin.Forms;
 
 namespace OnePiece.App.Views
 {
-    public partial class AnimePage : TabContentPage
+    public partial class AnimePage : TabbedPage
     {
         private readonly AnimePageViewModel _viewModel;
 
@@ -11,14 +12,14 @@ namespace OnePiece.App.Views
         {
             InitializeComponent();
 
-            _viewModel = (AnimePageViewModel) BindingContext;
+            //_viewModel = (AnimePageViewModel) BindingContext;
         }
 
         protected override async void OnAppearing()
         {
             base.OnAppearing();
 
-            await _viewModel.ExecuteLoadAnimesCommandAsync();
+            //await _viewModel.ExecuteLoadAnimesCommandAsync();
         }
     }
 }
