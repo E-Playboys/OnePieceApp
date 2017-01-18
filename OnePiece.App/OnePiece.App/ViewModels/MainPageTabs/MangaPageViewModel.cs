@@ -3,7 +3,9 @@ using OnePiece.App.Services;
 using OnePiece.App.Views.MainPageTabs;
 using Prism.Commands;
 using Rg.Plugins.Popup.Services;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -12,6 +14,8 @@ namespace OnePiece.App.ViewModels
     class MangaPageViewModel : BaseViewModel
     {
         public object LastTappedItem { get; set; }
+
+        public Dictionary<string, int> ChapterNameIdMap { get; set; } = new Dictionary<string, int>();
 
         public DelegateCommand RefreshCommand { get; set; }
         public DelegateCommand ItemTappedCommand { get; set; }
@@ -35,17 +39,24 @@ namespace OnePiece.App.ViewModels
         {
             var item = LastTappedItem as MangaBook;
 
+            await OpenChapter(item);
+        }
+
+        public async Task OpenChapter(MangaBook item)
+        {
+            var context = new MangaReaderPageViewModel(AppService)
+            {
+                MangaBook = item
+            };
+            await context.FetchAllPages();
+
             var mangaReaderPage = new MangaReaderPage()
             {
-                BindingContext = new MangaReaderPageViewModel(AppService)
-                {
-                    MangaBook = item
-                },
-                BackgroundColor = Color.White,
+                BindingContext = context,
+                BackgroundColor = Color.Black,
                 Opacity = 1,
                 CloseWhenBackgroundIsClicked = false
             };
-
             await PopupNavigation.PushAsync(mangaReaderPage);
         }
 
@@ -56,15 +67,27 @@ namespace OnePiece.App.ViewModels
 
         public async Task LoadMangaBooks(int skip = 0)
         {
-            for (int i = skip; i < skip + 20; i++)
+            for (int i = skip; i < skip + 21; i++)
             {
                 var book = new MangaBook
                 {
-                    Title = $"Chapter {i}",
-                    ImageUrl = "http://st.thichtruyentranh.com/images/icon/0048/one-piece1416866288.jpg"
+                    Title = "Magi",
+                    ChapterNum = $"Chapter {i}",
+                    ImageUrl = "http://st.thichtruyentranh.com/images/icon/0048/one-piece1416866288.jpg",
+                    PrevChapter = i - 1,
+                    NextChapter = i + 1
                 };
                 MangaBooks.Add(book);
             }
+        }
+
+        public async Task<List<string>> LoadChapterPicker()
+        {
+            for (int i = 0; i < 800; i++)
+            {
+                ChapterNameIdMap.Add($"Chapter {i}", i);
+            }
+            return ChapterNameIdMap.Select(r => r.Key).ToList();
         }
 
         public bool CanExecuteRefreshCommand()

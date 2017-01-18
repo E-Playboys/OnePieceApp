@@ -26,7 +26,9 @@ namespace OnePiece.App.Droid
 
             FFImageLoading.Forms.Droid.CachedImageRenderer.Init();
             IconControls.Init(Resource.Id.toolbar, Resource.Id.sliding_tabs);
-            Plugin.Iconize.Iconize.With(new MaterialModule()).With(new TypiconsModule());
+            Plugin.Iconize.Iconize
+                .With(new MaterialModule())
+                .With(new TypiconsModule());
             GifImageViewRenderer.Init();
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
