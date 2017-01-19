@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using OnePiece.App.Services;
+﻿using OnePiece.App.Services;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
+using System;
+using System.Diagnostics;
+using System.Threading;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace OnePiece.App.ViewModels

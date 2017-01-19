@@ -1,4 +1,5 @@
-﻿using Android.App;
+﻿using System;
+using Android.App;
 using Android.Content.PM;
 using Android.OS;
 using Felipecsl.GifImageViewLibrary;
@@ -7,6 +8,9 @@ using Microsoft.Practices.Unity;
 using OnePiece.App.Droid.Renderers;
 using Plugin.Iconize.Fonts;
 using Prism.Unity;
+using XLabs.Ioc;
+using XLabs.Forms;
+using XLabs.Platform.Device;
 
 namespace OnePiece.App.Droid
 {
@@ -22,11 +26,28 @@ namespace OnePiece.App.Droid
 
             FFImageLoading.Forms.Droid.CachedImageRenderer.Init();
             IconControls.Init(Resource.Id.toolbar, Resource.Id.sliding_tabs);
-            Plugin.Iconize.Iconize.With(new MaterialModule()).With(new TypiconsModule());
+            Plugin.Iconize.Iconize
+                .With(new MaterialModule())
+                .With(new TypiconsModule());
             GifImageViewRenderer.Init();
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
             LoadApplication(new App(new AndroidInitializer()));
+
+            if (!Resolver.IsSet)
+            {
+                this.SetIoc();
+            }
+        }
+
+        private void SetIoc()
+        {
+            var resolverContainer = new SimpleContainer();
+
+            resolverContainer.Register(t => AndroidDevice.CurrentDevice)
+                .Register(t => t.Resolve<IDevice>().Display);
+
+            Resolver.SetResolver(resolverContainer.GetResolver());
         }
     }
 
