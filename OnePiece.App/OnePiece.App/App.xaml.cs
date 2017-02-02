@@ -34,6 +34,7 @@ namespace OnePiece.App
             Container.RegisterTypeForNavigation<AnimePage>();
             Container.RegisterTypeForNavigation<MangaPage>();
             Container.RegisterTypeForNavigation<VideoPage>();
+            Container.RegisterTypeForNavigation<VideoPlayerPage>();
 
             Container.RegisterType<IAppService, AppService>();
         }

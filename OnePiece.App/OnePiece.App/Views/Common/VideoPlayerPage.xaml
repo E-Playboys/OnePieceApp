@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:OnePiece.App.Controls;assembly=OnePiece.App"
+             x:Class="OnePiece.App.Views.VideoPlayerPage">
+  <controls:VideoView x:Name="VideoView" BackgroundColor="Black" AutoPlay="True" Source="http://www.sample-videos.com/video/mp4/720/big_buck_bunny_720p_10mb.mp4"/>
+</ContentPage>

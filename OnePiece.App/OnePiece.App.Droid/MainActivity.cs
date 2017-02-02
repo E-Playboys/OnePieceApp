@@ -1,10 +1,13 @@
 ﻿using System;
+using Acr.UserDialogs;
 using Android.App;
 using Android.Content.PM;
 using Android.OS;
+using Android.Views;
 using Felipecsl.GifImageViewLibrary;
 using FormsPlugin.Iconize.Droid;
 using Microsoft.Practices.Unity;
+using OnePiece.App.Droid.Helpers;
 using OnePiece.App.Droid.Renderers;
 using Plugin.Iconize.Fonts;
 using Prism.Unity;
@@ -24,12 +27,16 @@ namespace OnePiece.App.Droid
 
             base.OnCreate(bundle);
 
+            UserDialogs.Init(this);
             FFImageLoading.Forms.Droid.CachedImageRenderer.Init();
             IconControls.Init(Resource.Id.toolbar, Resource.Id.sliding_tabs);
             Plugin.Iconize.Iconize
                 .With(new MaterialModule())
                 .With(new TypiconsModule());
             GifImageViewRenderer.Init();
+
+            //Set our status bar helper DecorView. This enables us to hide the notification bar for fullscreen
+            StatusBarHelper.DecorView = Window.DecorView;
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
             LoadApplication(new App(new AndroidInitializer()));
@@ -38,6 +45,15 @@ namespace OnePiece.App.Droid
             {
                 this.SetIoc();
             }
+        }
+
+        public override void OnAttachedToWindow()
+        {
+            base.OnAttachedToWindow();
+            //Set our status bar helper AppActionBar. This enables us to hide the ActionBar for fullscreen
+            //Always hide the actionbar/toolbar if you are hiding the notification bar
+            if (ActionBar != null)
+                StatusBarHelper.AppActionBar = ActionBar;
         }
 
         private void SetIoc()

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using OnePiece.App.Models;
 using OnePiece.App.Services;
 using OnePiece.App.Utilities;
+using OnePiece.App.Views;
 using Prism.Commands;
 
 namespace OnePiece.App.ViewModels
@@ -58,15 +59,23 @@ namespace OnePiece.App.ViewModels
 
         public DelegateCommand RefreshDataCommand { get; set; }
 
+        public DelegateCommand PlayVideoCommand { get; set; }
+
         public VideoListPageViewModel(IAppService appService) : base(appService)
         {
             RefreshDataCommand = new DelegateCommand(async () => await ExecuteRefreshDataCommandAsync());
+            PlayVideoCommand = new DelegateCommand(async () => await ExecutePlayVideoCommandAsync());
         }
 
         private async Task ExecuteRefreshDataCommandAsync()
         {
             await LoadAsync();
             IsRefreshingData = false;
+        }
+
+        private async Task ExecutePlayVideoCommandAsync()
+        {
+            await AppService.Navigation.NavigateAsync(nameof(VideoPlayerPage), useModalNavigation: true);
         }
 
         public async Task LoadAsync()
