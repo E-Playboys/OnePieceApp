@@ -113,7 +113,9 @@ namespace OnePiece.App.Droid.Renderers
                 _nativeVideoView.LayoutParameters = new FrameLayout.LayoutParams(-1, -1)
                 {
                     Gravity = GravityFlags.Fill,
-                    TopMargin = -StatusBarHelper.StatusBarHeight
+                    TopMargin = -StatusBarHelper.StatusBarHeight,
+                    Width = Acr.DeviceInfo.DeviceInfo.Hardware.ScreenHeight,
+                    Height = Acr.DeviceInfo.DeviceInfo.Hardware.ScreenWidth 
                 };
             }
             else

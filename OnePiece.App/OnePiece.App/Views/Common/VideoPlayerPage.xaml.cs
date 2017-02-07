@@ -14,5 +14,21 @@ namespace OnePiece.App.Views
         {
             InitializeComponent();
         }
+
+        protected override void OnSizeAllocated(double width, double height)
+        {
+            base.OnSizeAllocated(width, height);
+            if (width > height)
+            {
+                VideoView.HeightRequest = Acr.DeviceInfo.DeviceInfo.Hardware.ScreenWidth;
+                VideoView.WidthRequest = Acr.DeviceInfo.DeviceInfo.Hardware.ScreenHeight;
+            }
+            else
+            {
+                VideoView.HeightRequest = 200;
+                VideoView.WidthRequest = Acr.DeviceInfo.DeviceInfo.Hardware.ScreenWidth;
+                Label.HeightRequest = 0;
+            }
+        }
     }
 }

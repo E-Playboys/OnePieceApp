@@ -3,5 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:controls="clr-namespace:OnePiece.App.Controls;assembly=OnePiece.App"
              x:Class="OnePiece.App.Views.VideoPlayerPage">
-  <controls:VideoView x:Name="VideoView" BackgroundColor="Black" AutoPlay="True" Source="http://vredir.nixcdn.com/49ef31c726cbcc509624d28aa53a5547/58993953/SongClip28/DaoHaiTacTap700Vietsub-V.A-4029503_360.mp4"/>
+  <Grid RowSpacing="0">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="*" />
+    </Grid.RowDefinitions>
+    <controls:VideoView Grid.Row="0" x:Name="VideoView" BackgroundColor="Black" AutoPlay="True" Source="http://vredir.nixcdn.com/49ef31c726cbcc509624d28aa53a5547/58993953/SongClip28/DaoHaiTacTap700Vietsub-V.A-4029503_360.mp4"/>
+    <Label x:Name="Label" Grid.Row="1" Text="Troy" TextColor="Red" />
+  </Grid>
+  
 </ContentPage>
