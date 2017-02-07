@@ -16,33 +16,13 @@
       <RowDefinition Height="Auto" />
       <RowDefinition Height="Auto" />
       <RowDefinition Height="Auto" />
-      <RowDefinition Height="Auto" />
     </Grid.RowDefinitions>
 
-    <Grid Grid.Row="0" RowSpacing="0" ColumnSpacing="0" Padding="10">
-      <Grid.RowDefinitions>
-        <RowDefinition Height="25" />
-        <RowDefinition Height="25"/>
-      </Grid.RowDefinitions>
-      <Grid.ColumnDefinitions>
-        <ColumnDefinition Width="50"/>
-        <ColumnDefinition Width="*" />
-      </Grid.ColumnDefinitions>
-      <forms:CachedImage Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" x:Name="Avatar" Source="icon" Aspect="Fill">
-        <forms:CachedImage.Transformations>
-          <transformations:CircleTransformation />
-        </forms:CachedImage.Transformations>
-      </forms:CachedImage>
-      
-      <Label Grid.Row="0" Grid.Column="1" Text="Troy" FontSize="12" FontAttributes="Bold" TextColor="#D8DADA" Margin="10,0,0,0" VerticalOptions="End" />
-      <Label Grid.Row="1" Grid.Column="1" Text="just now" FontSize="12" TextColor="#D8DADA" Margin="10,0,0,0" VerticalOptions="Start" />
-    </Grid>
+    <Label Text="{Binding Title}" IsVisible="{Binding Title, Converter={x:Static converters:IsVisibleConverter.Instance}}" FontSize="22" TextColor="#D8DADA" Grid.Row="0" VerticalOptions="Center" Margin="10,10,10,10"/>
 
-    <Label Text="{Binding Title}" IsVisible="{Binding Title, Converter={x:Static converters:IsVisibleConverter.Instance}}" FontSize="22" TextColor="#D8DADA" Grid.Row="2" VerticalOptions="Center" Margin="10,0,10,5"/>
+    <Label Text="{Binding Description}" IsVisible="{Binding Description, Converter={x:Static converters:IsVisibleConverter.Instance}}" FontSize="14" TextColor="#D8DADA" Grid.Row="1" VerticalOptions="Center" Margin="10,0,10,10"/>
 
-    <Label Text="{Binding Description}" IsVisible="{Binding Description, Converter={x:Static converters:IsVisibleConverter.Instance}}" FontSize="14" TextColor="#D8DADA" Grid.Row="3" VerticalOptions="Center" Margin="10,0,10,5"/>
-
-    <controls:BindableGrid x:Name="GifPanel" Grid.Row="4"
+    <controls:BindableGrid x:Name="GifPanel" Grid.Row="2"
                 ItemsSource="{Binding Gifs}"
                 HorizontalOptions="FillAndExpand"
                 VerticalOptions="FillAndExpand">
@@ -52,5 +32,24 @@
         </DataTemplate>
       </controls:BindableGrid.ItemTemplate>
     </controls:BindableGrid>
+
+    <Grid Grid.Row="3" RowSpacing="0" ColumnSpacing="0" Padding="10">
+      <Grid.RowDefinitions>
+        <RowDefinition Height="30" />
+      </Grid.RowDefinitions>
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="30"/>
+        <ColumnDefinition Width="*" />
+        <ColumnDefinition Width="*" />
+      </Grid.ColumnDefinitions>
+      <forms:CachedImage Grid.Row="0" Grid.Column="0" x:Name="Avatar" Source="icon" Aspect="Fill">
+        <forms:CachedImage.Transformations>
+          <transformations:CircleTransformation />
+        </forms:CachedImage.Transformations>
+      </forms:CachedImage>
+      
+      <Label Grid.Row="0" Grid.Column="1" Text="Troy" FontSize="12" FontAttributes="Bold" Margin="10,0,0,0" TextColor="#D8DADA" VerticalOptions="Center" HorizontalOptions="Start" />
+      <Label Grid.Row="0" Grid.Column="2" Text="just now" FontSize="12" TextColor="#D8DADA" Margin="10,0,0,0" VerticalOptions="Center" HorizontalOptions="End" />
+    </Grid>
   </Grid>
 </ViewCell>
