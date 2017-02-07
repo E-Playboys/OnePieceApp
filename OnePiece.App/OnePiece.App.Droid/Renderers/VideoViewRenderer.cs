@@ -49,7 +49,23 @@ namespace OnePiece.App.Droid.Renderers
             _nativeVideoView = (Android.Widget.VideoView)Control.GetChildAt(0);
             _mediaController = new MediaController(_nativeVideoView.Context);
             _nativeVideoView.SetMediaController(_mediaController);
-            _nativeVideoView.SetOnPreparedListener(new VideoViewOnPreparedListener());
+            _nativeVideoView.Info += (sender, args) =>
+            {
+                var what = args.What;
+                if (what == MediaInfo.BufferingStart)
+                {
+                    UserDialogs.Instance.ShowLoading("Buffering ...", MaskType.None);
+                }
+
+                if (what == MediaInfo.BufferingEnd)
+                {
+                    UserDialogs.Instance.HideLoading();
+                }
+            };
+            _nativeVideoView.Prepared += (sender, args) =>
+            {
+                UserDialogs.Instance.HideLoading();
+            };
 
             await SetSourceAsync(_videoView);
 
@@ -93,15 +109,26 @@ namespace OnePiece.App.Droid.Renderers
                 uiOptions |= (int)SystemUiFlags.ImmersiveSticky;
 
                 StatusBarHelper.DecorView.SystemUiVisibility = (StatusBarVisibility)uiOptions;
-                //StatusBarHelper.AppActionBar?.Hide();
+                
+                _nativeVideoView.LayoutParameters = new FrameLayout.LayoutParams(-1, -1)
+                {
+                    Gravity = GravityFlags.Fill,
+                    TopMargin = -StatusBarHelper.StatusBarHeight
+                };
             }
             else
             {
                 var uiOptions = (int)SystemUiFlags.LayoutStable;
                 uiOptions |= (int)SystemUiFlags.LayoutFullscreen;
-                uiOptions |= (int)SystemUiFlags.Fullscreen;
                 StatusBarHelper.DecorView.SystemUiVisibility = (StatusBarVisibility)uiOptions;
-                //StatusBarHelper.AppActionBar?.Show();
+
+                _nativeVideoView.LayoutParameters = new FrameLayout.LayoutParams(-1, -1)
+                {
+                    Gravity = GravityFlags.Center
+                };
+
+                _mediaController.Show();
+                _isShowingController = true;
             }
         }
 
@@ -179,65 +206,6 @@ namespace OnePiece.App.Droid.Renderers
             catch
             {
             }
-        }
-
-        class VideoViewOnPreparedListener : Java.Lang.Object, MediaPlayer.IOnPreparedListener
-        {
-            public void OnPrepared(MediaPlayer mp)
-            {
-                mp.SetOnInfoListener(new VideoViewOnInfoListener());
-                mp.SetOnErrorListener(new VideoViewOnErrorListener());
-            }
-
-            class VideoViewOnInfoListener : Java.Lang.Object, MediaPlayer.IOnInfoListener
-            {
-                public bool OnInfo(MediaPlayer mp, MediaInfo what, int extra)
-                {
-                    if (what == MediaInfo.BufferingStart)
-                    {
-                        UserDialogs.Instance.ShowLoading("Buffering ...", MaskType.None);
-                    }
-
-                    if (what == MediaInfo.BufferingEnd)
-                    {
-                        UserDialogs.Instance.HideLoading();
-                    }
-
-                    return false;
-                }
-            }
-
-            class VideoViewOnErrorListener : Java.Lang.Object, MediaPlayer.IOnErrorListener
-            {
-                public bool OnError(MediaPlayer mp, MediaError what, int extra)
-                {
-                    UserDialogs.Instance.HideLoading();
-                    UserDialogs.Instance.AlertAsync("Error loading video!", okText: "OK");
-                    return false;
-                }
-            }
-
-            // THIS IS UNSTABLE
-            //class VideoViewOnBufferingUpdateListener : Java.Lang.Object, MediaPlayer.IOnBufferingUpdateListener
-            //{
-            //    private int _lastBufferedPercent;
-
-            //    public void OnBufferingUpdate(MediaPlayer mp, int percent)
-            //    {
-            //        if (percent == 100)
-            //        {
-            //            UserDialogs.Instance.HideLoading();
-            //        }
-            //        else
-            //        {
-            //            if (_lastBufferedPercent != percent)
-            //            {
-            //                _lastBufferedPercent = percent;
-            //                UserDialogs.Instance.ShowLoading($"Buffering {percent}% ...");
-            //            }
-            //        }
-            //    }
-            //}
         }
     }
 }

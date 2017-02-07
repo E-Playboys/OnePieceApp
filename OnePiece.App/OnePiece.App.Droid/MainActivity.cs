@@ -37,6 +37,12 @@ namespace OnePiece.App.Droid
 
             //Set our status bar helper DecorView. This enables us to hide the notification bar for fullscreen
             StatusBarHelper.DecorView = Window.DecorView;
+            
+            int statusBarResourceId = Resources.GetIdentifier("status_bar_height", "dimen", "android");
+            if (statusBarResourceId > 0)
+            {
+                StatusBarHelper.StatusBarHeight = Resources.GetDimensionPixelSize(statusBarResourceId);
+            }
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
             LoadApplication(new App(new AndroidInitializer()));

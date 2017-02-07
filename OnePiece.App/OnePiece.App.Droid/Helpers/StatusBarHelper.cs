@@ -16,6 +16,7 @@ namespace OnePiece.App.Droid.Helpers
     //These will be utilized to hide the notification bar and ActionBar for fullscreen
     public static class StatusBarHelper
     {
+        public static int StatusBarHeight { get; set; }
         public static View DecorView
         {
             get;
