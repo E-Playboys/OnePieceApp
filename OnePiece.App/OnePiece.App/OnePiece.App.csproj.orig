@@ -57,22 +57,16 @@
     <Compile Include="Messages.cs" />
     <Compile Include="Models\Anime.cs" />
     <Compile Include="Models\Gif.cs" />
-    <Compile Include="Models\MangaChapter.cs" />
-    <Compile Include="Models\MangaImage.cs" />
-    <Compile Include="Models\MangaVolume.cs" />
+    <Compile Include="Models\MangaBook.cs" />
+    <Compile Include="Models\MangaPage.cs" />
     <Compile Include="Models\NewsFeed.cs" />
     <Compile Include="Models\Season.cs" />
     <Compile Include="Models\Video.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AppService.cs" />
+    <Compile Include="Services\GetMangaBookRq.cs" />
     <Compile Include="Services\IStatusBar.cs" />
-    <Compile Include="Services\ListRequest.cs" />
-    <Compile Include="Services\Manga\GetChapterRq.cs" />
-    <Compile Include="Services\Manga\GetChapterRs.cs" />
-    <Compile Include="Services\Manga\GetVolumeRq.cs" />
-    <Compile Include="Services\Manga\ListMangaChaptersRq.cs" />
-    <Compile Include="Services\Manga\ListVolumesRq.cs" />
-    <Compile Include="Services\Manga\MangaService.cs" />
+    <Compile Include="Services\MangaService.cs" />
     <Compile Include="Utilities\ObservableCollectionEx.cs" />
     <Compile Include="Utilities\ObservableRangeCollection.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
@@ -212,12 +206,14 @@
       <HintPath>..\..\packages\Rox.Xamarin.Video.2.1.0\lib\portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Rox.Xamarin.Video.Portable.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="System.Net.Http">
-      <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\MonoAndroid\v1.0\System.Net.Http.dll</HintPath>
-    </Reference>
+<<<<<<< Updated upstream
     <Reference Include="Splat, Version=1.6.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Splat.1.6.2\lib\Portable-net45+win+wpa81+wp80\Splat.dll</HintPath>
       <Private>True</Private>
+=======
+    <Reference Include="System.Net.Http">
+      <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\MonoAndroid\v1.0\System.Net.Http.dll</HintPath>
+>>>>>>> Stashed changes
     </Reference>
     <Reference Include="System.Reactive.Core, Version=2.2.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Rx-Core.2.2.5\lib\portable-net45+winrt45+wp8+wpa81\System.Reactive.Core.dll</HintPath>

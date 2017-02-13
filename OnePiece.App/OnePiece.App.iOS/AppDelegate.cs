@@ -22,6 +22,8 @@ namespace OnePiece.App.iOS
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
+            App.ScreenWidth = (int)UIScreen.MainScreen.Bounds.Width;
+
             FFImageLoading.Forms.Touch.CachedImageRenderer.Init();
             Plugin.Iconize.Iconize.With(new Plugin.Iconize.Fonts.MaterialModule()).With(new Plugin.Iconize.Fonts.TypiconsModule());
             FormsPlugin.Iconize.iOS.IconControls.Init();

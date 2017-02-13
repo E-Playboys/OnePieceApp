@@ -1,6 +1,7 @@
 ﻿using Microsoft.Practices.Unity;
 using OnePiece.App.Controls;
 using OnePiece.App.Services;
+using OnePiece.App.Services.Manga;
 using OnePiece.App.Views;
 using Prism.Unity;
 using Xamarin.Forms;
@@ -11,6 +12,8 @@ namespace OnePiece.App
 {
     public partial class App : PrismApplication
     {
+        static public int ScreenWidth;
+
         public App(IPlatformInitializer initializer = null) : base(initializer) { }
 
         protected override void OnInitialized()
@@ -37,6 +40,7 @@ namespace OnePiece.App
             Container.RegisterTypeForNavigation<VideoPlayerPage>();
 
             Container.RegisterType<IAppService, AppService>();
+            Container.RegisterType<IMangaService, MangaService>();
         }
 
         protected override void OnStart()

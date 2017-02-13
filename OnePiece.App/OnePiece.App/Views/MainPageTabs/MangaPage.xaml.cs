@@ -4,7 +4,6 @@ using System.Linq;
 using Xamarin.Forms;
 using System;
 using FormsPlugin.Iconize;
-using System.Collections.Generic;
 using OnePiece.App.Models;
 
 namespace OnePiece.App.Views
@@ -30,16 +29,9 @@ namespace OnePiece.App.Views
             var context = BindingContext as MangaPageViewModel;
             if (context == null || ChapterPicker.SelectedIndex == -1) return;
             var item = ChapterPicker.Items[ChapterPicker.SelectedIndex];
-            var index = context.ChapterNameIdMap[item];
+            var chapterId = context.ChapterNameIdMap[item];
 
-            var book = new MangaBook
-            {
-                Title = "Magi",
-                ChapterNum = $"Chapter {index}",
-                PrevChapter = index - 1,
-                NextChapter = index + 1
-            };
-            await context.OpenChapter(book);
+            await context.OpenChapter(chapterId);
             ChapterPicker.Unfocus();
         }
 
@@ -53,16 +45,18 @@ namespace OnePiece.App.Views
             var context = BindingContext as MangaPageViewModel;
             if (context != null)
             {
-                if (!context.MangaBooks.Any())
+                if (!context.MangaChapters.Any())
                 {
-                    await context.LoadMangaBooks();
+                    await context.LoadMangaChapters();
                 }
 
-                // Load chapter picker
-                var chapterPickerList = await context.LoadChapterPicker();
-                foreach (var chap in chapterPickerList)
+                // Initialize chapter picker
+                await context.LoadChapterPicker();
+                var chapterNames = context.ChapterNameIdMap.Select(r => r.Key);
+
+                foreach (var chapterName in chapterNames)
                 {
-                    ChapterPicker.Items.Add(chap);
+                    ChapterPicker.Items.Add(chapterName);
                 }
             }
             base.OnAppearing();

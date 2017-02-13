@@ -35,11 +35,11 @@ namespace OnePiece.App.Views.MainPageTabs
         private async Task OnItemAppearing(object sender, ItemVisibilityEventArgs e)
         {
             var context = BindingContext as MangaReaderPageViewModel;
-            var currentPage = e.Item as Models.MangaPage;
+            var currentPage = e.Item as Models.MangaImage;
 
             if (currentPage == null || context == null) return;
 
-            var index = context.AllPages.IndexOf(currentPage);
+            var index = context.MangaChapter.MangaImages.IndexOf(currentPage);
             context.CurrentPageNum = index + 1;
 
             await ShowInfoBars(_hideInfoCancelSource);
@@ -51,14 +51,18 @@ namespace OnePiece.App.Views.MainPageTabs
         {
             var context = BindingContext as MangaReaderPageViewModel;
             if (context == null) return;
-            await context.PrevChapter();
+            context.AllPages.Clear();
+            context.MangaChapter.MangaImages.Clear();
+            await context.GoPrevChapter();
         }
 
         private async Task OnNextChapterClicked(object sender, EventArgs e)
         {
             var context = BindingContext as MangaReaderPageViewModel;
             if (context == null) return;
-            await context.NextChapter();
+            context.AllPages.Clear();
+            context.MangaChapter.MangaImages.Clear();
+            await context.GoNextChapter();
         }
 
         protected override async void OnAppearing()
@@ -66,8 +70,8 @@ namespace OnePiece.App.Views.MainPageTabs
             var context = BindingContext as MangaReaderPageViewModel;
             if (context != null)
             {
-                context.MangaBook.Pages.Clear();
-                await context.FetchAllPages();
+                context.MangaChapter.MangaImages.Clear();
+                await context.InitializeChapter();
                 await context.LoadMorePages();
             }
             base.OnAppearing();
