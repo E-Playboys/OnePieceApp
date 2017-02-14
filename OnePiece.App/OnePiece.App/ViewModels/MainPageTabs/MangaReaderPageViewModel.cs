@@ -1,5 +1,6 @@
 ﻿using OnePiece.App.Models;
 using OnePiece.App.Services;
+using OnePiece.App.Services.Manga;
 using Prism.Commands;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,23 +10,26 @@ namespace OnePiece.App.ViewModels
 {
     public class MangaReaderPageViewModel : BaseViewModel
     {
-        private MangaBook _mangaBook = new MangaBook();
-        public MangaBook MangaBook
+        private MangaChapter _mangaChapter = new MangaChapter();
+        public MangaChapter MangaChapter
         {
             get
             {
-                return _mangaBook;
+                return _mangaChapter;
             }
             set
             {
-                SetProperty(ref _mangaBook, value);
+                SetProperty(ref _mangaChapter, value);
             }
         }
 
-        public List<MangaPage> AllPages { get; set; } = new List<MangaPage>();
+        public int MangaChapterId { get; set; }
+        public int? PrevChapterId { get; set; }
+        public int? NextChapterId { get; set; }
 
+        public Queue<MangaImage> AllPages { get; set; } = new Queue<MangaImage>();
         public DelegateCommand RefreshCommand { get; set; }
-        public DelegateCommand<MangaPage> LoadMoreCommand { get; set; }
+        public DelegateCommand<MangaImage> LoadMoreCommand { get; set; }
 
         private int _currentPageNum;
         public int CurrentPageNum
@@ -40,81 +44,79 @@ namespace OnePiece.App.ViewModels
                 OnPropertyChanged(nameof(CurrentPageString));
             }
         }
-        public int TotalPages
-        {
-            get
-            {
-                return AllPages.Count;
-            }
-        }
+
+        public int TotalPageCount { get; set; }
+
         public string CurrentPageString
         {
             get
             {
-                return CurrentPageNum + "/" + TotalPages;
+                return CurrentPageNum + "/" + TotalPageCount;
             }
         }
 
-        public MangaReaderPageViewModel(IAppService appService) : base(appService)
+        private readonly IMangaService _mangaService;
+
+        public MangaReaderPageViewModel(IAppService appService, IMangaService mangaService) : base(appService)
         {
             RefreshCommand = DelegateCommand.FromAsyncHandler(ExecuteRefreshCommand, CanExecuteRefreshCommand);
-            LoadMoreCommand = DelegateCommand<MangaPage>.FromAsyncHandler(ExecuteLoadMoreCommand, CanExecuteLoadMoreCommand);
+            LoadMoreCommand = DelegateCommand<MangaImage>.FromAsyncHandler(ExecuteLoadMoreCommand, CanExecuteLoadMoreCommand);
+
+            _mangaService = mangaService;
         }
 
-        public async Task NextChapter()
+        public async Task GoNextChapter()
         {
-            var newBook = new MangaBook();
-            newBook.ChapterNum = $"Chapter {MangaBook.NextChapter}";
-            newBook.Title = "Magi";
-            newBook.PrevChapter = MangaBook.PrevChapter + 1;
-            newBook.NextChapter = MangaBook.NextChapter + 1;
-            MangaBook = newBook;
+            if (!NextChapterId.HasValue) return;
 
-            await FetchAllPages();
+            MangaChapterId = NextChapterId.Value;
+            await InitializeChapter();
             await LoadMorePages();
         }
 
-        public async Task PrevChapter()
+        public async Task GoPrevChapter()
         {
-            var newBook = new MangaBook();
-            newBook.ChapterNum = $"Chapter {MangaBook.PrevChapter}";
-            newBook.Title = "Magi";
-            newBook.PrevChapter = MangaBook.PrevChapter - 1;
-            newBook.NextChapter = MangaBook.NextChapter - 1;
-            MangaBook = newBook;
+            if (!PrevChapterId.HasValue) return;
 
-            await FetchAllPages();
+            MangaChapterId = PrevChapterId.Value;
+            await InitializeChapter();
             await LoadMorePages();
         }
 
-        public async Task FetchAllPages()
+        public async Task InitializeChapter()
         {
-            AllPages = new List<MangaPage>();
-
-            for (int i = 0; i < 20; i++)
+            if (MangaChapterId > 0)
             {
-                var page = new MangaPage
+                var rs = await _mangaService.GetChapterAsync(new GetChapterRq
                 {
-                    Title = $"Page {i}",
-                    ImageUrl = "http://i.imgur.com/mfKNPEF.jpg",
-                    MinimumHeight = 200
-                };
-                AllPages.Add(page);
+                    ChapterId = MangaChapterId
+                });
+
+                if (rs.Chapter == null) return;
+
+                NextChapterId = rs.NextChapterId;
+                PrevChapterId = rs.PrevChapterId;
+
+                TotalPageCount = rs.Chapter.MangaImages.Count;
+                AllPages = new Queue<MangaImage>(rs.Chapter.MangaImages);
+                rs.Chapter.MangaImages.Clear();
+                MangaChapter = rs.Chapter;
             }
         }
 
         public async Task LoadMorePages(int skip = 0)
         {
             var pageLoad = 4;
+            var popCount = 0;
 
-            if (MangaBook.Pages.Count > AllPages.Count - pageLoad)
+            while (AllPages.Count > 0)
             {
-                return;
-            }
+                if (popCount >= pageLoad) break;
 
-            for (int i = skip; i < skip + pageLoad; i++)
-            {
-                MangaBook.Pages.Add(AllPages[i]);
+                var nextPage = AllPages.Dequeue();
+                nextPage.ImageWidth = App.ScreenWidth;
+                MangaChapter.MangaImages.Add(nextPage);
+                popCount++;
             }
         }
 
@@ -127,22 +129,22 @@ namespace OnePiece.App.ViewModels
         {
             IsBusy = true;
 
-            MangaBook.Pages.Clear();
+            await InitializeChapter();
             await LoadMorePages();
 
             IsBusy = false;
         }
 
-        public bool CanExecuteLoadMoreCommand(MangaPage item)
+        public bool CanExecuteLoadMoreCommand(MangaImage item)
         {
-            return IsNotBusy && (!MangaBook.Pages.Any() || !MangaBook.Pages[0].IsLoading);
+            return IsNotBusy && (!MangaChapter.MangaImages.Any() || !MangaChapter.MangaImages[0].IsLoading);
         }
 
-        public async Task ExecuteLoadMoreCommand(MangaPage item)
+        public async Task ExecuteLoadMoreCommand(MangaImage item)
         {
             IsBusy = true;
 
-            var skip = MangaBook.Pages.Count;
+            var skip = MangaChapter.MangaImages.Count;
             await LoadMorePages(skip);
 
             IsBusy = false;

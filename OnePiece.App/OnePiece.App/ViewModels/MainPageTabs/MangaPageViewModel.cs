@@ -1,5 +1,6 @@
 ﻿using OnePiece.App.Models;
 using OnePiece.App.Services;
+using OnePiece.App.Services.Manga;
 using OnePiece.App.Views.MainPageTabs;
 using Prism.Commands;
 using Rg.Plugins.Popup.Services;
@@ -14,41 +15,43 @@ namespace OnePiece.App.ViewModels
     class MangaPageViewModel : BaseViewModel
     {
         public object LastTappedItem { get; set; }
-
         public Dictionary<string, int> ChapterNameIdMap { get; set; } = new Dictionary<string, int>();
 
         public DelegateCommand RefreshCommand { get; set; }
         public DelegateCommand ItemTappedCommand { get; set; }
-        public DelegateCommand<MangaBook> LoadMoreCommand { get; set; }
+        public DelegateCommand<MangaChapter> LoadMoreCommand { get; set; }
 
-        private ObservableCollection<MangaBook> _mangaBooks = new ObservableCollection<MangaBook>();
-        public ObservableCollection<MangaBook> MangaBooks
+        private ObservableCollection<MangaChapter> _mangaChapters = new ObservableCollection<MangaChapter>();
+        public ObservableCollection<MangaChapter> MangaChapters
         {
-            get { return _mangaBooks ?? (_mangaBooks = new ObservableCollection<MangaBook>()); }
-            set { SetProperty(ref _mangaBooks, value); }
+            get { return _mangaChapters ?? (_mangaChapters = new ObservableCollection<MangaChapter>()); }
+            set { SetProperty(ref _mangaChapters, value); }
         }
 
-        public MangaPageViewModel(IAppService appService) : base(appService)
+        private readonly IMangaService _mangaService;
+
+        public MangaPageViewModel(IAppService appService, IMangaService mangaService) : base(appService)
         {
             RefreshCommand = DelegateCommand.FromAsyncHandler(ExecuteRefreshCommand, CanExecuteRefreshCommand);
             ItemTappedCommand = DelegateCommand.FromAsyncHandler(ExecuteItemTappedCommand, CanExecuteItemTappedCommand);
-            LoadMoreCommand = DelegateCommand<MangaBook>.FromAsyncHandler(ExecuteLoadMoreCommand, CanExecuteLoadMoreCommand);
+            LoadMoreCommand = DelegateCommand<MangaChapter>.FromAsyncHandler(ExecuteLoadMoreCommand, CanExecuteLoadMoreCommand);
+
+            _mangaService = mangaService;
         }
 
         public async Task ExecuteItemTappedCommand()
         {
-            var item = LastTappedItem as MangaBook;
+            var item = LastTappedItem as MangaChapter;
 
-            await OpenChapter(item);
+            await OpenChapter(item.Id);
         }
 
-        public async Task OpenChapter(MangaBook item)
+        public async Task OpenChapter(int chapterId)
         {
-            var context = new MangaReaderPageViewModel(AppService)
+            var context = new MangaReaderPageViewModel(AppService, _mangaService)
             {
-                MangaBook = item
+                MangaChapterId = chapterId
             };
-            await context.FetchAllPages();
 
             var mangaReaderPage = new MangaReaderPage()
             {
@@ -65,29 +68,28 @@ namespace OnePiece.App.ViewModels
             return IsNotBusy;
         }
 
-        public async Task LoadMangaBooks(int skip = 0)
+        public async Task LoadMangaChapters(int skip = 0)
         {
-            for (int i = skip; i < skip + 21; i++)
+            const int takeCount = 21;
+
+            var chapters = await _mangaService.ListChaptersAsync(new ListMangaChaptersRq
             {
-                var book = new MangaBook
-                {
-                    Title = "Magi",
-                    ChapterNum = $"Chapter {i}",
-                    ImageUrl = "http://st.thichtruyentranh.com/images/icon/0048/one-piece1416866288.jpg",
-                    PrevChapter = i - 1,
-                    NextChapter = i + 1
-                };
-                MangaBooks.Add(book);
+                Skip = skip,
+                Take = takeCount
+            });
+
+            var screenWidth = App.ScreenWidth;
+            foreach (var chapter in chapters)
+            {
+                chapter.CoverImageWidth = (screenWidth - 30) / 3;
+                MangaChapters.Add(chapter);
             }
         }
 
-        public async Task<List<string>> LoadChapterPicker()
+        public async Task LoadChapterPicker()
         {
-            for (int i = 0; i < 800; i++)
-            {
-                ChapterNameIdMap.Add($"Chapter {i}", i);
-            }
-            return ChapterNameIdMap.Select(r => r.Key).ToList();
+            var allChapters = await _mangaService.ListChaptersAsync(new ListMangaChaptersRq());
+            ChapterNameIdMap = allChapters.ToDictionary(r => r.ChapterNum, r => r.Id);
         }
 
         public bool CanExecuteRefreshCommand()
@@ -99,23 +101,23 @@ namespace OnePiece.App.ViewModels
         {
             IsBusy = true;
 
-            MangaBooks = new ObservableCollection<MangaBook>();
-            await LoadMangaBooks();
+            MangaChapters = new ObservableCollection<MangaChapter>();
+            await LoadMangaChapters();
 
             IsBusy = false;
         }
 
-        public bool CanExecuteLoadMoreCommand(MangaBook item)
+        public bool CanExecuteLoadMoreCommand(MangaChapter item)
         {
-            return IsNotBusy;
+            return IsNotBusy && (!MangaChapters.Any() || !MangaChapters[0].IsLoading);
         }
 
-        public async Task ExecuteLoadMoreCommand(MangaBook item)
+        public async Task ExecuteLoadMoreCommand(MangaChapter item)
         {
             IsBusy = true;
 
-            var skip = MangaBooks.Count;
-            await LoadMangaBooks(skip);
+            var skip = MangaChapters.Count;
+            await LoadMangaChapters(skip);
 
             IsBusy = false;
         }

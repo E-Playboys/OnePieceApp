@@ -22,6 +22,8 @@ namespace OnePiece.App.Droid
     {
         protected override void OnCreate(Bundle bundle)
         {
+            App.ScreenWidth = (int)(Resources.DisplayMetrics.WidthPixels / Resources.DisplayMetrics.Density);
+
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
 

@@ -12,7 +12,7 @@
 
     <controls:ExtendedListView x:Name="MangaPagesView"
                                SeparatorVisibility="Default"
-                               ItemsSource="{Binding MangaBook.Pages}"
+                               ItemsSource="{Binding MangaChapter.MangaImages}"
                                HasUnevenRows="true"
                                IsRefreshing="{Binding IsBusy}"
                                ItemAppearing="OnItemAppearing"
@@ -33,7 +33,8 @@
                 <TapGestureRecognizer Tapped="OnItemTapped"/>
               </controls:PinchToZoomContainer.GestureRecognizers>
               <controls:PinchToZoomContainer.Content>
-                <forms:CachedImage BackgroundColor="#4CAF50" Source="{Binding ImageUrl}" Aspect="AspectFill" IsLoading="{Binding IsLoading}" />
+                <forms:CachedImage Source="{Binding Link}" IsLoading="{Binding IsLoading}" WidthRequest="{Binding ImageWidth}"
+                                   Aspect="AspectFill" BackgroundColor="#4CAF50" />
               </controls:PinchToZoomContainer.Content>
             </controls:PinchToZoomContainer>
           </ViewCell>
@@ -47,8 +48,8 @@
       </StackLayout>
       <BoxView HeightRequest="1" Color="#4CAF50"></BoxView>
       <StackLayout Padding="10" Spacing="0">
-        <Label Text="{Binding MangaBook.Title}" FontAttributes="Bold" TextColor="White" HorizontalOptions="Start" />
-        <Label Text="{Binding MangaBook.ChapterNum}" TextColor="Gray" HorizontalOptions="Start" />
+        <Label Text="{Binding MangaChapter.Name}" FontAttributes="Bold" TextColor="White" HorizontalOptions="Start" />
+        <Label Text="{Binding MangaChapter.ChapterNum}" TextColor="Gray" HorizontalOptions="Start" />
       </StackLayout>
     </StackLayout>
 
