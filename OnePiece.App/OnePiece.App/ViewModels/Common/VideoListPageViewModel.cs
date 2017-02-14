@@ -75,7 +75,7 @@ namespace OnePiece.App.ViewModels
 
         private async Task ExecutePlayVideoCommandAsync()
         {
-            await AppService.Navigation.NavigateAsync(nameof(VideoPlayerPage), useModalNavigation: true);
+            await AppService.Navigation.NavigateAsync(nameof(VideoPlayerPage));
         }
 
         public async Task LoadAsync()

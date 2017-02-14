@@ -54,7 +54,7 @@ namespace OnePiece.App.Droid.Renderers
                 var what = args.What;
                 if (what == MediaInfo.BufferingStart)
                 {
-                    UserDialogs.Instance.ShowLoading("Buffering ...", MaskType.None);
+                    //UserDialogs.Instance.ShowLoading("Buffering ...", MaskType.None);
                 }
 
                 if (what == MediaInfo.BufferingEnd)
@@ -71,7 +71,7 @@ namespace OnePiece.App.Droid.Renderers
 
             if (_videoView.AutoPlay)
             {
-                UserDialogs.Instance.ShowLoading("Buffering ...", MaskType.None);
+                //UserDialogs.Instance.ShowLoading("Buffering ...", MaskType.None);
                 _nativeVideoView.Start();
             }
         }

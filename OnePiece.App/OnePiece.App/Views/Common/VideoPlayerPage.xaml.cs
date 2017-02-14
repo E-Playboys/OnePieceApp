@@ -25,9 +25,8 @@ namespace OnePiece.App.Views
             }
             else
             {
-                VideoView.HeightRequest = 200;
+                VideoView.HeightRequest = (int)(width * 9 / 16);
                 VideoView.WidthRequest = Acr.DeviceInfo.DeviceInfo.Hardware.ScreenWidth;
-                Label.HeightRequest = 0;
             }
         }
     }

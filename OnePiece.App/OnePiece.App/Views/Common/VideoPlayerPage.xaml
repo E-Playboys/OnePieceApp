@@ -2,14 +2,91 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:controls="clr-namespace:OnePiece.App.Controls;assembly=OnePiece.App"
+             xmlns:flv="clr-namespace:DLToolkit.Forms.Controls;assembly=DLToolkit.Forms.Controls.FlowListView"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              x:Class="OnePiece.App.Views.VideoPlayerPage">
   <Grid RowSpacing="0">
     <Grid.RowDefinitions>
       <RowDefinition Height="Auto" />
       <RowDefinition Height="*" />
     </Grid.RowDefinitions>
-    <controls:VideoView Grid.Row="0" x:Name="VideoView" BackgroundColor="Black" AutoPlay="True" Source="http://vredir.nixcdn.com/49ef31c726cbcc509624d28aa53a5547/58993953/SongClip28/DaoHaiTacTap700Vietsub-V.A-4029503_360.mp4"/>
-    <Label x:Name="Label" Grid.Row="1" Text="Troy" TextColor="Red" />
+    <controls:VideoView Grid.Row="0" x:Name="VideoView" BackgroundColor="Black" AutoPlay="True" Source="http://vredir.nixcdn.com/622d549da432d3198ca91cb175cb204d/589a8e20/SongClip28/DaoHaiTacTap700Vietsub-V.A-4029503_360.mp4"/>
+    <ScrollView Grid.Row="1" BackgroundColor="#090b0d" Padding="10,0,0,0">
+      <StackLayout BackgroundColor="#BDBDBD" Spacing="0">
+        <StackLayout Style="{StaticResource VideoPlayerPanelNoLine}">
+          <Label Text="Năng lực tối thượng. Bí mật về sức mạnh của trái Ope Ope!" Style="{StaticResource VideoPlayerTitle}" />
+          <Label Text="One Piece 700 Vietsub+Engsub" Style="{StaticResource VideoPlayerSubTitle}" />
+          <Grid>
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <StackLayout Grid.Column="0" Orientation="Horizontal" HorizontalOptions="End">
+              <Button Text="360p" BackgroundColor="#4CAF50" TextColor="#090b0d" FontSize="10" WidthRequest="50" />
+              <Button Text="720p" BackgroundColor="White" TextColor="#090b0d" FontSize="10" WidthRequest="50"/>
+            </StackLayout>
+          </Grid>
+        </StackLayout>
+        <StackLayout Style="{StaticResource VideoPlayerPanel}">
+          <StackLayout Orientation="Horizontal">
+            <Label Text="Chương 1" TextColor="#4CAF50" Style="{StaticResource VideoPlayerPanelHeader}" />
+            <Label Text="Chương 2" Style="{StaticResource VideoPlayerPanelHeader}" />
+          </StackLayout>
+          <controls:ExtendedFlowListView FlowColumnCount="6" RowHeight="50" SeparatorVisibility="None"
+                                     FlowItemsSource="{Binding Episodes}">
+            <x:Arguments>
+              <ListViewCachingStrategy>RecycleElement</ListViewCachingStrategy>
+            </x:Arguments>
+            <flv:FlowListView.FlowColumnTemplate>
+              <DataTemplate>
+                <Button BackgroundColor="#4CAF50" FontSize="10" Text="{Binding Title, StringFormat='Tập {0}'}" />
+              </DataTemplate>
+            </flv:FlowListView.FlowColumnTemplate>
+          </controls:ExtendedFlowListView>
+        </StackLayout>
+        <StackLayout Style="{StaticResource VideoPlayerPanel}">
+          <Label Text="Giới thiệu" Style="{StaticResource VideoPlayerPanelHeader}" />
+          <Label Text="Đối mặt với Doflamingo kẻ sở hữu quyền lực mà có thể thao túng cả Chính quyền thế giới. Luffy và Law gần như là vô vọng. Khi Doflamingo sắp “dứt điểm” họ thì bí mật chất động về trái Ope Ope cũng như quá khứ không thể ngờ tới của Law được hé lộ!" Style="{StaticResource VideoPlayerContent}" />
+        </StackLayout>
+        <StackLayout Style="{StaticResource VideoPlayerPanel}">
+          <Label Text="Thông tin" Style="{StaticResource VideoPlayerPanelHeader}" />
+          <controls:ExtendedListView ItemsSource="{Binding VideoInfoProperties}" RowHeight="30">
+            <x:Arguments>
+              <ListViewCachingStrategy>RecycleElement</ListViewCachingStrategy>
+            </x:Arguments>
+            <controls:ExtendedListView.ItemTemplate>
+              <DataTemplate>
+                <ViewCell>
+                  <Grid ColumnSpacing="20">
+                    <Grid.ColumnDefinitions>
+                      <ColumnDefinition Width="*" />
+                      <ColumnDefinition Width="2*" />
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Text="{Binding PropertyName}" Style="{StaticResource VideoPlayerInfoProperty}" HorizontalOptions="End" />
+                    <Label Grid.Column="1" Text="{Binding PropertyValue}" Style="{StaticResource VideoPlayerContent}" HorizontalOptions="Start"/>
+                  </Grid>
+                </ViewCell>
+              </DataTemplate>
+            </controls:ExtendedListView.ItemTemplate>
+          </controls:ExtendedListView>
+        </StackLayout>
+        <StackLayout Style="{StaticResource VideoPlayerPanelNoLine}">
+          <Label Text="Liên quan" Style="{StaticResource VideoPlayerPanelHeader}" />
+          <controls:HorizontalListView ItemsSource="{Binding RelatedVideos}">
+            <controls:HorizontalListView.ItemTemplate>
+              <DataTemplate>
+                <StackLayout WidthRequest="100">
+                  <forms:CachedImage Source="http://moviesengsub.com/wp-content/uploads/2015/10/one-piece-anime-poster-0.jpg" />
+                  <Label Text="Zoro đánh bại Mihawk" FontSize="14" Style="{StaticResource CommonLabel}" />
+                  <Label Text="Tập 999" FontSize="12" Style="{StaticResource CommonSecondaryLabel}" />
+                </StackLayout>
+              </DataTemplate>
+            </controls:HorizontalListView.ItemTemplate>
+          </controls:HorizontalListView>
+        </StackLayout>
+      </StackLayout>
+    </ScrollView>
   </Grid>
-  
+
 </ContentPage>

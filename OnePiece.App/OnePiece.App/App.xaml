@@ -5,6 +5,16 @@
              x:Class="OnePiece.App.App">
   <Application.Resources>
     <ResourceDictionary>
+      <Style TargetType="Label" x:Key="CommonLabel">
+        <Setter Property="TextColor" Value="White"/>
+        <Setter Property="VerticalTextAlignment" Value="Center"/>
+      </Style>
+
+      <Style TargetType="Label" x:Key="CommonSecondaryLabel">
+        <Setter Property="TextColor" Value="#CFD8DC"/>
+        <Setter Property="VerticalTextAlignment" Value="Center"/>
+      </Style>
+
       <Style TargetType="Label" x:Key="VideoListItemTitle">
         <Setter Property="FontAttributes" Value="Bold"/>
       </Style>
@@ -36,6 +46,36 @@
       </Style>
 
       <Style TargetType="Image" x:Key="FeaturedVideoThumbnail" BasedOn="{StaticResource VideoListItemThumbnail}">
+      </Style>
+
+      <Style TargetType="Label" x:Key="VideoPlayerTitle" BasedOn="{StaticResource CommonLabel}">
+        <Setter Property="FontSize" Value="20"/>
+      </Style>
+
+      <Style TargetType="Label" x:Key="VideoPlayerSubTitle" BasedOn="{StaticResource CommonLabel}">
+        <Setter Property="FontSize" Value="14"/>
+      </Style>
+
+      <Style TargetType="StackLayout" x:Key="VideoPlayerPanel">
+        <Setter Property="BackgroundColor" Value="#090b0d"/>
+        <Setter Property="Padding" Value="0,20,10,20"/>
+        <Setter Property="Margin" Value="0,0,0,1"/>
+      </Style>
+
+      <Style TargetType="StackLayout" x:Key="VideoPlayerPanelNoLine" BasedOn="{StaticResource VideoPlayerPanel}">
+        <Setter Property="Margin" Value="0"/>
+      </Style>
+
+      <Style TargetType="Label" x:Key="VideoPlayerPanelHeader" BasedOn="{StaticResource CommonLabel}">
+        <Setter Property="FontSize" Value="16"/>
+      </Style>
+
+      <Style TargetType="Label" x:Key="VideoPlayerInfoProperty" BasedOn="{StaticResource CommonLabel}">
+        <Setter Property="FontSize" Value="12"/>
+      </Style>
+
+      <Style TargetType="Label" x:Key="VideoPlayerContent" BasedOn="{StaticResource CommonSecondaryLabel}">
+        <Setter Property="FontSize" Value="12"/>
       </Style>
       
       <OnPlatform x:Key="IconToolbarItemColor" x:TypeArguments="Color">
