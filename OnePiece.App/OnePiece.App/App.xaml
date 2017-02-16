@@ -39,6 +39,7 @@
 
       <Style TargetType="Label" x:Key="FeaturedVideoTitle" BasedOn="{StaticResource VideoListItemTitle}">
         <Setter Property="TextColor" Value="White"/>
+        <Setter Property="FontSize" Value="16"/>
       </Style>
 
       <Style TargetType="Label" x:Key="FeaturedVideoDescription" BasedOn="{StaticResource VideoListItemDescription}">
@@ -57,7 +58,7 @@
       </Style>
 
       <Style TargetType="StackLayout" x:Key="VideoPlayerPanel">
-        <Setter Property="BackgroundColor" Value="#090b0d"/>
+        <Setter Property="BackgroundColor" Value="#181D1C"/>
         <Setter Property="Padding" Value="0,20,10,20"/>
         <Setter Property="Margin" Value="0,0,0,1"/>
       </Style>

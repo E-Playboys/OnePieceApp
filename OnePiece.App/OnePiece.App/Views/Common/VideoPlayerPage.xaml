@@ -13,7 +13,7 @@
       <RowDefinition Height="*" />
     </Grid.RowDefinitions>
     <controls:VideoView Grid.Row="0" x:Name="VideoView" BackgroundColor="Black" AutoPlay="True" Source="http://vredir.nixcdn.com/622d549da432d3198ca91cb175cb204d/589a8e20/SongClip28/DaoHaiTacTap700Vietsub-V.A-4029503_360.mp4"/>
-    <ScrollView Grid.Row="1" BackgroundColor="#090b0d" Padding="10,0,0,0">
+    <ScrollView Grid.Row="1" BackgroundColor="#181D1C" Padding="10,0,0,0">
       <StackLayout BackgroundColor="#BDBDBD" Spacing="0">
         <StackLayout Style="{StaticResource VideoPlayerPanelNoLine}">
           <Label Text="Năng lực tối thượng. Bí mật về sức mạnh của trái Ope Ope!" Style="{StaticResource VideoPlayerTitle}" />
@@ -23,14 +23,14 @@
               <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <StackLayout Grid.Column="0" Orientation="Horizontal" HorizontalOptions="End">
-              <Button Text="360p" BackgroundColor="#4CAF50" TextColor="#090b0d" FontSize="10" WidthRequest="50" />
-              <Button Text="720p" BackgroundColor="White" TextColor="#090b0d" FontSize="10" WidthRequest="50"/>
+              <Button Text="360p" BackgroundColor="#E01722" TextColor="#181D1C" FontSize="10" WidthRequest="50" />
+              <Button Text="720p" BackgroundColor="White" TextColor="#181D1C" FontSize="10" WidthRequest="50"/>
             </StackLayout>
           </Grid>
         </StackLayout>
         <StackLayout Style="{StaticResource VideoPlayerPanel}">
           <StackLayout Orientation="Horizontal">
-            <Label Text="Chương 1" TextColor="#4CAF50" Style="{StaticResource VideoPlayerPanelHeader}" />
+            <Label Text="Chương 1" TextColor="#d32c24" Style="{StaticResource VideoPlayerPanelHeader}" />
             <Label Text="Chương 2" Style="{StaticResource VideoPlayerPanelHeader}" />
           </StackLayout>
           <controls:ExtendedFlowListView FlowColumnCount="6" RowHeight="50" SeparatorVisibility="None"
@@ -40,7 +40,7 @@
             </x:Arguments>
             <flv:FlowListView.FlowColumnTemplate>
               <DataTemplate>
-                <Button BackgroundColor="#4CAF50" FontSize="10" Text="{Binding Title, StringFormat='Tập {0}'}" />
+                <Button BackgroundColor="#333536" TextColor="White" FontSize="10" Text="{Binding Title, StringFormat='Tập {0}'}" />
               </DataTemplate>
             </flv:FlowListView.FlowColumnTemplate>
           </controls:ExtendedFlowListView>

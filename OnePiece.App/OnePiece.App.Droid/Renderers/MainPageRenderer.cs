@@ -9,7 +9,6 @@ using OnePiece.App.Views;
 using Plugin.Iconize.Droid.Controls;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
-using Color = Android.Graphics.Color;
 
 [assembly: ExportRenderer(typeof(MainPage), typeof(MainPageRenderer))]
 namespace OnePiece.App.Droid.Renderers
@@ -174,7 +173,7 @@ namespace OnePiece.App.Droid.Renderers
             //bar.UseFixedMode();
             bar.UseDarkTheme();
             PopulateBottomBarItems(bar, pageIntents);
-            bar.ItemContainer.SetBackgroundColor(Android.Graphics.Color.Rgb(30, 38, 43));
+            bar.ItemContainer.SetBackgroundColor(Color.FromHex("#181D1C").ToAndroid());
             bar.SetTextAppearance(Resource.Style.BottomBarTitle);
 
             return bar;

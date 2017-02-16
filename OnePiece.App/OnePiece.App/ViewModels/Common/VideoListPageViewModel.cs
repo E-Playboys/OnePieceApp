@@ -85,7 +85,7 @@ namespace OnePiece.App.ViewModels
 
             IsBusy = true;
 
-            FeaturedVideo = new Video { Title = "AAA", Description = "asfsgdsgdfgdgf", Thumbnail = "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQOcKyBoWtLojBu04h-QrtdDkiZagCB62dQUfWHjLcm6AiTSqmb" };
+            FeaturedVideo = new Video { Title = "Leo xuống lưng voi. Ra khơi mang Sanji trở về!", Description = "One Piece 776", Cover = "http://thegioiphimhay.com/wp-content/uploads/2016/11/review-danh-gia-phim-one-pice-dao-hai-tac-3.jpg", Poster = "http://static.hdonline.vn/i/resources/new/film/215x311/2016/07/20/one-piece-film-gold.jpg" };
 
             if (IsMultiSeason)
             {

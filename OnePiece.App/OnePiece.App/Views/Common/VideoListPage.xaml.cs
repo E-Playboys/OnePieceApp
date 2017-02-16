@@ -31,6 +31,12 @@ namespace OnePiece.App.Views
             _viewModel = (VideoListPageViewModel) BindingContext;
         }
 
+        protected override void OnSizeAllocated(double width, double height)
+        {
+            base.OnSizeAllocated(width, height);
+            VideoCover.HeightRequest = (int)(width * 9 / 16);
+        }
+
         protected override async void OnAppearing()
         {
             base.OnAppearing();

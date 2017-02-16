@@ -10,7 +10,7 @@
           xmlns:converters="clr-namespace:OnePiece.App.Converters;assembly=OnePiece.App"
           xmlns:controls="clr-namespace:OnePiece.App.Controls;assembly=OnePiece.App"
           x:Class="OnePiece.App.Views.Templates.NewsFeedViewCell">
-  <Grid RowSpacing="0" BackgroundColor="#2b343a" Margin="0,0,0,10">
+  <Grid RowSpacing="0" BackgroundColor="#333536" Margin="0,0,0,10">
     <Grid.RowDefinitions>
       <RowDefinition Height="Auto" />
       <RowDefinition Height="Auto" />
@@ -28,7 +28,7 @@
                 VerticalOptions="FillAndExpand">
       <controls:BindableGrid.ItemTemplate>
         <DataTemplate>
-          <controls:GifImage Url="{Binding Url}" BackgroundColor="#4CAF50" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
+          <controls:GifImage Url="{Binding Url}" BackgroundColor="#E01722" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
         </DataTemplate>
       </controls:BindableGrid.ItemTemplate>
     </controls:BindableGrid>

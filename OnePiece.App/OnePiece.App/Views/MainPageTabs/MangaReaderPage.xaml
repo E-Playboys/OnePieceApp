@@ -34,7 +34,7 @@
               </controls:PinchToZoomContainer.GestureRecognizers>
               <controls:PinchToZoomContainer.Content>
                 <forms:CachedImage Source="{Binding Link}" IsLoading="{Binding IsLoading}" WidthRequest="{Binding ImageWidth}"
-                                   Aspect="AspectFill" BackgroundColor="#4CAF50" />
+                                   Aspect="AspectFill" BackgroundColor="#E01722" />
               </controls:PinchToZoomContainer.Content>
             </controls:PinchToZoomContainer>
           </ViewCell>
@@ -44,9 +44,9 @@
 
     <StackLayout x:Name="TopBar" BackgroundColor="#E0000000" Spacing="0" VerticalOptions="Start">
       <StackLayout Orientation="Horizontal" Padding="10">
-        <controls:LinkLabel Text="Close" TextColor="#4CAF50" Clicked="OnClose"></controls:LinkLabel>
+        <controls:LinkLabel Text="Close" TextColor="#E01722" Clicked="OnClose"></controls:LinkLabel>
       </StackLayout>
-      <BoxView HeightRequest="1" Color="#4CAF50"></BoxView>
+      <BoxView HeightRequest="1" Color="#E01722"></BoxView>
       <StackLayout Padding="10" Spacing="0">
         <Label Text="{Binding MangaChapter.Name}" FontAttributes="Bold" TextColor="White" HorizontalOptions="Start" />
         <Label Text="{Binding MangaChapter.ChapterNum}" TextColor="Gray" HorizontalOptions="Start" />
@@ -54,9 +54,9 @@
     </StackLayout>
 
     <StackLayout x:Name="BottomBar" BackgroundColor="#E0000000" Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="End">
-      <iconize:IconButton Clicked="OnPrevChapterClicked" Text="md-arrow-back" FontSize="32" TextColor="#4CAF50" BackgroundColor="Transparent" HorizontalOptions="Start" VerticalOptions="Center" />
+      <iconize:IconButton Clicked="OnPrevChapterClicked" Text="md-arrow-back" FontSize="32" TextColor="#E01722" BackgroundColor="Transparent" HorizontalOptions="Start" VerticalOptions="Center" />
       <Label Text="{Binding CurrentPageString}" FontAttributes="Bold" TextColor="White" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" />
-      <iconize:IconButton Clicked="OnNextChapterClicked" Text="md-arrow-forward" FontSize="32" TextColor="#4CAF50" BackgroundColor="Transparent" HorizontalOptions="End" VerticalOptions="Center" />
+      <iconize:IconButton Clicked="OnNextChapterClicked" Text="md-arrow-forward" FontSize="32" TextColor="#E01722" BackgroundColor="Transparent" HorizontalOptions="End" VerticalOptions="Center" />
     </StackLayout>
   </Grid>
 </pages:PopupPage>
