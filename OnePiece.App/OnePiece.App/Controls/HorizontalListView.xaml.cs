@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Specialized;
+using Android.Content.Res;
 using Xamarin.Forms;
 
 namespace OnePiece.App.Controls
@@ -14,6 +15,10 @@ namespace OnePiece.App.Controls
             BindableProperty.Create(nameof(ItemsSource), typeof(IEnumerable), typeof(HorizontalListView), null,
                                         propertyChanged: (bindable, oldvalue, newvalue) => ((HorizontalListView)bindable).OnItemsSourceChanged(oldvalue as IEnumerable, newvalue as IEnumerable));
 
+        public static readonly BindableProperty OrientationProperty =
+            BindableProperty.Create(nameof(Orientation), typeof(StackOrientation), typeof(HorizontalListView), StackOrientation.Horizontal,
+                                        propertyChanged: (bindable, oldvalue, newvalue) => ((HorizontalListView)bindable).OnOrientationChanged(oldvalue, newvalue));
+
         public DataTemplate ItemTemplate
         {
             get { return (DataTemplate)GetValue(ItemTemplateProperty); }
@@ -24,6 +29,12 @@ namespace OnePiece.App.Controls
         {
             get { return (IEnumerable)GetValue(ItemsSourceProperty); }
             set { SetValue(ItemsSourceProperty, value); }
+        }
+
+        public StackOrientation Orientation
+        {
+            get { return (StackOrientation)GetValue(OrientationProperty); }
+            set { SetValue(OrientationProperty, value); }
         }
 
         public HorizontalListView()
@@ -50,6 +61,12 @@ namespace OnePiece.App.Controls
                 coll.CollectionChanged += Coll_CollectionChanged;
                 BindItems(newItems);
             }
+        }
+
+        private void OnOrientationChanged(object oldValue, object newValue)
+        {
+            StackItems.Orientation = (StackOrientation)newValue;
+            ScrollView.Orientation = (ScrollOrientation)newValue;
         }
 
         private void Coll_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
