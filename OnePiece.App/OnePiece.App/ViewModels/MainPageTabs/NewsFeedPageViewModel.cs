@@ -21,8 +21,8 @@ namespace OnePiece.App.ViewModels
 
         public NewsFeedPageViewModel(IAppService appService) : base(appService)
         {
-            RefreshCommand = DelegateCommand.FromAsyncHandler(ExecuteRefreshCommand, CanExecuteRefreshCommand);
-            LoadMoreCommand = DelegateCommand<NewsFeed>.FromAsyncHandler(ExecuteLoadMoreCommand, CanExecuteLoadMoreCommand);
+            RefreshCommand = new DelegateCommand(ExecuteRefreshCommand, CanExecuteRefreshCommand);
+            LoadMoreCommand = new DelegateCommand<NewsFeed>(ExecuteLoadMoreCommand, CanExecuteLoadMoreCommand);
         }
 
         public bool CanExecuteRefreshCommand()
@@ -30,7 +30,7 @@ namespace OnePiece.App.ViewModels
             return IsNotBusy;
         }
 
-        public async Task ExecuteRefreshCommand()
+        public async void ExecuteRefreshCommand()
         {
             IsBusy = true;
 
@@ -45,7 +45,7 @@ namespace OnePiece.App.ViewModels
             return IsNotBusy;
         }
 
-        public async Task ExecuteLoadMoreCommand(NewsFeed item)
+        public async void ExecuteLoadMoreCommand(NewsFeed item)
         {
             IsBusy = true;
 
