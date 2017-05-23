@@ -35,7 +35,6 @@ namespace OnePiece.App.Views
         {
             base.OnSizeAllocated(width, height);
             VideoCover.HeightRequest = (int)(width * 9 / 16);
-            VideoCover2.HeightRequest = (int)(width * 9 / 16);
         }
 
         protected override async void OnAppearing()
