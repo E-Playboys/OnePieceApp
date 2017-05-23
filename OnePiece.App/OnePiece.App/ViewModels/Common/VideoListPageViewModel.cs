@@ -107,12 +107,12 @@ namespace OnePiece.App.ViewModels
         {
             var fakeData = new List<Video>
             {
-                new Video { Title = "AAA", Description = "asfsgdsgdfgdgf", Thumbnail = "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQOcKyBoWtLojBu04h-QrtdDkiZagCB62dQUfWHjLcm6AiTSqmb" },
-                new Video { Title = "AAA", Description = "asffdgnfg rtfjfgjhf dhh", Thumbnail = "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQOcKyBoWtLojBu04h-QrtdDkiZagCB62dQUfWHjLcm6AiTSqmb" },
-                new Video { Title = "AAA", Description = "sdgdf dfh tr rty rgdgdfg", Thumbnail = "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQOcKyBoWtLojBu04h-QrtdDkiZagCB62dQUfWHjLcm6AiTSqmb" },
-                new Video { Title = "AAA", Description = "erwerwet", Thumbnail = "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQOcKyBoWtLojBu04h-QrtdDkiZagCB62dQUfWHjLcm6AiTSqmb" },
-                new Video { Title = "AAA", Description = "r werwerwer wet", Thumbnail = "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQOcKyBoWtLojBu04h-QrtdDkiZagCB62dQUfWHjLcm6AiTSqmb" },
-                new Video { Title = "AAA", Description = "dbdgmdfv er qwfqwrfwer", Thumbnail = "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQOcKyBoWtLojBu04h-QrtdDkiZagCB62dQUfWHjLcm6AiTSqmb" }
+                new Video { Title = "AAA", Description = "asfsgdsgdfgdgf", Thumbnail = "http://pre06.deviantart.net/e2ef/th/pre/f/2014/149/a/2/one_piece_poster_by_thebartrempillo-d7k9vwa.jpg" },
+                new Video { Title = "AAA", Description = "asffdgnfg rtfjfgjhf dhh", Thumbnail = "http://pre06.deviantart.net/e2ef/th/pre/f/2014/149/a/2/one_piece_poster_by_thebartrempillo-d7k9vwa.jpg" },
+                new Video { Title = "AAA", Description = "sdgdf dfh tr rty rgdgdfg", Thumbnail = "http://pre06.deviantart.net/e2ef/th/pre/f/2014/149/a/2/one_piece_poster_by_thebartrempillo-d7k9vwa.jpg" },
+                new Video { Title = "AAA", Description = "erwerwet", Thumbnail = "http://pre06.deviantart.net/e2ef/th/pre/f/2014/149/a/2/one_piece_poster_by_thebartrempillo-d7k9vwa.jpg" },
+                new Video { Title = "AAA", Description = "r werwerwer wet", Thumbnail = "http://pre06.deviantart.net/e2ef/th/pre/f/2014/149/a/2/one_piece_poster_by_thebartrempillo-d7k9vwa.jpg" },
+                new Video { Title = "AAA", Description = "dbdgmdfv er qwfqwrfwer", Thumbnail = "http://pre06.deviantart.net/e2ef/th/pre/f/2014/149/a/2/one_piece_poster_by_thebartrempillo-d7k9vwa.jpg" }
             };
             await Task.Delay(1);
             return fakeData;
@@ -122,12 +122,12 @@ namespace OnePiece.App.ViewModels
         {
             var fakeData = new List<Season>
             {
-                new Season { Title = "Season 1", LatestEpisode = 1, TotalEpisodes = 10, Description = "asfsgdsgdfgdgf", Thumbnail = "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQOcKyBoWtLojBu04h-QrtdDkiZagCB62dQUfWHjLcm6AiTSqmb" },
-                new Season { Title = "Season 2", LatestEpisode = 10, TotalEpisodes = 10, Description = "asffdgnfg rtfjfgjhf dhh", Thumbnail = "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQOcKyBoWtLojBu04h-QrtdDkiZagCB62dQUfWHjLcm6AiTSqmb"},
+                new Season { Title = "Season 1", LatestEpisode = 1, TotalEpisodes = 10, Description = "asfsgdsgdfgdgf", Thumbnail = "http://pre06.deviantart.net/e2ef/th/pre/f/2014/149/a/2/one_piece_poster_by_thebartrempillo-d7k9vwa.jpg" },
+                new Season { Title = "Season 2", LatestEpisode = 10, TotalEpisodes = 10, Description = "asffdgnfg rtfjfgjhf dhh", Thumbnail = "http://pre06.deviantart.net/e2ef/th/pre/f/2014/149/a/2/one_piece_poster_by_thebartrempillo-d7k9vwa.jpg"},
                 new Season { Title = "Season 3", LatestEpisode = 10, TotalEpisodes = 10, Description = "sdgdf dfh tr rty rgdgdfg", Thumbnail = "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQOcKyBoWtLojBu04h-QrtdDkiZagCB62dQUfWHjLcm6AiTSqm"},
-                new Season { Title = "Season 4", LatestEpisode = 10, TotalEpisodes = 10, Description = "erwerwet", Thumbnail = "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQOcKyBoWtLojBu04h-QrtdDkiZagCB62dQUfWHjLcm6AiTSqmb" },
-                new Season { Title = "Season 5", LatestEpisode = 10, TotalEpisodes = 10, Description = "r werwerwer wet", Thumbnail = "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQOcKyBoWtLojBu04h-QrtdDkiZagCB62dQUfWHjLcm6AiTSqmb" },
-                new Season { Title = "Season 6", LatestEpisode = 10, TotalEpisodes = 10, Description = "dbdgmdfv er qwfqwrfwer", Thumbnail = "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQOcKyBoWtLojBu04h-QrtdDkiZagCB62dQUfWHjLcm6AiTSqmb" }
+                new Season { Title = "Season 4", LatestEpisode = 10, TotalEpisodes = 10, Description = "erwerwet", Thumbnail = "http://pre06.deviantart.net/e2ef/th/pre/f/2014/149/a/2/one_piece_poster_by_thebartrempillo-d7k9vwa.jpg" },
+                new Season { Title = "Season 5", LatestEpisode = 10, TotalEpisodes = 10, Description = "r werwerwer wet", Thumbnail = "http://pre06.deviantart.net/e2ef/th/pre/f/2014/149/a/2/one_piece_poster_by_thebartrempillo-d7k9vwa.jpg" },
+                new Season { Title = "Season 6", LatestEpisode = 10, TotalEpisodes = 10, Description = "dbdgmdfv er qwfqwrfwer", Thumbnail = "http://pre06.deviantart.net/e2ef/th/pre/f/2014/149/a/2/one_piece_poster_by_thebartrempillo-d7k9vwa.jpg" }
             };
 
             return fakeData;
