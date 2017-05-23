@@ -18,7 +18,7 @@ namespace OnePiece.App.ViewModels
         {
             AppService = appService;
 
-            NavigateCommand = new DelegateCommand<string>(NavigateAsync);
+            NavigateCommand = DelegateCommand<string>.FromAsyncHandler(NavigateAsync);
             OpenUrlCommand = new DelegateCommand<string>(OpenUrlAsync);
         }
 
@@ -52,7 +52,7 @@ namespace OnePiece.App.ViewModels
 
         #endregion
 
-        private async void NavigateAsync(string target)
+        private async Task NavigateAsync(string target)
         {
             await AppService.Navigation.NavigateAsync(target);
         }
@@ -138,11 +138,6 @@ namespace OnePiece.App.ViewModels
                 _cancellationTokenSource.Cancel();
                 _cancellationTokenSource = new CancellationTokenSource();
             }
-        }
-
-        public void OnNavigatingTo(NavigationParameters parameters)
-        {
-            throw new NotImplementedException();
         }
 
         #endregion

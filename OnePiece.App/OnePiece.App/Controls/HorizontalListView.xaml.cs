@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Specialized;
+using Android.Content.Res;
 using Xamarin.Forms;
 
 namespace OnePiece.App.Controls

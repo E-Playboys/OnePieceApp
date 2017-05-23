@@ -114,7 +114,7 @@ namespace OnePiece.App.ViewModels
                 new Video { Title = "AAA", Description = "r werwerwer wet", Thumbnail = "http://pre06.deviantart.net/e2ef/th/pre/f/2014/149/a/2/one_piece_poster_by_thebartrempillo-d7k9vwa.jpg" },
                 new Video { Title = "AAA", Description = "dbdgmdfv er qwfqwrfwer", Thumbnail = "http://pre06.deviantart.net/e2ef/th/pre/f/2014/149/a/2/one_piece_poster_by_thebartrempillo-d7k9vwa.jpg" }
             };
-            await Task.Delay(1);
+
             return fakeData;
         }
 

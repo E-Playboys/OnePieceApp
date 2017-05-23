@@ -18,16 +18,16 @@ namespace OnePiece.App.Views
         protected override void OnSizeAllocated(double width, double height)
         {
             base.OnSizeAllocated(width, height);
-            //if (width > height)
-            //{
-            //    VideoView.HeightRequest = Acr.DeviceInfo.DeviceInfo.Hardware.ScreenWidth;
-            //    VideoView.WidthRequest = Acr.DeviceInfo.DeviceInfo.Hardware.ScreenHeight;
-            //}
-            //else
-            //{
-            //    VideoView.HeightRequest = (int)(width * 9 / 16);
-            //    VideoView.WidthRequest = Acr.DeviceInfo.DeviceInfo.Hardware.ScreenWidth;
-            //}
+            if (width > height)
+            {
+                VideoView.HeightRequest = Acr.DeviceInfo.DeviceInfo.Hardware.ScreenWidth;
+                VideoView.WidthRequest = Acr.DeviceInfo.DeviceInfo.Hardware.ScreenHeight;
+            }
+            else
+            {
+                VideoView.HeightRequest = (int)(width * 9 / 16);
+                VideoView.WidthRequest = Acr.DeviceInfo.DeviceInfo.Hardware.ScreenWidth;
+            }
         }
     }
 }

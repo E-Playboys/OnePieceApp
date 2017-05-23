@@ -59,8 +59,8 @@ namespace OnePiece.App.ViewModels
 
         public MangaReaderPageViewModel(IAppService appService, IMangaService mangaService) : base(appService)
         {
-            RefreshCommand = new DelegateCommand(ExecuteRefreshCommand, CanExecuteRefreshCommand);
-            LoadMoreCommand = new DelegateCommand<MangaImage>(ExecuteLoadMoreCommand, CanExecuteLoadMoreCommand);
+            RefreshCommand = DelegateCommand.FromAsyncHandler(ExecuteRefreshCommand, CanExecuteRefreshCommand);
+            LoadMoreCommand = DelegateCommand<MangaImage>.FromAsyncHandler(ExecuteLoadMoreCommand, CanExecuteLoadMoreCommand);
 
             _mangaService = mangaService;
         }
@@ -125,7 +125,7 @@ namespace OnePiece.App.ViewModels
             return IsNotBusy;
         }
 
-        public async void ExecuteRefreshCommand()
+        public async Task ExecuteRefreshCommand()
         {
             IsBusy = true;
 
@@ -140,7 +140,7 @@ namespace OnePiece.App.ViewModels
             return IsNotBusy && (!MangaChapter.MangaImages.Any() || !MangaChapter.MangaImages[0].IsLoading);
         }
 
-        public async void ExecuteLoadMoreCommand(MangaImage item)
+        public async Task ExecuteLoadMoreCommand(MangaImage item)
         {
             IsBusy = true;
 
