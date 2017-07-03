@@ -12,7 +12,7 @@
       <RowDefinition Height="Auto" />
       <RowDefinition Height="*" />
     </Grid.RowDefinitions>
-    <controls:VideoView Grid.Row="0" x:Name="VideoView" BackgroundColor="Black" AutoPlay="True" Source="http://vredir.nixcdn.com/622d549da432d3198ca91cb175cb204d/589a8e20/SongClip28/DaoHaiTacTap700Vietsub-V.A-4029503_360.mp4"/>
+        <controls:VideoView Grid.Row="0" x:Name="VideoView" BackgroundColor="Black" AutoPlay="True" Source="https://troylee.blob.core.windows.net/asset-a86b6fab-03c8-4a8a-932c-cee0d8d00cf1/Ep574.OP.720p.mkv?sv=2015-07-08&amp;sr=c&amp;si=f84960b0-bf7b-497c-96fd-a126ec9f1e2f&amp;sig=AppbNizG9YI9jVLge%2BBd%2BmIzUUwwQwZVxMsztBycFMg%3D&amp;st=2017-05-24T07%3A37%3A39Z&amp;se=2117-05-25T07%3A37%3A39Z"/>
     <ScrollView Grid.Row="1" BackgroundColor="#181D1C" Padding="10,0,0,0">
       <StackLayout BackgroundColor="#BDBDBD" Spacing="0">
         <StackLayout Style="{StaticResource VideoPlayerPanelNoLine}">
