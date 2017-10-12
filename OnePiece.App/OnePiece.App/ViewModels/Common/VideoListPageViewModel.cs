@@ -9,6 +9,8 @@ using OnePiece.App.Services;
 using OnePiece.App.Utilities;
 using OnePiece.App.Views;
 using Prism.Commands;
+using Plugin.MediaManager;
+using Plugin.MediaManager.Abstractions.Enums;
 
 namespace OnePiece.App.ViewModels
 {
@@ -64,7 +66,7 @@ namespace OnePiece.App.ViewModels
         public VideoListPageViewModel(IAppService appService) : base(appService)
         {
             RefreshDataCommand = new DelegateCommand(async () => await ExecuteRefreshDataCommandAsync());
-            PlayVideoCommand = new DelegateCommand(async () => await ExecutePlayVideoCommandAsync());
+            PlayVideoCommand = new DelegateCommand(() => ExecutePlayVideoCommandAsync());
         }
 
         private async Task ExecuteRefreshDataCommandAsync()
@@ -73,8 +75,9 @@ namespace OnePiece.App.ViewModels
             IsRefreshingData = false;
         }
 
-        private async Task ExecutePlayVideoCommandAsync()
+        private async void ExecutePlayVideoCommandAsync()
         {
+            //CrossMediaManager.Current.Play("https://archive.org/download/BigBuckBunny_328/BigBuckBunny_512kb.mp4", MediaFileType.Video);
             await AppService.Navigation.NavigateAsync(nameof(VideoPlayerPage));
         }
 

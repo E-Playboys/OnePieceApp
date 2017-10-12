@@ -1,10 +1,11 @@
-using OnePiece.App.Droid.Services;
+using OnePiece.App.iOS.Services;
 using OnePiece.App.Services;
 using UIKit;
+using Xamarin.Forms.Platform.iOS;
 using Xamarin.Forms;
 
 [assembly: Dependency(typeof(StatusBarImplementation))]
-namespace OnePiece.App.Droid.Services
+namespace OnePiece.App.iOS.Services
 {
     public class StatusBarImplementation : IStatusBar
     {

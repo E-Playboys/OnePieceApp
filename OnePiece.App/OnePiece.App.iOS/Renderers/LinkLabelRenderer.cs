@@ -3,8 +3,8 @@ using OnePiece.App.Controls;
 using OnePiece.App.iOS.Renderers;
 using System;
 using UIKit;
-using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
+using Xamarin.Forms;
 
 [assembly: ExportRenderer(typeof(LinkLabel), typeof(LinkLabelRenderer))]
 namespace OnePiece.App.iOS.Renderers

@@ -11,8 +11,8 @@ using CoreMedia;
 using Foundation;
 using OnePiece.App.iOS.Renderers;
 using UIKit;
-using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
+using Xamarin.Forms;
 using VideoView = OnePiece.App.Controls.VideoView;
 
 [assembly: ExportRenderer(typeof(VideoView), typeof(VideoViewRenderer))]

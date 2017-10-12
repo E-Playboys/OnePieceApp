@@ -9,6 +9,7 @@
           xmlns:rox="clr-namespace:Rox;assembly=Rox.Xamarin.Video.Portable"
           xmlns:converters="clr-namespace:OnePiece.App.Converters;assembly=OnePiece.App"
           xmlns:controls="clr-namespace:OnePiece.App.Controls;assembly=OnePiece.App"
+          xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
           x:Class="OnePiece.App.Views.Templates.NewsFeedViewCell">
   <Grid RowSpacing="0" BackgroundColor="#333536" Margin="0,0,0,10">
     <Grid.RowDefinitions>
@@ -28,7 +29,7 @@
                 VerticalOptions="FillAndExpand">
       <controls:BindableGrid.ItemTemplate>
         <DataTemplate>
-          <controls:GifImage Url="{Binding Url}" BackgroundColor="#E01722" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
+          <ff:CachedImage Source="{Binding Url}" BackgroundColor="#E01722" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
         </DataTemplate>
       </controls:BindableGrid.ItemTemplate>
     </controls:BindableGrid>

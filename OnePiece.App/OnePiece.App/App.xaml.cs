@@ -3,6 +3,7 @@ using OnePiece.App.Controls;
 using OnePiece.App.Services;
 using OnePiece.App.Services.Manga;
 using OnePiece.App.Views;
+using Plugin.DeviceInfo;
 using Prism.Unity;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -41,6 +42,7 @@ namespace OnePiece.App
 
             Container.RegisterType<IAppService, AppService>();
             Container.RegisterType<IMangaService, MangaService>();
+            Container.RegisterType<IHardwareInfo, HardwareInfo>();
         }
 
         protected override void OnStart()

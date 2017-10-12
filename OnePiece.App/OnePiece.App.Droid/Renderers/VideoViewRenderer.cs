@@ -24,6 +24,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 using Orientation = Android.Content.Res.Orientation;
 using VideoView = OnePiece.App.Controls.VideoView;
+using Plugin.DeviceInfo;
 
 [assembly: ExportRenderer(typeof(VideoView), typeof(VideoViewRenderer))]
 namespace OnePiece.App.Droid.Renderers
@@ -109,13 +110,14 @@ namespace OnePiece.App.Droid.Renderers
                 uiOptions |= (int)SystemUiFlags.ImmersiveSticky;
 
                 StatusBarHelper.DecorView.SystemUiVisibility = (StatusBarVisibility)uiOptions;
-                
+
+                var hardwareInfo = DependencyService.Get<IHardwareInfo>();
                 _nativeVideoView.LayoutParameters = new FrameLayout.LayoutParams(-1, -1)
                 {
                     Gravity = GravityFlags.Fill,
                     TopMargin = -StatusBarHelper.StatusBarHeight,
-                    Width = Acr.DeviceInfo.DeviceInfo.Hardware.ScreenHeight,
-                    Height = Acr.DeviceInfo.DeviceInfo.Hardware.ScreenWidth 
+                    Width = hardwareInfo.ScreenHeight,
+                    Height = hardwareInfo.ScreenWidth 
                 };
             }
             else
