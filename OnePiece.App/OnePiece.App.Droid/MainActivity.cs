@@ -15,7 +15,6 @@ using XLabs.Ioc;
 using XLabs.Forms;
 using XLabs.Platform.Device;
 using Plugin.MediaManager;
-using Plugin.MediaManager.ExoPlayer;
 using Plugin.MediaManager.MediaSession;
 
 namespace OnePiece.App.Droid
@@ -57,9 +56,9 @@ namespace OnePiece.App.Droid
                 this.SetIoc();
             }
 
-            ((MediaManagerImplementation)CrossMediaManager.Current).MediaSessionManager = new MediaSessionManager(Application.Context, typeof(ExoPlayerAudioService));
-            var exoPlayer = new ExoPlayerAudioImplementation(((MediaManagerImplementation)CrossMediaManager.Current).MediaSessionManager);
-            CrossMediaManager.Current.AudioPlayer = exoPlayer;
+            //((MediaManagerImplementation)CrossMediaManager.Current).MediaSessionManager = new MediaSessionManager(Application.Context, typeof(ExoPlayerAudioService));
+            //var exoPlayer = new ExoPlayerAudioImplementation(((MediaManagerImplementation)CrossMediaManager.Current).MediaSessionManager);
+            //CrossMediaManager.Current.AudioPlayer = exoPlayer;
         }
 
         public override void OnAttachedToWindow()

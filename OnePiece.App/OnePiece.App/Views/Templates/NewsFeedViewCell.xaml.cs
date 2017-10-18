@@ -22,19 +22,19 @@ namespace OnePiece.App.Views.Templates
             if (context != null)
             {
                 var gifPanelHeight = 0;
-                var appearingUrls = new List<string>();
+                //var appearingUrls = new List<string>();
                 foreach (var gif in context.Gifs)
                 {
                     var gifHeight = GifPanel.Width * gif.Height / gif.Width;
                     gifPanelHeight = gifPanelHeight + (int)gifHeight + 5;
-                    appearingUrls.Add(gif.Url);
+                    //appearingUrls.Add(gif.Url);
                 }
                 GifPanel.HeightRequest = gifPanelHeight - 5;
-                var message = new GifAppearingMessage()
-                {
-                    AppearingUrls = appearingUrls
-                };
-                MessagingCenter.Send(message, "GifAppearingMessage");
+                //var message = new GifAppearingMessage()
+                //{
+                //    AppearingUrls = appearingUrls
+                //};
+                //MessagingCenter.Send(message, "GifAppearingMessage");
             }
         }
     }
