@@ -114,6 +114,9 @@
     <Compile Include="Views\MainPageTabs\NewsFeedPage.xaml.cs">
       <DependentUpon>NewsFeedPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Templates\ViewPlayerView.xaml.cs">
+      <DependentUpon>ViewPlayerView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Templates\CachedImageViewCell.xaml.cs">
       <DependentUpon>CachedImageViewCell.xaml</DependentUpon>
     </Compile>
@@ -344,6 +347,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\Templates\CachedImageViewCell.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Templates\ViewPlayerView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

@@ -2,66 +2,21 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:controls="clr-namespace:OnePiece.App.Controls;assembly=OnePiece.App"
-             xmlns:mm="clr-namespace:Plugin.MediaManager.Forms;assembly=Plugin.MediaManager.Forms"
              xmlns:flv="clr-namespace:DLToolkit.Forms.Controls;assembly=DLToolkit.Forms.Controls.FlowListView"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
-             xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
-             xmlns:iconize="clr-namespace:FormsPlugin.Iconize;assembly=FormsPlugin.Iconize"
+             xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:templates="clr-namespace:OnePiece.App.Views.Templates;assembly=OnePiece.App"
              x:Class="OnePiece.App.Views.VideoPlayerPage">
     <Grid RowSpacing="0">
         <Grid.RowDefinitions>
             <RowDefinition Height="200" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        
-        <mm:VideoView x:Name="videoView" 
-                             Grid.Row="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" 
-                             Source="http://stream19.tv.zdn.vn/streaming/a4ce3382588ef46112376c3f2896864f/59e6d79f/Video480/2017/1015/93/291caf2db6d78b70b223639db214b799.mp4"
-                             AspectMode="AspectFill"/>
 
-        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Row="0" ColumnSpacing="0" RowSpacing="0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
-
-            <Label x:Name="Position" Text="00:00" VerticalOptions="End" HorizontalOptions="Center" TextColor="White" FontSize="12" Grid.Row="0" Grid.Column="0"></Label>
-
-            <Label x:Name="Duration" Text="00:00" VerticalOptions="End" HorizontalOptions="Center" TextColor="White" FontSize="12" Grid.Row="0" Grid.Column="4"></Label>
-
-            <controls:Seeker x:Name="ProgressBar" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" TouchDown="ProgressBar_TouchDown" TouchUp="ProgressBar_TouchUp" VerticalOptions="End" HorizontalOptions="FillAndExpand" />
-
-            <iconize:IconLabel Grid.Row="0" Grid.Column="1" Text="md-skip-previous" FontSize="50" TextColor="White" VerticalOptions="CenterAndExpand" HorizontalOptions="End">
-                <iconize:IconLabel.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding PlayVideoCommand}"/>
-                </iconize:IconLabel.GestureRecognizers>
-            </iconize:IconLabel>
-            <iconize:IconLabel x:Name="PlayButton" Grid.Row="0" Grid.Column="2" Text="md-play-circle-outline" FontSize="50" TextColor="#E01722" VerticalOptions="CenterAndExpand" HorizontalOptions="Center">
-                <iconize:IconLabel.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="PlayClicked"/>
-                </iconize:IconLabel.GestureRecognizers>
-            </iconize:IconLabel>
-            <iconize:IconLabel x:Name="PauseButton" Grid.Row="0" Grid.Column="2" Text="md-pause-circle-outline" FontSize="50" TextColor="#E01722" VerticalOptions="CenterAndExpand" HorizontalOptions="Center">
-                <iconize:IconLabel.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="PauseClicked"/>
-                </iconize:IconLabel.GestureRecognizers>
-            </iconize:IconLabel>
-            <iconize:IconLabel Grid.Row="0" Grid.Column="3" Text="md-skip-next" FontSize="50" TextColor="White" VerticalOptions="CenterAndExpand" HorizontalOptions="Start">
-                <iconize:IconLabel.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding PlayVideoCommand}"/>
-                </iconize:IconLabel.GestureRecognizers>
-            </iconize:IconLabel>
-            <!--<Button Grid.Row="1" Grid.Column="0" TextColor="White" BackgroundColor="Gray" HeightRequest="50" VerticalOptions="Center" Text="Play" WidthRequest="100" Clicked="PlayClicked"></Button>
-            <Button Grid.Row="1" Grid.Column="1" TextColor="White" Text="Pause" BackgroundColor="Gray" HeightRequest="50" VerticalOptions="Center" WidthRequest="100" Clicked="PauseClicked"></Button>
-            <Button Grid.Row="1" Grid.Column="2" TextColor="White" Text="Stop" BackgroundColor="Gray" HeightRequest="50" VerticalOptions="Center" WidthRequest="100" Clicked="StopClicked"></Button>-->
-        </Grid>
+        <StackLayout Grid.Row="0">
+            <templates:ViewPlayerView BackgroundColor="#E01722" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
+        </StackLayout>
         <ScrollView Grid.Row="1" BackgroundColor="#181D1C" Padding="10,0,0,0">
             <StackLayout BackgroundColor="#BDBDBD" Spacing="0">
                 <StackLayout Style="{StaticResource VideoPlayerPanelNoLine}">
@@ -126,7 +81,7 @@
                         <controls:HorizontalListView.ItemTemplate>
                             <DataTemplate>
                                 <StackLayout WidthRequest="100">
-                                    <forms:CachedImage Source="http://moviesengsub.com/wp-content/uploads/2015/10/one-piece-anime-poster-0.jpg" />
+                                    <ff:CachedImage Source="http://moviesengsub.com/wp-content/uploads/2015/10/one-piece-anime-poster-0.jpg" />
                                     <Label Text="Zoro đánh bại Mihawk" FontSize="14" Style="{StaticResource CommonLabel}" />
                                     <Label Text="Tập 999" FontSize="12" Style="{StaticResource CommonSecondaryLabel}" />
                                 </StackLayout>
