@@ -18,15 +18,20 @@ namespace OnePiece.App.Views
         public VideoPlayerPage()
         {
             InitializeComponent();
-
+            
             CrossMediaManager.Current.PlayingChanged += (sender, e) =>
             {
                 Device.BeginInvokeOnMainThread(() =>
                 {
-                    ProgressBar.Maximum = e.Duration.TotalSeconds;
-                    ProgressBar.Value = e.Position.TotalSeconds;
-                    Duration.Text = e.Duration.ToString(@"hh\:mm\:ss");
-                    Position.Text = e.Position.ToString(@"hh\:mm\:ss");
+                    if(e.Progress > 0)
+                    {
+                        ProgressBar.Maximum = e.Duration.TotalSeconds;
+                        ProgressBar.Value = e.Position.TotalSeconds;
+                        double durationSeconds = e.Duration.TotalSeconds / 1000;
+                        double positionSeconds = e.Position.TotalSeconds / 1000;
+                        Duration.Text = TimeSpan.FromSeconds(durationSeconds).ToString(@"h\:mm\:ss");
+                        Position.Text = TimeSpan.FromSeconds(positionSeconds).ToString(@"h\:mm\:ss");
+                    }
                 });
             };
         }
@@ -49,16 +54,22 @@ namespace OnePiece.App.Views
 
         protected override void OnAppearing()
         {
+            PauseButton.IsVisible = true;
+            PlayButton.IsVisible = false;
             PlaybackController.Play();
         }
 
         private void PlayClicked(object sender, EventArgs e)
         {
+            PauseButton.IsVisible = true;
+            PlayButton.IsVisible = false;
             PlaybackController.Play();
         }
 
         private void PauseClicked(object sender, EventArgs e)
         {
+            PauseButton.IsVisible = false;
+            PlayButton.IsVisible = true;
             PlaybackController.Pause();
         }
 
@@ -74,8 +85,8 @@ namespace OnePiece.App.Views
 
         private void ProgressBar_TouchUp(object sender, FocusEventArgs e)
         {
-            var value = ProgressBar.Value;
-            Position.Text = value.ToString(@"hh\:mm\:ss");
+            var value = ProgressBar.Value / 1000;
+            Position.Text = value.ToString(@"%h\:mm\:ss");
             PlaybackController.SeekTo(value);
         }
     }

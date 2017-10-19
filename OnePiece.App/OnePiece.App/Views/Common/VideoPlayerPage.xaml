@@ -17,35 +17,40 @@
         
         <mm:VideoView x:Name="videoView" 
                              Grid.Row="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" 
-                             Source="http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4"
+                             Source="http://stream19.tv.zdn.vn/streaming/a4ce3382588ef46112376c3f2896864f/59e6d79f/Video480/2017/1015/93/291caf2db6d78b70b223639db214b799.mp4"
                              AspectMode="AspectFill"/>
 
-        <controls:Seeker x:Name="ProgressBar" Grid.Row="0" TouchDown="ProgressBar_TouchDown" TouchUp="ProgressBar_TouchUp" VerticalOptions="End" HorizontalOptions="FillAndExpand" />
-
-        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Row="0" HeightRequest="100">
+        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Row="0" ColumnSpacing="0" RowSpacing="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="40"/>
+                <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="40"/>
+                <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
             <Label x:Name="Position" Text="00:00" VerticalOptions="End" HorizontalOptions="Center" TextColor="White" FontSize="12" Grid.Row="0" Grid.Column="0"></Label>
 
             <Label x:Name="Duration" Text="00:00" VerticalOptions="End" HorizontalOptions="Center" TextColor="White" FontSize="12" Grid.Row="0" Grid.Column="4"></Label>
 
+            <controls:Seeker x:Name="ProgressBar" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" TouchDown="ProgressBar_TouchDown" TouchUp="ProgressBar_TouchUp" VerticalOptions="End" HorizontalOptions="FillAndExpand" />
+
             <iconize:IconLabel Grid.Row="0" Grid.Column="1" Text="md-skip-previous" FontSize="50" TextColor="White" VerticalOptions="CenterAndExpand" HorizontalOptions="End">
                 <iconize:IconLabel.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding PlayVideoCommand}"/>
                 </iconize:IconLabel.GestureRecognizers>
             </iconize:IconLabel>
-            <iconize:IconLabel Grid.Row="0" Grid.Column="2" Text="md-play-circle-outline" FontSize="50" TextColor="#E01722" VerticalOptions="CenterAndExpand" HorizontalOptions="Center">
+            <iconize:IconLabel x:Name="PlayButton" Grid.Row="0" Grid.Column="2" Text="md-play-circle-outline" FontSize="50" TextColor="#E01722" VerticalOptions="CenterAndExpand" HorizontalOptions="Center">
                 <iconize:IconLabel.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding PlayVideoCommand}"/>
+                    <TapGestureRecognizer Tapped="PlayClicked"/>
+                </iconize:IconLabel.GestureRecognizers>
+            </iconize:IconLabel>
+            <iconize:IconLabel x:Name="PauseButton" Grid.Row="0" Grid.Column="2" Text="md-pause-circle-outline" FontSize="50" TextColor="#E01722" VerticalOptions="CenterAndExpand" HorizontalOptions="Center">
+                <iconize:IconLabel.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="PauseClicked"/>
                 </iconize:IconLabel.GestureRecognizers>
             </iconize:IconLabel>
             <iconize:IconLabel Grid.Row="0" Grid.Column="3" Text="md-skip-next" FontSize="50" TextColor="White" VerticalOptions="CenterAndExpand" HorizontalOptions="Start">
