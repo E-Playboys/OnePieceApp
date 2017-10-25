@@ -5,7 +5,7 @@
                          prism:ViewModelLocator.AutowireViewModel="True"
                          xmlns:templates="clr-namespace:OnePiece.App.Views.Templates;assembly=OnePiece.App"
                          x:Class="OnePiece.App.Views.NewsFeedPage">
-  <StackLayout>
+  <StackLayout BackgroundColor="#dcdcdc">
     <controls:ExtendedListView x:Name="NewsFeedListView"
                 SeparatorVisibility="None"
                 ItemsSource="{Binding NewsFeeds}"

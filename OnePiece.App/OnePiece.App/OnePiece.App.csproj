@@ -46,6 +46,9 @@
     <Compile Include="Controls\ExtendedFlowListView.cs" />
     <Compile Include="Controls\ExtendedListView.cs" />
     <Compile Include="Controls\GifImage.cs" />
+    <Compile Include="Controls\VerticalListView.xaml.cs">
+      <DependentUpon>VerticalListView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\HorizontalListView.xaml.cs">
       <DependentUpon>HorizontalListView.xaml</DependentUpon>
     </Compile>
@@ -353,6 +356,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\Templates\ViewPlayerView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\VerticalListView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

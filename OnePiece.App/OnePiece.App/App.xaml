@@ -6,13 +6,13 @@
   <Application.Resources>
     <ResourceDictionary>
       <Style TargetType="Label" x:Key="CommonLabel">
-        <Setter Property="TextColor" Value="White"/>
+        <Setter Property="TextColor" Value="Black"/>
+        <Setter Property="Opacity" Value="0.87"/>
         <Setter Property="VerticalTextAlignment" Value="Center"/>
       </Style>
 
-      <Style TargetType="Label" x:Key="CommonSecondaryLabel">
-        <Setter Property="TextColor" Value="#CFD8DC"/>
-        <Setter Property="VerticalTextAlignment" Value="Center"/>
+      <Style TargetType="Label" x:Key="CommonSecondaryLabel" BasedOn="{StaticResource CommonLabel}">
+        <Setter Property="Opacity" Value="0.54"/>
       </Style>
 
       <Style TargetType="Label" x:Key="VideoListItemTitle">
@@ -58,8 +58,8 @@
       </Style>
 
       <Style TargetType="StackLayout" x:Key="VideoPlayerPanel">
-        <Setter Property="BackgroundColor" Value="#181D1C"/>
-        <Setter Property="Padding" Value="0,20,10,20"/>
+        <Setter Property="BackgroundColor" Value="White"/>
+        <Setter Property="Padding" Value="15,20,15,20"/>
         <Setter Property="Margin" Value="0,0,0,1"/>
       </Style>
 

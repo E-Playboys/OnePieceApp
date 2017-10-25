@@ -77,11 +77,11 @@ namespace OnePiece.App.Droid.Renderers
 
             var statusBarHeight = 0;
 
-            int resourceId = Resources.GetIdentifier("status_bar_height", "dimen", "android");
-            if (resourceId > 0)
-            {
-                statusBarHeight = Resources.GetDimensionPixelSize(resourceId);
-            }
+            //int resourceId = Resources.GetIdentifier("status_bar_height", "dimen", "android");
+            //if (resourceId > 0)
+            //{
+            //    statusBarHeight = Resources.GetDimensionPixelSize(resourceId);
+            //}
 
             b -= statusBarHeight;
 
@@ -171,9 +171,10 @@ namespace OnePiece.App.Droid.Renderers
             // TODO: Configure the bottom bar here according to your needs
             bar.SetOnTabClickListener(this);
             //bar.UseFixedMode();
-            bar.UseDarkTheme();
+            //bar.UseDarkTheme();
             PopulateBottomBarItems(bar, pageIntents);
-            bar.ItemContainer.SetBackgroundColor(Color.FromHex("#181D1C").ToAndroid());
+            //bar.ItemContainer.SetBackgroundColor(Color.White.ToAndroid());
+            bar.SetActiveTabColor(Color.FromHex("#b71c1c").ToAndroid());
             bar.SetTextAppearance(Resource.Style.BottomBarTitle);
 
             return bar;

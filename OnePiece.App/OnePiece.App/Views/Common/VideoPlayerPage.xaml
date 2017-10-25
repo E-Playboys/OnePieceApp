@@ -17,20 +17,11 @@
         <StackLayout Grid.Row="0">
             <templates:ViewPlayerView BackgroundColor="#E01722" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
         </StackLayout>
-        <ScrollView Grid.Row="1" BackgroundColor="#181D1C" Padding="10,0,0,0">
-            <StackLayout BackgroundColor="#BDBDBD" Spacing="0">
-                <StackLayout Style="{StaticResource VideoPlayerPanelNoLine}">
+        <ScrollView Grid.Row="1">
+            <StackLayout BackgroundColor="#dcdcdc" Padding="1" Spacing="0">
+                <StackLayout Style="{StaticResource VideoPlayerPanel}">
                     <Label Text="Năng lực tối thượng. Bí mật về sức mạnh của trái Ope Ope!" Style="{StaticResource VideoPlayerTitle}" />
                     <Label Text="One Piece 700 Vietsub+Engsub" Style="{StaticResource VideoPlayerSubTitle}" />
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <StackLayout Grid.Column="0" Orientation="Horizontal" HorizontalOptions="End">
-                            <Button Text="360p" BackgroundColor="#E01722" TextColor="#181D1C" FontSize="10" WidthRequest="50" />
-                            <Button Text="720p" BackgroundColor="White" TextColor="#181D1C" FontSize="10" WidthRequest="50"/>
-                        </StackLayout>
-                    </Grid>
                 </StackLayout>
                 <StackLayout Style="{StaticResource VideoPlayerPanel}">
                     <StackLayout Orientation="Horizontal">
