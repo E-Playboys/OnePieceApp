@@ -7,6 +7,7 @@
              prism:ViewModelLocator.AutowireViewModel="True"
              xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:templates="clr-namespace:OnePiece.App.Views.Templates;assembly=OnePiece.App"
+             xmlns:cv="clr-namespace:CarouselView.FormsPlugin.Abstractions;assembly=CarouselView.FormsPlugin.Abstractions"
              x:Class="OnePiece.App.Views.VideoPlayerPage">
     <Grid RowSpacing="0">
         <Grid.RowDefinitions>
@@ -19,26 +20,37 @@
         </StackLayout>
         <ScrollView Grid.Row="1">
             <StackLayout BackgroundColor="#dcdcdc" Padding="1" Spacing="0">
-                <StackLayout Style="{StaticResource VideoPlayerPanel}">
+                <StackLayout Style="{StaticResource VideoPlayerPanel}" Margin="0,0,0,10">
                     <Label Text="Năng lực tối thượng. Bí mật về sức mạnh của trái Ope Ope!" Style="{StaticResource VideoPlayerTitle}" />
                     <Label Text="One Piece 700 Vietsub+Engsub" Style="{StaticResource VideoPlayerSubTitle}" />
                 </StackLayout>
                 <StackLayout Style="{StaticResource VideoPlayerPanel}">
-                    <StackLayout Orientation="Horizontal">
-                        <Label Text="Chương 1" TextColor="#d32c24" Style="{StaticResource VideoPlayerPanelHeader}" />
-                        <Label Text="Chương 2" Style="{StaticResource VideoPlayerPanelHeader}" />
-                    </StackLayout>
-                    <controls:ExtendedFlowListView FlowColumnCount="6" RowHeight="50" SeparatorVisibility="None"
-                                     FlowItemsSource="{Binding Episodes}">
-                        <x:Arguments>
-                            <ListViewCachingStrategy>RecycleElement</ListViewCachingStrategy>
-                        </x:Arguments>
-                        <flv:FlowListView.FlowColumnTemplate>
+                    <cv:CarouselViewControl HeightRequest="280" ItemsSource="{Binding RelatedVideos}" Position="0" HorizontalOptions="FillAndExpand">
+                        <cv:CarouselViewControl.ItemTemplate>
                             <DataTemplate>
-                                <Button BackgroundColor="#333536" TextColor="White" FontSize="10" Text="{Binding Title, StringFormat='Tập {0}'}" />
+                                <Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                                    <Grid.RowDefinitions >
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+
+                                    <Label Grid.Row="0" Text="{Binding Title, StringFormat='Session {0}: Luffy trở thành vua hải tặc'}" FontSize="16" Style="{StaticResource CommonLabel}" VerticalOptions="Center"/>
+                                    <controls:HorizontalListView Grid.Row="1" ItemsSource="{Binding RelatedVideos}">
+                                        <controls:HorizontalListView.ItemTemplate>
+                                            <DataTemplate>
+                                                <Button BackgroundColor="#ffca28" TextColor="Black" FontSize="10" Text="{Binding Title, StringFormat='Tập {0}'}" HeightRequest="40" WidthRequest="60" />
+                                            </DataTemplate>
+                                        </controls:HorizontalListView.ItemTemplate>
+                                    </controls:HorizontalListView>
+                                    <ff:CachedImage Grid.Row="2" Source="http://fconepiece.com/wp-content/uploads/2017/10/One-Piece-810-800x450.png" />
+                                    <Label Grid.Row="3" Text="Tập 999" FontSize="14" Style="{StaticResource CommonLabel}" VerticalOptions="Center" HorizontalOptions="Start"/>
+                                    <Label Grid.Row="3" Text="312,456,123 lượt xem" FontSize="12" Style="{StaticResource CommonSecondaryLabel}" VerticalOptions="Center" HorizontalOptions="End"/>
+                                </Grid>
                             </DataTemplate>
-                        </flv:FlowListView.FlowColumnTemplate>
-                    </controls:ExtendedFlowListView>
+                        </cv:CarouselViewControl.ItemTemplate>
+                    </cv:CarouselViewControl>
                 </StackLayout>
                 <StackLayout Style="{StaticResource VideoPlayerPanel}">
                     <Label Text="Giới thiệu" Style="{StaticResource VideoPlayerPanelHeader}" />

@@ -14,7 +14,7 @@ namespace OnePiece.App.ViewModels
         public VideoPlayerPageViewModel(IAppService appService) : base(appService)
         {
             var animes = new List<Anime>();
-            for (int i = 1; i < 21; i++)
+            for (int i = 1; i < 5; i++)
             {
                 animes.Add(new Anime()
                 {
