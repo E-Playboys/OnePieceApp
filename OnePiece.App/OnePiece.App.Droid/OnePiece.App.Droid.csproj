@@ -334,6 +334,7 @@
     <Compile Include="Renderers\VideoViewRenderer.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\OrientationService.cs" />
     <Compile Include="Services\StatusBarImplementation.cs" />
   </ItemGroup>
   <ItemGroup>

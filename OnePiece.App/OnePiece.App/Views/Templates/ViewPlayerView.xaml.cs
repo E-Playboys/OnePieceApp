@@ -2,12 +2,24 @@
 using Xamarin.Forms;
 using Plugin.MediaManager.Abstractions;
 using Plugin.MediaManager;
+using Rg.Plugins.Popup.Extensions;
+using System.Threading.Tasks;
+using OnePiece.App.Services;
 
 namespace OnePiece.App.Views.Templates
 {
     public partial class ViewPlayerView : ContentView
     {
         private IPlaybackController PlaybackController => CrossMediaManager.Current.PlaybackController;
+
+        public static readonly BindableProperty IsFullScreenProperty =
+  BindableProperty.Create("IsFullScreen", typeof(bool), typeof(ViewPlayerView), false, BindingMode.TwoWay);
+
+        public bool IsFullScreen
+        {
+            get { return (bool)GetValue(IsFullScreenProperty); }
+            set { SetValue(IsFullScreenProperty, value); }
+        }
 
         public ViewPlayerView()
         {
@@ -28,33 +40,50 @@ namespace OnePiece.App.Views.Templates
                     }
                 });
             };
+
+            CrossMediaManager.Current.StatusChanged += (sender, e) =>
+            {
+                if(e.Status == Plugin.MediaManager.Abstractions.Enums.MediaPlayerStatus.Playing)
+                {
+                    PauseButton.IsVisible = true;
+                    PlayButton.IsVisible = false;
+                }
+                else
+                {
+                    PauseButton.IsVisible = false;
+                    PlayButton.IsVisible = true;
+                }
+            };
+
+            Main.BindingContext = this;
         }
 
         protected override void OnBindingContextChanged()
         {
             base.OnBindingContextChanged();
-            PauseButton.IsVisible = true;
-            PlayButton.IsVisible = false;
             PlaybackController.Play();
         }
 
         private void PlayClicked(object sender, EventArgs e)
         {
-            PauseButton.IsVisible = true;
-            PlayButton.IsVisible = false;
             PlaybackController.Play();
         }
 
         private void PauseClicked(object sender, EventArgs e)
         {
-            PauseButton.IsVisible = false;
-            PlayButton.IsVisible = true;
             PlaybackController.Pause();
         }
 
-        private void StopClicked(object sender, EventArgs e)
+        private void FullScreenClicked(object sender, EventArgs e)
         {
-            PlaybackController.Stop();
+            DependencyService.Get<IOrientationService>().Landscape();
+            IsFullScreen = true;
+        }
+
+        private void FullScreenExitClicked(object sender, EventArgs e)
+        {
+            DependencyService.Get<IOrientationService>().Portrait();
+            IsFullScreen = false;
         }
 
         private void ProgressBar_TouchDown(object sender, FocusEventArgs e)

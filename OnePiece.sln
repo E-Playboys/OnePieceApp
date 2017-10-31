@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27004.2005
+VisualStudioVersion = 15.0.27004.2002
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnePiece.App", "OnePiece.App\OnePiece.App\OnePiece.App.csproj", "{C94274B6-34CF-4CA5-AA1D-DBF93F67E6DD}"
 EndProject
@@ -9,7 +9,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnePiece.App.Droid", "OnePi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnePiece.App.iOS", "OnePiece.App\OnePiece.App.iOS\OnePiece.App.iOS.csproj", "{112745A2-BC31-4395-8FA0-BB8ACA3B31F5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnePiece.Web", "OnePiece.Web\OnePiece.Web.csproj", "{44A807F0-866A-44AA-A14E-FDC90111474C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnePiece.Web", "OnePiece.Web\OnePiece.Web.csproj", "{44A807F0-866A-44AA-A14E-FDC90111474C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "App", "App", "{229FF06B-B128-4E3A-B1C2-CF87CCCA21F8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{2E2CBAED-8AA9-4BE4-8215-4F266601843F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -242,6 +246,12 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C94274B6-34CF-4CA5-AA1D-DBF93F67E6DD} = {229FF06B-B128-4E3A-B1C2-CF87CCCA21F8}
+		{9FFED15D-00FF-4E77-96A9-45E39F2FFEF6} = {229FF06B-B128-4E3A-B1C2-CF87CCCA21F8}
+		{112745A2-BC31-4395-8FA0-BB8ACA3B31F5} = {229FF06B-B128-4E3A-B1C2-CF87CCCA21F8}
+		{44A807F0-866A-44AA-A14E-FDC90111474C} = {2E2CBAED-8AA9-4BE4-8215-4F266601843F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CF5ED71C-A2F6-4D0B-816A-A17721B77BEF}

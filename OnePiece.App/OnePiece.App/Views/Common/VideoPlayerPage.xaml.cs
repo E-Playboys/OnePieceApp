@@ -19,20 +19,20 @@ namespace OnePiece.App.Views
             InitializeComponent();
         }
 
-        //protected override void OnSizeAllocated(double width, double height)
-        //{
-        //    base.OnSizeAllocated(width, height);
-        //    var hardwareInfo = DependencyService.Get<IHardwareInfo>();
-        //    if (width > height)
-        //    {
-        //        VideoView.HeightRequest = hardwareInfo.ScreenWidth;
-        //        VideoView.WidthRequest = hardwareInfo.ScreenHeight;
-        //    }
-        //    else
-        //    {
-        //        VideoView.HeightRequest = (int)(width * 9 / 16);
-        //        VideoView.WidthRequest = hardwareInfo.ScreenWidth;
-        //    }
-        //}
+        protected override void OnSizeAllocated(double width, double height)
+        {
+            base.OnSizeAllocated(width, height);
+            var hardwareInfo = CrossDevice.Hardware;
+            if (width > height)
+            {
+                VideoView.HeightRequest = hardwareInfo.ScreenWidth;
+                VideoView.WidthRequest = hardwareInfo.ScreenHeight;
+            }
+            else
+            {
+                VideoView.HeightRequest = (int)(width * 9 / 16);
+                VideoView.WidthRequest = hardwareInfo.ScreenWidth;
+            }
+        }
     }
 }
