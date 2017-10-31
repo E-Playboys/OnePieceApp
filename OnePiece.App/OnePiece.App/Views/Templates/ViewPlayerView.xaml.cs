@@ -77,12 +77,14 @@ namespace OnePiece.App.Views.Templates
         private void FullScreenClicked(object sender, EventArgs e)
         {
             DependencyService.Get<IOrientationService>().Landscape();
+            DependencyService.Get<IStatusBar>().HideStatusBar();
             IsFullScreen = true;
         }
 
         private void FullScreenExitClicked(object sender, EventArgs e)
         {
             DependencyService.Get<IOrientationService>().Portrait();
+            DependencyService.Get<IStatusBar>().ShowStatusBar();
             IsFullScreen = false;
         }
 
