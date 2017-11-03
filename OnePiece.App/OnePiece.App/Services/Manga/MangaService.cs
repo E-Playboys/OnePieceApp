@@ -35,6 +35,18 @@ namespace OnePiece.App.Services.Manga
 
         public async Task<List<MangaChapter>> ListChaptersAsync(ListMangaChaptersRq rq)
         {
+            var chapters = new List<MangaChapter>();
+            for(var i = 0; i <= 20; i++)
+            {
+                chapters.Add(new MangaChapter()
+                {
+                    Avatar = "http://static.hdonline.vn/i/resources/new/film/215x311/2016/07/20/one-piece-film-gold.jpg",
+                    Name = "Luffy thành vua hải tặc",
+                    Number = i
+                });
+            }
+            return chapters;
+
             const string apiAction = "ListChapters";
             var requestUrl = $"{apiUrl}{apiAction}?skip={rq.Skip}&take={rq.Take}&volumeId={rq.VolumeId}";
             string response = string.Empty;

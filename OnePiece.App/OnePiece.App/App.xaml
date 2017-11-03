@@ -46,6 +46,17 @@
         <Setter Property="TextColor" Value="White"/>
       </Style>
 
+      <Style TargetType="Label" x:Key="MangaTitle" BasedOn="{StaticResource VideoListItemTitle}">
+        <Setter Property="TextColor" Value="Black"/>
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="Opacity" Value="0.87"/>
+      </Style>
+
+      <Style TargetType="Label" x:Key="MangaDescription" BasedOn="{StaticResource MangaTitle}">
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="Opacity" Value="0.54"/>
+      </Style>
+
       <Style TargetType="Image" x:Key="FeaturedVideoThumbnail" BasedOn="{StaticResource VideoListItemThumbnail}">
       </Style>
 

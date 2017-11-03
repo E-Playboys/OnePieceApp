@@ -4,9 +4,110 @@
                          xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
                          prism:ViewModelLocator.AutowireViewModel="True"
                          xmlns:flv="clr-namespace:DLToolkit.Forms.Controls;assembly=DLToolkit.Forms.Controls.FlowListView"
-                         xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+                         xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+                         xmlns:iconize="clr-namespace:FormsPlugin.Iconize;assembly=FormsPlugin.Iconize"
+                         xmlns:converters="clr-namespace:OnePiece.App.Converters;assembly=OnePiece.App"
                          x:Class="OnePiece.App.Views.MangaPage">
-  <StackLayout>
+
+  <Grid VerticalOptions="FillAndExpand">
+
+    <ActivityIndicator IsRunning="{Binding IsBusy}" VerticalOptions="CenterAndExpand"/>
+
+    <ScrollView IsVisible="{Binding IsBusy, Converter={x:Static converters:InverseBoolConverter.Instance}}">
+      <StackLayout Spacing="0">
+        <Grid BackgroundColor="White" Padding="10" RowSpacing="0">
+          <Grid.GestureRecognizers>
+            <TapGestureRecognizer Command="{Binding ItemTappedCommand}"/>
+          </Grid.GestureRecognizers>
+
+          <Grid.RowDefinitions>
+            <RowDefinition Height="150"/>
+          </Grid.RowDefinitions>
+
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="*"/>
+          </Grid.ColumnDefinitions>
+          
+          <ffimage:CachedImage x:Name="VideoPoster" Grid.Column="0" BackgroundColor="LightGray" Aspect="AspectFill" DownsampleToViewSize="true" Source="http://fconepiece.com/wp-content/uploads/2017/10/One-Piece-810-800x450.png" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
+          <StackLayout Grid.Column="1" Padding="0,5,0,0" VerticalOptions="End" Spacing="5">
+            <Label Text="Sanji vs Luffy cuộc chiến không mong muốn" Style="{StaticResource MangaTitle}"/>
+            <Label Text="Chapter 811" Style="{StaticResource MangaDescription}"/>
+            <Grid>
+              <Grid.RowDefinitions>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="25"/>
+              </Grid.RowDefinitions>
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+              </Grid.ColumnDefinitions>
+              <StackLayout Grid.Row="0" Grid.Column="0" Orientation="Horizontal">
+                <iconize:IconLabel Text="md-visibility" FontSize="18" TextColor="#ffca28"
+           VerticalTextAlignment="Center" HorizontalTextAlignment="Center" VerticalOptions="Center" HorizontalOptions="Start"/>
+                <Label Text="3,001,451" FontSize="16" Style="{StaticResource CommonLabel}"
+           VerticalTextAlignment="Center" HorizontalTextAlignment="Center" VerticalOptions="Center" HorizontalOptions="Start" />
+              </StackLayout>
+
+              <StackLayout Grid.Row="1" Grid.Column="0" Orientation="Horizontal">
+                <iconize:IconLabel Text="md-star" FontSize="18" TextColor="#ffca28"
+           VerticalTextAlignment="Center" HorizontalTextAlignment="Center" VerticalOptions="Center" HorizontalOptions="Start"/>
+                <iconize:IconLabel Text="md-star" FontSize="18" TextColor="#ffca28"
+           VerticalTextAlignment="Center" HorizontalTextAlignment="Center" VerticalOptions="Center" HorizontalOptions="Start"/>
+                <iconize:IconLabel Text="md-star" FontSize="18" TextColor="#ffca28"
+           VerticalTextAlignment="Center" HorizontalTextAlignment="Center" VerticalOptions="Center" HorizontalOptions="Start"/>
+                <iconize:IconLabel Text="md-star-half" FontSize="18" TextColor="#ffca28"
+           VerticalTextAlignment="Center" HorizontalTextAlignment="Center" VerticalOptions="Center" HorizontalOptions="Start"/>
+                <iconize:IconLabel Text="md-star-border" FontSize="18" TextColor="#ffca28"
+           VerticalTextAlignment="Center" HorizontalTextAlignment="Center" VerticalOptions="Center" HorizontalOptions="Start"/>
+                <Label Text="4.6/5" FontSize="16" Style="{StaticResource CommonLabel}"
+           VerticalTextAlignment="Center" HorizontalTextAlignment="Center" VerticalOptions="Center" HorizontalOptions="Start" />
+              </StackLayout>
+            </Grid>
+            <iconize:IconLabel Text="md-import-contacts" FontSize="40" TextColor="#ffca28" HorizontalOptions="End" VerticalOptions="End">
+              <iconize:IconLabel.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding ItemTappedCommand}"/>
+              </iconize:IconLabel.GestureRecognizers>
+            </iconize:IconLabel>
+          </StackLayout>
+          
+        </Grid>
+
+        <StackLayout BackgroundColor="White" Padding="15" Margin="0,0,0,10">
+          <Label Text="Giới thiệu" Style="{StaticResource CommonLabel}" FontSize="16" />
+          <Label Text="Trong One Piece 775 – Bác sĩ Chopper bắt đầu chữa trị vết thương cho Zunesha. Kỹ năng kiếm pháp của Zoro và Brook, năng lực trái Hana-Hana của Robin… cùng với tài nghệ của Usopp, Franky, tất cả tập trung trị thương cho voi khổng lồ." Style="{StaticResource CommonSecondaryLabel}" FontSize="14" />
+        </StackLayout>
+
+        <controls:VerticalListView ItemsSource="{Binding MangaChapters}">
+          <controls:VerticalListView.ItemTemplate>
+            <DataTemplate>
+              <Grid BackgroundColor="White" ColumnSpacing="7.5" Padding="10" Margin="0,0,0,1">
+                <Grid.RowDefinitions>
+                  <RowDefinition Height="Auto" />
+                  <RowDefinition Height="200"/>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" Text="Season 01: Luffy - người sẽ trở thành Vua Hải Tặc" Style="{StaticResource CommonLabel}" FontSize="16" />
+                <controls:HorizontalListView Grid.Row="1" ItemsSource="{Binding MangaImages}">
+                  <controls:HorizontalListView.ItemTemplate>
+                    <DataTemplate>
+                      <StackLayout>
+                        <ffimage:CachedImage Source="http://fconepiece.com/wp-content/uploads/2017/10/One-Piece-810-800x450.png" />
+                        <Label Text="Tập 999" FontSize="14" Style="{StaticResource CommonLabel}" VerticalOptions="Center"/>
+                        <Label Text="312,456,123 lượt xem" FontSize="12" Style="{StaticResource CommonSecondaryLabel}" VerticalOptions="Center"/>
+                      </StackLayout>
+                    </DataTemplate>
+                  </controls:HorizontalListView.ItemTemplate>
+                </controls:HorizontalListView>
+              </Grid>
+            </DataTemplate>
+          </controls:VerticalListView.ItemTemplate>
+        </controls:VerticalListView>
+        <Picker x:Name="ChapterPicker" Title="Chapters" VerticalOptions="CenterAndExpand" IsVisible="false"></Picker>
+      </StackLayout>
+    </ScrollView>
+  </Grid>
+  
+  <!--<StackLayout>
     <controls:ExtendedFlowListView x:Name="MangaListView" FlowColumnCount="3" SeparatorVisibility="None" HasUnevenRows="true"
                                    FlowItemTappedCommand="{Binding ItemTappedCommand}" FlowItemsSource="{Binding MangaChapters}"
                                    RefreshCommand="{Binding RefreshCommand}"
@@ -19,19 +120,15 @@
       </x:Arguments>
       <flv:FlowListView.FlowColumnTemplate>
         <DataTemplate>
-          <AbsoluteLayout Margin="0,10" BackgroundColor="Transparent" WidthRequest="{Binding CoverImageWidth}">
-            <AbsoluteLayout AbsoluteLayout.LayoutBounds="0.5,0.5,-1,-1" AbsoluteLayout.LayoutFlags="PositionProportional">
-              <forms:CachedImage Source="{Binding CoverImageLink}" IsLoading="{Binding IsLoading}" WidthRequest="{Binding CoverImageWidth}"
-                                 Aspect="AspectFill" />
-              <StackLayout HorizontalOptions="FillAndExpand" BackgroundColor="#80000000" AbsoluteLayout.LayoutBounds="0,1,1,-1" AbsoluteLayout.LayoutFlags="PositionProportional,WidthProportional">
-                <Label TextColor="White" Text="{Binding ChapterNum}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" />
-              </StackLayout>
-            </AbsoluteLayout>
-          </AbsoluteLayout>
+          <StackLayout>
+            <ffimage:CachedImage Source="{Binding Avatar}" />
+            <Label Text="{Binding ChapterNum}" FontSize="14" Style="{StaticResource CommonLabel}" VerticalOptions="Center"/>
+            <Label Text="3,265 lượt xem" FontSize="12" Style="{StaticResource CommonSecondaryLabel}" VerticalOptions="Center"/>
+          </StackLayout>
         </DataTemplate>
       </flv:FlowListView.FlowColumnTemplate>
     </controls:ExtendedFlowListView>
 
     <Picker x:Name="ChapterPicker" Title="Chapters" VerticalOptions="CenterAndExpand" IsVisible="false"></Picker>
-  </StackLayout>
+  </StackLayout>-->
 </controls:TabContentPage>

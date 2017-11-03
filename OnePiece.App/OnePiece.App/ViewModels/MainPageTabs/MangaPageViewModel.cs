@@ -1,7 +1,7 @@
 ﻿using OnePiece.App.Models;
 using OnePiece.App.Services;
 using OnePiece.App.Services.Manga;
-using OnePiece.App.Views.MainPageTabs;
+using OnePiece.App.Views;
 using Prism.Commands;
 using Rg.Plugins.Popup.Services;
 using System.Collections.Generic;

@@ -7,7 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
-namespace OnePiece.App.Views.MainPageTabs
+namespace OnePiece.App.Views
 {
     public partial class MangaReaderPage : PopupPage
     {
