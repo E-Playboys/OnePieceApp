@@ -16,19 +16,19 @@ namespace Onepiece.VideoCollector
     {
         static void Main(string[] args)
         {
-            CollectFromFcOnePiece();
+            Console.Write("Collect (1) or Download (2): ");
+            var action = Console.ReadLine();
 
-            //var driver = new FirefoxDriver
-            //{
-            //    Url = "http://www.linkvip.info/"
-            //};
+            if (action == "1")
+            {
+                CollectFromFcOnePiece();
+            }
+            else if (action == "2")
+            {
+                Directory.CreateDirectory("Videos");
 
-            //driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(20);
-
-            //driver.FindElement(By.Name("url")).SendKeys("https://www.fshare.vn/file/7IB03VNMG7");
-            //driver.FindElement(By.TagName("button")).Click();
-
-            //var link = driver.FindElement(By.XPath("//h4/a")).GetAttribute("href");
+                DownloadVideo();
+            }
         }
 
         private static void CollectFromFcOnePiece()
@@ -75,7 +75,7 @@ namespace Onepiece.VideoCollector
                                     {
                                         downloadLink = driver.FindElement(By.XPath("//h4/a")).GetAttribute("href");
                                     }
-                                    
+
                                     previousLink = downloadLink;
                                     downloadLinkData += $"{seasonNo}_{epLinkNode.InnerText}_{downloadLink}" + Environment.NewLine;
                                 }
@@ -86,6 +86,28 @@ namespace Onepiece.VideoCollector
             }
 
             File.WriteAllText("LinkData.txt", downloadLinkData);
+        }
+
+        private static void DownloadVideo()
+        {
+            var tasks = new List<Task>();
+            var linkData = File.ReadAllLines("LinkData.txt");
+            foreach (var linkInfo in linkData)
+            {
+                var downloadLink = linkInfo.Split('_')[2];
+
+                var task = Task.Run(() =>
+                {
+                    using (WebClient wc = new WebClient())
+                    {
+                        wc.DownloadFile(new Uri(downloadLink), $@"Videos\{linkInfo.Split('_')[0]}_{linkInfo.Split('_')[1]}");
+                    }
+                });
+
+                tasks.Add(task);
+            }
+
+            Task.WaitAll(tasks.ToArray());
         }
     }
 }
