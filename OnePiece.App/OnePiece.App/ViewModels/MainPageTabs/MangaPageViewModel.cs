@@ -2,6 +2,7 @@
 using OnePiece.App.Services;
 using OnePiece.App.Services.Manga;
 using OnePiece.App.Views;
+using OnePiece.App.Utilities;
 using Prism.Commands;
 using Rg.Plugins.Popup.Services;
 using System.Collections.Generic;
@@ -21,10 +22,10 @@ namespace OnePiece.App.ViewModels
         public DelegateCommand ItemTappedCommand { get; set; }
         public DelegateCommand<MangaChapter> LoadMoreCommand { get; set; }
 
-        private ObservableCollection<MangaChapter> _mangaChapters = new ObservableCollection<MangaChapter>();
-        public ObservableCollection<MangaChapter> MangaChapters
+        private ObservableRangeCollection<MangaChapter> _mangaChapters = new ObservableRangeCollection<MangaChapter>();
+        public ObservableRangeCollection<MangaChapter> MangaChapters
         {
-            get { return _mangaChapters ?? (_mangaChapters = new ObservableCollection<MangaChapter>()); }
+            get { return _mangaChapters ?? (_mangaChapters = new ObservableRangeCollection<MangaChapter>()); }
             set { SetProperty(ref _mangaChapters, value); }
         }
 
@@ -82,8 +83,9 @@ namespace OnePiece.App.ViewModels
             foreach (var chapter in chapters)
             {
                 chapter.CoverImageWidth = (screenWidth - 30) / 3;
-                MangaChapters.Add(chapter);
             }
+
+            MangaChapters.AddRange(chapters);
         }
 
         public async Task LoadChapterPicker()
@@ -101,7 +103,7 @@ namespace OnePiece.App.ViewModels
         {
             IsBusy = true;
 
-            MangaChapters = new ObservableCollection<MangaChapter>();
+            MangaChapters = new ObservableRangeCollection<MangaChapter>();
             await LoadMangaChapters();
 
             IsBusy = false;

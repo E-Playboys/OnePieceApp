@@ -18,7 +18,7 @@
 
         <ScrollView IsVisible="{Binding IsBusy, Converter={x:Static converters:InverseBoolConverter.Instance}}">
             <StackLayout Spacing="0">
-                <Grid BackgroundColor="White" ColumnSpacing="15" RowSpacing="0">
+                <Grid BackgroundColor="White" ColumnSpacing="10" RowSpacing="0">
                     <Grid.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding PlayVideoCommand}"/>
                     </Grid.GestureRecognizers>

@@ -31,7 +31,17 @@ namespace OnePiece.App.Models
 
         public int CoverImageWidth { get; set; }
 
-        public ObservableCollection<MangaImage> MangaImages { get; set; } = new ObservableCollection<MangaImage>();
+        public ObservableCollection<MangaImage> MangaImages { get; set; } = new ObservableCollection<MangaImage>() {
+            new MangaImage(),
+            new MangaImage(),
+            new MangaImage(),
+            new MangaImage(),
+            new MangaImage(),
+            new MangaImage(),
+            new MangaImage(),
+            new MangaImage(),
+            new MangaImage(),
+        };
 
         public string Avatar { get; set; }
 
