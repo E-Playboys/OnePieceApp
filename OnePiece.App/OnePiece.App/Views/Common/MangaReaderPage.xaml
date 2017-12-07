@@ -7,40 +7,26 @@
                  prism:ViewModelLocator.AutowireViewModel="True"
                  xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
                  xmlns:iconize="clr-namespace:FormsPlugin.Iconize;assembly=FormsPlugin.Iconize"
+                 xmlns:cv="clr-namespace:CarouselView.FormsPlugin.Abstractions;assembly=CarouselView.FormsPlugin.Abstractions"
                  x:Class="OnePiece.App.Views.MangaReaderPage">
   <Grid RowSpacing="0">
 
-    <controls:ExtendedListView x:Name="MangaPagesView"
-                               SeparatorVisibility="Default"
+    <cv:CarouselViewControl x:Name="MangaPagesView"
                                ItemsSource="{Binding MangaChapter.MangaImages}"
-                               HasUnevenRows="true"
-                               IsRefreshing="{Binding IsBusy}"
-                               ItemAppearing="OnItemAppearing"
                                HorizontalOptions="FillAndExpand"
                                VerticalOptions="FillAndExpand"
-                               RefreshCommand="{Binding RefreshCommand}"
-                               LoadMoreCommand="{Binding LoadMoreCommand}"
-                               IsPullToRefreshEnabled="true"
+                               InterPageSpacing="10" Position="0" 
                                Margin="0,0,0,1">
-      <x:Arguments>
-        <ListViewCachingStrategy>RecycleElement</ListViewCachingStrategy>
-      </x:Arguments>
-      <controls:ExtendedListView.ItemTemplate>
+      <cv:CarouselViewControl.ItemTemplate>
         <DataTemplate>
-          <ViewCell>
-            <controls:PinchToZoomContainer>
-              <controls:PinchToZoomContainer.GestureRecognizers>
-                <TapGestureRecognizer Tapped="OnItemTapped"/>
-              </controls:PinchToZoomContainer.GestureRecognizers>
-              <controls:PinchToZoomContainer.Content>
-                <forms:CachedImage Source="{Binding Link}" IsLoading="{Binding IsLoading}" WidthRequest="{Binding ImageWidth}"
-                                   Aspect="AspectFill" BackgroundColor="#E01722" />
-              </controls:PinchToZoomContainer.Content>
-            </controls:PinchToZoomContainer>
-          </ViewCell>
+
+          <forms:CachedImage Source="{Binding Link}"
+                             HorizontalOptions="FillAndExpand"
+                             VerticalOptions="FillAndExpand"
+                             Aspect="AspectFill" BackgroundColor="#E01722" />
         </DataTemplate>
-      </controls:ExtendedListView.ItemTemplate>
-    </controls:ExtendedListView>
+      </cv:CarouselViewControl.ItemTemplate>
+    </cv:CarouselViewControl>
 
     <StackLayout x:Name="TopBar" BackgroundColor="#E0000000" Spacing="0" VerticalOptions="Start">
       <StackLayout Orientation="Horizontal" Padding="10">

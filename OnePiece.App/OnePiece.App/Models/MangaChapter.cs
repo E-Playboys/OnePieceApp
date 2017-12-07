@@ -32,15 +32,15 @@ namespace OnePiece.App.Models
         public int CoverImageWidth { get; set; }
 
         public ObservableCollection<MangaImage> MangaImages { get; set; } = new ObservableCollection<MangaImage>() {
-            new MangaImage(),
-            new MangaImage(),
-            new MangaImage(),
-            new MangaImage(),
-            new MangaImage(),
-            new MangaImage(),
-            new MangaImage(),
-            new MangaImage(),
-            new MangaImage(),
+            new MangaImage() { Link = "http://www.onepiecepodcast.com/wp-content/uploads/2016/02/OPFilm-Gold-1-1.png" },
+            new MangaImage() { Link = "http://www.onepiecepodcast.com/wp-content/uploads/2016/02/OPFilm-Gold-1-1.png" },
+            new MangaImage() { Link = "http://www.onepiecepodcast.com/wp-content/uploads/2016/02/OPFilm-Gold-1-1.png" },
+            new MangaImage() { Link = "http://www.onepiecepodcast.com/wp-content/uploads/2016/02/OPFilm-Gold-1-1.png" },
+            new MangaImage() { Link = "http://www.onepiecepodcast.com/wp-content/uploads/2016/02/OPFilm-Gold-1-1.png" },
+            new MangaImage() { Link = "http://www.onepiecepodcast.com/wp-content/uploads/2016/02/OPFilm-Gold-1-1.png" },
+            new MangaImage() { Link = "http://www.onepiecepodcast.com/wp-content/uploads/2016/02/OPFilm-Gold-1-1.png" },
+            new MangaImage() { Link = "http://www.onepiecepodcast.com/wp-content/uploads/2016/02/OPFilm-Gold-1-1.png" },
+            new MangaImage() { Link = "http://www.onepiecepodcast.com/wp-content/uploads/2016/02/OPFilm-Gold-1-1.png" },
         };
 
         public string Avatar { get; set; }

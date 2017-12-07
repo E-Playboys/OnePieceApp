@@ -6,9 +6,10 @@ using BottomNavigationBar.Listeners;
 using OnePiece.App.Controls;
 using OnePiece.App.Droid.Renderers;
 using OnePiece.App.Views;
-using Plugin.Iconize.Droid.Controls;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
+using Plugin.Iconize;
+using Plugin.Iconize.Droid.Controls;
 
 [assembly: ExportRenderer(typeof(MainPage), typeof(MainPageRenderer))]
 namespace OnePiece.App.Droid.Renderers

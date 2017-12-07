@@ -87,12 +87,16 @@ namespace OnePiece.App.ViewModels
         {
             if (MangaChapterId > 0)
             {
-                var rs = await _mangaService.GetChapterAsync(new GetChapterRq
-                {
-                    ChapterId = MangaChapterId
-                });
+                //var rs = await _mangaService.GetChapterAsync(new GetChapterRq
+                //{
+                //    ChapterId = MangaChapterId
+                //});
 
-                if (rs.Chapter == null) return;
+                //if (rs.Chapter == null) return;
+
+                var rs = new GetChapterRs() {
+                    Chapter = new MangaChapter()
+                };
 
                 NextChapterId = rs.NextChapterId;
                 PrevChapterId = rs.PrevChapterId;

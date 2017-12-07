@@ -7,101 +7,47 @@
                          xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
                          xmlns:iconize="clr-namespace:FormsPlugin.Iconize;assembly=FormsPlugin.Iconize"
                          xmlns:converters="clr-namespace:OnePiece.App.Converters;assembly=OnePiece.App"
+                         xmlns:cv="clr-namespace:CarouselView.FormsPlugin.Abstractions;assembly=CarouselView.FormsPlugin.Abstractions"
                          x:Class="OnePiece.App.Views.MangaPage">
 
-  <Grid VerticalOptions="FillAndExpand">
+  <ScrollView VerticalOptions="FillAndExpand">
 
     <ActivityIndicator IsRunning="{Binding IsBusy}" VerticalOptions="CenterAndExpand"/>
 
-    <ScrollView IsVisible="{Binding IsBusy, Converter={x:Static converters:InverseBoolConverter.Instance}}">
-      <StackLayout Spacing="0">
-        <Grid BackgroundColor="White" Padding="10" RowSpacing="0">
-          <Grid.GestureRecognizers>
-            <TapGestureRecognizer Command="{Binding ItemTappedCommand}"/>
-          </Grid.GestureRecognizers>
-
-          <Grid.RowDefinitions>
-            <RowDefinition Height="150"/>
-          </Grid.RowDefinitions>
-
-          <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="100"/>
-            <ColumnDefinition Width="*"/>
-          </Grid.ColumnDefinitions>
-          
-          <ffimage:CachedImage x:Name="VideoPoster" Grid.Column="0" BackgroundColor="LightGray" Aspect="AspectFill" DownsampleToViewSize="true" Source="http://fconepiece.com/wp-content/uploads/2017/10/One-Piece-810-800x450.png" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
-          <StackLayout Grid.Column="1" Padding="5" VerticalOptions="End" Spacing="5">
-            <Label Text="Sanji vs Luffy cuộc chiến không mong muốn" Style="{StaticResource MangaTitle}"/>
-            <Label Text="Chapter 811" Style="{StaticResource MangaDescription}"/>
-            
-              <StackLayout Orientation="Horizontal">
-                <iconize:IconLabel Text="md-visibility" FontSize="18" TextColor="#ffca28"
-           VerticalTextAlignment="Center" HorizontalTextAlignment="Center" VerticalOptions="Center" HorizontalOptions="Start"/>
-                <Label Text="3,001,451" FontSize="16" Style="{StaticResource CommonLabel}"
-           VerticalTextAlignment="Center" HorizontalTextAlignment="Center" VerticalOptions="Center" HorizontalOptions="Start" />
-              </StackLayout>
-
-              <StackLayout Orientation="Horizontal">
-                <iconize:IconLabel Text="md-star" FontSize="18" TextColor="#ffca28"
-           VerticalTextAlignment="Center" HorizontalTextAlignment="Center" VerticalOptions="Center" HorizontalOptions="Start"/>
-                <iconize:IconLabel Text="md-star" FontSize="18" TextColor="#ffca28"
-           VerticalTextAlignment="Center" HorizontalTextAlignment="Center" VerticalOptions="Center" HorizontalOptions="Start"/>
-                <iconize:IconLabel Text="md-star" FontSize="18" TextColor="#ffca28"
-           VerticalTextAlignment="Center" HorizontalTextAlignment="Center" VerticalOptions="Center" HorizontalOptions="Start"/>
-                <iconize:IconLabel Text="md-star-half" FontSize="18" TextColor="#ffca28"
-           VerticalTextAlignment="Center" HorizontalTextAlignment="Center" VerticalOptions="Center" HorizontalOptions="Start"/>
-                <iconize:IconLabel Text="md-star-border" FontSize="18" TextColor="#ffca28"
-           VerticalTextAlignment="Center" HorizontalTextAlignment="Center" VerticalOptions="Center" HorizontalOptions="Start"/>
-                <Label Text="4.6/5" FontSize="16" Style="{StaticResource CommonLabel}"
-           VerticalTextAlignment="Center" HorizontalTextAlignment="Center" VerticalOptions="Center" HorizontalOptions="Start" />
-              </StackLayout>
-            
-            <iconize:IconLabel Text="md-import-contacts" FontSize="40" TextColor="#ffca28" HorizontalOptions="End" VerticalOptions="End">
-              <iconize:IconLabel.GestureRecognizers>
-                <TapGestureRecognizer Command="{Binding ItemTappedCommand}"/>
-              </iconize:IconLabel.GestureRecognizers>
-            </iconize:IconLabel>
-          </StackLayout>
-        </Grid>
-
-        <StackLayout BackgroundColor="White" Padding="10" Margin="0,0,0,10">
-          <Label Text="Giới thiệu" Style="{StaticResource CommonLabel}" FontSize="16" />
-          <Label Text="Trong One Piece 775 – Bác sĩ Chopper bắt đầu chữa trị vết thương cho Zunesha. Kỹ năng kiếm pháp của Zoro và Brook, năng lực trái Hana-Hana của Robin… cùng với tài nghệ của Usopp, Franky, tất cả tập trung trị thương cho voi khổng lồ." Style="{StaticResource CommonSecondaryLabel}" FontSize="14" />
-        </StackLayout>
-
-        <controls:VerticalListView ItemsSource="{Binding MangaChapters}">
-          <controls:VerticalListView.ItemTemplate>
+      <StackLayout Spacing="10" IsVisible="{Binding IsBusy, Converter={x:Static converters:InverseBoolConverter.Instance}}" BackgroundColor="White">
+        <cv:CarouselViewControl x:Name="HotMangaCarouselView" Orientation="Horizontal" HeightRequest="200" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
+                                InterPageSpacing="10" Position="0" ItemsSource="{Binding MangaChapters}" ShowIndicators="True" IndicatorsTintColor="#ffca28">
+          <cv:CarouselViewControl.ItemTemplate>
             <DataTemplate>
-              <StackLayout BackgroundColor="White" Padding="10" Margin="0,0,0,1">
-                <Label Text="Season 01: Luffy - người sẽ trở thành Vua Hải Tặc" Style="{StaticResource CommonLabel}" FontSize="16" />
-                <controls:ExtendedFlowListView x:Name="MangaListView" FlowColumnCount="3" SeparatorVisibility="None" HasUnevenRows="true"
-                                   FlowItemTappedCommand="{Binding ItemTappedCommand}" FlowItemsSource="{Binding MangaImages}"
-                                   RefreshCommand="{Binding RefreshCommand}"
-                                   IsRefreshing="{Binding IsBusy}"
-                                   IsPullToRefreshEnabled="true"
-                                   FlowLastTappedItem="{Binding LastTappedItem}"
-                                   LoadMoreCommand="{Binding LoadMoreCommand}">
-                  <x:Arguments>
-                    <ListViewCachingStrategy>RecycleElement</ListViewCachingStrategy>
-                  </x:Arguments>
-                  <flv:FlowListView.FlowColumnTemplate>
-                    <DataTemplate>
-                      <StackLayout WidthRequest="75" HeightRequest="130" Padding="5">
-                        <ffimage:CachedImage Source="http://fconepiece.com/wp-content/uploads/2017/10/One-Piece-810-800x450.png" Aspect="AspectFill" />
-                        <Label Text="Chương 70" FontSize="14" Style="{StaticResource CommonLabel}" VerticalOptions="Center"/>
-                        <Label Text="3,265 lượt xem" FontSize="12" Style="{StaticResource CommonSecondaryLabel}" VerticalOptions="Center"/>
-                      </StackLayout>
-                    </DataTemplate>
-                  </flv:FlowListView.FlowColumnTemplate>
-                </controls:ExtendedFlowListView>
-              </StackLayout>
+              <ffimage:CachedImage Source="http://fconepiece.com/wp-content/uploads/2017/10/One-Piece-810-800x450.png" />
             </DataTemplate>
-          </controls:VerticalListView.ItemTemplate>
-        </controls:VerticalListView>
+          </cv:CarouselViewControl.ItemTemplate>
+        </cv:CarouselViewControl>
+
+        <flv:FlowListView x:Name="MangaListView" FlowColumnCount="3" SeparatorVisibility="None" RowHeight="210"
+                                       FlowUseAbsoluteLayoutInternally="false" FlowColumnExpand="None"
+                                       FlowItemTappedCommand="{Binding ItemTappedCommand}" FlowItemsSource="{Binding MangaChapters}"
+                                       RefreshCommand="{Binding RefreshCommand}"
+                                       IsRefreshing="{Binding IsBusy}"
+                                       IsPullToRefreshEnabled="true"
+                                       FlowLastTappedItem="{Binding LastTappedItem}" HorizontalOptions="FillAndExpand">
+                      <x:Arguments>
+                        <ListViewCachingStrategy>RecycleElement</ListViewCachingStrategy>
+                      </x:Arguments>
+                      <flv:FlowListView.FlowColumnTemplate>
+                        <DataTemplate>
+                          <StackLayout WidthRequest="75" Padding="5" Spacing="0">
+                            <ffimage:CachedImage Source="http://www.onepiecepodcast.com/wp-content/uploads/2016/02/OPFilm-Gold-1-1.png" Aspect="AspectFill" />
+                            <Label Text="Chương 70" FontSize="14" Style="{StaticResource CommonLabel}" VerticalOptions="Center"/>
+                            <Label Text="3,265 lượt xem" FontSize="12" Style="{StaticResource CommonSecondaryLabel}" VerticalOptions="Center"/>
+                          </StackLayout>
+                        </DataTemplate>
+                      </flv:FlowListView.FlowColumnTemplate>
+                    </flv:FlowListView>
+                  
         <Picker x:Name="ChapterPicker" Title="Chapters" VerticalOptions="CenterAndExpand" IsVisible="false"></Picker>
       </StackLayout>
-    </ScrollView>
-  </Grid>
+  </ScrollView>
   
   <!--<StackLayout>
     <controls:ExtendedFlowListView x:Name="MangaListView" FlowColumnCount="3" SeparatorVisibility="None" HasUnevenRows="true"

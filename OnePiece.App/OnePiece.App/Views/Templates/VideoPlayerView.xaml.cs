@@ -8,12 +8,12 @@ using OnePiece.App.Services;
 
 namespace OnePiece.App.Views.Templates
 {
-    public partial class ViewPlayerView : ContentView
+    public partial class VideoPlayerView : ContentView
     {
         private IPlaybackController PlaybackController => CrossMediaManager.Current.PlaybackController;
 
         public static readonly BindableProperty IsFullScreenProperty =
-  BindableProperty.Create("IsFullScreen", typeof(bool), typeof(ViewPlayerView), false, BindingMode.TwoWay);
+  BindableProperty.Create("IsFullScreen", typeof(bool), typeof(VideoPlayerView), false, BindingMode.TwoWay);
 
         public bool IsFullScreen
         {
@@ -21,7 +21,7 @@ namespace OnePiece.App.Views.Templates
             set { SetValue(IsFullScreenProperty, value); }
         }
 
-        public ViewPlayerView()
+        public VideoPlayerView()
         {
             InitializeComponent();
 

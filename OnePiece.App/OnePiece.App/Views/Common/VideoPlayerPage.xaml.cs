@@ -1,4 +1,5 @@
-﻿using Plugin.DeviceInfo;
+﻿using OnePiece.App.Services;
+using Plugin.DeviceInfo;
 using Plugin.MediaManager;
 using Plugin.MediaManager.Abstractions;
 using System;
@@ -27,11 +28,13 @@ namespace OnePiece.App.Views
             {
                 VideoView.HeightRequest = hardwareInfo.ScreenWidth;
                 VideoView.WidthRequest = hardwareInfo.ScreenHeight;
+                DependencyService.Get<IStatusBar>().HideStatusBar();
             }
             else
             {
                 VideoView.HeightRequest = (int)(width * 9 / 16);
                 VideoView.WidthRequest = hardwareInfo.ScreenWidth;
+                DependencyService.Get<IStatusBar>().ShowStatusBar();
             }
         }
     }

@@ -50,6 +50,12 @@ namespace OnePiece.App.Views
                     await context.LoadMangaChapters();
                 }
 
+                Device.StartTimer(TimeSpan.FromSeconds(5), () =>
+                {
+                    HotMangaCarouselView.Position = HotMangaCarouselView.Position < context.MangaChapters.Count ? HotMangaCarouselView.Position + 1 : 0;
+                    return true;
+                });
+
                 // Initialize chapter picker
                 await context.LoadChapterPicker();
                 var chapterNames = context.ChapterNameIdMap.Select(r => r.Key);

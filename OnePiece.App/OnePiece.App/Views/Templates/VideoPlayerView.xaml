@@ -7,7 +7,7 @@
           xmlns:iconize="clr-namespace:FormsPlugin.Iconize;assembly=FormsPlugin.Iconize"
           xmlns:mm="clr-namespace:Plugin.MediaManager.Forms;assembly=Plugin.MediaManager.Forms"
           xmlns:converters="clr-namespace:OnePiece.App.Converters;assembly=OnePiece.App"
-          x:Class="OnePiece.App.Views.Templates.ViewPlayerView">
+          x:Class="OnePiece.App.Views.Templates.VideoPlayerView">
     
     <Grid x:Name="Main" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" ColumnSpacing="0" RowSpacing="0">
         <Grid.RowDefinitions>

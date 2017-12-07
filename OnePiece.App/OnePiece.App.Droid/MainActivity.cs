@@ -6,7 +6,6 @@ using Android.OS;
 using Android.Views;
 using Felipecsl.GifImageViewLibrary;
 using FormsPlugin.Iconize.Droid;
-using Microsoft.Practices.Unity;
 using OnePiece.App.Droid.Helpers;
 using OnePiece.App.Droid.Renderers;
 using Plugin.Iconize.Fonts;
@@ -15,6 +14,7 @@ using XLabs.Ioc;
 using XLabs.Forms;
 using XLabs.Platform.Device;
 using Plugin.MediaManager;
+using Microsoft.Practices.Unity;
 
 namespace OnePiece.App.Droid
 {

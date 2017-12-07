@@ -1,5 +1,4 @@
-﻿using Microsoft.Practices.Unity;
-using OnePiece.App.Controls;
+﻿using OnePiece.App.Controls;
 using OnePiece.App.Services;
 using OnePiece.App.Services.Manga;
 using OnePiece.App.Views;
@@ -7,6 +6,7 @@ using Plugin.DeviceInfo;
 using Prism.Unity;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Microsoft.Practices.Unity;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace OnePiece.App

@@ -42,7 +42,8 @@ namespace OnePiece.App.Services.Manga
                 {
                     Avatar = "http://static.hdonline.vn/i/resources/new/film/215x311/2016/07/20/one-piece-film-gold.jpg",
                     Name = "Luffy thành vua hải tặc",
-                    Number = i
+                    Number = i,
+                    Id = i
                 });
             }
             return chapters;
