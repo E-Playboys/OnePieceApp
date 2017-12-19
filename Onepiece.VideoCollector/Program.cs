@@ -171,97 +171,54 @@ namespace Onepiece.VideoCollector
             Thread.Sleep(TimeSpan.FromSeconds(10));
 
             // data 1
-            //var tasks = new List<Task>();
-            var linkData = File.ReadAllLines("LinkData.txt");
-            var totalCount = linkData.Count();
-            var pageSize = 10;
+            var linkData = File.ReadAllLines("LinkData.txt").Concat(File.ReadAllLines("LinkData_2.txt")).ToList();
+            var fshareLinks = linkData.Where(x => x.Contains("fshare")).ToList();
+            var zingLinks = linkData.Where(x => !x.Contains("fshare")).ToList();
+
+            // fshare
+            var totalCount = fshareLinks.Count();
+            var pageSize = 2; // firefox limit
             var pageCount = (totalCount + pageSize - 1) / pageSize;
 
             for (int i = 0; i <= pageCount; i++)
             {
-                var links = linkData.Skip(i * pageCount).Take(pageSize);
+                var links = fshareLinks.Skip(i * pageCount).Take(pageSize);
                 foreach (var link in links)
                 {
                     var downloadLink = link.Split('_')[2];
                     driver.Url = downloadLink;
                     driver.FindElementByClassName("btn-download-vip").Click();
                 }
+
+                // wait for download completes
+                Thread.Sleep(TimeSpan.FromMinutes(10));
             }
 
-            //foreach (var linkInfo in linkData)
-            //{
-                //var downloadLink = linkInfo.Split('_')[2];
-
-                //var task = Task.Run(() =>
-                //{
-                //    using (WebClient wc = new WebClient())
-                //    {
-                //        wc.DownloadFile(new Uri(downloadLink), $@"Videos\{linkInfo.Split('_')[0]}_{linkInfo.Split('_')[1]}");
-                //    }
-                //});
-
-                //tasks.Add(task);
-            //}
-
-            //Task.WaitAll(tasks.ToArray());
-
-            // data 2
+            // zing
             var tasks = new List<Task>();
-            linkData = File.ReadAllLines("LinkData_2.txt");
-            totalCount = linkData.Count();
-            pageSize = 10;
+            totalCount = zingLinks.Count();
+            pageSize = 5;
             pageCount = (totalCount + pageSize - 1) / pageSize;
 
             for (int i = 0; i <= pageCount; i++)
             {
-                var links = linkData.Skip(i * pageCount).Take(pageSize);
+                var links = zingLinks.Skip(i * pageCount).Take(pageSize);
                 foreach (var link in links)
                 {
                     var downloadLink = link.Split('_')[2];
-                    if (downloadLink.Contains("fshare"))
+                    var task = Task.Run(() =>
                     {
-                        driver.Url = downloadLink;
-                        driver.FindElementByClassName("btn-download-vip").Click();
-                    }
-                    else
-                    {
-                        var task = Task.Run(() =>
+                        using (var wc = new WebClient())
                         {
-                            using (var wc = new WebClient())
-                            {
-                                wc.DownloadFile(new Uri(downloadLink), $@"Videos\{link.Split('_')[0]}_{link.Split('_')[1]}.{link.Split('.').Last()}");
-                            }
-                        });
+                            wc.DownloadFile(new Uri(downloadLink), $@"Videos\{link.Split('_')[0]}_{link.Split('_')[1]}.{link.Split('.').Last()}");
+                        }
+                    });
 
-                        tasks.Add(task);
-                    }
+                    tasks.Add(task);
                 }
 
                 Task.WaitAll(tasks.ToArray());
             }
-
-            //foreach (var linkInfo in linkData)
-            //{
-            // skip if there is no video to download
-            //if (linkInfo.Length < 10)
-            //{
-            //    continue;
-            //}
-
-            //var downloadLink = linkInfo.Split('_')[2];
-
-            //var task = Task.Run(() =>
-            //{
-            //    using (WebClient wc = new WebClient())
-            //    {
-            //        wc.DownloadFile(new Uri(downloadLink), $@"Videos\{linkInfo.Split('_')[0]}_{linkInfo.Split('_')[1]}.{linkInfo.Split('.').Last()}");
-            //    }
-            //});
-
-            //tasks.Add(task);
-            //}
-
-            //Task.WaitAll(tasks.ToArray());
         }
     }
 }
