@@ -1,10 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:views="clr-namespace:OnePiece.App.Views;assembly=OnePiece.App"
              x:Class="OnePiece.App.Views.LeftMenu">
-  <MasterDetailPage.Master>
-    <ContentPage Title="Default">
-      <Label Text="Left Menu" />
-    </ContentPage>
-  </MasterDetailPage.Master>
+    <MasterDetailPage.Master>
+        <ContentPage Title="Default">
+            <Label Text="Left Menu" />
+        </ContentPage>
+    </MasterDetailPage.Master>
+    <MasterDetailPage.Detail>
+        <views:MainPage />
+    </MasterDetailPage.Detail>
 </MasterDetailPage>

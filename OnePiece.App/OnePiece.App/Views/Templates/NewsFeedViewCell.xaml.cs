@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OnePiece.App.Models;
+using Plugin.DeviceInfo;
 using Xamarin.Forms;
 
 namespace OnePiece.App.Views.Templates
@@ -25,7 +26,7 @@ namespace OnePiece.App.Views.Templates
                 //var appearingUrls = new List<string>();
                 foreach (var gif in context.Gifs)
                 {
-                    var gifHeight = GifPanel.Width * gif.Height / gif.Width;
+                    var gifHeight = App.ScreenWidth * gif.Height / gif.Width;
                     gifPanelHeight = gifPanelHeight + (int)gifHeight;
                     //appearingUrls.Add(gif.Url);
                 }

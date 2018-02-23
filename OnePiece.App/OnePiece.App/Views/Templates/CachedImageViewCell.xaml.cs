@@ -22,6 +22,11 @@ namespace OnePiece.App.Views.Templates
             if (context != null)
             {
                 CachedImage.Source = context.Url;
+                if(CachedImage.WidthRequest != App.ScreenWidth)
+                {
+                    CachedImage.HeightRequest = App.ScreenWidth * context.Height / context.Width;
+                    CachedImage.WidthRequest = App.ScreenWidth;
+                }
             }
         }
 

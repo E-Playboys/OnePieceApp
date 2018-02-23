@@ -6,7 +6,8 @@ using Plugin.DeviceInfo;
 using Prism.Unity;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using Microsoft.Practices.Unity;
+using Prism.Ioc;
+using Prism;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace OnePiece.App
@@ -21,28 +22,27 @@ namespace OnePiece.App
         {
             InitializeComponent();
 
-            var url = $"{nameof(LeftMenu)}/{nameof(Views.MainPage)}/{nameof(TabNavigationPage)}/{nameof(NewsFeedPage)}";
-            NavigationService.NavigateAsync(url);
+            MainPage = new LeftMenu();
         }
-
-        protected override void RegisterTypes()
+        
+        protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            Container.RegisterTypeForNavigation<NavigationPage>();
-            Container.RegisterTypeForNavigation<TabbedPage>();
-            Container.RegisterTypeForNavigation<MasterDetailPage>();
+            containerRegistry.RegisterForNavigation<NavigationPage>();
+            containerRegistry.RegisterForNavigation<TabbedPage>();
+            containerRegistry.RegisterForNavigation<MasterDetailPage>();
 
-            Container.RegisterTypeForNavigation<LeftMenu>();
-            Container.RegisterTypeForNavigation<TabNavigationPage>();
-            Container.RegisterTypeForNavigation<MainPage>();
-            Container.RegisterTypeForNavigation<NewsFeedPage>();
-            Container.RegisterTypeForNavigation<AnimePage>();
-            Container.RegisterTypeForNavigation<MangaPage>();
-            Container.RegisterTypeForNavigation<VideoPage>();
-            Container.RegisterTypeForNavigation<VideoPlayerPage>();
+            containerRegistry.RegisterForNavigation<LeftMenu>();
+            containerRegistry.RegisterForNavigation<TabNavigationPage>();
+            containerRegistry.RegisterForNavigation<MainPage>();
+            containerRegistry.RegisterForNavigation<NewsFeedPage>();
+            containerRegistry.RegisterForNavigation<AnimePage>();
+            containerRegistry.RegisterForNavigation<MangaPage>();
+            containerRegistry.RegisterForNavigation<VideoPage>();
+            containerRegistry.RegisterForNavigation<VideoPlayerPage>();
 
-            Container.RegisterType<IAppService, AppService>();
-            Container.RegisterType<IMangaService, MangaService>();
-            Container.RegisterType<IHardwareInfo, HardwareInfo>();
+            containerRegistry.Register<IAppService, AppService>();
+            containerRegistry.Register<IMangaService, MangaService>();
+            containerRegistry.Register<IHardwareInfo, HardwareInfo>();
         }
 
         protected override void OnStart()

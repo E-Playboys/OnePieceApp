@@ -14,7 +14,9 @@ using XLabs.Ioc;
 using XLabs.Forms;
 using XLabs.Platform.Device;
 using Plugin.MediaManager;
-using Microsoft.Practices.Unity;
+using Prism;
+using Unity;
+using Prism.Ioc;
 
 namespace OnePiece.App.Droid
 {
@@ -31,7 +33,7 @@ namespace OnePiece.App.Droid
             base.OnCreate(bundle);
 
             UserDialogs.Init(this);
-            FFImageLoading.Forms.Droid.CachedImageRenderer.Init();
+            FFImageLoading.Forms.Droid.CachedImageRenderer.Init(true);
             IconControls.Init(Resource.Id.toolbar, Resource.Id.sliding_tabs);
             Plugin.Iconize.Iconize
                 .With(new MaterialModule())
@@ -78,9 +80,8 @@ namespace OnePiece.App.Droid
 
     public class AndroidInitializer : IPlatformInitializer
     {
-        public void RegisterTypes(IUnityContainer container)
+        public void RegisterTypes(IContainerRegistry containerRegistry)
         {
-
         }
     }
 }
