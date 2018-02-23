@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using OnePiece.App.Models;
 using OnePiece.App.Services;
 using Prism.Commands;
+using Xamarin.Forms;
 
 namespace OnePiece.App.ViewModels
 {
@@ -57,6 +58,12 @@ namespace OnePiece.App.ViewModels
 
         public async Task LoadNewsFeeds(int skip)
         {
+            var nfs = await DependencyService.Get<IAzureDocumentDBService>().GetNewsFeeds();
+            foreach (var nf in nfs)
+            {
+                NewsFeeds.Add(nf);
+            }
+
             var newsFeeds = new ObservableCollection<NewsFeed>()
             {
                 new NewsFeed()
