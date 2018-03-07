@@ -16,7 +16,6 @@
 
         <mm:VideoView x:Name="videoView" 
                              Grid.Row="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" 
-                             Source="http://zingtv-video-19-te-vnno-pt-4.zadn.vn/streaming/b3ea1d5e28e650d3ef1204fd8c034b2d/59f8258b/Video480/2017/1023/33/cec7c3fc232807c5f91650033af862f4.mp4"
                              AspectMode="AspectFill"/>
 
         <StackLayout Grid.Row="0" VerticalOptions="End" HeightRequest="50" Orientation="Horizontal" Spacing="10" Padding="10,0,10,0">
@@ -34,15 +33,9 @@
 
             <Label x:Name="Position" Text="00:00" VerticalOptions="CenterAndExpand" HorizontalOptions="Start" TextColor="White" FontSize="14"></Label>
 
-            <controls:Seeker x:Name="ProgressBar" Grid.Row="0" TouchDown="ProgressBar_TouchDown" TouchUp="ProgressBar_TouchUp" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" />
+            <controls:Seeker x:Name="ProgressBar" TouchDown="ProgressBar_TouchDown" TouchUp="ProgressBar_TouchUp" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" />
 
             <Label x:Name="Duration" Text="00:00" VerticalOptions="CenterAndExpand" HorizontalOptions="End" TextColor="White" FontSize="14"></Label>
-
-            <iconize:IconLabel x:Name="VolumeButton" Text="md-volume-up" FontSize="24" TextColor="White" VerticalOptions="CenterAndExpand" HorizontalOptions="Center">
-                <iconize:IconLabel.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="PlayClicked"/>
-                </iconize:IconLabel.GestureRecognizers>
-            </iconize:IconLabel>
 
             <iconize:IconLabel x:Name="QualityButton" Text="md-hd" FontSize="24" TextColor="White" VerticalOptions="CenterAndExpand" HorizontalOptions="Center">
                 <iconize:IconLabel.GestureRecognizers>

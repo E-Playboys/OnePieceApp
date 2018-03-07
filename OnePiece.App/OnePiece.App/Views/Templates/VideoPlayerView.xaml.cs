@@ -35,8 +35,9 @@ namespace OnePiece.App.Views.Templates
                         ProgressBar.Value = e.Position.TotalSeconds;
                         double durationSeconds = e.Duration.TotalSeconds / 1000;
                         double positionSeconds = e.Position.TotalSeconds / 1000;
-                        Duration.Text = TimeSpan.FromSeconds(durationSeconds).ToString(@"h\:mm\:ss");
-                        Position.Text = TimeSpan.FromSeconds(positionSeconds).ToString(@"h\:mm\:ss");
+                        string format = durationSeconds >= 3600 ? @"h\:mm\:ss" : @"mm\:ss";
+                        Duration.Text = TimeSpan.FromSeconds(durationSeconds).ToString(format);
+                        Position.Text = TimeSpan.FromSeconds(positionSeconds).ToString(format);
                     }
                 });
             };
@@ -56,6 +57,7 @@ namespace OnePiece.App.Views.Templates
             };
 
             Main.BindingContext = this;
+            videoView.Source = "https://player.vimeo.com/external/258928251.hd.mp4?s=f5fe5d897c45c49807ad1be2ef3489d0a26f0455&profile_id=174";
         }
 
         protected override void OnBindingContextChanged()
@@ -66,12 +68,12 @@ namespace OnePiece.App.Views.Templates
 
         private void PlayClicked(object sender, EventArgs e)
         {
-            PlaybackController.Play();
+            PlaybackController.PlayPause();
         }
 
         private void PauseClicked(object sender, EventArgs e)
         {
-            PlaybackController.Pause();
+            PlaybackController.PlayPause();
         }
 
         private void FullScreenClicked(object sender, EventArgs e)
@@ -96,7 +98,8 @@ namespace OnePiece.App.Views.Templates
         private void ProgressBar_TouchUp(object sender, FocusEventArgs e)
         {
             var value = ProgressBar.Value / 1000;
-            Position.Text = value.ToString(@"%h\:mm\:ss");
+            //string format = value >= 3600 ? @"h\:mm\:ss" : @"mm\:ss";
+            //Position.Text = value.ToString(format);
             PlaybackController.SeekTo(value);
         }
     }

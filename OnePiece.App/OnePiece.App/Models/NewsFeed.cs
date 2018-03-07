@@ -13,11 +13,11 @@ namespace OnePiece.App.Models
         public int Width { get; set; }
         public int Height { get; set; }
 
-        private ObservableCollection<Gif> _gifs;
-        public ObservableCollection<Gif> Gifs
+        private ObservableCollection<Media> _medias;
+        public ObservableCollection<Media> Medias
         {
-            get { return _gifs; }
-            set { SetProperty(ref _gifs, value); }
+            get { return _medias; }
+            set { SetProperty(ref _medias, value); }
         }
     }
 }

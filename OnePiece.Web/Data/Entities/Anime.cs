@@ -2,9 +2,9 @@
 
 namespace OnePiece.Web.Data.Entities
 {
-    public class Episode : BaseEntity
+    public class Anime : BaseEntity
     {
-        public int No { get; set; }
+        public int EpisodeNumber { get; set; }
 
         public string Title { get; set; }
 
@@ -20,18 +20,16 @@ namespace OnePiece.Web.Data.Entities
 
         public int ViewCount { get; set; }
 
-        public EpisodeType Type { get; set; }
+        public AnimeType Type { get; set; }
 
-        public List<Photo> Photos { get; set; }
-
-        public List<Video> Videos { get; set; }
+        public List<Media> Medias { get; set; }
 
         public int SeasonId { get; set; }
 
         public Season Season { get; set; }
     }
 
-    public enum EpisodeType
+    public enum AnimeType
     {
         Story,
         TvSpecial,

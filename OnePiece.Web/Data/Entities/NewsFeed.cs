@@ -2,7 +2,7 @@
 
 namespace OnePiece.Web.Data.Entities
 {
-    public class Feed : BaseEntity
+    public class NewsFeed : BaseEntity
     {
         public string Title { get; set; }
 
@@ -12,8 +12,6 @@ namespace OnePiece.Web.Data.Entities
 
         public string DescriptionEng { get; set; }
 
-        public List<Photo> Photos { get; set; }
-
-        public List<Video> Videos { get; set; }
+        public List<Media> Medias { get; set; }
     }
 }

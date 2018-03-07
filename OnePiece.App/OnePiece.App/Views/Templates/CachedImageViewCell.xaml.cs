@@ -18,7 +18,7 @@ namespace OnePiece.App.Views.Templates
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            var context = BindingContext as Gif;
+            var context = BindingContext as Models.Media;
             if (context != null)
             {
                 CachedImage.Source = context.Url;
@@ -33,7 +33,7 @@ namespace OnePiece.App.Views.Templates
         protected override void OnDisappearing()
         {
             base.OnDisappearing();
-            var context = BindingContext as Gif;
+            var context = BindingContext as Models.Media;
             if (context != null)
             {
                 CachedImage.Source = context.Url.Replace(".gif", ".jpeg");

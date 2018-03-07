@@ -23,7 +23,7 @@ namespace OnePiece.Web.Controllers
         public async Task<IActionResult> ListBySeason(int seasonId)
         {
             var eps = await _dbContext.Episodes.Where(x => x.SeasonId == seasonId)
-                .Include(x => x.Photos)
+                .Include(x => x.Medias)
                 .ToListAsync();
 
             return Json(eps);
@@ -32,8 +32,8 @@ namespace OnePiece.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> ListTvSpecials(ListRequest rq)
         {
-            var eps = await _dbContext.Episodes.Where(x => x.Type == EpisodeType.TvSpecial)
-                .Include(x => x.Photos)
+            var eps = await _dbContext.Episodes.Where(x => x.Type == AnimeType.TvSpecial)
+                .Include(x => x.Medias)
                 .Skip(rq.Skip).Take(rq.Take).ToListAsync();
 
             return Json(eps);
@@ -42,8 +42,8 @@ namespace OnePiece.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> ListMovies(ListRequest rq)
         {
-            var eps = await _dbContext.Episodes.Where(x => x.Type == EpisodeType.Movie)
-                .Include(x => x.Photos)
+            var eps = await _dbContext.Episodes.Where(x => x.Type == AnimeType.Movie)
+                .Include(x => x.Medias)
                 .Skip(rq.Skip).Take(rq.Take).ToListAsync();
 
             return Json(eps);

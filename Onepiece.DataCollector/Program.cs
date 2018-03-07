@@ -50,7 +50,7 @@ namespace Onepiece.DataCollector
                         {
                             No = -1,
                             TitleEng = "TV specials & Videos",
-                            Episodes = new List<Episode>()
+                            Episodes = new List<Anime>()
                         };
 
                         seasons.Add(season);
@@ -68,11 +68,11 @@ namespace Onepiece.DataCollector
 
                         var epTitle = epRow.ChildNodes[3].FirstChild.InnerText.Trim('"');
 
-                        var episode = new Episode
+                        var episode = new Anime
                         {
                             No = epNo,
                             TitleEng = epTitle,
-                            Type = EpisodeType.TvSpecial
+                            Type = AnimeType.TvSpecial
                         };
 
                         season.Episodes.Add(episode);
@@ -98,11 +98,11 @@ namespace Onepiece.DataCollector
 
                         var epTitle = epRow.ChildNodes[3].FirstChild.InnerText.Trim('"');
 
-                        var episode = new Episode
+                        var episode = new Anime
                         {
                             No = epNo,
                             TitleEng = epTitle,
-                            Type = EpisodeType.Movie
+                            Type = AnimeType.Movie
                         };
 
                         season.Episodes.Add(episode);
@@ -123,7 +123,7 @@ namespace Onepiece.DataCollector
                     {
                         No = seasonNo,
                         TitleEng = tableTitle,
-                        Episodes = new List<Episode>()
+                        Episodes = new List<Anime>()
                     };
 
                     seasons.Add(season);
@@ -141,7 +141,7 @@ namespace Onepiece.DataCollector
                         var epTitle = seasonNo < 6 ? epRow.ChildNodes[5].FirstChild.InnerText.Trim('"')
                             : epRow.ChildNodes[3].FirstChild.InnerText.Trim('"');
 
-                        var episode = new Episode
+                        var episode = new Anime
                         {
                             No = epNo,
                             TitleEng = epTitle

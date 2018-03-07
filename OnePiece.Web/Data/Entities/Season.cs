@@ -4,7 +4,7 @@ namespace OnePiece.Web.Data.Entities
 {
     public class Season : BaseEntity
     {
-        public int No { get; set; }
+        public int SeasonNumber { get; set; }
 
         public string Title { get; set; }
 
@@ -14,8 +14,6 @@ namespace OnePiece.Web.Data.Entities
 
         public string DescriptionEng { get; set; }
 
-        public List<Photo> Photos { get; set; }
-
-        public List<Episode> Episodes { get; set; }
+        public List<Anime> Episodes { get; set; }
     }
 }

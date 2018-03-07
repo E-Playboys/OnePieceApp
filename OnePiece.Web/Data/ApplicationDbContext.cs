@@ -11,9 +11,9 @@ namespace OnePiece.Web.Data
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-        public DbSet<Episode> Episodes { get; set; }
+        public DbSet<Anime> Episodes { get; set; }
 
-        public DbSet<Feed> Feeds { get; set; }
+        public DbSet<NewsFeed> Feeds { get; set; }
 
         public DbSet<Season> Seasons { get; set; }
 

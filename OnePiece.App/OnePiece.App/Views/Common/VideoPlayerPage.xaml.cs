@@ -2,6 +2,7 @@
 using Plugin.DeviceInfo;
 using Plugin.MediaManager;
 using Plugin.MediaManager.Abstractions;
+using Rg.Plugins.Popup.Pages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,7 @@ using Xamarin.Forms;
 
 namespace OnePiece.App.Views
 {
-    public partial class VideoPlayerPage : ContentPage
+    public partial class VideoPlayerPage : PopupPage
     {
 
         public VideoPlayerPage()

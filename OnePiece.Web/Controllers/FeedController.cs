@@ -22,8 +22,7 @@ namespace OnePiece.Web.Controllers
         public async Task<IActionResult> List(ListRequest rq)
         {
             var feeds = await _dbContext.Feeds
-                .Include(x => x.Photos)
-                .Include(x => x.Videos)
+                .Include(x => x.Medias)
                 .Skip(rq.Skip).Take(rq.Take).ToListAsync();
 
             return Json(feeds);

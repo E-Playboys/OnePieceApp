@@ -11,6 +11,7 @@ using OnePiece.App.Views;
 using Prism.Commands;
 using Plugin.MediaManager;
 using Plugin.MediaManager.Abstractions.Enums;
+using Rg.Plugins.Popup.Services;
 
 namespace OnePiece.App.ViewModels
 {
@@ -78,7 +79,8 @@ namespace OnePiece.App.ViewModels
         private async void ExecutePlayVideoCommandAsync()
         {
             //CrossMediaManager.Current.Play("https://archive.org/download/BigBuckBunny_328/BigBuckBunny_512kb.mp4", MediaFileType.Video);
-            await AppService.Navigation.NavigateAsync(nameof(VideoPlayerPage));
+            //await AppService.Navigation.NavigateAsync(nameof(VideoPlayerPage));
+            await PopupNavigation.PushAsync(new VideoPlayerPage());
         }
 
         public async Task LoadAsync()

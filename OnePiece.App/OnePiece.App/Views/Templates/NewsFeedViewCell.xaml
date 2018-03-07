@@ -17,8 +17,8 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <controls:ExtendedListView x:Name="GifPanel" Grid.Row="0" BackgroundColor="LightGray" Margin="0,0,0,10"
-                ItemsSource="{Binding Gifs}"
+        <controls:ExtendedListView x:Name="MediaPanel" Grid.Row="0" BackgroundColor="LightGray" Margin="0,0,0,10"
+                ItemsSource="{Binding Medias}"
                 HasUnevenRows="true"
                 HorizontalOptions="FillAndExpand"
                 VerticalOptions="FillAndExpand">

@@ -4,12 +4,17 @@ using Xamarin.Forms.Platform.Android;
 using OnePiece.App.Controls;
 using Xamarin.Forms;
 using OnePiece.App.Droid.Renderers;
+using Android.Content;
 
 [assembly: ExportRenderer(typeof(Seeker), typeof(SeekerRenderer))]
 namespace OnePiece.App.Droid.Renderers
 {
     public class SeekerRenderer : SliderRenderer
     {
+        public SeekerRenderer(Context context) : base(context)
+        {
+        }
+
         protected override void OnLayout(bool changed, int l, int t, int r, int b)
         {
             base.OnLayout(changed, l, t, r, b);

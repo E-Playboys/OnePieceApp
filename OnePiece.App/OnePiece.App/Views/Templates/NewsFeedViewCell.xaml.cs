@@ -24,13 +24,13 @@ namespace OnePiece.App.Views.Templates
             {
                 var gifPanelHeight = 0;
                 //var appearingUrls = new List<string>();
-                foreach (var gif in context.Gifs)
+                foreach (var gif in context.Medias)
                 {
                     var gifHeight = App.ScreenWidth * gif.Height / gif.Width;
                     gifPanelHeight = gifPanelHeight + (int)gifHeight;
                     //appearingUrls.Add(gif.Url);
                 }
-                GifPanel.HeightRequest = gifPanelHeight;
+                MediaPanel.HeightRequest = gifPanelHeight;
                 //var message = new GifAppearingMessage()
                 //{
                 //    AppearingUrls = appearingUrls
