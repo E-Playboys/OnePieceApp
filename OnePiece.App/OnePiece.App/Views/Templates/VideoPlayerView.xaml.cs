@@ -5,12 +5,14 @@ using Plugin.MediaManager;
 using Rg.Plugins.Popup.Extensions;
 using System.Threading.Tasks;
 using OnePiece.App.Services;
+using System.Threading;
+using Plugin.MediaManager.Forms;
 
 namespace OnePiece.App.Views.Templates
 {
     public partial class VideoPlayerView : ContentView
     {
-        private IPlaybackController PlaybackController => CrossMediaManager.Current.PlaybackController;
+        public IPlaybackController PlaybackController => CrossMediaManager.Current.PlaybackController;
 
         public static readonly BindableProperty IsFullScreenProperty =
   BindableProperty.Create("IsFullScreen", typeof(bool), typeof(VideoPlayerView), false, BindingMode.TwoWay);
@@ -56,14 +58,8 @@ namespace OnePiece.App.Views.Templates
                 }
             };
 
+            VideoView.Source = "https://player.vimeo.com/external/258928251.hd.mp4?s=f5fe5d897c45c49807ad1be2ef3489d0a26f0455&profile_id=174";
             Main.BindingContext = this;
-            videoView.Source = "https://player.vimeo.com/external/258928251.hd.mp4?s=f5fe5d897c45c49807ad1be2ef3489d0a26f0455&profile_id=174";
-        }
-
-        protected override void OnBindingContextChanged()
-        {
-            base.OnBindingContextChanged();
-            PlaybackController.Play();
         }
 
         private void PlayClicked(object sender, EventArgs e)
@@ -101,6 +97,11 @@ namespace OnePiece.App.Views.Templates
             //string format = value >= 3600 ? @"h\:mm\:ss" : @"mm\:ss";
             //Position.Text = value.ToString(format);
             PlaybackController.SeekTo(value);
+        }
+
+        private void VideoView_Tapped(object sender, EventArgs e)
+        {
+            VideoControl.IsVisible = !VideoControl.IsVisible;
         }
     }
 }

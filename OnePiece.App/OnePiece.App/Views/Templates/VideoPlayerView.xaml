@@ -14,11 +14,15 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <mm:VideoView x:Name="videoView" 
+        <mm:VideoView x:Name="VideoView" 
                              Grid.Row="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" 
-                             AspectMode="AspectFill"/>
+                             AspectMode="AspectFill">
+            <mm:VideoView.GestureRecognizers>
+                <TapGestureRecognizer Tapped="VideoView_Tapped" />
+            </mm:VideoView.GestureRecognizers>
+        </mm:VideoView>
 
-        <StackLayout Grid.Row="0" VerticalOptions="End" HeightRequest="50" Orientation="Horizontal" Spacing="10" Padding="10,0,10,0">
+        <StackLayout x:Name="VideoControl" Grid.Row="0" VerticalOptions="End" HeightRequest="50" Orientation="Horizontal" Spacing="10" Padding="10,0,10,0">
             <iconize:IconLabel x:Name="PlayButton" Text="md-play-circle-filled" FontSize="40" TextColor="#ffca28" VerticalOptions="CenterAndExpand" HorizontalOptions="Center">
                 <iconize:IconLabel.GestureRecognizers>
                     <TapGestureRecognizer Tapped="PlayClicked"/>
