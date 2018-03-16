@@ -22,7 +22,8 @@ namespace OnePiece.Web.Controllers
         public async Task<IActionResult> List(ListRequest rq)
         {
             var seasons = await _dbContext.Seasons
-                .Include(x => x.Photos)
+                .Include(x => x.Episodes)
+                .Include(x => x.Chapters)
                 .Skip(rq.Skip).Take(rq.Take).ToListAsync();
 
             return Json(seasons);
@@ -32,7 +33,8 @@ namespace OnePiece.Web.Controllers
         public async Task<IActionResult> Get(int id)
         {
             var season = await _dbContext.Seasons.Where(x => x.Id == id)
-                .Include(x => x.Photos)
+                .Include(x => x.Episodes)
+                .Include(x => x.Chapters)
                 .FirstOrDefaultAsync();
 
             return Json(season);

@@ -15,5 +15,7 @@ namespace OnePiece.Web.Data.Entities
         public string DescriptionEng { get; set; }
 
         public List<Anime> Episodes { get; set; }
+
+        public List<Manga> Chapters { get; set; }
     }
 }

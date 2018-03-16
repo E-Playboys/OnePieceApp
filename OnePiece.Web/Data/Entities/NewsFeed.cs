@@ -13,5 +13,16 @@ namespace OnePiece.Web.Data.Entities
         public string DescriptionEng { get; set; }
 
         public List<Media> Medias { get; set; }
+
+        public LinkTo LinkTo { get; set; }
+
+        public int LinkToId { get; set; }
+    }
+
+    public enum LinkTo
+    {
+        Anime,
+        Manga,
+        Season
     }
 }
