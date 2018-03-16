@@ -14,6 +14,18 @@ namespace OnePiece.Web.Data.Entities
         public MediaType Type { get; set; }
 
         public MediaQuality Quality { get; set; }
+
+        public int? MangaId { get; set; }
+
+        public Manga Manga { get; set; }
+
+        public int? AnimeId { get; set; }
+
+        public Anime Anime { get; set; }
+
+        public int? NewsFeedId { get; set; }
+
+        public NewsFeed NewsFeed { get; set; }
     }
 
     public enum MediaType

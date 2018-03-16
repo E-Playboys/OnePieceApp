@@ -191,11 +191,11 @@ namespace OnePiece.Web.Migrations
 
                     b.Property<int>("EpisodeNumber");
 
-                    b.Property<decimal>("ImdbScore");
+                    b.Property<decimal?>("ImdbScore");
 
-                    b.Property<decimal>("Rating");
+                    b.Property<decimal?>("Rating");
 
-                    b.Property<int>("SeasonId");
+                    b.Property<int?>("SeasonId");
 
                     b.Property<string>("Title");
 
@@ -365,8 +365,7 @@ namespace OnePiece.Web.Migrations
                 {
                     b.HasOne("OnePiece.Web.Data.Entities.Season", "Season")
                         .WithMany("Episodes")
-                        .HasForeignKey("SeasonId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("SeasonId");
                 });
 
             modelBuilder.Entity("OnePiece.Web.Data.Entities.Manga", b =>
