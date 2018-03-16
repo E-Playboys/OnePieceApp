@@ -43,12 +43,12 @@ namespace Onepiece.DataCollector
                 var tableTitle = table.SelectNodes(@"preceding-sibling::h2").Last().InnerText;
                 if (tableTitle.Contains("TV specials"))
                 {
-                    var season = seasons.Find(x => x.No == -1);
+                    var season = seasons.Find(x => x.SeasonNumber == -1);
                     if (season == null)
                     {
                         season = new Season
                         {
-                            No = -1,
+                            SeasonNumber = -1,
                             TitleEng = "TV specials & Videos",
                             Episodes = new List<Anime>()
                         };
@@ -70,7 +70,7 @@ namespace Onepiece.DataCollector
 
                         var episode = new Anime
                         {
-                            No = epNo,
+                            EpisodeNumber = epNo,
                             TitleEng = epTitle,
                             Type = AnimeType.TvSpecial
                         };
@@ -84,7 +84,7 @@ namespace Onepiece.DataCollector
                 // Movies
                 if (tableTitle.Contains("Original video animations"))
                 {
-                    var season = seasons.Find(x => x.No == -1);
+                    var season = seasons.Find(x => x.SeasonNumber == -1);
 
                     var epRows = table.SelectNodes(@"tr[@class=""vevent""]");
                     foreach (var epRow in epRows)
@@ -100,7 +100,7 @@ namespace Onepiece.DataCollector
 
                         var episode = new Anime
                         {
-                            No = epNo,
+                            EpisodeNumber = epNo,
                             TitleEng = epTitle,
                             Type = AnimeType.Movie
                         };
@@ -121,7 +121,7 @@ namespace Onepiece.DataCollector
 
                     var season = new Season
                     {
-                        No = seasonNo,
+                        SeasonNumber = seasonNo,
                         TitleEng = tableTitle,
                         Episodes = new List<Anime>()
                     };
@@ -143,7 +143,7 @@ namespace Onepiece.DataCollector
 
                         var episode = new Anime
                         {
-                            No = epNo,
+                            EpisodeNumber = epNo,
                             TitleEng = epTitle
                         };
 
@@ -178,7 +178,7 @@ namespace Onepiece.DataCollector
                             regex = new Regex("[0-9]+");
                             var seasonNo = int.Parse(regex.Match(content)?.Value);
 
-                            currentSeason = seasons.Find(x => x.No == seasonNo);
+                            currentSeason = seasons.Find(x => x.SeasonNumber == seasonNo);
                             currentSeason.Title = content;
                         }
                     }
@@ -207,7 +207,7 @@ namespace Onepiece.DataCollector
                             var titlePart = 1;
                             for (int i = fromEp; i <= toEp; i++)
                             {
-                                var ep = currentSeason.Episodes.Find(x => x.No == i);
+                                var ep = currentSeason.Episodes.Find(x => x.EpisodeNumber == i);
                                 if (ep == null)
                                 {
                                     continue;
@@ -219,7 +219,7 @@ namespace Onepiece.DataCollector
                         else if (titleNos.Count == 1)
                         {
                             var epNo = int.Parse(titleNos[0].Value);
-                            var ep = currentSeason.Episodes.Find(x => x.No == epNo);
+                            var ep = currentSeason.Episodes.Find(x => x.EpisodeNumber == epNo);
                             if (ep == null)
                             {
                                 continue;

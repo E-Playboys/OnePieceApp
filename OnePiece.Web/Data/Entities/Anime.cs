@@ -14,9 +14,9 @@ namespace OnePiece.Web.Data.Entities
 
         public string DescriptionEng { get; set; }
 
-        public decimal ImdbScore { get; set; }
+        public decimal? ImdbScore { get; set; }
 
-        public decimal Rating { get; set; }
+        public decimal? Rating { get; set; }
 
         public int ViewCount { get; set; }
 
@@ -24,7 +24,7 @@ namespace OnePiece.Web.Data.Entities
 
         public List<Media> Medias { get; set; }
 
-        public int SeasonId { get; set; }
+        public int? SeasonId { get; set; }
 
         public Season Season { get; set; }
     }
