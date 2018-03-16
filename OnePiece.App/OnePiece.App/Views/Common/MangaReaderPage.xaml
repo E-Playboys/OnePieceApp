@@ -5,44 +5,63 @@
                  xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
                  xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
                  prism:ViewModelLocator.AutowireViewModel="True"
-                 xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+                 xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
                  xmlns:iconize="clr-namespace:FormsPlugin.Iconize;assembly=FormsPlugin.Iconize"
                  xmlns:cv="clr-namespace:CarouselView.FormsPlugin.Abstractions;assembly=CarouselView.FormsPlugin.Abstractions"
                  x:Class="OnePiece.App.Views.MangaReaderPage">
   <Grid RowSpacing="0">
-
     <cv:CarouselViewControl x:Name="MangaPagesView"
                                ItemsSource="{Binding MangaChapter.MangaImages}"
                                HorizontalOptions="FillAndExpand"
                                VerticalOptions="FillAndExpand"
-                               InterPageSpacing="10" Position="0" 
+                               InterPageSpacing="10" Position="0"
                                Margin="0,0,0,1">
       <cv:CarouselViewControl.ItemTemplate>
         <DataTemplate>
-
-          <forms:CachedImage Source="{Binding Link}"
+          <ffimage:CachedImage Source="{Binding Link}"
                              HorizontalOptions="FillAndExpand"
                              VerticalOptions="FillAndExpand"
-                             Aspect="AspectFill" BackgroundColor="#E01722" />
+                             Aspect="AspectFill" BackgroundColor="#E01722">
+            <ffimage:CachedImage.GestureRecognizers>
+              <TapGestureRecognizer Tapped="ShowHideControlBars" />
+            </ffimage:CachedImage.GestureRecognizers>
+          </ffimage:CachedImage>
         </DataTemplate>
       </cv:CarouselViewControl.ItemTemplate>
     </cv:CarouselViewControl>
 
     <StackLayout x:Name="TopBar" BackgroundColor="#E0000000" Spacing="0" VerticalOptions="Start">
       <StackLayout Orientation="Horizontal" Padding="10">
-        <controls:LinkLabel Text="Close" TextColor="#E01722" Clicked="OnClose"></controls:LinkLabel>
+        <iconize:IconImage IconSize="25" Icon="md-chevron-left" IconColor="#E01722">
+          <iconize:IconImage.GestureRecognizers>
+            <TapGestureRecognizer Tapped="OnClose" />
+          </iconize:IconImage.GestureRecognizers>
+        </iconize:IconImage>
+        <iconize:IconImage IconSize="25" Icon="md-apps" IconColor="#E01722" />
+        <Label Text="Đại chiến Big Mom, Luffy vượt qua giới hạn!" FontAttributes="Bold" TextColor="White" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" />
+        <iconize:IconImage IconSize="25" Icon="md-bookmark-border" IconColor="#E01722" />
       </StackLayout>
-      <BoxView HeightRequest="1" Color="#E01722"></BoxView>
+      <!--<BoxView HeightRequest="1" Color="#E01722"></BoxView>
       <StackLayout Padding="10" Spacing="0">
         <Label Text="{Binding MangaChapter.Name}" FontAttributes="Bold" TextColor="White" HorizontalOptions="Start" />
         <Label Text="{Binding MangaChapter.ChapterNum}" TextColor="Gray" HorizontalOptions="Start" />
-      </StackLayout>
+      </StackLayout>-->
     </StackLayout>
 
-    <StackLayout x:Name="BottomBar" BackgroundColor="#E0000000" Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="End">
-      <iconize:IconButton Clicked="OnPrevChapterClicked" Text="md-arrow-back" FontSize="32" TextColor="#E01722" BackgroundColor="Transparent" HorizontalOptions="Start" VerticalOptions="Center" />
-      <Label Text="{Binding CurrentPageString}" FontAttributes="Bold" TextColor="White" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" />
-      <iconize:IconButton Clicked="OnNextChapterClicked" Text="md-arrow-forward" FontSize="32" TextColor="#E01722" BackgroundColor="Transparent" HorizontalOptions="End" VerticalOptions="Center" />
+    <StackLayout x:Name="BottomBar" BackgroundColor="#E0000000" Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="End" Padding="5">
+      <!--<iconize:IconButton Clicked="OnPrevChapterClicked" Text="md-arrow-back" FontSize="32" TextColor="#E01722" BackgroundColor="Transparent" HorizontalOptions="Start" VerticalOptions="Center" />-->
+      <controls:HorizontalListView ItemsSource="{Binding MangaChapter.MangaImages}">
+        <controls:HorizontalListView.ItemTemplate>
+          <DataTemplate>
+            <ffimage:CachedImage Source="http://fconepiece.com/wp-content/uploads/2017/10/One-Piece-810-800x450.png" HeightRequest="50">
+              <ffimage:CachedImage.GestureRecognizers>
+                <TapGestureRecognizer Tapped="JumpTo" />
+              </ffimage:CachedImage.GestureRecognizers>
+            </ffimage:CachedImage>
+          </DataTemplate>
+        </controls:HorizontalListView.ItemTemplate>
+      </controls:HorizontalListView>
+      <!--<iconize:IconButton Clicked="OnNextChapterClicked" Text="md-arrow-forward" FontSize="32" TextColor="#E01722" BackgroundColor="Transparent" HorizontalOptions="End" VerticalOptions="Center" />-->
     </StackLayout>
   </Grid>
 </pages:PopupPage>

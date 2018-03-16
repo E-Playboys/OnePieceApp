@@ -8,6 +8,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Prism.Ioc;
 using Prism;
+using FormsPlugin.Iconize;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace OnePiece.App
@@ -22,7 +23,7 @@ namespace OnePiece.App
         {
             InitializeComponent();
 
-            MainPage = new LeftMenu();
+            MainPage = new IconNavigationPage(new MainPage());
         }
         
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
@@ -32,6 +33,7 @@ namespace OnePiece.App
             containerRegistry.RegisterForNavigation<MasterDetailPage>();
 
             containerRegistry.RegisterForNavigation<LeftMenu>();
+            containerRegistry.RegisterForNavigation<IconNavigationPage>();
             containerRegistry.RegisterForNavigation<TabNavigationPage>();
             containerRegistry.RegisterForNavigation<MainPage>();
             containerRegistry.RegisterForNavigation<NewsFeedPage>();

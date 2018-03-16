@@ -26,11 +26,15 @@ namespace OnePiece.App.Views
             DependencyService.Get<IStatusBar>().ShowStatusBar();
         }
 
-        private async Task OnItemTapped(object sender, EventArgs e)
+        private void ShowHideControlBars(object sender, EventArgs e)
         {
-            await ShowInfoBars(_hideInfoCancelSource);
-            _hideInfoCancelSource = new CancellationTokenSource();
-            await HideInfoBars(_hideInfoCancelSource.Token);
+            TopBar.IsVisible = !TopBar.IsVisible;
+            BottomBar.IsVisible = !BottomBar.IsVisible;
+        }
+
+        private void JumpTo(object sender, EventArgs e)
+        {
+            //TODO: Jump to correct image
         }
 
         private async Task OnItemAppearing(object sender, ItemVisibilityEventArgs e)
@@ -43,9 +47,9 @@ namespace OnePiece.App.Views
             var index = context.MangaChapter.MangaImages.IndexOf(currentPage);
             context.CurrentPageNum = index + 1;
 
-            await ShowInfoBars(_hideInfoCancelSource);
-            _hideInfoCancelSource = new CancellationTokenSource();
-            await HideInfoBars(_hideInfoCancelSource.Token);
+            //await ShowInfoBars(_hideInfoCancelSource);
+            //_hideInfoCancelSource = new CancellationTokenSource();
+            //await HideInfoBars(_hideInfoCancelSource.Token);
         }
 
         private async Task OnPrevChapterClicked(object sender, EventArgs e)
@@ -78,9 +82,9 @@ namespace OnePiece.App.Views
             base.OnAppearing();
 
             // Hide status bar
-            DependencyService.Get<IStatusBar>().HideStatusBar();
+            //DependencyService.Get<IStatusBar>().HideStatusBar();
 
-            await HideInfoBars(_hideInfoCancelSource.Token);
+            //await HideInfoBars(_hideInfoCancelSource.Token);
         }
 
         private async Task HideInfoBars(CancellationToken token)

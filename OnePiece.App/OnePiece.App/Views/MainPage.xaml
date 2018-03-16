@@ -9,8 +9,17 @@
              xmlns:views="clr-namespace:OnePiece.App.Views;assembly=OnePiece.App"
              BackgroundColor="#dcdcdc"
              x:Class="OnePiece.App.Views.MainPage">
-
-  <controls:TabNavigationPage Icon="typcn-news" Title="News Feed">
+  
+  <views:NewsFeedPage/>
+  <views:AnimePage/>
+  <views:MangaPage/>
+  <ContentPage Icon="typcn-social-youtube" Title="Video">
+    <StackLayout>
+      <Label Text="Đang phát triển..." />
+    </StackLayout>
+  </ContentPage>
+  
+  <!--<controls:TabNavigationPage Icon="typcn-news" Title="News Feed">
     <x:Arguments>
       <views:NewsFeedPage/>
     </x:Arguments>
@@ -30,8 +39,12 @@
 
   <controls:TabNavigationPage Icon="typcn-social-youtube" Title="Video">
     <x:Arguments>
-      <views:VideoPage/>
+      <ContentPage>
+        <StackLayout>
+          <Label Text="Đang phát triển..." />
+        </StackLayout>
+      </ContentPage>
     </x:Arguments>
-  </controls:TabNavigationPage>
+  </controls:TabNavigationPage>-->
 
 </iconize:IconTabbedPage>

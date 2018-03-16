@@ -8,7 +8,8 @@
                          xmlns:iconize="clr-namespace:FormsPlugin.Iconize;assembly=FormsPlugin.Iconize"
                          xmlns:converters="clr-namespace:OnePiece.App.Converters;assembly=OnePiece.App"
                          xmlns:cv="clr-namespace:CarouselView.FormsPlugin.Abstractions;assembly=CarouselView.FormsPlugin.Abstractions"
-                         x:Class="OnePiece.App.Views.MangaPage">
+                         x:Class="OnePiece.App.Views.MangaPage"
+                         Icon="typcn-book" Title="Manga">
 
   <ScrollView VerticalOptions="FillAndExpand">
 
