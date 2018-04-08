@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:installLocation="auto">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:installLocation="auto" package="com.onepiece.wiki">
 	<uses-sdk android:minSdkVersion="15" android:targetSdkVersion="26" />
-	<application android:label="OnePiece.App.Droid" android:largeHeap="true" ></application>
+	<application android:label="OnePiece.Wiki" android:largeHeap="true"></application>
 </manifest>
