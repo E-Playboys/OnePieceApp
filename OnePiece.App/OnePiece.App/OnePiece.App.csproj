@@ -60,7 +60,22 @@
     <Compile Include="Controls\VideoView.cs" />
     <Compile Include="Converters\InverseBoolConverter.cs" />
     <Compile Include="Converters\IsVisibleConverter.cs" />
+    <Compile Include="DataModels\Anime.cs" />
+    <Compile Include="DataModels\Manga.cs" />
+    <Compile Include="DataModels\Media.cs" />
+    <Compile Include="DataModels\NewsFeed.cs" />
+    <Compile Include="DataModels\Season.cs" />
+    <Compile Include="DataServices\Anime\AnimeApiService.cs" />
+    <Compile Include="DataServices\Anime\IAnimeApiService.cs" />
+    <Compile Include="DataServices\IRequestProvider.cs" />
+    <Compile Include="DataServices\ListRequest.cs" />
+    <Compile Include="DataServices\NewsFeed\INewsFeedApiService.cs" />
+    <Compile Include="DataServices\NewsFeed\NewsFeedApiService.cs" />
+    <Compile Include="DataServices\RequestProvider.cs" />
+    <Compile Include="DataServices\Season\ISeasonApiService.cs" />
+    <Compile Include="DataServices\Season\SeasonApiService.cs" />
     <Compile Include="Effects\ColorSliderEffect.cs" />
+    <Compile Include="Exceptions\HttpRequestExceptionEx.cs" />
     <Compile Include="Messages.cs" />
     <Compile Include="Models\Anime.cs" />
     <Compile Include="Models\Media.cs" />
@@ -373,6 +388,9 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="DataServices\Manga\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\..\packages\NETStandard.Library.2.0.1\build\NETStandard.Library.targets" Condition="Exists('..\..\packages\NETStandard.Library.2.0.1\build\NETStandard.Library.targets')" />

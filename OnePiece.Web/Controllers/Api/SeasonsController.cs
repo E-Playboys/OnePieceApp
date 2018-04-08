@@ -9,6 +9,7 @@ using OnePiece.Web.Models;
 
 namespace OnePiece.Web.Controllers.Api
 {
+    [Route("api/[controller]")]
     public class SeasonsController : Controller
     {
         private readonly ApplicationDbContext _dbContext;

@@ -9,6 +9,9 @@ using Xamarin.Forms.Xaml;
 using Prism.Ioc;
 using Prism;
 using FormsPlugin.Iconize;
+using OnePiece.App.DataServices;
+using OnePiece.App.DataServices.NewsFeed;
+using OnePiece.App.DataServices.Season;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace OnePiece.App
@@ -45,6 +48,9 @@ namespace OnePiece.App
             containerRegistry.Register<IAppService, AppService>();
             containerRegistry.Register<IMangaService, MangaService>();
             containerRegistry.Register<IHardwareInfo, HardwareInfo>();
+            containerRegistry.Register<IRequestProvider, RequestProvider>();
+            containerRegistry.Register<INewsFeedApiService, NewsFeedApiService>();
+            containerRegistry.Register<ISeasonApiService, SeasonApiService>();
         }
 
         protected override void OnStart()

@@ -8,6 +8,7 @@ using OnePiece.Web.Models;
 
 namespace OnePiece.Web.Controllers.Api
 {
+    [Route("api/[controller]")]
     public class EpisodesController : Controller
     {
         private readonly ApplicationDbContext _dbContext;

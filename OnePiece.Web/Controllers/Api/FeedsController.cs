@@ -7,6 +7,7 @@ using OnePiece.Web.Models;
 
 namespace OnePiece.Web.Controllers.Api
 {
+    [Route("api/[controller]")]
     public class FeedsController : Controller
     {
         private readonly ApplicationDbContext _dbContext;

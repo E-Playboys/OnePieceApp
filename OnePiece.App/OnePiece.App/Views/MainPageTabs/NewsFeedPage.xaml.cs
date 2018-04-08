@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Acr.UserDialogs;
 using OnePiece.App.Controls;
 using OnePiece.App.ViewModels;
 
@@ -14,7 +15,14 @@ namespace OnePiece.App.Views
         protected override async void OnAppearing()
         {
             var context = BindingContext as NewsFeedPageViewModel;
-            if (context != null && !context.NewsFeeds.Any()) await context.LoadNewsFeeds(0);
+            if (context != null && !context.NewsFeeds.Any())
+            {
+                //UserDialogs.Instance.ShowLoading("Loading...");
+
+                await context.LoadNewsFeeds(0);
+
+                //UserDialogs.Instance.HideLoading();
+            }
             base.OnAppearing();
         }
     }
