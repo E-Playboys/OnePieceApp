@@ -4,7 +4,10 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using OnePiece.App.Models;
+using OnePiece.App.DataModels;
+using OnePiece.App.DataServices;
+using OnePiece.App.DataServices.Anime;
+using OnePiece.App.DataServices.Season;
 using OnePiece.App.Services;
 using OnePiece.App.Utilities;
 using OnePiece.App.Views;
@@ -17,6 +20,9 @@ namespace OnePiece.App.ViewModels
 {
     public class VideoListPageViewModel : BaseViewModel
     {
+        private readonly ISeasonApiService _seasonService;
+        private readonly IAnimeApiService _animeService;
+
         private bool _isMultiSeason;
         public bool IsMultiSeason
         {
@@ -26,8 +32,8 @@ namespace OnePiece.App.ViewModels
 
         public string DataSource { get; set; }
 
-        private Video _featuredVideo;
-        public Video FeaturedVideo
+        private Anime _featuredVideo;
+        public Anime FeaturedVideo
         {
             get { return _featuredVideo; }
             set { SetProperty(ref _featuredVideo, value); }
@@ -36,10 +42,10 @@ namespace OnePiece.App.ViewModels
         /// <summary>
         /// Single-season
         /// </summary>
-        private ObservableRangeCollection<Video> _videos;
-        public ObservableRangeCollection<Video> Videos
+        private ObservableRangeCollection<Anime> _videos;
+        public ObservableRangeCollection<Anime> Animes
         {
-            get { return _videos ?? (_videos = new ObservableRangeCollection<Video>()); }
+            get { return _videos ?? (_videos = new ObservableRangeCollection<Anime>()); }
             set { _videos = value; }
         }
 
@@ -64,8 +70,11 @@ namespace OnePiece.App.ViewModels
 
         public DelegateCommand PlayVideoCommand { get; set; }
 
-        public VideoListPageViewModel(IAppService appService) : base(appService)
+        public VideoListPageViewModel(IAppService appService, ISeasonApiService seasonService, IAnimeApiService animeService) : base(appService)
         {
+            _seasonService = seasonService;
+            _animeService = animeService;
+
             RefreshDataCommand = new DelegateCommand(async () => await ExecuteRefreshDataCommandAsync());
             PlayVideoCommand = new DelegateCommand(() => ExecutePlayVideoCommandAsync());
         }
@@ -78,7 +87,7 @@ namespace OnePiece.App.ViewModels
 
         private async void ExecutePlayVideoCommandAsync()
         {
-            //CrossMediaManager.Current.Play("https://archive.org/download/BigBuckBunny_328/BigBuckBunny_512kb.mp4", MediaFileType.Video);
+            //CrossMediaManager.Current.Play("https://archive.org/download/BigBuckBunny_328/BigBuckBunny_512kb.mp4", MediaFileType.Anime);
             //await AppService.Navigation.NavigateAsync(nameof(VideoPlayerPage));
             await PopupNavigation.PushAsync(new VideoPlayerPage());
         }
@@ -90,52 +99,39 @@ namespace OnePiece.App.ViewModels
 
             IsBusy = true;
 
-            FeaturedVideo = new Video { Title = "Leo xuống lưng voi. Ra khơi mang Sanji trở về!", Description = "One Piece 776", Cover = "http://thegioiphimhay.com/wp-content/uploads/2016/11/review-danh-gia-phim-one-pice-dao-hai-tac-3.jpg", Poster = "http://static.hdonline.vn/i/resources/new/film/215x311/2016/07/20/one-piece-film-gold.jpg" };
+            //FeaturedVideo = new Anime { Title = "Leo xuống lưng voi. Ra khơi mang Sanji trở về!", Description = "One Piece 776", Cover = "http://thegioiphimhay.com/wp-content/uploads/2016/11/review-danh-gia-phim-one-pice-dao-hai-tac-3.jpg", Poster = "http://static.hdonline.vn/i/resources/new/film/215x311/2016/07/20/one-piece-film-gold.jpg" };
 
             if (IsMultiSeason)
             {
                 var seasons = await LoadSeasonsAsync();
                 Seasons.Clear();
                 Seasons.AddRange(seasons);
+
+                foreach (var season in Seasons)
+                {
+                    var episodes = await _animeService.ListEpisodeBySeasonAsync(new ListEpisodeBySeasonRequest { SeasonId = season.Id, Take = 5});
+                    season.Episodes.AddRange(episodes);
+                }
             }
             else
             {
-                var videos = await LoadVideosAsync();
-                Videos.Clear();
-                Videos.AddRange(videos);
+                var animes = await LoadVideosAsync();
+                Animes.Clear();
+                Animes.AddRange(animes);
             }
 
             IsBusy = false;
         }
 
-        private async Task<List<Video>> LoadVideosAsync()
+        private async Task<List<Anime>> LoadVideosAsync()
         {
-            var fakeData = new List<Video>
-            {
-                new Video { Title = "AAA", Description = "asfsgdsgdfgdgf", Thumbnail = "http://pre06.deviantart.net/e2ef/th/pre/f/2014/149/a/2/one_piece_poster_by_thebartrempillo-d7k9vwa.jpg" },
-                new Video { Title = "AAA", Description = "asffdgnfg rtfjfgjhf dhh", Thumbnail = "http://pre06.deviantart.net/e2ef/th/pre/f/2014/149/a/2/one_piece_poster_by_thebartrempillo-d7k9vwa.jpg" },
-                new Video { Title = "AAA", Description = "sdgdf dfh tr rty rgdgdfg", Thumbnail = "http://pre06.deviantart.net/e2ef/th/pre/f/2014/149/a/2/one_piece_poster_by_thebartrempillo-d7k9vwa.jpg" },
-                new Video { Title = "AAA", Description = "erwerwet", Thumbnail = "http://pre06.deviantart.net/e2ef/th/pre/f/2014/149/a/2/one_piece_poster_by_thebartrempillo-d7k9vwa.jpg" },
-                new Video { Title = "AAA", Description = "r werwerwer wet", Thumbnail = "http://pre06.deviantart.net/e2ef/th/pre/f/2014/149/a/2/one_piece_poster_by_thebartrempillo-d7k9vwa.jpg" },
-                new Video { Title = "AAA", Description = "dbdgmdfv er qwfqwrfwer", Thumbnail = "http://pre06.deviantart.net/e2ef/th/pre/f/2014/149/a/2/one_piece_poster_by_thebartrempillo-d7k9vwa.jpg" }
-            };
-
-            return fakeData;
+            return null;
         }
 
         private async Task<List<Season>> LoadSeasonsAsync()
         {
-            var fakeData = new List<Season>
-            {
-                new Season { Title = "Season 1", LatestEpisode = 1, TotalEpisodes = 10, Description = "asfsgdsgdfgdgf", Thumbnail = "http://pre06.deviantart.net/e2ef/th/pre/f/2014/149/a/2/one_piece_poster_by_thebartrempillo-d7k9vwa.jpg" },
-                new Season { Title = "Season 2", LatestEpisode = 10, TotalEpisodes = 10, Description = "asffdgnfg rtfjfgjhf dhh", Thumbnail = "http://pre06.deviantart.net/e2ef/th/pre/f/2014/149/a/2/one_piece_poster_by_thebartrempillo-d7k9vwa.jpg"},
-                new Season { Title = "Season 3", LatestEpisode = 10, TotalEpisodes = 10, Description = "sdgdf dfh tr rty rgdgdfg", Thumbnail = "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQOcKyBoWtLojBu04h-QrtdDkiZagCB62dQUfWHjLcm6AiTSqm"},
-                new Season { Title = "Season 4", LatestEpisode = 10, TotalEpisodes = 10, Description = "erwerwet", Thumbnail = "http://pre06.deviantart.net/e2ef/th/pre/f/2014/149/a/2/one_piece_poster_by_thebartrempillo-d7k9vwa.jpg" },
-                new Season { Title = "Season 5", LatestEpisode = 10, TotalEpisodes = 10, Description = "r werwerwer wet", Thumbnail = "http://pre06.deviantart.net/e2ef/th/pre/f/2014/149/a/2/one_piece_poster_by_thebartrempillo-d7k9vwa.jpg" },
-                new Season { Title = "Season 6", LatestEpisode = 10, TotalEpisodes = 10, Description = "dbdgmdfv er qwfqwrfwer", Thumbnail = "http://pre06.deviantart.net/e2ef/th/pre/f/2014/149/a/2/one_piece_poster_by_thebartrempillo-d7k9vwa.jpg" }
-            };
-
-            return fakeData;
+            var seasons = await _seasonService.ListAsync(new DataServices.ListRequest {Skip = Seasons.Count});
+            return seasons;
         }
     }
 }

@@ -18,6 +18,7 @@ namespace OnePiece.Web.Controllers.Api
         }
 
         [HttpGet]
+        [Route("List")]
         public async Task<IActionResult> List(ListRequest rq)
         {
             var feeds = await _dbContext.Feeds

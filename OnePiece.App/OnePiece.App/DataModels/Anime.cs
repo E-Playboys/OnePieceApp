@@ -31,6 +31,19 @@ namespace OnePiece.App.DataModels
         public List<Media> Medias { get; set; }
 
         public int? SeasonId { get; set; }
+
+        public string Thumbnail
+        {
+            get
+            {
+                if (Medias == null || !Medias.Any())
+                {
+                    return null;
+                }
+
+                return Medias[0].Url;
+            }
+        }
     }
 
     public enum AnimeType

@@ -10,6 +10,7 @@ using Prism.Ioc;
 using Prism;
 using FormsPlugin.Iconize;
 using OnePiece.App.DataServices;
+using OnePiece.App.DataServices.Anime;
 using OnePiece.App.DataServices.NewsFeed;
 using OnePiece.App.DataServices.Season;
 
@@ -51,6 +52,7 @@ namespace OnePiece.App
             containerRegistry.Register<IRequestProvider, RequestProvider>();
             containerRegistry.Register<INewsFeedApiService, NewsFeedApiService>();
             containerRegistry.Register<ISeasonApiService, SeasonApiService>();
+            containerRegistry.Register<IAnimeApiService, AnimeApiService>();
         }
 
         protected override void OnStart()

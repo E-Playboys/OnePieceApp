@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OnePiece.App.Utilities;
 
 namespace OnePiece.App.DataModels
 {
@@ -22,8 +23,8 @@ namespace OnePiece.App.DataModels
 
         public string Avatar { get; set; }
 
-        public List<Anime> Episodes { get; set; }
+        public ObservableRangeCollection<Anime> Episodes { get; set; } = new ObservableRangeCollection<Anime>();
 
-        public List<Manga> Chapters { get; set; }
+        public ObservableRangeCollection<Manga> Chapters { get; set; } = new ObservableRangeCollection<Manga>();
     }
 }

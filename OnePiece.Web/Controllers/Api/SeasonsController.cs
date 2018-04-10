@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using OnePiece.Web.Data;
+using OnePiece.Web.Data.Entities;
 using OnePiece.Web.Models;
 
 namespace OnePiece.Web.Controllers.Api
@@ -20,17 +21,15 @@ namespace OnePiece.Web.Controllers.Api
         }
 
         [HttpGet]
+        [Route("List")]
         public async Task<IActionResult> List(ListRequest rq)
         {
-            var seasons = await _dbContext.Seasons
-                .Include(x => x.Episodes)
-                .Include(x => x.Chapters)
-                .Skip(rq.Skip).Take(rq.Take).ToListAsync();
-
+            var seasons = await _dbContext.Seasons.OrderByDescending(x => x.Id).Skip(rq.Skip).Take(rq.Take).ToListAsync();
             return Json(seasons);
         }
 
         [HttpGet]
+        [Route("Get")]
         public async Task<IActionResult> Get(int id)
         {
             var season = await _dbContext.Seasons.Where(x => x.Id == id)

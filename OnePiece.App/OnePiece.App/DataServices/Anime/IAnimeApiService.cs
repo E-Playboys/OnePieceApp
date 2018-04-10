@@ -8,6 +8,8 @@ namespace OnePiece.App.DataServices.Anime
 {
     public interface IAnimeApiService
     {
+        Task<List<DataModels.Anime>> ListEpisodeBySeasonAsync(ListEpisodeBySeasonRequest rq);
 
+        Task<DataModels.Anime> GetAsync(int id);
     }
 }

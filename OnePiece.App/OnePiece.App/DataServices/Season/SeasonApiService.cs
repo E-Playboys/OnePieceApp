@@ -17,14 +17,14 @@ namespace OnePiece.App.DataServices.Season
 
         public async Task<List<DataModels.Season>> ListAsync(ListRequest rq)
         {
-            var seasons = await _requestProvider.GetAsync<List<DataModels.Season>>($"{AppSettings.WEB_API_URL}/Seasons?skip={rq.Skip}&take={rq.Take}");
+            var seasons = await _requestProvider.GetAsync<List<DataModels.Season>>($"{AppSettings.WEB_API_URL}/Seasons/List?skip={rq.Skip}&take={rq.Take}");
 
             return seasons;
         }
 
         public async Task<DataModels.Season> GetAsync(int id)
         {
-            var season = await _requestProvider.GetAsync<DataModels.Season>($"{AppSettings.WEB_API_URL}/Seasons/{id}");
+            var season = await _requestProvider.GetAsync<DataModels.Season>($"{AppSettings.WEB_API_URL}/Seasons/Get?id={id}");
 
             return season;
         }

@@ -14,14 +14,14 @@ namespace OnePiece.App.DataServices.NewsFeed
 
         public async Task<List<DataModels.NewsFeed>> ListAsync(ListRequest rq)
         {
-            var feeds = await _requestProvider.GetAsync<List<DataModels.NewsFeed>>($"{AppSettings.WEB_API_URL}/Feeds?skip={rq.Skip}&take={rq.Take}");
+            var feeds = await _requestProvider.GetAsync<List<DataModels.NewsFeed>>($"{AppSettings.WEB_API_URL}/Feeds/List?skip={rq.Skip}&take={rq.Take}");
 
             return feeds;
         }
 
         public async Task<DataModels.NewsFeed> GetAsync(int id)
         {
-            var feed = await _requestProvider.GetAsync<DataModels.NewsFeed>($"{AppSettings.WEB_API_URL}/Feeds/{id}");
+            var feed = await _requestProvider.GetAsync<DataModels.NewsFeed>($"{AppSettings.WEB_API_URL}/Feeds/Get?id={id}");
 
             return feed;
         }

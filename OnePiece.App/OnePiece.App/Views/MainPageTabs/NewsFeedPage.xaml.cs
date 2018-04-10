@@ -17,11 +17,7 @@ namespace OnePiece.App.Views
             var context = BindingContext as NewsFeedPageViewModel;
             if (context != null && !context.NewsFeeds.Any())
             {
-                //UserDialogs.Instance.ShowLoading("Loading...");
-
                 await context.LoadNewsFeeds(0);
-
-                //UserDialogs.Instance.HideLoading();
             }
             base.OnAppearing();
         }

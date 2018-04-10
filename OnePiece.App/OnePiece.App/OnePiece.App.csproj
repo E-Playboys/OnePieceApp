@@ -67,6 +67,7 @@
     <Compile Include="DataModels\Season.cs" />
     <Compile Include="DataServices\Anime\AnimeApiService.cs" />
     <Compile Include="DataServices\Anime\IAnimeApiService.cs" />
+    <Compile Include="DataServices\Anime\ListAnimeBySeasonRequest.cs" />
     <Compile Include="DataServices\IRequestProvider.cs" />
     <Compile Include="DataServices\ListRequest.cs" />
     <Compile Include="DataServices\NewsFeed\INewsFeedApiService.cs" />

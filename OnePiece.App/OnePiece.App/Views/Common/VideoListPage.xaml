@@ -14,113 +14,113 @@
 
   <Grid VerticalOptions="FillAndExpand">
 
-        <ActivityIndicator IsRunning="{Binding IsBusy}" VerticalOptions="CenterAndExpand"/>
+    <ActivityIndicator IsRunning="{Binding IsBusy}" VerticalOptions="CenterAndExpand"/>
 
-        <ScrollView IsVisible="{Binding IsBusy, Converter={x:Static converters:InverseBoolConverter.Instance}}">
-            <StackLayout Spacing="0">
-                <Grid BackgroundColor="White" ColumnSpacing="10" RowSpacing="0">
-                    <Grid.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding PlayVideoCommand}"/>
-                    </Grid.GestureRecognizers>
+    <ScrollView IsVisible="{Binding IsBusy, Converter={x:Static converters:InverseBoolConverter.Instance}}">
+      <StackLayout Spacing="0">
+        <Grid BackgroundColor="White" ColumnSpacing="10" RowSpacing="0">
+          <Grid.GestureRecognizers>
+            <TapGestureRecognizer Command="{Binding PlayVideoCommand}"/>
+          </Grid.GestureRecognizers>
 
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
+          <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+          </Grid.RowDefinitions>
 
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="0"/>
-                        <ColumnDefinition Width="100"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0"/>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="*"/>
+          </Grid.ColumnDefinitions>
 
-                    <ffimage:CachedImage x:Name="VideoCover" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Aspect="AspectFill" DownsampleToViewSize="true" Source="{Binding FeaturedVideo.Cover}" Style="{StaticResource FeaturedVideoThumbnail}"/>
-                    <StackLayout Grid.Row="0" Grid.Column="2" Padding="0,0,15,10" VerticalOptions="End">
-                        <Label Text="{Binding FeaturedVideo.Title}" Style="{StaticResource FeaturedVideoTitle}"/>
-                        <Label Text="{Binding FeaturedVideo.Description}" Style="{StaticResource FeaturedVideoDescription}"/>
-                    </StackLayout>
-                    <iconize:IconLabel Grid.Row="1" Grid.Column="2" Text="md-play-circle-filled" FontSize="50" Margin="0,-25,0,0" TextColor="#ffca28" HorizontalOptions="End">
-                        <iconize:IconLabel.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding PlayVideoCommand}"/>
-                        </iconize:IconLabel.GestureRecognizers>
-                    </iconize:IconLabel>
-                    <ffimage:CachedImage x:Name="VideoPoster" Grid.Row="1" Grid.Column="1" BackgroundColor="LightGray" HeightRequest="150" Margin="0,-75,0,0" Aspect="AspectFill" DownsampleToViewSize="true" Source="{Binding FeaturedVideo.Poster}" />
-                    <Grid Grid.Row="1" Grid.Column="2" Margin="0,10,0,0">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="25"/>
-                            <RowDefinition Height="25"/>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-                        <StackLayout Grid.Row="0" Grid.Column="0" Orientation="Horizontal">
-                            <Label Text="IMDb" FontSize="12" WidthRequest="40" HeightRequest="20" FontAttributes="Bold" BackgroundColor="#ffca28" TextColor="Black"
+          <ffimage:CachedImage x:Name="VideoCover" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Aspect="AspectFill" DownsampleToViewSize="true" Source="{Binding FeaturedVideo.Cover}" Style="{StaticResource FeaturedVideoThumbnail}"/>
+          <StackLayout Grid.Row="0" Grid.Column="2" Padding="0,0,15,10" VerticalOptions="End">
+            <Label Text="{Binding FeaturedVideo.Title}" Style="{StaticResource FeaturedVideoTitle}"/>
+            <Label Text="{Binding FeaturedVideo.Description}" Style="{StaticResource FeaturedVideoDescription}"/>
+          </StackLayout>
+          <iconize:IconLabel Grid.Row="1" Grid.Column="2" Text="md-play-circle-filled" FontSize="50" Margin="0,-25,0,0" TextColor="#ffca28" HorizontalOptions="End">
+            <iconize:IconLabel.GestureRecognizers>
+              <TapGestureRecognizer Command="{Binding PlayVideoCommand}"/>
+            </iconize:IconLabel.GestureRecognizers>
+          </iconize:IconLabel>
+          <ffimage:CachedImage x:Name="VideoPoster" Grid.Row="1" Grid.Column="1" BackgroundColor="LightGray" HeightRequest="150" Margin="0,-75,0,0" Aspect="AspectFill" DownsampleToViewSize="true" Source="{Binding FeaturedVideo.Poster}" />
+          <Grid Grid.Row="1" Grid.Column="2" Margin="0,10,0,0">
+            <Grid.RowDefinitions>
+              <RowDefinition Height="25"/>
+              <RowDefinition Height="25"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="Auto" />
+              <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <StackLayout Grid.Row="0" Grid.Column="0" Orientation="Horizontal">
+              <Label Text="IMDb" FontSize="12" WidthRequest="40" HeightRequest="20" FontAttributes="Bold" BackgroundColor="#ffca28" TextColor="Black"
                      VerticalTextAlignment="Center" HorizontalTextAlignment="Center" VerticalOptions="Center" HorizontalOptions="Start"/>
-                            <Label Text="9.0/10" FontSize="16" Style="{StaticResource CommonLabel}"
+              <Label Text="9.0/10" FontSize="16" Style="{StaticResource CommonLabel}"
                        VerticalTextAlignment="Center" HorizontalTextAlignment="Center" VerticalOptions="Center" HorizontalOptions="Start" />
-                        </StackLayout>
-
-                        <StackLayout Grid.Row="1" Grid.Column="0" Orientation="Horizontal">
-                            <iconize:IconLabel Text="md-star" FontSize="18" TextColor="#ffca28"
-                       VerticalTextAlignment="Center" HorizontalTextAlignment="Center" VerticalOptions="Center" HorizontalOptions="Start"/>
-                            <iconize:IconLabel Text="md-star" FontSize="18" TextColor="#ffca28"
-                       VerticalTextAlignment="Center" HorizontalTextAlignment="Center" VerticalOptions="Center" HorizontalOptions="Start"/>
-                            <iconize:IconLabel Text="md-star" FontSize="18" TextColor="#ffca28"
-                       VerticalTextAlignment="Center" HorizontalTextAlignment="Center" VerticalOptions="Center" HorizontalOptions="Start"/>
-                            <iconize:IconLabel Text="md-star-half" FontSize="18" TextColor="#ffca28"
-                       VerticalTextAlignment="Center" HorizontalTextAlignment="Center" VerticalOptions="Center" HorizontalOptions="Start"/>
-                            <iconize:IconLabel Text="md-star-border" FontSize="18" TextColor="#ffca28"
-                       VerticalTextAlignment="Center" HorizontalTextAlignment="Center" VerticalOptions="Center" HorizontalOptions="Start"/>
-                            <Label Text="4.6/5" FontSize="16" Style="{StaticResource CommonLabel}"
-                       VerticalTextAlignment="Center" HorizontalTextAlignment="Center" VerticalOptions="Center" HorizontalOptions="Start" />
-                        </StackLayout>
-                    </Grid>
-                </Grid>
-
-                <StackLayout BackgroundColor="White" Padding="15" Margin="0,0,0,10">
-                    <Label Text="Giới thiệu" Style="{StaticResource CommonLabel}" FontSize="16" />
-                    <Label Text="Trong One Piece 775 – Bác sĩ Chopper bắt đầu chữa trị vết thương cho Zunesha. Kỹ năng kiếm pháp của Zoro và Brook, năng lực trái Hana-Hana của Robin… cùng với tài nghệ của Usopp, Franky, tất cả tập trung trị thương cho voi khổng lồ." Style="{StaticResource CommonSecondaryLabel}" FontSize="14" />
-                </StackLayout>
-
-                <controls:VerticalListView ItemsSource="{Binding Seasons}" IsVisible="{Binding IsMultiSeason}">
-                    <controls:VerticalListView.ItemTemplate>
-                        <DataTemplate>
-                            <Grid BackgroundColor="White" ColumnSpacing="7.5" Padding="10" Margin="0,0,0,1">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="200"/>
-                                </Grid.RowDefinitions>
-                                <Label Grid.Row="0" Text="Season 01: Luffy - người sẽ trở thành Vua Hải Tặc" Style="{StaticResource CommonLabel}" FontSize="16" />
-                                <controls:HorizontalListView Grid.Row="1" ItemsSource="{Binding Videos}">
-                                    <controls:HorizontalListView.ItemTemplate>
-                                        <DataTemplate>
-                                            <StackLayout>
-                                                <ffimage:CachedImage Source="http://fconepiece.com/wp-content/uploads/2017/10/One-Piece-810-800x450.png" />
-                                                <Label Text="Tập 999" FontSize="14" Style="{StaticResource CommonLabel}" VerticalOptions="Center"/>
-                                                <Label Text="312,456,123 lượt xem" FontSize="12" Style="{StaticResource CommonSecondaryLabel}" VerticalOptions="Center"/>
-                                            </StackLayout>
-                                        </DataTemplate>
-                                    </controls:HorizontalListView.ItemTemplate>
-                                </controls:HorizontalListView>
-                            </Grid>
-                        </DataTemplate>
-                    </controls:VerticalListView.ItemTemplate>
-                </controls:VerticalListView>
-
-                <controls:VerticalListView ItemsSource="{Binding Videos}" IsVisible="{Binding IsMultiSeason, Converter={x:Static converters:InverseBoolConverter.Instance}}">
-                    <controls:VerticalListView.ItemTemplate>
-                        <DataTemplate>
-                            <StackLayout BackgroundColor="White" Padding="10" Margin="0,0,0,1">
-                                <ffimage:CachedImage Source="http://fconepiece.com/wp-content/uploads/2017/10/One-Piece-810-800x450.png" />
-                                <Label Text="Tập 999 - Đối đầu với Big Mom" FontSize="14" Style="{StaticResource CommonLabel}" VerticalOptions="Center"/>
-                                <Label Text="312,456,123 lượt xem" FontSize="12" Style="{StaticResource CommonSecondaryLabel}" VerticalOptions="Center"/>
-                            </StackLayout>
-                        </DataTemplate>
-                    </controls:VerticalListView.ItemTemplate>
-                </controls:VerticalListView>
-
             </StackLayout>
-        </ScrollView>
-    </Grid>
+
+            <StackLayout Grid.Row="1" Grid.Column="0" Orientation="Horizontal">
+              <iconize:IconLabel Text="md-star" FontSize="18" TextColor="#ffca28"
+                       VerticalTextAlignment="Center" HorizontalTextAlignment="Center" VerticalOptions="Center" HorizontalOptions="Start"/>
+              <iconize:IconLabel Text="md-star" FontSize="18" TextColor="#ffca28"
+                       VerticalTextAlignment="Center" HorizontalTextAlignment="Center" VerticalOptions="Center" HorizontalOptions="Start"/>
+              <iconize:IconLabel Text="md-star" FontSize="18" TextColor="#ffca28"
+                       VerticalTextAlignment="Center" HorizontalTextAlignment="Center" VerticalOptions="Center" HorizontalOptions="Start"/>
+              <iconize:IconLabel Text="md-star-half" FontSize="18" TextColor="#ffca28"
+                       VerticalTextAlignment="Center" HorizontalTextAlignment="Center" VerticalOptions="Center" HorizontalOptions="Start"/>
+              <iconize:IconLabel Text="md-star-border" FontSize="18" TextColor="#ffca28"
+                       VerticalTextAlignment="Center" HorizontalTextAlignment="Center" VerticalOptions="Center" HorizontalOptions="Start"/>
+              <Label Text="4.6/5" FontSize="16" Style="{StaticResource CommonLabel}"
+                       VerticalTextAlignment="Center" HorizontalTextAlignment="Center" VerticalOptions="Center" HorizontalOptions="Start" />
+            </StackLayout>
+          </Grid>
+        </Grid>
+
+        <StackLayout BackgroundColor="White" Padding="15" Margin="0,0,0,10">
+          <Label Text="Giới thiệu" Style="{StaticResource CommonLabel}" FontSize="16" />
+          <Label Text="Trong One Piece 775 – Bác sĩ Chopper bắt đầu chữa trị vết thương cho Zunesha. Kỹ năng kiếm pháp của Zoro và Brook, năng lực trái Hana-Hana của Robin… cùng với tài nghệ của Usopp, Franky, tất cả tập trung trị thương cho voi khổng lồ." Style="{StaticResource CommonSecondaryLabel}" FontSize="14" />
+        </StackLayout>
+
+        <controls:VerticalListView ItemsSource="{Binding Seasons}" IsVisible="{Binding IsMultiSeason}">
+          <controls:VerticalListView.ItemTemplate>
+            <DataTemplate>
+              <Grid BackgroundColor="White" ColumnSpacing="7.5" Padding="10" Margin="0,0,0,1">
+                <Grid.RowDefinitions>
+                  <RowDefinition Height="Auto" />
+                  <RowDefinition Height="200"/>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" Text="{Binding Title}" Style="{StaticResource CommonLabel}" FontSize="16" />
+                <controls:HorizontalListView Grid.Row="1" ItemsSource="{Binding Episodes}">
+                  <controls:HorizontalListView.ItemTemplate>
+                    <DataTemplate>
+                      <StackLayout>
+                        <ffimage:CachedImage Source="{Binding Thumbnail}" />
+                        <Label Text="{Binding EpisodeNumber, StringFormat='Ep {0}'}" FontSize="14" Style="{StaticResource CommonLabel}" VerticalOptions="Center"/>
+                        <Label Text="{Binding ViewCount, StringFormat='{0} views'}" FontSize="12" Style="{StaticResource CommonSecondaryLabel}" VerticalOptions="Center"/>
+                      </StackLayout>
+                    </DataTemplate>
+                  </controls:HorizontalListView.ItemTemplate>
+                </controls:HorizontalListView>
+              </Grid>
+            </DataTemplate>
+          </controls:VerticalListView.ItemTemplate>
+        </controls:VerticalListView>
+
+        <controls:VerticalListView ItemsSource="{Binding Videos}" IsVisible="{Binding IsMultiSeason, Converter={x:Static converters:InverseBoolConverter.Instance}}">
+          <controls:VerticalListView.ItemTemplate>
+            <DataTemplate>
+              <StackLayout BackgroundColor="White" Padding="10" Margin="0,0,0,1">
+                <ffimage:CachedImage Source="http://fconepiece.com/wp-content/uploads/2017/10/One-Piece-810-800x450.png" />
+                <Label Text="Tập 999 - Đối đầu với Big Mom" FontSize="14" Style="{StaticResource CommonLabel}" VerticalOptions="Center"/>
+                <Label Text="312,456,123 lượt xem" FontSize="12" Style="{StaticResource CommonSecondaryLabel}" VerticalOptions="Center"/>
+              </StackLayout>
+            </DataTemplate>
+          </controls:VerticalListView.ItemTemplate>
+        </controls:VerticalListView>
+
+      </StackLayout>
+    </ScrollView>
+  </Grid>
 </ContentPage>

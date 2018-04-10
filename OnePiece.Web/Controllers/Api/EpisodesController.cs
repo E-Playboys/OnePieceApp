@@ -19,19 +19,24 @@ namespace OnePiece.Web.Controllers.Api
         }
 
         [HttpGet]
-        public async Task<IActionResult> ListBySeason(int seasonId)
+        [Route("ListBySeason")]
+        public async Task<IActionResult> ListBySeason(ListEpisodeBySeasonRequest rq)
         {
-            var eps = await _dbContext.Episodes.Where(x => x.SeasonId == seasonId)
+            var eps = await _dbContext.Episodes.Where(x => x.SeasonId == rq.SeasonId)
+                .OrderByDescending(x => x.Id)
                 .Include(x => x.Medias)
+                .Skip(rq.Skip).Take(rq.Take)
                 .ToListAsync();
 
             return Json(eps);
         }
 
         [HttpGet]
+        [Route("ListTvSpecials")]
         public async Task<IActionResult> ListTvSpecials(ListRequest rq)
         {
             var eps = await _dbContext.Episodes.Where(x => x.Type == AnimeType.TvSpecial)
+                .OrderByDescending(x => x.Id)
                 .Include(x => x.Medias)
                 .Skip(rq.Skip).Take(rq.Take).ToListAsync();
 
@@ -39,13 +44,23 @@ namespace OnePiece.Web.Controllers.Api
         }
 
         [HttpGet]
+        [Route("ListMovies")]
         public async Task<IActionResult> ListMovies(ListRequest rq)
         {
             var eps = await _dbContext.Episodes.Where(x => x.Type == AnimeType.Movie)
+                .OrderByDescending(x => x.Id)
                 .Include(x => x.Medias)
                 .Skip(rq.Skip).Take(rq.Take).ToListAsync();
 
             return Json(eps);
+        }
+
+        [HttpGet]
+        [Route("GetLatestEpisode")]
+        public async Task<IActionResult> GetLatestEpisode()
+        {
+            var ep = await _dbContext.Episodes.Where(x => x.Type == AnimeType.Story).OrderByDescending(x => x.Id).FirstOrDefaultAsync();
+            return Json(ep);
         }
     }
 }
