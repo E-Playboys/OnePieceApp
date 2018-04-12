@@ -59,7 +59,7 @@ namespace OnePiece.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ChapterNumber,Title,TitleEng,Description,DescriptionEng,Rating,ViewCount,Type,SeasonId,Id")] Manga manga)
+        public async Task<IActionResult> Create(Manga manga)
         {
             if (ModelState.IsValid)
             {
@@ -95,7 +95,7 @@ namespace OnePiece.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ChapterNumber,Title,TitleEng,Description,DescriptionEng,Rating,ViewCount,Type,SeasonId,Id")] Manga manga)
+        public async Task<IActionResult> Edit(int id, Manga manga)
         {
             if (id != manga.Id)
             {

@@ -185,6 +185,8 @@ namespace OnePiece.Web.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("Cover");
+
                     b.Property<string>("Description");
 
                     b.Property<string>("DescriptionEng");
@@ -192,6 +194,12 @@ namespace OnePiece.Web.Migrations
                     b.Property<int>("EpisodeNumber");
 
                     b.Property<decimal?>("ImdbScore");
+
+                    b.Property<string>("IntroText");
+
+                    b.Property<string>("IntroTextEng");
+
+                    b.Property<string>("Poster");
 
                     b.Property<decimal?>("Rating");
 
@@ -222,6 +230,8 @@ namespace OnePiece.Web.Migrations
                     b.Property<string>("Description");
 
                     b.Property<string>("DescriptionEng");
+
+                    b.Property<string>("Poster");
 
                     b.Property<decimal>("Rating");
 

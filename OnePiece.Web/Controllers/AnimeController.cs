@@ -59,7 +59,7 @@ namespace OnePiece.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("EpisodeNumber,Title,TitleEng,Description,DescriptionEng,ImdbScore,Rating,ViewCount,Type,SeasonId,Id")] Anime anime)
+        public async Task<IActionResult> Create(Anime anime)
         {
             if (ModelState.IsValid)
             {
@@ -95,7 +95,7 @@ namespace OnePiece.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("EpisodeNumber,Title,TitleEng,Description,DescriptionEng,ImdbScore,Rating,ViewCount,Type,SeasonId,Id")] Anime anime)
+        public async Task<IActionResult> Edit(int id, Anime anime)
         {
             if (id != anime.Id)
             {

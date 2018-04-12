@@ -42,11 +42,11 @@ namespace OnePiece.App.ViewModels
         /// <summary>
         /// Single-season
         /// </summary>
-        private ObservableRangeCollection<Anime> _videos;
+        private ObservableRangeCollection<Anime> _animes;
         public ObservableRangeCollection<Anime> Animes
         {
-            get { return _videos ?? (_videos = new ObservableRangeCollection<Anime>()); }
-            set { _videos = value; }
+            get { return _animes ?? (_animes = new ObservableRangeCollection<Anime>()); }
+            set { _animes = value; }
         }
 
         /// <summary>
@@ -94,44 +94,44 @@ namespace OnePiece.App.ViewModels
 
         public async Task LoadAsync()
         {
-            if(IsBusy)
+            if (IsBusy)
                 return;
 
             IsBusy = true;
 
-            //FeaturedVideo = new Anime { Title = "Leo xuống lưng voi. Ra khơi mang Sanji trở về!", Description = "One Piece 776", Cover = "http://thegioiphimhay.com/wp-content/uploads/2016/11/review-danh-gia-phim-one-pice-dao-hai-tac-3.jpg", Poster = "http://static.hdonline.vn/i/resources/new/film/215x311/2016/07/20/one-piece-film-gold.jpg" };
-
             if (IsMultiSeason)
             {
-                var seasons = await LoadSeasonsAsync();
+                FeaturedVideo = await _animeService.GetLatestEpisodeAsync();
+
+                var seasons = await _seasonService.ListAsync(new DataServices.ListRequest { Skip = Seasons.Count });
                 Seasons.Clear();
                 Seasons.AddRange(seasons);
 
                 foreach (var season in Seasons)
                 {
-                    var episodes = await _animeService.ListEpisodeBySeasonAsync(new ListEpisodeBySeasonRequest { SeasonId = season.Id, Take = 5});
+                    var episodes = await _animeService.ListEpisodeBySeasonAsync(new ListEpisodeBySeasonRequest { SeasonId = season.Id, Take = 5 });
                     season.Episodes.AddRange(episodes);
                 }
             }
             else
             {
-                var animes = await LoadVideosAsync();
+                List<Anime> animes = null;
+                if (DataSource.ToLower() == "tvspecials")
+                {
+                    FeaturedVideo = await _animeService.GetLatestTvSpecialAsync();
+                    animes = await _animeService.ListTvSpecialsAsync(new DataServices.ListRequest { Skip = Animes.Count });
+                }
+                else if (DataSource.ToLower() == "movies")
+                {
+                    FeaturedVideo = await _animeService.GetLatestMovieAsync();
+                    animes = await _animeService.ListMoviesAsync(new DataServices.ListRequest { Skip = Animes.Count });
+                }
+
                 Animes.Clear();
                 Animes.AddRange(animes);
             }
 
             IsBusy = false;
-        }
-
-        private async Task<List<Anime>> LoadVideosAsync()
-        {
-            return null;
-        }
-
-        private async Task<List<Season>> LoadSeasonsAsync()
-        {
-            var seasons = await _seasonService.ListAsync(new DataServices.ListRequest {Skip = Seasons.Count});
-            return seasons;
         }
     }
 }

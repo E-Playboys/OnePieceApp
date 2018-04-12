@@ -20,6 +20,10 @@ namespace OnePiece.App.DataModels
 
         public string DescriptionEng { get; set; }
 
+        public string IntroText { get; set; }
+
+        public string IntroTextEng { get; set; }
+
         public decimal? ImdbScore { get; set; }
 
         public decimal? Rating { get; set; }
@@ -28,22 +32,13 @@ namespace OnePiece.App.DataModels
 
         public AnimeType Type { get; set; }
 
+        public string Cover { get; set; }
+
+        public string Poster { get; set; }
+
         public List<Media> Medias { get; set; }
 
         public int? SeasonId { get; set; }
-
-        public string Thumbnail
-        {
-            get
-            {
-                if (Medias == null || !Medias.Any())
-                {
-                    return null;
-                }
-
-                return Medias[0].Url;
-            }
-        }
     }
 
     public enum AnimeType

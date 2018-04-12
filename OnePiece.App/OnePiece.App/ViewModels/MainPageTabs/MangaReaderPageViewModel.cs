@@ -5,6 +5,7 @@ using Prism.Commands;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using OnePiece.App.DataServices.Manga;
 
 namespace OnePiece.App.ViewModels
 {
@@ -55,9 +56,9 @@ namespace OnePiece.App.ViewModels
             }
         }
 
-        private readonly IMangaService _mangaService;
+        private readonly IMangaApiService _mangaService;
 
-        public MangaReaderPageViewModel(IAppService appService, IMangaService mangaService) : base(appService)
+        public MangaReaderPageViewModel(IAppService appService, IMangaApiService mangaService) : base(appService)
         {
             RefreshCommand = new DelegateCommand(ExecuteRefreshCommand, CanExecuteRefreshCommand);
             LoadMoreCommand = new DelegateCommand<MangaImage>(ExecuteLoadMoreCommand, CanExecuteLoadMoreCommand);

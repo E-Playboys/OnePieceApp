@@ -62,5 +62,21 @@ namespace OnePiece.Web.Controllers.Api
             var ep = await _dbContext.Episodes.Where(x => x.Type == AnimeType.Story).OrderByDescending(x => x.Id).FirstOrDefaultAsync();
             return Json(ep);
         }
+
+        [HttpGet]
+        [Route("GetLatestTvSpecial")]
+        public async Task<IActionResult> GetLatestTvSpecial()
+        {
+            var ep = await _dbContext.Episodes.Where(x => x.Type == AnimeType.TvSpecial).OrderByDescending(x => x.Id).FirstOrDefaultAsync();
+            return Json(ep);
+        }
+
+        [HttpGet]
+        [Route("GetLatestMovie")]
+        public async Task<IActionResult> GetLatestMovie()
+        {
+            var ep = await _dbContext.Episodes.Where(x => x.Type == AnimeType.Movie).OrderByDescending(x => x.Id).FirstOrDefaultAsync();
+            return Json(ep);
+        }
     }
 }

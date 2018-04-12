@@ -57,7 +57,7 @@
             <StackLayout Grid.Row="0" Grid.Column="0" Orientation="Horizontal">
               <Label Text="IMDb" FontSize="12" WidthRequest="40" HeightRequest="20" FontAttributes="Bold" BackgroundColor="#ffca28" TextColor="Black"
                      VerticalTextAlignment="Center" HorizontalTextAlignment="Center" VerticalOptions="Center" HorizontalOptions="Start"/>
-              <Label Text="9.0/10" FontSize="16" Style="{StaticResource CommonLabel}"
+              <Label Text="{Binding FeaturedVideo.ImdbScore, StringFormat='{0}/10'}" FontSize="16" Style="{StaticResource CommonLabel}"
                        VerticalTextAlignment="Center" HorizontalTextAlignment="Center" VerticalOptions="Center" HorizontalOptions="Start" />
             </StackLayout>
 
@@ -72,7 +72,7 @@
                        VerticalTextAlignment="Center" HorizontalTextAlignment="Center" VerticalOptions="Center" HorizontalOptions="Start"/>
               <iconize:IconLabel Text="md-star-border" FontSize="18" TextColor="#ffca28"
                        VerticalTextAlignment="Center" HorizontalTextAlignment="Center" VerticalOptions="Center" HorizontalOptions="Start"/>
-              <Label Text="4.6/5" FontSize="16" Style="{StaticResource CommonLabel}"
+              <Label Text="{Binding FeaturedVideo.Rating, StringFormat='{0}/5'}" FontSize="16" Style="{StaticResource CommonLabel}"
                        VerticalTextAlignment="Center" HorizontalTextAlignment="Center" VerticalOptions="Center" HorizontalOptions="Start" />
             </StackLayout>
           </Grid>
@@ -80,7 +80,7 @@
 
         <StackLayout BackgroundColor="White" Padding="15" Margin="0,0,0,10">
           <Label Text="Giới thiệu" Style="{StaticResource CommonLabel}" FontSize="16" />
-          <Label Text="Trong One Piece 775 – Bác sĩ Chopper bắt đầu chữa trị vết thương cho Zunesha. Kỹ năng kiếm pháp của Zoro và Brook, năng lực trái Hana-Hana của Robin… cùng với tài nghệ của Usopp, Franky, tất cả tập trung trị thương cho voi khổng lồ." Style="{StaticResource CommonSecondaryLabel}" FontSize="14" />
+          <Label Text="{Binding FeaturedVideo.IntroText}" Style="{StaticResource CommonSecondaryLabel}" FontSize="14" />
         </StackLayout>
 
         <controls:VerticalListView ItemsSource="{Binding Seasons}" IsVisible="{Binding IsMultiSeason}">
@@ -96,7 +96,7 @@
                   <controls:HorizontalListView.ItemTemplate>
                     <DataTemplate>
                       <StackLayout>
-                        <ffimage:CachedImage Source="{Binding Thumbnail}" />
+                        <ffimage:CachedImage Source="{Binding Cover}" />
                         <Label Text="{Binding EpisodeNumber, StringFormat='Ep {0}'}" FontSize="14" Style="{StaticResource CommonLabel}" VerticalOptions="Center"/>
                         <Label Text="{Binding ViewCount, StringFormat='{0} views'}" FontSize="12" Style="{StaticResource CommonSecondaryLabel}" VerticalOptions="Center"/>
                       </StackLayout>
@@ -108,13 +108,13 @@
           </controls:VerticalListView.ItemTemplate>
         </controls:VerticalListView>
 
-        <controls:VerticalListView ItemsSource="{Binding Videos}" IsVisible="{Binding IsMultiSeason, Converter={x:Static converters:InverseBoolConverter.Instance}}">
+        <controls:VerticalListView ItemsSource="{Binding Animes}" IsVisible="{Binding IsMultiSeason, Converter={x:Static converters:InverseBoolConverter.Instance}}">
           <controls:VerticalListView.ItemTemplate>
             <DataTemplate>
               <StackLayout BackgroundColor="White" Padding="10" Margin="0,0,0,1">
-                <ffimage:CachedImage Source="http://fconepiece.com/wp-content/uploads/2017/10/One-Piece-810-800x450.png" />
-                <Label Text="Tập 999 - Đối đầu với Big Mom" FontSize="14" Style="{StaticResource CommonLabel}" VerticalOptions="Center"/>
-                <Label Text="312,456,123 lượt xem" FontSize="12" Style="{StaticResource CommonSecondaryLabel}" VerticalOptions="Center"/>
+                <ffimage:CachedImage Source="{Binding Cover}" />
+                <Label Text="{Binding Title}" FontSize="14" Style="{StaticResource CommonLabel}" VerticalOptions="Center"/>
+                <Label Text="{Binding ViewCount, StringFormat='{0} views'}" FontSize="12" Style="{StaticResource CommonSecondaryLabel}" VerticalOptions="Center"/>
               </StackLayout>
             </DataTemplate>
           </controls:VerticalListView.ItemTemplate>

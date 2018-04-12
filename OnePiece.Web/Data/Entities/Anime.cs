@@ -14,6 +14,10 @@ namespace OnePiece.Web.Data.Entities
 
         public string DescriptionEng { get; set; }
 
+        public string IntroText { get; set; }
+
+        public string IntroTextEng { get; set; }
+
         public decimal? ImdbScore { get; set; }
 
         public decimal? Rating { get; set; }
@@ -21,6 +25,10 @@ namespace OnePiece.Web.Data.Entities
         public int ViewCount { get; set; }
 
         public AnimeType Type { get; set; }
+
+        public string Cover { get; set; }
+
+        public string Poster { get; set; }
 
         public List<Media> Medias { get; set; }
 

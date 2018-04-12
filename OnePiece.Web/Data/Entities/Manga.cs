@@ -18,6 +18,8 @@ namespace OnePiece.Web.Data.Entities
 
         public int ViewCount { get; set; }
 
+        public string Poster { get; set; }
+
         public MangaType Type { get; set; }
 
         public List<Media> Medias { get; set; }
