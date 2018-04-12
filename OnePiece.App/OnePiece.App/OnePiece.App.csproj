@@ -70,6 +70,8 @@
     <Compile Include="DataServices\Anime\ListAnimeBySeasonRequest.cs" />
     <Compile Include="DataServices\IRequestProvider.cs" />
     <Compile Include="DataServices\ListRequest.cs" />
+    <Compile Include="DataServices\Manga\IMangaApiService.cs" />
+    <Compile Include="DataServices\Manga\MangaApiService.cs" />
     <Compile Include="DataServices\NewsFeed\INewsFeedApiService.cs" />
     <Compile Include="DataServices\NewsFeed\NewsFeedApiService.cs" />
     <Compile Include="DataServices\RequestProvider.cs" />
@@ -390,9 +392,7 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="DataServices\Manga\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\..\packages\NETStandard.Library.2.0.1\build\NETStandard.Library.targets" Condition="Exists('..\..\packages\NETStandard.Library.2.0.1\build\NETStandard.Library.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
