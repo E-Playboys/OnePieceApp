@@ -45,14 +45,14 @@ namespace OnePiece.App.Views
             var context = BindingContext as MangaPageViewModel;
             if (context != null)
             {
-                if (!context.MangaChapters.Any())
+                if (!context.Mangas.Any())
                 {
-                    await context.LoadMangaChapters();
+                    await context.LoadMangas();
                 }
 
                 Device.StartTimer(TimeSpan.FromSeconds(5), () =>
                 {
-                    HotMangaCarouselView.Position = HotMangaCarouselView.Position < context.MangaChapters.Count ? HotMangaCarouselView.Position + 1 : 0;
+                    HotMangaCarouselView.Position = HotMangaCarouselView.Position < context.Mangas.Count ? HotMangaCarouselView.Position + 1 : 0;
                     return true;
                 });
 

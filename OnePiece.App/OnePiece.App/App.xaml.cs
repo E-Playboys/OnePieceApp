@@ -2,7 +2,6 @@
 using OnePiece.App.Services;
 using OnePiece.App.Services.Manga;
 using OnePiece.App.Views;
-using Plugin.DeviceInfo;
 using Prism.Unity;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -49,7 +48,6 @@ namespace OnePiece.App
 
             containerRegistry.Register<IAppService, AppService>();
             containerRegistry.Register<IMangaService, MangaService>();
-            containerRegistry.Register<IHardwareInfo, HardwareInfo>();
             containerRegistry.Register<IRequestProvider, RequestProvider>();
             containerRegistry.Register<INewsFeedApiService, NewsFeedApiService>();
             containerRegistry.Register<ISeasonApiService, SeasonApiService>();

@@ -1,13 +1,9 @@
 ﻿using System.Collections.ObjectModel;
-using System.Linq;
 using System.Threading.Tasks;
-using Acr.UserDialogs;
 using OnePiece.App.DataModels;
-using OnePiece.App.DataServices;
 using OnePiece.App.DataServices.NewsFeed;
 using OnePiece.App.Services;
 using Prism.Commands;
-using Xamarin.Forms;
 
 namespace OnePiece.App.ViewModels
 {

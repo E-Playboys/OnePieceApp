@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using Acr.UserDialogs;
 using OnePiece.App.Controls;
 using OnePiece.App.ViewModels;
 
