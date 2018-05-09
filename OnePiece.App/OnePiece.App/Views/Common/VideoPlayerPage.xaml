@@ -17,13 +17,13 @@
         </Grid.RowDefinitions>
 
         <StackLayout Grid.Row="0">
-            <templates:VideoPlayerView x:Name="VideoView" BackgroundColor="#E01722" IsFullScreen="False" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
+            <templates:VideoPlayerView x:Name="VideoView" BackgroundColor="#E01722" IsFullScreen="True" Anime="{Binding Anime}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
         </StackLayout>
         <ScrollView Grid.Row="1">
             <StackLayout BackgroundColor="#dcdcdc" Padding="1" Spacing="0">
                 <StackLayout Style="{StaticResource VideoPlayerPanel}" Margin="0,0,0,10">
-                    <Label Text="Năng lực tối thượng. Bí mật về sức mạnh của trái Ope Ope!" Style="{StaticResource VideoPlayerTitle}" />
-                    <Label Text="One Piece 700 Vietsub+Engsub" Style="{StaticResource VideoPlayerSubTitle}" />
+                    <Label Text="{Binding Anime.Title}" Style="{StaticResource VideoPlayerTitle}" />
+                    <Label Text="{Binding Anime.EpisodeNumber, StringFormat='Episode {0}'}" Style="{StaticResource VideoPlayerSubTitle}" />
                 </StackLayout>
                 <StackLayout Style="{StaticResource VideoPlayerPanel}">
                     <cv:CarouselViewControl HeightRequest="280" ItemsSource="{Binding RelatedVideos}" Position="0" HorizontalOptions="FillAndExpand">

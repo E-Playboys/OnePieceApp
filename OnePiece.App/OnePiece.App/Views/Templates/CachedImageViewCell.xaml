@@ -5,5 +5,5 @@
           prism:ViewModelLocator.AutowireViewModel="True"
           xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
           x:Class="OnePiece.App.Views.Templates.CachedImageViewCell">
-    <ff:CachedImage x:Name="CachedImage" BackgroundColor="#E01722" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Aspect="AspectFill"/>
+    <ff:CachedImage x:Name="CachedImage" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Aspect="AspectFill"/>
 </ViewCell>

@@ -59,7 +59,7 @@ namespace OnePiece.Web.Controllers.Api
         [Route("GetLatestEpisode")]
         public async Task<IActionResult> GetLatestEpisode()
         {
-            var ep = await _dbContext.Episodes.Where(x => x.Type == AnimeType.Story).OrderByDescending(x => x.Id).FirstOrDefaultAsync();
+            var ep = await _dbContext.Episodes.Include(x => x.Medias).Where(x => x.Type == AnimeType.Story).OrderByDescending(x => x.Id).FirstOrDefaultAsync();
             return Json(ep);
         }
 
@@ -67,7 +67,7 @@ namespace OnePiece.Web.Controllers.Api
         [Route("GetLatestTvSpecial")]
         public async Task<IActionResult> GetLatestTvSpecial()
         {
-            var ep = await _dbContext.Episodes.Where(x => x.Type == AnimeType.TvSpecial).OrderByDescending(x => x.Id).FirstOrDefaultAsync();
+            var ep = await _dbContext.Episodes.Include(x => x.Medias).Where(x => x.Type == AnimeType.TvSpecial).OrderByDescending(x => x.Id).FirstOrDefaultAsync();
             return Json(ep);
         }
 
@@ -75,7 +75,7 @@ namespace OnePiece.Web.Controllers.Api
         [Route("GetLatestMovie")]
         public async Task<IActionResult> GetLatestMovie()
         {
-            var ep = await _dbContext.Episodes.Where(x => x.Type == AnimeType.Movie).OrderByDescending(x => x.Id).FirstOrDefaultAsync();
+            var ep = await _dbContext.Episodes.Include(x => x.Medias).Where(x => x.Type == AnimeType.Movie).OrderByDescending(x => x.Id).FirstOrDefaultAsync();
             return Json(ep);
         }
     }

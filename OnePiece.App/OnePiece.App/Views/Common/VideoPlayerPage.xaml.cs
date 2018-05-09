@@ -1,4 +1,6 @@
-﻿using OnePiece.App.Services;
+﻿using OnePiece.App.DataModels;
+using OnePiece.App.Services;
+using OnePiece.App.ViewModels;
 using Plugin.DeviceInfo;
 using Rg.Plugins.Popup.Pages;
 
@@ -8,16 +10,15 @@ namespace OnePiece.App.Views
 {
     public partial class VideoPlayerPage : PopupPage
     {
-
-        public VideoPlayerPage()
+        public VideoPlayerPage(Anime anime)
         {
             InitializeComponent();
-        }
 
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-            VideoView.PlaybackController.Play();
+            var context = BindingContext as VideoPlayerPageViewModel;
+            if (context != null)
+            {
+                context.Anime = anime;
+            }
         }
 
         protected override void OnSizeAllocated(double width, double height)

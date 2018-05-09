@@ -38,12 +38,12 @@
       </Style>
 
       <Style TargetType="Label" x:Key="FeaturedVideoTitle" BasedOn="{StaticResource VideoListItemTitle}">
-        <Setter Property="TextColor" Value="White"/>
+        <Setter Property="TextColor" Value="Black"/>
         <Setter Property="FontSize" Value="16"/>
       </Style>
 
       <Style TargetType="Label" x:Key="FeaturedVideoDescription" BasedOn="{StaticResource VideoListItemDescription}">
-        <Setter Property="TextColor" Value="White"/>
+        <Setter Property="TextColor" Value="Black"/>
       </Style>
 
       <Style TargetType="Label" x:Key="MangaTitle" BasedOn="{StaticResource VideoListItemTitle}">

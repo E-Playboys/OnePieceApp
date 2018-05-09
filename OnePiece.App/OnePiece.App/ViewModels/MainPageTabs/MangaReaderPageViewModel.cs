@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using OnePiece.App.DataServices.Manga;
+using Plugin.DeviceInfo;
 
 namespace OnePiece.App.ViewModels
 {
@@ -42,7 +43,7 @@ namespace OnePiece.App.ViewModels
             set
             {
                 _currentPageNum = value;
-                OnPropertyChanged(nameof(CurrentPageString));
+                RaisePropertyChanged(nameof(CurrentPageString));
             }
         }
 
@@ -119,7 +120,7 @@ namespace OnePiece.App.ViewModels
                 if (popCount >= pageLoad) break;
 
                 var nextPage = AllPages.Dequeue();
-                nextPage.ImageWidth = App.ScreenWidth;
+                nextPage.ImageWidth = CrossDevice.Device.ScreenWidth;
                 MangaChapter.MangaImages.Add(nextPage);
                 popCount++;
             }

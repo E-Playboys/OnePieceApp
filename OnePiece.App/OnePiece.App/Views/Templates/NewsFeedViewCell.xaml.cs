@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OnePiece.App.Models;
+﻿using OnePiece.App.DataModels;
 using Plugin.DeviceInfo;
+using System;
+using System.Linq;
 using Xamarin.Forms;
 
 namespace OnePiece.App.Views.Templates
@@ -22,20 +19,11 @@ namespace OnePiece.App.Views.Templates
             var context = BindingContext as NewsFeed;
             if (context != null)
             {
-                var gifPanelHeight = 0;
-                //var appearingUrls = new List<string>();
-                foreach (var gif in context.Medias)
+                var media = context.Medias.FirstOrDefault();
+                if(media != null)
                 {
-                    var gifHeight = App.ScreenWidth * gif.Height / gif.Width;
-                    gifPanelHeight = gifPanelHeight + (int)gifHeight;
-                    //appearingUrls.Add(gif.Url);
+                    MediaPanel.RowHeight = (Convert.ToInt32(App.ScreenWidth) * media.Height / media.Width) - 10; 
                 }
-                MediaPanel.HeightRequest = gifPanelHeight;
-                //var message = new GifAppearingMessage()
-                //{
-                //    AppearingUrls = appearingUrls
-                //};
-                //MessagingCenter.Send(message, "GifAppearingMessage");
             }
         }
     }

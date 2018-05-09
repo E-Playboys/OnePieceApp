@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace OnePiece.Web.Data.Entities
 {
@@ -14,9 +15,9 @@ namespace OnePiece.Web.Data.Entities
 
         public List<Media> Medias { get; set; }
 
-        public LinkTo LinkTo { get; set; }
+        public LinkTo? LinkTo { get; set; }
 
-        public int LinkToId { get; set; }
+        public int? LinkToId { get; set; }
     }
 
     public enum LinkTo

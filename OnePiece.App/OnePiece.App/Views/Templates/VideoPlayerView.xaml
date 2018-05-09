@@ -25,13 +25,13 @@
         <StackLayout x:Name="VideoControl" Grid.Row="0" VerticalOptions="End" HeightRequest="50" Orientation="Horizontal" Spacing="10" Padding="10,0,10,0">
             <iconize:IconLabel x:Name="PlayButton" Text="md-play-circle-filled" FontSize="40" TextColor="#ffca28" VerticalOptions="CenterAndExpand" HorizontalOptions="Center">
                 <iconize:IconLabel.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="PlayClicked"/>
+                    <TapGestureRecognizer Tapped="PlayPauseClicked"/>
                 </iconize:IconLabel.GestureRecognizers>
             </iconize:IconLabel>
 
             <iconize:IconLabel x:Name="PauseButton" IsVisible="False" Text="md-pause-circle-filled" FontSize="40" TextColor="#ffca28" VerticalOptions="CenterAndExpand" HorizontalOptions="Center">
                 <iconize:IconLabel.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="PauseClicked"/>
+                    <TapGestureRecognizer Tapped="PlayPauseClicked"/>
                 </iconize:IconLabel.GestureRecognizers>
             </iconize:IconLabel>
 
@@ -43,7 +43,7 @@
 
             <iconize:IconLabel x:Name="QualityButton" Text="md-hd" FontSize="24" TextColor="White" VerticalOptions="CenterAndExpand" HorizontalOptions="Center">
                 <iconize:IconLabel.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="PlayClicked"/>
+                    <TapGestureRecognizer Tapped="FullScreenClicked"/>
                 </iconize:IconLabel.GestureRecognizers>
             </iconize:IconLabel>
 

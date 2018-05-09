@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using OnePiece.App.Services;
 using System.Threading;
 using Plugin.MediaManager.Forms;
+using OnePiece.App.DataModels;
+using System.Runtime.CompilerServices;
 
 namespace OnePiece.App.Views.Templates
 {
@@ -15,12 +17,21 @@ namespace OnePiece.App.Views.Templates
         public IPlaybackController PlaybackController => CrossMediaManager.Current.PlaybackController;
 
         public static readonly BindableProperty IsFullScreenProperty =
-  BindableProperty.Create("IsFullScreen", typeof(bool), typeof(VideoPlayerView), false, BindingMode.TwoWay);
+            BindableProperty.Create("IsFullScreen", typeof(bool), typeof(VideoPlayerView), false, BindingMode.TwoWay);
 
         public bool IsFullScreen
         {
             get { return (bool)GetValue(IsFullScreenProperty); }
             set { SetValue(IsFullScreenProperty, value); }
+        }
+
+        public static readonly BindableProperty AnimeProperty =
+            BindableProperty.Create("Anime", typeof(Anime), typeof(VideoPlayerView), null, BindingMode.TwoWay);
+
+        public Anime Anime
+        {
+            get { return (Anime)GetValue(AnimeProperty); }
+            set { SetValue(AnimeProperty, value); }
         }
 
         public VideoPlayerView()
@@ -57,33 +68,53 @@ namespace OnePiece.App.Views.Templates
                     PlayButton.IsVisible = true;
                 }
             };
-
-            VideoView.Source = "https://player.vimeo.com/external/258928251.hd.mp4?s=f5fe5d897c45c49807ad1be2ef3489d0a26f0455&profile_id=174";
             Main.BindingContext = this;
         }
 
-        private void PlayClicked(object sender, EventArgs e)
+        protected override void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            base.OnPropertyChanged(propertyName);
+
+            if (propertyName == "IsFullScreen")
+            {
+                ToggleFullScreen();
+            }
+            if (propertyName == "Anime")
+            {
+                VideoView.Source = Anime.Medias[0]?.Url;
+                PlaybackController.Play();
+            }
+        }
+
+        private void PlayPauseClicked(object sender, EventArgs e)
         {
             PlaybackController.PlayPause();
         }
 
-        private void PauseClicked(object sender, EventArgs e)
+        private void ToggleFullScreen()
         {
-            PlaybackController.PlayPause();
+            if (IsFullScreen)
+            {
+                DependencyService.Get<IOrientationService>().Landscape();
+                DependencyService.Get<IStatusBar>().HideStatusBar();
+            }
+            else
+            {
+                DependencyService.Get<IOrientationService>().Portrait();
+                DependencyService.Get<IStatusBar>().ShowStatusBar();
+            }
         }
 
         private void FullScreenClicked(object sender, EventArgs e)
         {
-            DependencyService.Get<IOrientationService>().Landscape();
-            DependencyService.Get<IStatusBar>().HideStatusBar();
             IsFullScreen = true;
+            ToggleFullScreen();
         }
 
         private void FullScreenExitClicked(object sender, EventArgs e)
         {
-            DependencyService.Get<IOrientationService>().Portrait();
-            DependencyService.Get<IStatusBar>().ShowStatusBar();
             IsFullScreen = false;
+            ToggleFullScreen();
         }
 
         private void ProgressBar_TouchDown(object sender, FocusEventArgs e)

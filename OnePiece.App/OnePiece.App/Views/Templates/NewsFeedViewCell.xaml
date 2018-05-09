@@ -17,20 +17,19 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <controls:ExtendedListView x:Name="MediaPanel" Grid.Row="0" BackgroundColor="LightGray" Margin="0,0,0,10"
+        <ListView x:Name="MediaPanel" Grid.Row="0" BackgroundColor="LightGray" Margin="0,0,0,10"
                 ItemsSource="{Binding Medias}"
-                HasUnevenRows="true"
                 HorizontalOptions="FillAndExpand"
                 VerticalOptions="FillAndExpand">
             <x:Arguments>
                 <ListViewCachingStrategy>RecycleElement</ListViewCachingStrategy>
             </x:Arguments>
-            <controls:ExtendedListView.ItemTemplate>
+            <ListView.ItemTemplate>
                 <DataTemplate>
                     <templates:CachedImageViewCell />
                 </DataTemplate>
-            </controls:ExtendedListView.ItemTemplate>
-        </controls:ExtendedListView>
+            </ListView.ItemTemplate>
+        </ListView>
 
         <Grid Grid.Row="1" RowSpacing="0" ColumnSpacing="0">
             <Grid.RowDefinitions>

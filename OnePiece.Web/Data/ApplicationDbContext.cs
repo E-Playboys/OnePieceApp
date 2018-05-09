@@ -17,6 +17,10 @@ namespace OnePiece.Web.Data
 
         public DbSet<Season> Seasons { get; set; }
 
+        public DbSet<Manga> Manga { get; set; }
+
+        public DbSet<Media> Media { get; set; }
+
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
@@ -29,9 +33,5 @@ namespace OnePiece.Web.Data
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
         }
-
-        public DbSet<OnePiece.Web.Data.Entities.Manga> Manga { get; set; }
-
-        public DbSet<OnePiece.Web.Data.Entities.Media> Media { get; set; }
     }
 }

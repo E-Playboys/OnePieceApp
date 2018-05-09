@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OnePiece.App.DataModels;
+using Plugin.DeviceInfo;
 using Xamarin.Forms;
 
 namespace OnePiece.App.Views.Templates
@@ -18,22 +19,17 @@ namespace OnePiece.App.Views.Templates
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            var context = BindingContext as DataModels.Media;
+            var context = BindingContext as Media;
             if (context != null)
             {
                 CachedImage.Source = context.Url;
-                if(CachedImage.WidthRequest != App.ScreenWidth)
-                {
-                    CachedImage.HeightRequest = App.ScreenWidth * context.Height / context.Width;
-                    CachedImage.WidthRequest = App.ScreenWidth;
-                }
             }
         }
 
         protected override void OnDisappearing()
         {
             base.OnDisappearing();
-            var context = BindingContext as DataModels.Media;
+            var context = BindingContext as Media;
             if (context != null)
             {
                 CachedImage.Source = context.Url.Replace(".gif", ".jpeg");

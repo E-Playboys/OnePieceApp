@@ -13,7 +13,7 @@ namespace OnePiece.Web.Data.Entities
 
         public MediaType Type { get; set; }
 
-        public MediaQuality Quality { get; set; }
+        public MediaQuality? Quality { get; set; }
 
         public int? MangaId { get; set; }
 
