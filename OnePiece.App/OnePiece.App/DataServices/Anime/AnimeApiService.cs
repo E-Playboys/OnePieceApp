@@ -22,6 +22,13 @@ namespace OnePiece.App.DataServices.Anime
             return animes;
         }
 
+        public async Task<List<DataModels.Anime>> ListStoriesAsync(ListRequest rq)
+        {
+            var animes = await _requestProvider.GetAsync<List<DataModels.Anime>>($"{AppSettings.WEB_API_URL}/Episodes/ListStories?skip={rq.Skip}&take={rq.Take}");
+
+            return animes;
+        }
+
         public async Task<List<DataModels.Anime>> ListTvSpecialsAsync(ListRequest rq)
         {
             var animes = await _requestProvider.GetAsync<List<DataModels.Anime>>($"{AppSettings.WEB_API_URL}/Episodes/ListTvSpecials?skip={rq.Skip}&take={rq.Take}");

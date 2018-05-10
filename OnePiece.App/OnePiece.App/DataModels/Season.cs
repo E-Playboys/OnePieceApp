@@ -21,6 +21,8 @@ namespace OnePiece.App.DataModels
 
         public string DescriptionEng { get; set; }
 
+        public string SeasonNumberTitle => $"Season {SeasonNumber}: {Title}";
+
         public string Avatar { get; set; }
 
         public ObservableRangeCollection<Anime> Episodes { get; set; } = new ObservableRangeCollection<Anime>();

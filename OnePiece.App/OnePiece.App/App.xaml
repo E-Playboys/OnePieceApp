@@ -38,12 +38,12 @@
       </Style>
 
       <Style TargetType="Label" x:Key="FeaturedVideoTitle" BasedOn="{StaticResource VideoListItemTitle}">
-        <Setter Property="TextColor" Value="Black"/>
+        <Setter Property="TextColor" Value="White"/>
         <Setter Property="FontSize" Value="16"/>
       </Style>
 
       <Style TargetType="Label" x:Key="FeaturedVideoDescription" BasedOn="{StaticResource VideoListItemDescription}">
-        <Setter Property="TextColor" Value="Black"/>
+        <Setter Property="TextColor" Value="White"/>
       </Style>
 
       <Style TargetType="Label" x:Key="MangaTitle" BasedOn="{StaticResource VideoListItemTitle}">
@@ -61,7 +61,7 @@
       </Style>
 
       <Style TargetType="Label" x:Key="VideoPlayerTitle" BasedOn="{StaticResource CommonLabel}">
-        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="FontSize" Value="16"/>
       </Style>
 
       <Style TargetType="Label" x:Key="VideoPlayerSubTitle" BasedOn="{StaticResource CommonLabel}">
@@ -70,7 +70,7 @@
 
       <Style TargetType="StackLayout" x:Key="VideoPlayerPanel">
         <Setter Property="BackgroundColor" Value="White"/>
-        <Setter Property="Padding" Value="15"/>
+        <Setter Property="Padding" Value="10"/>
         <Setter Property="Margin" Value="0,0,0,1"/>
       </Style>
 

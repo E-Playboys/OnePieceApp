@@ -92,6 +92,7 @@
     <Compile Include="Effects\ColorSliderEffect.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
+    <Compile Include="Renderers\GradientStackLayoutRenderer.cs" />
     <Compile Include="Renderers\LinkLabelRenderer.cs" />
     <Compile Include="Renderers\SeekerRenderer.cs" />
     <Compile Include="Services\OrientationService.cs" />

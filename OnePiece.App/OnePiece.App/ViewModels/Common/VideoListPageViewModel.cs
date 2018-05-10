@@ -89,7 +89,7 @@ namespace OnePiece.App.ViewModels
         {
             //CrossMediaManager.Current.Play("https://archive.org/download/BigBuckBunny_328/BigBuckBunny_512kb.mp4", MediaFileType.Anime);
             //await AppService.Navigation.NavigateAsync(nameof(VideoPlayerPage));
-            await PopupNavigation.PushAsync(new VideoPlayerPage(FeaturedVideo));
+            await PopupNavigation.PushAsync(new VideoPlayerPage(FeaturedVideo, DataSource.ToLower()));
         }
 
         public async Task LoadAsync()

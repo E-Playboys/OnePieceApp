@@ -47,6 +47,7 @@
     <Compile Include="Controls\ExtendedFlowListView.cs" />
     <Compile Include="Controls\ExtendedListView.cs" />
     <Compile Include="Controls\GifImage.cs" />
+    <Compile Include="Controls\GradientStackLayout.cs" />
     <Compile Include="Controls\VerticalListView.xaml.cs">
       <DependentUpon>VerticalListView.xaml</DependentUpon>
     </Compile>

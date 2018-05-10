@@ -1,5 +1,6 @@
 ﻿using OnePiece.App.DataModels;
 using OnePiece.App.Services;
+using OnePiece.App.Utilities;
 using OnePiece.App.ViewModels;
 using Plugin.DeviceInfo;
 using Rg.Plugins.Popup.Pages;
@@ -10,14 +11,27 @@ namespace OnePiece.App.Views
 {
     public partial class VideoPlayerPage : PopupPage
     {
-        public VideoPlayerPage(Anime anime)
+        private readonly VideoPlayerPageViewModel _context;
+
+        public VideoPlayerPage(Anime anime, string animeType)
         {
             InitializeComponent();
 
-            var context = BindingContext as VideoPlayerPageViewModel;
-            if (context != null)
+            _context = BindingContext as VideoPlayerPageViewModel;
+            if (_context != null)
             {
-                context.Anime = anime;
+                _context.Anime = anime;
+                _context.AnimeType = animeType;
+            }
+        }
+
+        protected override async void OnAppearing()
+        {
+            base.OnAppearing();
+
+            if(_context != null)
+            {
+                await _context.LoadAsync();
             }
         }
 

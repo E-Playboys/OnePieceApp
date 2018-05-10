@@ -47,7 +47,7 @@
                 </forms:CachedImage.Transformations>
             </forms:CachedImage>
 
-            <Label Grid.Row="0" Grid.Column="1" Text="{Binding Title}" IsVisible="{Binding Title, Converter={x:Static converters:IsVisibleConverter.Instance}}" FontSize="22" TextColor="Black" Opacity="0.87" VerticalOptions="Center" Margin="10,0,0,0"/>
+            <Label Grid.Row="0" Grid.Column="1" Text="{Binding Title}" IsVisible="{Binding Title, Converter={x:Static converters:IsVisibleConverter.Instance}}" FontSize="16" TextColor="Black" Opacity="0.87" VerticalOptions="Center" Margin="10,0,0,0"/>
             <Label Grid.Row="1" Grid.Column="1" Text="{Binding Description}" IsVisible="{Binding Description, Converter={x:Static converters:IsVisibleConverter.Instance}}" FontSize="14" TextColor="Black" Opacity="0.54" VerticalOptions="Center" Margin="10,0,0,0"/>
             <!--<Label Grid.Row="0" Grid.Column="1" Text="Troy" FontSize="12" FontAttributes="Bold" Margin="10,0,0,0" TextColor="#D8DADA" VerticalOptions="Center" HorizontalOptions="Start" />
             <Label Grid.Row="0" Grid.Column="2" Text="just now" FontSize="12" TextColor="#D8DADA" Margin="10,0,0,0" VerticalOptions="Center" HorizontalOptions="End" />-->

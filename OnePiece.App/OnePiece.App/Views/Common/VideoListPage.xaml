@@ -29,23 +29,26 @@
           </Grid.RowDefinitions>
 
           <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0"/>
-            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="110"/>
             <ColumnDefinition Width="*"/>
           </Grid.ColumnDefinitions>
 
-          <ffimage:CachedImage x:Name="VideoCover" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Aspect="AspectFill" DownsampleToViewSize="true" Source="{Binding FeaturedVideo.Cover}" Style="{StaticResource FeaturedVideoThumbnail}"/>
-          <StackLayout Grid.Row="0" Grid.Column="2" Padding="0,0,15,10" VerticalOptions="End">
+          <ffimage:CachedImage x:Name="VideoCover" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Aspect="AspectFill" DownsampleToViewSize="true" Source="{Binding FeaturedVideo.Cover}" Style="{StaticResource FeaturedVideoThumbnail}"/>
+          <controls:GradientStackLayout Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"  StartColor="Transparent" EndColor="Black" Opacity="0.7">
+          </controls:GradientStackLayout>
+          <StackLayout Grid.Row="0" Grid.Column="1" Padding="0,0,15,10" VerticalOptions="End">
             <Label Text="{Binding FeaturedVideo.Title}" Style="{StaticResource FeaturedVideoTitle}"/>
             <Label Text="{Binding FeaturedVideo.EpisodeNumber, StringFormat='Episode {0}'}" Style="{StaticResource FeaturedVideoDescription}"/>
           </StackLayout>
-          <iconize:IconLabel Grid.Row="1" Grid.Column="2" Text="md-play-circle-filled" FontSize="50" Margin="0,-25,0,0" TextColor="#ffca28" HorizontalOptions="End">
+          <iconize:IconLabel Grid.Row="1" Grid.Column="1" Text="md-play-circle-filled" FontSize="50" Margin="5,-25,0,0" TextColor="#ffca28" HorizontalOptions="EndAndExpand">
             <iconize:IconLabel.GestureRecognizers>
               <TapGestureRecognizer Command="{Binding PlayVideoCommand}"/>
             </iconize:IconLabel.GestureRecognizers>
           </iconize:IconLabel>
-          <ffimage:CachedImage x:Name="VideoPoster" Grid.Row="1" Grid.Column="1" BackgroundColor="LightGray" HeightRequest="150" Margin="0,-75,0,0" Aspect="AspectFill" DownsampleToViewSize="true" Source="{Binding FeaturedVideo.Poster}" />
-          <Grid Grid.Row="1" Grid.Column="2" Margin="0,10,0,0">
+          <StackLayout Grid.Row="1" Grid.Column="0" HeightRequest="150" WidthRequest="100" Margin="0,-75,0,0" Padding="10,0,0,0">
+            <ffimage:CachedImage x:Name="VideoPoster" BackgroundColor="LightGray" Aspect="AspectFill" DownsampleToViewSize="true" Source="{Binding FeaturedVideo.Poster}" />
+          </StackLayout>
+          <Grid Grid.Row="1" Grid.Column="1" Margin="0,10,0,0">
             <Grid.RowDefinitions>
               <RowDefinition Height="25"/>
               <RowDefinition Height="25"/>
@@ -62,18 +65,12 @@
             </StackLayout>
 
             <StackLayout Grid.Row="1" Grid.Column="0" Orientation="Horizontal">
-              <iconize:IconLabel Text="md-star" FontSize="18" TextColor="#ffca28"
-                       VerticalTextAlignment="Center" HorizontalTextAlignment="Center" VerticalOptions="Center" HorizontalOptions="Start"/>
-              <iconize:IconLabel Text="md-star" FontSize="18" TextColor="#ffca28"
-                       VerticalTextAlignment="Center" HorizontalTextAlignment="Center" VerticalOptions="Center" HorizontalOptions="Start"/>
-              <iconize:IconLabel Text="md-star" FontSize="18" TextColor="#ffca28"
-                       VerticalTextAlignment="Center" HorizontalTextAlignment="Center" VerticalOptions="Center" HorizontalOptions="Start"/>
-              <iconize:IconLabel Text="md-star-half" FontSize="18" TextColor="#ffca28"
-                       VerticalTextAlignment="Center" HorizontalTextAlignment="Center" VerticalOptions="Center" HorizontalOptions="Start"/>
-              <iconize:IconLabel Text="md-star-border" FontSize="18" TextColor="#ffca28"
-                       VerticalTextAlignment="Center" HorizontalTextAlignment="Center" VerticalOptions="Center" HorizontalOptions="Start"/>
+              <Label Text="OPWK" FontSize="12" WidthRequest="40" HeightRequest="20" FontAttributes="Bold" BackgroundColor="#ffca28" TextColor="Black"
+                     VerticalTextAlignment="Center" HorizontalTextAlignment="Center" VerticalOptions="Center" HorizontalOptions="Start"/>
               <Label Text="{Binding FeaturedVideo.Rating, StringFormat='{0}/5'}" FontSize="16" Style="{StaticResource CommonLabel}"
                        VerticalTextAlignment="Center" HorizontalTextAlignment="Center" VerticalOptions="Center" HorizontalOptions="Start" />
+              <iconize:IconLabel Text="md-star" FontSize="18" TextColor="#ffca28"
+                       VerticalTextAlignment="Center" HorizontalTextAlignment="Center" VerticalOptions="Center" HorizontalOptions="Start"/>
             </StackLayout>
           </Grid>
         </Grid>
@@ -86,19 +83,22 @@
         <controls:VerticalListView ItemsSource="{Binding Seasons}" IsVisible="{Binding IsMultiSeason}">
           <controls:VerticalListView.ItemTemplate>
             <DataTemplate>
-              <Grid BackgroundColor="White" ColumnSpacing="7.5" Padding="10" Margin="0,0,0,1">
+              <Grid BackgroundColor="White" ColumnSpacing="10" Padding="10" Margin="0,0,0,1">
                 <Grid.RowDefinitions>
                   <RowDefinition Height="Auto" />
-                  <RowDefinition Height="200"/>
+                  <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <Label Grid.Row="0" Text="{Binding Title}" Style="{StaticResource CommonLabel}" FontSize="16" />
+                <Label Grid.Row="0" Text="{Binding SeasonNumberTitle}" Style="{StaticResource CommonLabel}" FontSize="16" />
                 <controls:HorizontalListView Grid.Row="1" ItemsSource="{Binding Episodes}">
                   <controls:HorizontalListView.ItemTemplate>
                     <DataTemplate>
-                      <StackLayout>
-                        <ffimage:CachedImage Source="{Binding Cover}" />
-                        <Label Text="{Binding EpisodeNumber, StringFormat='Episode {0}'}" FontSize="14" Style="{StaticResource CommonLabel}" VerticalOptions="Center"/>
-                        <Label Text="{Binding ViewCount, StringFormat='{0} views'}" FontSize="12" Style="{StaticResource CommonSecondaryLabel}" VerticalOptions="Center"/>
+                      <StackLayout WidthRequest="200">
+                        <ffimage:CachedImage Source="{Binding Cover}" Aspect="AspectFit"/>
+                        <Label Text="{Binding Title}" FontSize="14" Style="{StaticResource CommonLabel}" HorizontalOptions="FillAndExpand"/>
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                            <Label Text="{Binding EpisodeNumber, StringFormat='Episode {0}'}" FontSize="12" Style="{StaticResource CommonLabel}" HorizontalOptions="Start"/>
+                            <Label Text="{Binding ViewCount, StringFormat='{0} views'}" FontSize="12" Style="{StaticResource CommonSecondaryLabel}" HorizontalOptions="EndAndExpand"/>
+                        </StackLayout>
                       </StackLayout>
                     </DataTemplate>
                   </controls:HorizontalListView.ItemTemplate>
@@ -112,9 +112,12 @@
           <controls:VerticalListView.ItemTemplate>
             <DataTemplate>
               <StackLayout BackgroundColor="White" Padding="10" Margin="0,0,0,1">
+                <Label Grid.Row="0" Text="{Binding Title}" Style="{StaticResource CommonLabel}" FontSize="16" />
                 <ffimage:CachedImage Source="{Binding Cover}" />
-                <Label Text="{Binding Title}" FontSize="14" Style="{StaticResource CommonLabel}" VerticalOptions="Center"/>
-                <Label Text="{Binding ViewCount, StringFormat='{0} views'}" FontSize="12" Style="{StaticResource CommonSecondaryLabel}" VerticalOptions="Center"/>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                  <Label Text="{Binding EpisodeNumber, StringFormat='Episode {0}'}" FontSize="14" Style="{StaticResource CommonLabel}" HorizontalOptions="Start"/>
+                  <Label Text="{Binding ViewCount, StringFormat='{0} views'}" FontSize="12" Style="{StaticResource CommonSecondaryLabel}" HorizontalOptions="EndAndExpand"/>
+                </StackLayout>
               </StackLayout>
             </DataTemplate>
           </controls:VerticalListView.ItemTemplate>

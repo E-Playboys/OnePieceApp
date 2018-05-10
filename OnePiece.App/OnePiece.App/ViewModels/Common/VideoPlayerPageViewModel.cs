@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OnePiece.App.DataModels;
+using OnePiece.App.DataServices.Anime;
+using OnePiece.App.DataServices.Season;
 using OnePiece.App.Services;
 using OnePiece.App.Utilities;
 
@@ -11,6 +13,9 @@ namespace OnePiece.App.ViewModels
 {
     public class VideoPlayerPageViewModel : BaseViewModel
     {
+        private readonly ISeasonApiService _seasonService;
+        private readonly IAnimeApiService _animeService;
+
         private Anime _anime;
         public Anime Anime
         {
@@ -18,11 +23,25 @@ namespace OnePiece.App.ViewModels
             set { SetProperty(ref _anime, value); }
         }
 
-        private ObservableRangeCollection<Anime> _episodes;
-        public ObservableRangeCollection<Anime> Episodes
+        private string _animeType;
+        public string AnimeType
         {
-            get { return _episodes ?? (_episodes = new ObservableRangeCollection<Anime>()); }
-            set { _episodes = value; }
+            get { return _animeType; }
+            set { SetProperty(ref _animeType, value); }
+        }
+
+        private ObservableRangeCollection<Anime> _animes;
+        public ObservableRangeCollection<Anime> Animes
+        {
+            get { return _animes ?? (_animes = new ObservableRangeCollection<Anime>()); }
+            set { _animes = value; }
+        }
+
+        private ObservableRangeCollection<Season> _seasons;
+        public ObservableRangeCollection<Season> Seasons
+        {
+            get { return _seasons ?? (_seasons = new ObservableRangeCollection<Season>()); }
+            set { _seasons = value; }
         }
 
         private ObservableRangeCollection<InfoProperty> _videoInfoProperties;
@@ -32,25 +51,8 @@ namespace OnePiece.App.ViewModels
             set { _videoInfoProperties = value; }
         }
 
-        private ObservableRangeCollection<Anime> _relatedVideos;
-        public ObservableRangeCollection<Anime> RelatedVideos
+        public VideoPlayerPageViewModel(IAppService appService, IAnimeApiService animeService, ISeasonApiService seasonService) : base(appService)
         {
-            get { return _relatedVideos ?? (_relatedVideos = new ObservableRangeCollection<Anime>()); }
-            set { _relatedVideos = value; }
-        }
-
-        public VideoPlayerPageViewModel(IAppService appService) : base(appService)
-        {
-            var animes = new List<Anime>();
-            for (int i = 1; i < 5; i++)
-            {
-                animes.Add(new Anime()
-                {
-                    Title = $"{i}"
-                });
-            }
-            Episodes.AddRange(animes);
-
             VideoInfoProperties.AddRange(new List<InfoProperty>()
             {
                 new InfoProperty()
@@ -79,8 +81,39 @@ namespace OnePiece.App.ViewModels
                     PropertyValue = "2016"
                 }
             });
+            _seasonService = seasonService;
+            _animeService = animeService;
+        }
 
-            RelatedVideos.AddRange(animes);
+        public async Task LoadAsync()
+        {
+            if (IsBusy)
+                return;
+
+            IsBusy = true;
+
+            List<Anime> animes = null;
+            switch (AnimeType.ToLower())
+            {
+                case "stories":
+                    animes = await _animeService.ListStoriesAsync(new DataServices.ListRequest { Skip = Animes.Count });
+
+                    var seasons = await _seasonService.ListAsync(new DataServices.ListRequest { Skip = Seasons.Count });
+                    Seasons.Clear();
+                    Seasons.AddRange(seasons);
+                    break;
+                case "tvspecials":
+                    animes = await _animeService.ListTvSpecialsAsync(new DataServices.ListRequest { Skip = Animes.Count });
+                    break;
+                case "movies":
+                    animes = await _animeService.ListMoviesAsync(new DataServices.ListRequest { Skip = Animes.Count });
+                    break;
+            }
+
+            Animes.Clear();
+            Animes.AddRange(animes);
+
+            IsBusy = false;
         }
     }
 
