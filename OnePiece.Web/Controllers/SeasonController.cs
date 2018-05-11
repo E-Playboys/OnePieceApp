@@ -54,7 +54,7 @@ namespace OnePiece.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("SeasonNumber,Title,TitleEng,Description,DescriptionEng,Id")] Season season)
+        public async Task<IActionResult> Create([Bind("SeasonNumber,Title,TitleEng,Description,DescriptionEng,Avatar,Id")] Season season)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +86,7 @@ namespace OnePiece.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("SeasonNumber,Title,TitleEng,Description,DescriptionEng,Id")] Season season)
+        public async Task<IActionResult> Edit(int id, [Bind("SeasonNumber,Title,TitleEng,Description,DescriptionEng,Avatar,Id")] Season season)
         {
             if (id != season.Id)
             {

@@ -65,19 +65,17 @@
             </StackLayout>
 
             <StackLayout Grid.Row="1" Grid.Column="0" Orientation="Horizontal">
-              <Label Text="OPWK" FontSize="12" WidthRequest="40" HeightRequest="20" FontAttributes="Bold" BackgroundColor="#ffca28" TextColor="Black"
-                     VerticalTextAlignment="Center" HorizontalTextAlignment="Center" VerticalOptions="Center" HorizontalOptions="Start"/>
-              <Label Text="{Binding FeaturedVideo.Rating, StringFormat='{0}/5'}" FontSize="16" Style="{StaticResource CommonLabel}"
-                       VerticalTextAlignment="Center" HorizontalTextAlignment="Center" VerticalOptions="Center" HorizontalOptions="Start" />
-              <iconize:IconLabel Text="md-star" FontSize="18" TextColor="#ffca28"
+              <iconize:IconLabel Text="md-visibility" FontSize="18" TextColor="#ffca28"
                        VerticalTextAlignment="Center" HorizontalTextAlignment="Center" VerticalOptions="Center" HorizontalOptions="Start"/>
+              <Label Text="{Binding FeaturedVideo.ViewCount, StringFormat='{0} views'}" FontSize="16" Style="{StaticResource CommonLabel}"
+                       VerticalTextAlignment="Center" HorizontalTextAlignment="Center" VerticalOptions="Center" HorizontalOptions="Start" />
             </StackLayout>
           </Grid>
         </Grid>
 
         <StackLayout BackgroundColor="White" Padding="15" Margin="0,0,0,10">
           <Label Text="Giới thiệu" Style="{StaticResource CommonLabel}" FontSize="16" />
-          <Label Text="{Binding FeaturedVideo.IntroText}" Style="{StaticResource CommonSecondaryLabel}" FontSize="14" />
+          <Label Text="{Binding FeaturedVideo.Description}" Style="{StaticResource CommonSecondaryLabel}" FontSize="14" />
         </StackLayout>
 
         <controls:VerticalListView ItemsSource="{Binding Seasons}" IsVisible="{Binding IsMultiSeason}">

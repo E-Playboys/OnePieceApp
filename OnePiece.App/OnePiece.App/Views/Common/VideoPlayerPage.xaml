@@ -43,7 +43,7 @@
                 </StackLayout>
                 <StackLayout Style="{StaticResource VideoPlayerPanel}">
                     <Label Text="Giới thiệu" Style="{StaticResource VideoPlayerPanelHeader}" />
-                    <Label Text="{Binding Anime.IntroText}" Style="{StaticResource VideoPlayerContent}" />
+                    <Label Text="{Binding Anime.Description}" Style="{StaticResource VideoPlayerContent}" />
                 </StackLayout>
                 <StackLayout Style="{StaticResource VideoPlayerPanel}">
                     <Label Text="Thông tin" Style="{StaticResource VideoPlayerPanelHeader}" />
@@ -68,33 +68,17 @@
                     </controls:ExtendedListView>
                 </StackLayout>
                 <StackLayout Style="{StaticResource VideoPlayerPanelNoLine}">
-                    <Label Text="Liên quan" Style="{StaticResource VideoPlayerPanelHeader}" />
-                    <cv:CarouselViewControl HeightRequest="280" ItemsSource="{Binding Seasons}" Position="0" HorizontalOptions="FillAndExpand">
-                        <cv:CarouselViewControl.ItemTemplate>
-                            <DataTemplate>
-                                <Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-                                    <Grid.RowDefinitions >
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                    </Grid.RowDefinitions>
-
-                                    <Label Grid.Row="0" Text="{Binding Title, StringFormat='Session {0}'}" FontSize="16" Style="{StaticResource CommonLabel}" VerticalOptions="Center"/>
-                                    <controls:HorizontalListView Grid.Row="1" ItemsSource="{Binding RelatedVideos}">
-                                        <controls:HorizontalListView.ItemTemplate>
-                                            <DataTemplate>
-                                                <Button BackgroundColor="#ffca28" TextColor="Black" FontSize="10" Text="{Binding Title, StringFormat='Tập {0}'}" HeightRequest="40" WidthRequest="60" />
-                                            </DataTemplate>
-                                        </controls:HorizontalListView.ItemTemplate>
-                                    </controls:HorizontalListView>
-                                    <ff:CachedImage Grid.Row="2" Source="http://fconepiece.com/wp-content/uploads/2017/10/One-Piece-810-800x450.png" />
-                                    <Label Grid.Row="3" Text="Tập 999" FontSize="14" Style="{StaticResource CommonLabel}" VerticalOptions="Center" HorizontalOptions="Start"/>
-                                    <Label Grid.Row="3" Text="312,456,123 lượt xem" FontSize="12" Style="{StaticResource CommonSecondaryLabel}" VerticalOptions="Center" HorizontalOptions="End"/>
-                                </Grid>
-                            </DataTemplate>
-                        </cv:CarouselViewControl.ItemTemplate>
-                    </cv:CarouselViewControl>
+                    <Label Text="Seasons" Style="{StaticResource VideoPlayerPanelHeader}" />
+                  <controls:HorizontalListView ItemsSource="{Binding Seasons}">
+                    <controls:HorizontalListView.ItemTemplate>
+                      <DataTemplate>
+                        <StackLayout WidthRequest="100">
+                          <ff:CachedImage Source="{Binding Avatar}" WidthRequest="100" HeightRequest="150" Aspect="AspectFill"/>
+                          <Label Text="{Binding Title}" FontSize="14" Style="{StaticResource CommonLabel}" HorizontalOptions="FillAndExpand"/>
+                        </StackLayout>
+                      </DataTemplate>
+                    </controls:HorizontalListView.ItemTemplate>
+                  </controls:HorizontalListView>
                 </StackLayout>
             </StackLayout>
         </ScrollView>

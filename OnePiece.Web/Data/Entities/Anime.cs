@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace OnePiece.Web.Data.Entities
 {
@@ -22,13 +23,17 @@ namespace OnePiece.Web.Data.Entities
 
         public decimal? Rating { get; set; }
 
-        public int ViewCount { get; set; }
+        public int? ViewCount { get; set; }
 
         public AnimeType Type { get; set; }
 
         public string Cover { get; set; }
 
         public string Poster { get; set; }
+
+        public DateTime? PublishDate { get; set; }
+
+        public string Source { get; set; }
 
         public List<Media> Medias { get; set; }
 

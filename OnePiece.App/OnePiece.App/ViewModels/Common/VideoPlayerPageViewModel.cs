@@ -58,27 +58,37 @@ namespace OnePiece.App.ViewModels
                 new InfoProperty()
                 {
                     PropertyName = "Đạo diễn",
-                    PropertyValue = "Troy"
+                    PropertyValue = "Takuji Suzuki, Shinobu Yaguchi"
+                },
+                new InfoProperty()
+                {
+                    PropertyName = "Biên tập",
+                    PropertyValue = "Takuji Suzuki, Shinobu Yaguchi"
                 },
                 new InfoProperty()
                 {
                     PropertyName = "Diễn viên",
-                    PropertyValue = "Troy Lee, Luffy, Zoro, Nami, Sanji"
+                    PropertyValue = " Travis Mullenix, Satoru Jitsunashi, Jason C. Kane, Masumi Kuichi, Nao Nekota, Yôji Tanaka"
                 },
                 new InfoProperty()
                 {
-                    PropertyName = "Thể loại",
-                    PropertyValue = "Hoạt hình, Kinh điển"
+                    PropertyName = "Quay phim",
+                    PropertyValue = "Shinobu Yaguchi	"
                 },
                 new InfoProperty()
                 {
-                    PropertyName = "Thời lượng",
-                    PropertyValue = "30 phút"
+                    PropertyName = "Biên tập phim",
+                    PropertyValue = "Shinobu Yaguchi	"
                 },
                 new InfoProperty()
                 {
-                    PropertyName = "Năm sản xuất",
-                    PropertyValue = "2016"
+                    PropertyName = "Âm thanh",
+                    PropertyValue = "Joseph Shalack"
+                },
+                new InfoProperty()
+                {
+                    PropertyName = "Lòng tiếng",
+                    PropertyValue = "Chuck Powers"
                 }
             });
             _seasonService = seasonService;
@@ -97,10 +107,6 @@ namespace OnePiece.App.ViewModels
             {
                 case "stories":
                     animes = await _animeService.ListStoriesAsync(new DataServices.ListRequest { Skip = Animes.Count });
-
-                    var seasons = await _seasonService.ListAsync(new DataServices.ListRequest { Skip = Seasons.Count });
-                    Seasons.Clear();
-                    Seasons.AddRange(seasons);
                     break;
                 case "tvspecials":
                     animes = await _animeService.ListTvSpecialsAsync(new DataServices.ListRequest { Skip = Animes.Count });
@@ -112,6 +118,10 @@ namespace OnePiece.App.ViewModels
 
             Animes.Clear();
             Animes.AddRange(animes);
+
+            var seasons = await _seasonService.ListAsync(new DataServices.ListRequest { Skip = Seasons.Count });
+            Seasons.Clear();
+            Seasons.AddRange(seasons);
 
             IsBusy = false;
         }
