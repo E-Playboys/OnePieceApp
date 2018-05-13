@@ -19,6 +19,8 @@ namespace OnePiece.Web.Data
 
         public DbSet<Manga> Manga { get; set; }
 
+        public DbSet<MangaPage> MangaPages { get; set; }
+
         public DbSet<Media> Media { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)

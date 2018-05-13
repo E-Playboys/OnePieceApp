@@ -11,5 +11,7 @@ namespace OnePiece.App.DataServices.Manga
         Task<List<DataModels.Manga>> ListAsync(ListRequest rq);
 
         Task<DataModels.Manga> GetAsync(int id);
+
+        Task<DataModels.Manga> GetByChapterNumberAsync(int chapterNumber, int next, int previous);
     }
 }

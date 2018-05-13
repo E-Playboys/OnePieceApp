@@ -33,7 +33,31 @@ namespace OnePiece.Web.Controllers.Api
         [Route("Get")]
         public async Task<IActionResult> Get(int id)
         {
-            var manga = await _dbContext.Manga.Where(x => x.Id == id).Include(x => x.Medias).FirstOrDefaultAsync();
+            var manga = await _dbContext.Manga.Where(x => x.Id == id).Include(x => x.MangaPages).FirstOrDefaultAsync();
+
+            return Json(manga);
+        }
+
+        [HttpGet]
+        [Route("GetByChapterNumber")]
+        public async Task<IActionResult> GetByChapterNumber(int chapterNumber, int next, int previous)
+        {
+            var query = _dbContext.Manga.Include(x => x.MangaPages).AsQueryable();
+
+            if(next > 0)
+            {
+                query = query.Where(x => x.ChapterNumber > chapterNumber).OrderBy(x => x.ChapterNumber).Skip(next - 1);
+            }
+            else if(previous > 0)
+            {
+                query = query.Where(x => x.ChapterNumber < chapterNumber).OrderByDescending(x => x.ChapterNumber).Skip(previous - 1);
+            }
+            else
+            {
+                query = query.Where(x => x.ChapterNumber == chapterNumber);
+            }
+
+            var manga = await query.FirstOrDefaultAsync();
 
             return Json(manga);
         }

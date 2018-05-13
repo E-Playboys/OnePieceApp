@@ -6,6 +6,8 @@ namespace OnePiece.Web.Data.Entities
     {
         public int ChapterNumber { get; set; }
 
+        public int TotalPages { get; set; }
+
         public string Title { get; set; }
 
         public string TitleEng { get; set; }
@@ -14,15 +16,17 @@ namespace OnePiece.Web.Data.Entities
 
         public string DescriptionEng { get; set; }
 
-        public decimal Rating { get; set; }
+        public decimal? Rating { get; set; }
 
-        public int ViewCount { get; set; }
+        public int? ViewCount { get; set; }
+
+        public string Cover { get; set; }
 
         public string Poster { get; set; }
 
         public MangaType Type { get; set; }
 
-        public List<Media> Medias { get; set; }
+        public List<MangaPage> MangaPages { get; set; }
 
         public int SeasonId { get; set; }
 

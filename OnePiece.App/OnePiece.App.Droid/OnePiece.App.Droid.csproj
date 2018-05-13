@@ -80,12 +80,6 @@
       <HintPath>..\..\packages\BottomNavigationBar.1.4.0.3\lib\MonoAndroid403\BottomNavigationBar.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="CarouselView.FormsPlugin.Abstractions, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\CarouselView.FormsPlugin.5.2.0\lib\MonoAndroid\CarouselView.FormsPlugin.Abstractions.dll</HintPath>
-    </Reference>
-    <Reference Include="CarouselView.FormsPlugin.Android, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\CarouselView.FormsPlugin.5.2.0\lib\MonoAndroid\CarouselView.FormsPlugin.Android.dll</HintPath>
-    </Reference>
     <Reference Include="Com.Android.DeskClock">
       <HintPath>..\..\packages\Xamarin.Android.VerticalViewPager.1.0.1\lib\MonoAndroid\Com.Android.DeskClock.dll</HintPath>
       <Private>True</Private>
@@ -146,6 +140,12 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\..\packages\Newtonsoft.Json.11.0.2\lib\netstandard2.0\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
+    </Reference>
+    <Reference Include="PanCardView, Version=1.0.6669.34352, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\CardsView.1.4.1\lib\MonoAndroid10\PanCardView.dll</HintPath>
+    </Reference>
+    <Reference Include="PanCardView.Droid, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\CardsView.1.4.1\lib\MonoAndroid10\PanCardView.Droid.dll</HintPath>
     </Reference>
     <Reference Include="Plugin.DeviceInfo">
       <HintPath>..\..\packages\Acr.DeviceInfo.6.1.0\lib\monoandroid80\Plugin.DeviceInfo.dll</HintPath>

@@ -1,5 +1,6 @@
 ﻿using OnePiece.App.Services;
 using OnePiece.App.ViewModels;
+using OnePiece.App.DataModels;
 using Rg.Plugins.Popup.Extensions;
 using Rg.Plugins.Popup.Pages;
 using System;
@@ -11,11 +12,19 @@ namespace OnePiece.App.Views
 {
     public partial class MangaReaderPage : PopupPage
     {
+        private readonly MangaReaderPageViewModel _context;
+
         private CancellationTokenSource _hideInfoCancelSource { get; set; } = new CancellationTokenSource();
 
-        public MangaReaderPage()
+        public MangaReaderPage(int chapterNumber)
         {
             InitializeComponent();
+
+            _context = BindingContext as MangaReaderPageViewModel;
+            if (_context != null)
+            {
+                _context.CurrentMangaChapterNumber = chapterNumber;
+            }
         }
 
         private async void OnClose(object sender, EventArgs e)
@@ -35,17 +44,21 @@ namespace OnePiece.App.Views
         private void JumpTo(object sender, EventArgs e)
         {
             //TODO: Jump to correct image
+            var context = BindingContext as MangaReaderPageViewModel;
+            if(context != null)
+            {
+                context.CurrentPageNumber = 0;
+            }
         }
 
         private async Task OnItemAppearing(object sender, ItemVisibilityEventArgs e)
         {
             var context = BindingContext as MangaReaderPageViewModel;
-            var currentPage = e.Item as Models.MangaImage;
+            var currentPage = e.Item as DataModels.MangaPage;
 
             if (currentPage == null || context == null) return;
 
-            var index = context.MangaChapter.MangaImages.IndexOf(currentPage);
-            context.CurrentPageNum = index + 1;
+            context.CurrentPageNumber = currentPage.PageNumber;
 
             //await ShowInfoBars(_hideInfoCancelSource);
             //_hideInfoCancelSource = new CancellationTokenSource();
@@ -56,8 +69,7 @@ namespace OnePiece.App.Views
         {
             var context = BindingContext as MangaReaderPageViewModel;
             if (context == null) return;
-            context.AllPages.Clear();
-            context.MangaChapter.MangaImages.Clear();
+            MangaPagesView.Items.Clear();
             await context.GoPrevChapter();
         }
 
@@ -65,8 +77,7 @@ namespace OnePiece.App.Views
         {
             var context = BindingContext as MangaReaderPageViewModel;
             if (context == null) return;
-            context.AllPages.Clear();
-            context.MangaChapter.MangaImages.Clear();
+            MangaPagesView.Items.Clear();
             await context.GoNextChapter();
         }
 
@@ -75,9 +86,7 @@ namespace OnePiece.App.Views
             var context = BindingContext as MangaReaderPageViewModel;
             if (context != null)
             {
-                context.MangaChapter.MangaImages.Clear();
-                await context.InitializeChapter();
-                await context.LoadMorePages();
+                await context.LoadManga();
             }
             base.OnAppearing();
 

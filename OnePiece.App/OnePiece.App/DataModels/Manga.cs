@@ -20,15 +20,17 @@ namespace OnePiece.App.DataModels
 
         public string DescriptionEng { get; set; }
 
-        public decimal Rating { get; set; }
+        public decimal? Rating { get; set; }
 
-        public int ViewCount { get; set; }
+        public int? ViewCount { get; set; }
+
+        public string Cover { get; set; }
 
         public string Poster { get; set; }
 
         public MangaType Type { get; set; }
 
-        public List<Media> Medias { get; set; }
+        public List<MangaPage> MangaPages { get; set; }
     }
 
     public enum MangaType

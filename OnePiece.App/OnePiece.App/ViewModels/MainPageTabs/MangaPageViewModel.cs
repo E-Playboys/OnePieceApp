@@ -23,11 +23,18 @@ namespace OnePiece.App.ViewModels
         public DelegateCommand ItemTappedCommand { get; set; }
         public DelegateCommand<Manga> LoadMoreCommand { get; set; }
 
-        private ObservableRangeCollection<Manga> _mangaChapters = new ObservableRangeCollection<Manga>();
+        private ObservableRangeCollection<Manga> _mangas = new ObservableRangeCollection<Manga>();
         public ObservableRangeCollection<Manga> Mangas
         {
-            get { return _mangaChapters ?? (_mangaChapters = new ObservableRangeCollection<Manga>()); }
-            set { SetProperty(ref _mangaChapters, value); }
+            get { return _mangas ?? (_mangas = new ObservableRangeCollection<Manga>()); }
+            set { SetProperty(ref _mangas, value); }
+        }
+
+        private ObservableRangeCollection<Manga> _featuredMangas = new ObservableRangeCollection<Manga>();
+        public ObservableRangeCollection<Manga> FeaturedMangas
+        {
+            get { return _featuredMangas ?? (_featuredMangas = new ObservableRangeCollection<Manga>()); }
+            set { SetProperty(ref _featuredMangas, value); }
         }
 
         private readonly IMangaApiService _mangaService;
@@ -45,23 +52,12 @@ namespace OnePiece.App.ViewModels
         {
             var item = LastTappedItem as Manga;
 
-            await OpenChapter(item.Id);
+            await OpenChapter(item.ChapterNumber);
         }
 
-        public async Task OpenChapter(int chapterId)
+        public async Task OpenChapter(int chapterNumber)
         {
-            var context = new MangaReaderPageViewModel(AppService, _mangaService)
-            {
-                MangaChapterId = chapterId
-            };
-
-            var mangaReaderPage = new MangaReaderPage()
-            {
-                BindingContext = context,
-                BackgroundColor = Color.Black,
-                Opacity = 1,
-                CloseWhenBackgroundIsClicked = false
-            };
+            var mangaReaderPage = new MangaReaderPage(chapterNumber);
             await PopupNavigation.PushAsync(mangaReaderPage);
         }
 
@@ -86,7 +82,11 @@ namespace OnePiece.App.ViewModels
             //    chapter.CoverImageWidth = (screenWidth - 30) / 3;
             //}
 
+            Mangas.Clear();
             Mangas.AddRange(chapters);
+
+            FeaturedMangas.Clear();
+            FeaturedMangas.AddRange(chapters.OrderByDescending(x => x.ChapterNumber).Take(3));
         }
 
         public async Task LoadChapterPicker()

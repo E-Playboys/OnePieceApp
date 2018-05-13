@@ -28,5 +28,12 @@ namespace OnePiece.App.DataServices.Manga
 
             return manga;
         }
+
+        public async Task<DataModels.Manga> GetByChapterNumberAsync(int chapterNumber, int next = 0, int previous = 0)
+        {
+            var manga = await _requestProvider.GetAsync<DataModels.Manga>($"{AppSettings.WEB_API_URL}/Mangas/GetByChapterNumber?chapterNumber={chapterNumber}&next={next}&previous={previous}");
+
+            return manga;
+        }
     }
 }

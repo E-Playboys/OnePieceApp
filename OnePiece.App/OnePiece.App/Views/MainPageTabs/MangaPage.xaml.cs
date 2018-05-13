@@ -45,16 +45,7 @@ namespace OnePiece.App.Views
             var context = BindingContext as MangaPageViewModel;
             if (context != null)
             {
-                if (!context.Mangas.Any())
-                {
-                    await context.LoadMangas();
-                }
-
-                Device.StartTimer(TimeSpan.FromSeconds(5), () =>
-                {
-                    HotMangaCarouselView.Position = HotMangaCarouselView.Position < context.Mangas.Count ? HotMangaCarouselView.Position + 1 : 0;
-                    return true;
-                });
+                await context.LoadMangas();
 
                 // Initialize chapter picker
                 await context.LoadChapterPicker();
