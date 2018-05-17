@@ -29,6 +29,8 @@ namespace OnePiece.App.ViewModels
             set { SetProperty(ref _mangaPages, value); }
         }
 
+        public int TotalPage => MangaPages.Count;
+
         public int CurrentMangaChapterNumber { get; set; }
 
         private int _currentPageNumber;
@@ -38,12 +40,19 @@ namespace OnePiece.App.ViewModels
             set { SetProperty(ref _currentPageNumber, value); }
         }
 
-        public DelegateCommand<MangaPage> JumpPageCommand { get; set; }
+        private bool _isControlVisible;
+        public bool IsControlVisible
+        {
+            get { return _isControlVisible; }
+            set { SetProperty(ref _isControlVisible, value); }
+        }
+
+        public DelegateCommand ToggleControlCommand { get; set; }
         public DelegateCommand LoadMoreCommand { get; set; }
 
         public MangaReaderPageViewModel(IAppService appService, IMangaApiService mangaService) : base(appService)
         {
-            JumpPageCommand = new DelegateCommand<MangaPage>(ExecuteJumpPageCommand, CanExecuteJumpPageCommand);
+            ToggleControlCommand = new DelegateCommand(ExecuteToggleControlCommand, CanExecuteToggleControlCommand);
             LoadMoreCommand = new DelegateCommand(ExecuteLoadMoreCommand, CanExecuteLoadMoreCommand);
 
             _mangaService = mangaService;
@@ -76,16 +85,16 @@ namespace OnePiece.App.ViewModels
             IsBusy = false;
         }
 
-        public bool CanExecuteJumpPageCommand(MangaPage mangaPage)
+        public bool CanExecuteToggleControlCommand()
         {
             return IsNotBusy;
         }
 
-        public void ExecuteJumpPageCommand(MangaPage mangaPage)
+        public void ExecuteToggleControlCommand()
         {
             IsBusy = true;
 
-            CurrentPageNumber = mangaPage.PageNumber;
+            IsControlVisible = !IsControlVisible;
 
             IsBusy = false;
         }

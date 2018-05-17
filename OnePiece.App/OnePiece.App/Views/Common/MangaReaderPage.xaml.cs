@@ -37,39 +37,14 @@ namespace OnePiece.App.Views
 
         private void ShowHideControlBars(object sender, EventArgs e)
         {
-            TopBar.IsVisible = !TopBar.IsVisible;
-            BottomBar.IsVisible = !BottomBar.IsVisible;
-        }
-
-        private void JumpTo(object sender, EventArgs e)
-        {
-            //TODO: Jump to correct image
-            var context = BindingContext as MangaReaderPageViewModel;
-            if(context != null)
-            {
-                context.CurrentPageNumber = 0;
-            }
-        }
-
-        private async Task OnItemAppearing(object sender, ItemVisibilityEventArgs e)
-        {
-            var context = BindingContext as MangaReaderPageViewModel;
-            var currentPage = e.Item as DataModels.MangaPage;
-
-            if (currentPage == null || context == null) return;
-
-            context.CurrentPageNumber = currentPage.PageNumber;
-
-            //await ShowInfoBars(_hideInfoCancelSource);
-            //_hideInfoCancelSource = new CancellationTokenSource();
-            //await HideInfoBars(_hideInfoCancelSource.Token);
+            //TopBar.IsVisible = !TopBar.IsVisible;
+            //BottomBar.IsVisible = !BottomBar.IsVisible;
         }
 
         private async Task OnPrevChapterClicked(object sender, EventArgs e)
         {
             var context = BindingContext as MangaReaderPageViewModel;
             if (context == null) return;
-            MangaPagesView.Items.Clear();
             await context.GoPrevChapter();
         }
 
@@ -77,7 +52,6 @@ namespace OnePiece.App.Views
         {
             var context = BindingContext as MangaReaderPageViewModel;
             if (context == null) return;
-            MangaPagesView.Items.Clear();
             await context.GoNextChapter();
         }
 
@@ -103,16 +77,16 @@ namespace OnePiece.App.Views
 
             if (token.IsCancellationRequested) return;
 
-            TopBar.IsVisible = false;
-            BottomBar.IsVisible = false;
+            //TopBar.IsVisible = false;
+            //BottomBar.IsVisible = false;
         }
 
         private async Task ShowInfoBars(CancellationTokenSource cancelSource)
         {
             cancelSource.Cancel();
 
-            TopBar.IsVisible = true;
-            BottomBar.IsVisible = true;
+            //TopBar.IsVisible = true;
+            //BottomBar.IsVisible = true;
         }
     }
 }

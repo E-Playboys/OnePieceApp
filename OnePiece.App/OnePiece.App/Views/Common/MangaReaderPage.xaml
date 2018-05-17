@@ -9,7 +9,9 @@
                  xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
                  xmlns:iconize="clr-namespace:FormsPlugin.Iconize;assembly=FormsPlugin.Iconize"
                  xmlns:cards="clr-namespace:PanCardView;assembly=PanCardView"
-                 x:Class="OnePiece.App.Views.MangaReaderPage">
+                 xmlns:cardsControls="clr-namespace:PanCardView.Controls;assembly=PanCardView"
+                 x:Class="OnePiece.App.Views.MangaReaderPage"
+                 x:Name="CurrentPage">
   <Grid RowSpacing="0" BackgroundColor="Black">
     <ActivityIndicator IsRunning="{Binding IsBusy}" VerticalOptions="CenterAndExpand"/>
     
@@ -18,7 +20,7 @@
                                CurrentIndex="{Binding CurrentPageNumber}"
                                HorizontalOptions="FillAndExpand"
                                VerticalOptions="FillAndExpand">
-      <cards:CardsView.ItemTemplate>
+            <cards:CardsView.ItemTemplate>
         <DataTemplate>
           <controls:PinchToZoomContainer>
             <controls:PinchToZoomContainer.Content>
@@ -26,17 +28,48 @@
                                  HorizontalOptions="FillAndExpand"
                                  VerticalOptions="FillAndExpand"
                                  Aspect="AspectFit" BackgroundColor="White">
-                <ffimage:CachedImage.GestureRecognizers>
-                  <TapGestureRecognizer Tapped="ShowHideControlBars" />
-                </ffimage:CachedImage.GestureRecognizers>
+                                <ffimage:CachedImage.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding BindingContext.ToggleControlCommand, Source={x:Reference CurrentPage}}" />
+            </ffimage:CachedImage.GestureRecognizers>
               </ffimage:CachedImage>
             </controls:PinchToZoomContainer.Content>
           </controls:PinchToZoomContainer>
         </DataTemplate>
       </cards:CardsView.ItemTemplate>
-    </cards:CardsView>
 
-    <StackLayout x:Name="TopBar" BackgroundColor="#E0000000" Spacing="0" VerticalOptions="Start">
+            <cardsControls:IndicatorsControl IsVisible="{Binding BindingContext.IsControlVisible, Source={x:Reference CurrentPage}}" 
+                                       Margin="0,0,0,0" 
+                                         Spacing="0"
+                                         BackgroundColor="#E0000000" 
+                                         AbsoluteLayout.LayoutBounds="0,1,1,.1" 
+                                         AbsoluteLayout.LayoutFlags="All">
+            <cardsControls:IndicatorsControl.SelectedIndicatorStyle>
+              <Style TargetType="Frame">
+                <Setter Property="BackgroundColor" Value="#E01722"/>
+              </Style>
+            </cardsControls:IndicatorsControl.SelectedIndicatorStyle>
+          <cardsControls:IndicatorsControl.UnselectedIndicatorStyle>
+            <Style TargetType="Frame">
+              <Setter Property="BackgroundColor" Value="Transparent"/>
+            </Style>
+          </cardsControls:IndicatorsControl.UnselectedIndicatorStyle>
+            <cardsControls:IndicatorsControl.ItemTemplate>
+                <DataTemplate>
+                  <Grid
+                      HeightRequest="60"
+                      WidthRequest="40"
+                      Padding="2">
+
+                        <ffimage:CachedImage Source="{Binding Url}"/>
+                            <Label Text="{Binding PageNumber}" FontSize="12" FontAttributes="Bold" TextColor="Black" VerticalOptions="End" />
+
+                        </Grid>
+                </DataTemplate>
+            </cardsControls:IndicatorsControl.ItemTemplate>
+        </cardsControls:IndicatorsControl>   
+  </cards:CardsView>
+
+    <StackLayout x:Name="TopBar" BackgroundColor="#E0000000" Spacing="0" VerticalOptions="Start" IsVisible="{Binding IsControlVisible}" >
       <StackLayout Orientation="Horizontal" Padding="10">
         <iconize:IconImage IconSize="25" Icon="md-chevron-left" IconColor="#E01722">
           <iconize:IconImage.GestureRecognizers>
@@ -54,20 +87,20 @@
       </StackLayout>-->
     </StackLayout>
 
-    <StackLayout x:Name="BottomBar" BackgroundColor="#E0000000" Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="End" Padding="5" Margin="0,0,0,-1">
+    <!--<StackLayout x:Name="BottomBar" BackgroundColor="#E0000000" Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="End" Padding="5" Margin="0,0,0,-1">
       <iconize:IconButton Clicked="OnPrevChapterClicked" Text="md-skip-previous" FontSize="32" TextColor="#E01722" BackgroundColor="Transparent" HorizontalOptions="Start" VerticalOptions="Center" />
       <controls:HorizontalListView ItemsSource="{Binding MangaPages}" HorizontalOptions="CenterAndExpand">
         <controls:HorizontalListView.ItemTemplate>
           <DataTemplate>
             <ffimage:CachedImage Source="{Binding Url}" HeightRequest="50">
               <ffimage:CachedImage.GestureRecognizers>
-                <TapGestureRecognizer Tapped="JumpTo" />
+                <TapGestureRecognizer Tapped="JumpTo" Command="{}"/>
               </ffimage:CachedImage.GestureRecognizers>
             </ffimage:CachedImage>
           </DataTemplate>
         </controls:HorizontalListView.ItemTemplate>
       </controls:HorizontalListView>
       <iconize:IconButton Clicked="OnNextChapterClicked" Text="md-skip-next" FontSize="32" TextColor="#E01722" BackgroundColor="Transparent" HorizontalOptions="End" VerticalOptions="Center" />
-    </StackLayout>
+    </StackLayout>-->
   </Grid>
 </pages:PopupPage>
