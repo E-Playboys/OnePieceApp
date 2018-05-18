@@ -26,6 +26,8 @@ namespace OnePiece.Web.Data.Entities
 
         public MangaType Type { get; set; }
 
+        public string PagesJson { get; set; }
+
         public List<MangaPage> MangaPages { get; set; }
 
         public int SeasonId { get; set; }

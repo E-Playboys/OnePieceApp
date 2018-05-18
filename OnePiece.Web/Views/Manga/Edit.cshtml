@@ -7,70 +7,74 @@
 <hr />
 <div class="row">
   <div class="col-md-4">
-    <form asp-action="Edit">
-      <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-      <div class="form-group">
-        <label asp-for="ChapterNumber" class="control-label"></label>
-        <input asp-for="ChapterNumber" class="form-control" />
-        <span asp-validation-for="ChapterNumber" class="text-danger"></span>
-      </div>
-      <div class="form-group">
-        <label asp-for="Title" class="control-label"></label>
-        <input asp-for="Title" class="form-control" />
-        <span asp-validation-for="Title" class="text-danger"></span>
-      </div>
-      <div class="form-group">
-        <label asp-for="TitleEng" class="control-label"></label>
-        <input asp-for="TitleEng" class="form-control" />
-        <span asp-validation-for="TitleEng" class="text-danger"></span>
-      </div>
-      <div class="form-group">
-        <label asp-for="Description" class="control-label"></label>
-        <input asp-for="Description" class="form-control" />
-        <span asp-validation-for="Description" class="text-danger"></span>
-      </div>
-      <div class="form-group">
-        <label asp-for="DescriptionEng" class="control-label"></label>
-        <input asp-for="DescriptionEng" class="form-control" />
-        <span asp-validation-for="DescriptionEng" class="text-danger"></span>
-      </div>
-      <div class="form-group">
-        <label asp-for="Cover" class="control-label"></label>
-        <input asp-for="Cover" class="form-control" />
-        <span asp-validation-for="Cover" class="text-danger"></span>
-      </div>
-      <div class="form-group">
-        <label asp-for="Poster" class="control-label"></label>
-        <input asp-for="Poster" class="form-control" />
-        <span asp-validation-for="Poster" class="text-danger"></span>
-      </div>
-      <div class="form-group">
-        <label asp-for="Rating" class="control-label"></label>
-        <input asp-for="Rating" class="form-control" />
-        <span asp-validation-for="Rating" class="text-danger"></span>
-      </div>
-      <div class="form-group">
-        <label asp-for="ViewCount" class="control-label"></label>
-        <input asp-for="ViewCount" class="form-control" />
-        <span asp-validation-for="ViewCount" class="text-danger"></span>
-      </div>
-      <div class="form-group">
-        <label asp-for="Type" class="control-label"></label>
-        <select asp-for="Type" class="form-control" asp-items="ViewBag.MangaTypeSelectList"></select>
-        <span asp-validation-for="Type" class="text-danger"></span>
-      </div>
-      <div class="form-group">
-        <label asp-for="SeasonId" class="control-label"></label>
-        <select asp-for="SeasonId" class="form-control" asp-items="ViewBag.SeasonSelectList">
-          <option value="">Please Select</option>
-        </select>
-        <span asp-validation-for="SeasonId" class="text-danger"></span>
-      </div>
-      <input type="hidden" asp-for="Id" />
-      <div class="form-group">
-        <input type="submit" value="Save" class="btn btn-default" />
-      </div>
-    </form>
+      <form asp-action="Edit">
+          <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+          <div class="form-group">
+              <label asp-for="ChapterNumber" class="control-label"></label>
+              <input asp-for="ChapterNumber" class="form-control" />
+              <span asp-validation-for="ChapterNumber" class="text-danger"></span>
+          </div>
+          <div class="form-group">
+              <label asp-for="Title" class="control-label"></label>
+              <input asp-for="Title" class="form-control" />
+              <span asp-validation-for="Title" class="text-danger"></span>
+          </div>
+          <div class="form-group">
+              <label asp-for="TitleEng" class="control-label"></label>
+              <input asp-for="TitleEng" class="form-control" />
+              <span asp-validation-for="TitleEng" class="text-danger"></span>
+          </div>
+          <div class="form-group">
+              <label asp-for="Description" class="control-label"></label>
+              <input asp-for="Description" class="form-control" />
+              <span asp-validation-for="Description" class="text-danger"></span>
+          </div>
+          <div class="form-group">
+              <label asp-for="DescriptionEng" class="control-label"></label>
+              <input asp-for="DescriptionEng" class="form-control" />
+              <span asp-validation-for="DescriptionEng" class="text-danger"></span>
+          </div>
+          <div class="form-group">
+              <label asp-for="Cover" class="control-label"></label>
+              <input asp-for="Cover" class="form-control" />
+              <span asp-validation-for="Cover" class="text-danger"></span>
+          </div>
+          <div class="form-group">
+              <label asp-for="Poster" class="control-label"></label>
+              <input asp-for="Poster" class="form-control" />
+              <span asp-validation-for="Poster" class="text-danger"></span>
+          </div>
+          <div class="form-group">
+              <label asp-for="Rating" class="control-label"></label>
+              <input asp-for="Rating" class="form-control" />
+              <span asp-validation-for="Rating" class="text-danger"></span>
+          </div>
+          <div class="form-group">
+              <label asp-for="ViewCount" class="control-label"></label>
+              <input asp-for="ViewCount" class="form-control" />
+              <span asp-validation-for="ViewCount" class="text-danger"></span>
+          </div>
+          <div class="form-group">
+              <label asp-for="Type" class="control-label"></label>
+              <select asp-for="Type" class="form-control" asp-items="ViewBag.MangaTypeSelectList"></select>
+              <span asp-validation-for="Type" class="text-danger"></span>
+          </div>
+          <div class="form-group">
+              <label asp-for="SeasonId" class="control-label"></label>
+              <select asp-for="SeasonId" class="form-control" asp-items="ViewBag.SeasonSelectList">
+                  <option value="">Please Select</option>
+              </select>
+              <span asp-validation-for="SeasonId" class="text-danger"></span>
+          </div>
+          <div class="form-group">
+              <label asp-for="PagesJson" class="control-label"></label>
+              <textarea asp-for="PagesJson" class="form-control"></textarea>
+          </div>
+          <input type="hidden" asp-for="Id" />
+          <div class="form-group">
+              <input type="submit" value="Save" class="btn btn-default" />
+          </div>
+      </form>
   </div>
 </div>
 <div>

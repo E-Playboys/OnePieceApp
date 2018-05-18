@@ -82,7 +82,7 @@ namespace OnePiece.Web.Controllers
             {
                 return NotFound();
             }
-            ViewData["MangaId"] = new SelectList(_context.Manga, "Id", "Id", mangaPage.MangaId);
+            ViewData["MangaId"] = new SelectList(_context.Manga, "Id", "ChapterNumber", mangaPage.MangaId);
             return View(mangaPage);
         }
 

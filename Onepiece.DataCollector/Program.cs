@@ -16,7 +16,9 @@ namespace Onepiece.DataCollector
     {
         static void Main(string[] args)
         {
-            CollectSeasons();
+            //CollectSeasons();
+            MangaCollector.Collect();
+            Console.ReadLine();
         }
 
         private static void CollectSeasons()
