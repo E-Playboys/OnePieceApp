@@ -59,13 +59,6 @@ namespace OnePiece.App.ViewModels
             set { _seasons = value; }
         }
 
-        private bool _isRefreshingData;
-        public bool IsRefreshingData
-        {
-            get { return _isRefreshingData; }
-            set { SetProperty(ref _isRefreshingData, value); }
-        }
-
         public DelegateCommand RefreshDataCommand { get; set; }
 
         public DelegateCommand PlayVideoCommand { get; set; }
@@ -81,18 +74,15 @@ namespace OnePiece.App.ViewModels
 
         private async Task ExecuteRefreshDataCommandAsync()
         {
-            await LoadAsync();
-            IsRefreshingData = false;
+            await LoadAsync(true);
         }
 
         private async void ExecutePlayVideoCommandAsync()
         {
-            //CrossMediaManager.Current.Play("https://archive.org/download/BigBuckBunny_328/BigBuckBunny_512kb.mp4", MediaFileType.Anime);
-            //await AppService.Navigation.NavigateAsync(nameof(VideoPlayerPage));
             await PopupNavigation.PushAsync(new VideoPlayerPage(FeaturedVideo, DataSource.ToLower()));
         }
 
-        public async Task LoadAsync()
+        public async Task LoadAsync(bool refresh = false)
         {
             if (IsBusy)
                 return;
@@ -103,7 +93,7 @@ namespace OnePiece.App.ViewModels
             {
                 FeaturedVideo = await _animeService.GetLatestEpisodeAsync();
 
-                var seasons = await _seasonService.ListAsync(new DataServices.ListRequest { Skip = Seasons.Count });
+                var seasons = await _seasonService.ListAsync(new DataServices.ListRequest { Skip = refresh ? 0 : Seasons.Count });
                 Seasons.Clear();
                 Seasons.AddRange(seasons);
 
@@ -119,12 +109,12 @@ namespace OnePiece.App.ViewModels
                 if (DataSource.ToLower() == "tvspecials")
                 {
                     FeaturedVideo = await _animeService.GetLatestTvSpecialAsync();
-                    animes = await _animeService.ListTvSpecialsAsync(new DataServices.ListRequest { Skip = Animes.Count });
+                    animes = await _animeService.ListTvSpecialsAsync(new DataServices.ListRequest { Skip = refresh ? 0 : Animes.Count });
                 }
                 else if (DataSource.ToLower() == "movies")
                 {
                     FeaturedVideo = await _animeService.GetLatestMovieAsync();
-                    animes = await _animeService.ListMoviesAsync(new DataServices.ListRequest { Skip = Animes.Count });
+                    animes = await _animeService.ListMoviesAsync(new DataServices.ListRequest { Skip = refresh ? 0 : Animes.Count });
                 }
 
                 Animes.Clear();

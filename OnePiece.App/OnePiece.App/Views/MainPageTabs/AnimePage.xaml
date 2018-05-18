@@ -1,11 +1,13 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-                         xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
-                         xmlns:views="clr-namespace:OnePiece.App.Views;assembly=OnePiece.App"
-                         prism:ViewModelLocator.AutowireViewModel="True"
-                         x:Class="OnePiece.App.Views.AnimePage"
-                         Icon="typcn-film" Title="Anime">
-  <views:VideoListPage Title="Story" IsMultiSeason="True" DataSource="stories"/>
-  <views:VideoListPage Title="TV Special" DataSource="tvspecials"/>
-  <views:VideoListPage Title="Movie" DataSource="movies"/>
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<TabbedPage x:Class="OnePiece.App.Views.AnimePage"
+            xmlns="http://xamarin.com/schemas/2014/forms"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+            xmlns:views="clr-namespace:OnePiece.App.Views;assembly=OnePiece.App"
+            Title="Anime"
+            prism:ViewModelLocator.AutowireViewModel="True"
+            Icon="typcn-film">
+  <views:VideoListPage Title="Story" DataSource="stories" IsMultiSeason="True" />
+  <views:VideoListPage Title="TV Special" DataSource="tvspecials" />
+  <views:VideoListPage Title="Movie" DataSource="movies" />
 </TabbedPage>

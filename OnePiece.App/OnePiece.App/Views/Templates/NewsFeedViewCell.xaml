@@ -1,56 +1,83 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-<ViewCell xmlns="http://xamarin.com/schemas/2014/forms"
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ViewCell x:Class="OnePiece.App.Views.Templates.NewsFeedViewCell"
+          xmlns="http://xamarin.com/schemas/2014/forms"
           xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-          xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
-          prism:ViewModelLocator.AutowireViewModel="True"
-          xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
-          xmlns:transformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
-          xmlns:iconize="clr-namespace:FormsPlugin.Iconize;assembly=FormsPlugin.Iconize"
-          xmlns:rox="clr-namespace:Rox;assembly=Rox.Xamarin.Video.Portable"
-          xmlns:converters="clr-namespace:OnePiece.App.Converters;assembly=OnePiece.App"
           xmlns:controls="clr-namespace:OnePiece.App.Controls;assembly=OnePiece.App"
+          xmlns:converters="clr-namespace:OnePiece.App.Converters;assembly=OnePiece.App"
+          xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+          xmlns:iconize="clr-namespace:FormsPlugin.Iconize;assembly=FormsPlugin.Iconize"
+          xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+          xmlns:rox="clr-namespace:Rox;assembly=Rox.Xamarin.Video.Portable"
           xmlns:templates="clr-namespace:OnePiece.App.Views.Templates;assembly=OnePiece.App"
-          x:Class="OnePiece.App.Views.Templates.NewsFeedViewCell">
-    <Grid RowSpacing="0" BackgroundColor="White" Margin="1,0,1,1" Padding="10">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
+          xmlns:transformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+          prism:ViewModelLocator.AutowireViewModel="True">
+  <Grid Margin="1,0,1,1" Padding="10" BackgroundColor="White" RowSpacing="0">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+    </Grid.RowDefinitions>
 
-        <ListView x:Name="MediaPanel" Grid.Row="0" BackgroundColor="LightGray" Margin="0,0,0,10"
-                ItemsSource="{Binding Medias}"
-                HorizontalOptions="FillAndExpand"
-                VerticalOptions="FillAndExpand">
-            <x:Arguments>
-                <ListViewCachingStrategy>RecycleElement</ListViewCachingStrategy>
-            </x:Arguments>
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <templates:CachedImageViewCell />
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+    <ListView x:Name="MediaPanel"
+              Grid.Row="0"
+              Margin="0,0,0,10"
+              BackgroundColor="LightGray"
+              HorizontalOptions="FillAndExpand"
+              ItemsSource="{Binding Medias}"
+              VerticalOptions="FillAndExpand">
+      <x:Arguments>
+        <ListViewCachingStrategy>RecycleElement</ListViewCachingStrategy>
+      </x:Arguments>
+      <ListView.ItemTemplate>
+        <DataTemplate>
+          <templates:CachedImageViewCell />
+        </DataTemplate>
+      </ListView.ItemTemplate>
+    </ListView>
 
-        <Grid Grid.Row="1" RowSpacing="0" ColumnSpacing="0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="40"/>
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            
-            <forms:CachedImage Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" HeightRequest="40" WidthRequest="40" VerticalOptions="Start" x:Name="Avatar" Source="icon" Aspect="AspectFill">
-                <forms:CachedImage.Transformations>
-                    <transformations:CircleTransformation />
-                </forms:CachedImage.Transformations>
-            </forms:CachedImage>
+    <Grid Grid.Row="1" ColumnSpacing="0" RowSpacing="0">
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="Auto" />
+      </Grid.RowDefinitions>
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="40" />
+        <ColumnDefinition Width="*" />
+      </Grid.ColumnDefinitions>
 
-            <Label Grid.Row="0" Grid.Column="1" Text="{Binding Title}" IsVisible="{Binding Title, Converter={x:Static converters:IsVisibleConverter.Instance}}" FontSize="16" TextColor="Black" Opacity="0.87" VerticalOptions="Center" Margin="10,0,0,0"/>
-            <Label Grid.Row="1" Grid.Column="1" Text="{Binding Description}" IsVisible="{Binding Description, Converter={x:Static converters:IsVisibleConverter.Instance}}" FontSize="14" TextColor="Black" Opacity="0.54" VerticalOptions="Center" Margin="10,0,0,0"/>
-            <!--<Label Grid.Row="0" Grid.Column="1" Text="Troy" FontSize="12" FontAttributes="Bold" Margin="10,0,0,0" TextColor="#D8DADA" VerticalOptions="Center" HorizontalOptions="Start" />
+      <forms:CachedImage x:Name="Avatar"
+                         Grid.Row="0"
+                         Grid.RowSpan="2"
+                         Grid.Column="0"
+                         Aspect="AspectFill"
+                         HeightRequest="40"
+                         Source="icon"
+                         VerticalOptions="Start"
+                         WidthRequest="40">
+        <forms:CachedImage.Transformations>
+          <transformations:CircleTransformation />
+        </forms:CachedImage.Transformations>
+      </forms:CachedImage>
+
+      <Label Grid.Row="0"
+             Grid.Column="1"
+             Margin="10,0,0,0"
+             FontSize="16"
+             IsVisible="{Binding Title, Converter={x:Static converters:IsVisibleConverter.Instance}}"
+             Opacity="0.87"
+             Text="{Binding Title}"
+             TextColor="Black"
+             VerticalOptions="Center" />
+      <Label Grid.Row="1"
+             Grid.Column="1"
+             Margin="10,0,0,0"
+             FontSize="14"
+             IsVisible="{Binding Description, Converter={x:Static converters:IsVisibleConverter.Instance}}"
+             Opacity="0.54"
+             Text="{Binding Description}"
+             TextColor="Black"
+             VerticalOptions="Center" />
+      <!--<Label Grid.Row="0" Grid.Column="1" Text="Troy" FontSize="12" FontAttributes="Bold" Margin="10,0,0,0" TextColor="#D8DADA" VerticalOptions="Center" HorizontalOptions="Start" />
             <Label Grid.Row="0" Grid.Column="2" Text="just now" FontSize="12" TextColor="#D8DADA" Margin="10,0,0,0" VerticalOptions="Center" HorizontalOptions="End" />-->
-        </Grid>
     </Grid>
+  </Grid>
 </ViewCell>

@@ -35,26 +35,6 @@ namespace OnePiece.App.Views
             DependencyService.Get<IStatusBar>().ShowStatusBar();
         }
 
-        private void ShowHideControlBars(object sender, EventArgs e)
-        {
-            //TopBar.IsVisible = !TopBar.IsVisible;
-            //BottomBar.IsVisible = !BottomBar.IsVisible;
-        }
-
-        private async Task OnPrevChapterClicked(object sender, EventArgs e)
-        {
-            var context = BindingContext as MangaReaderPageViewModel;
-            if (context == null) return;
-            await context.GoPrevChapter();
-        }
-
-        private async Task OnNextChapterClicked(object sender, EventArgs e)
-        {
-            var context = BindingContext as MangaReaderPageViewModel;
-            if (context == null) return;
-            await context.GoNextChapter();
-        }
-
         protected override async void OnAppearing()
         {
             var context = BindingContext as MangaReaderPageViewModel;
@@ -65,28 +45,7 @@ namespace OnePiece.App.Views
             base.OnAppearing();
 
             // Hide status bar
-            //DependencyService.Get<IStatusBar>().HideStatusBar();
-
-            //await HideInfoBars(_hideInfoCancelSource.Token);
-        }
-
-        private async Task HideInfoBars(CancellationToken token)
-        {
-            // Hide info
-            await Task.Delay(2000);
-
-            if (token.IsCancellationRequested) return;
-
-            //TopBar.IsVisible = false;
-            //BottomBar.IsVisible = false;
-        }
-
-        private async Task ShowInfoBars(CancellationTokenSource cancelSource)
-        {
-            cancelSource.Cancel();
-
-            //TopBar.IsVisible = true;
-            //BottomBar.IsVisible = true;
+            DependencyService.Get<IStatusBar>().HideStatusBar();
         }
     }
 }

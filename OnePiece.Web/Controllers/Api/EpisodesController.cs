@@ -23,7 +23,7 @@ namespace OnePiece.Web.Controllers.Api
         public async Task<IActionResult> ListBySeason(ListEpisodeBySeasonRequest rq)
         {
             var eps = await _dbContext.Episodes.Where(x => x.SeasonId == rq.SeasonId)
-                .OrderByDescending(x => x.Id)
+                .OrderByDescending(x => x.EpisodeNumber)
                 .Include(x => x.Medias)
                 .Skip(rq.Skip).Take(rq.Take)
                 .ToListAsync();
@@ -71,7 +71,7 @@ namespace OnePiece.Web.Controllers.Api
         [Route("GetLatestEpisode")]
         public async Task<IActionResult> GetLatestEpisode()
         {
-            var ep = await _dbContext.Episodes.Include(x => x.Medias).Where(x => x.Type == AnimeType.Story).OrderByDescending(x => x.Id).FirstOrDefaultAsync();
+            var ep = await _dbContext.Episodes.Include(x => x.Medias).Where(x => x.Type == AnimeType.Story).OrderByDescending(x => x.EpisodeNumber).FirstOrDefaultAsync();
             return Json(ep);
         }
 
@@ -79,7 +79,7 @@ namespace OnePiece.Web.Controllers.Api
         [Route("GetLatestTvSpecial")]
         public async Task<IActionResult> GetLatestTvSpecial()
         {
-            var ep = await _dbContext.Episodes.Include(x => x.Medias).Where(x => x.Type == AnimeType.TvSpecial).OrderByDescending(x => x.Id).FirstOrDefaultAsync();
+            var ep = await _dbContext.Episodes.Include(x => x.Medias).Where(x => x.Type == AnimeType.TvSpecial).OrderByDescending(x => x.EpisodeNumber).FirstOrDefaultAsync();
             return Json(ep);
         }
 
@@ -87,7 +87,7 @@ namespace OnePiece.Web.Controllers.Api
         [Route("GetLatestMovie")]
         public async Task<IActionResult> GetLatestMovie()
         {
-            var ep = await _dbContext.Episodes.Include(x => x.Medias).Where(x => x.Type == AnimeType.Movie).OrderByDescending(x => x.Id).FirstOrDefaultAsync();
+            var ep = await _dbContext.Episodes.Include(x => x.Medias).Where(x => x.Type == AnimeType.Movie).OrderByDescending(x => x.EpisodeNumber).FirstOrDefaultAsync();
             return Json(ep);
         }
     }

@@ -1,21 +1,23 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-<controls:TabContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<controls:TabContentPage x:Class="OnePiece.App.Views.NewsFeedPage"
+                         xmlns="http://xamarin.com/schemas/2014/forms"
+                         xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                          xmlns:controls="clr-namespace:OnePiece.App.Controls;assembly=OnePiece.App"
                          xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
-                         prism:ViewModelLocator.AutowireViewModel="True"
                          xmlns:templates="clr-namespace:OnePiece.App.Views.Templates;assembly=OnePiece.App"
-                         x:Class="OnePiece.App.Views.NewsFeedPage"
-                         Icon="typcn-news" Title="News Feed">
+                         Title="News Feed"
+                         prism:ViewModelLocator.AutowireViewModel="True"
+                         Icon="typcn-news">
   <StackLayout BackgroundColor="#dcdcdc">
     <controls:ExtendedListView x:Name="NewsFeedListView"
-                SeparatorVisibility="None"
-                ItemsSource="{Binding NewsFeeds}"
-                HasUnevenRows="true"
-                IsPullToRefreshEnabled="true"
-                RefreshCommand="{Binding RefreshCommand}"
-                IsRefreshing="{Binding IsBusy}"
-                HorizontalOptions="FillAndExpand"
-                VerticalOptions="FillAndExpand">
+                               HasUnevenRows="true"
+                               HorizontalOptions="FillAndExpand"
+                               IsPullToRefreshEnabled="true"
+                               IsRefreshing="{Binding IsBusy}"
+                               ItemsSource="{Binding NewsFeeds}"
+                               RefreshCommand="{Binding RefreshCommand}"
+                               SeparatorVisibility="None"
+                               VerticalOptions="FillAndExpand">
       <x:Arguments>
         <ListViewCachingStrategy>RecycleElement</ListViewCachingStrategy>
       </x:Arguments>

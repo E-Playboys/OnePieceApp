@@ -33,11 +33,20 @@ namespace OnePiece.App.ViewModels
 
         public int CurrentMangaChapterNumber { get; set; }
 
-        private int _currentPageNumber;
-        public int CurrentPageNumber
+        private int _currentIndex;
+        public int CurrentIndex
         {
-            get { return _currentPageNumber; }
-            set { SetProperty(ref _currentPageNumber, value); }
+            get { return _currentIndex; }
+            set {
+                CurrentPageNumber = value + 1;
+                SetProperty(ref _currentIndex, value);
+            }
+        }
+
+        private int _currentPageNumber;
+        public int CurrentPageNumber {
+            get => _currentPageNumber;
+            set => SetProperty(ref _currentPageNumber, value);
         }
 
         private bool _isControlVisible;
@@ -48,24 +57,16 @@ namespace OnePiece.App.ViewModels
         }
 
         public DelegateCommand ToggleControlCommand { get; set; }
-        public DelegateCommand LoadMoreCommand { get; set; }
+        public DelegateCommand NextChapterCommand { get; set; }
+        public DelegateCommand PrevChapterCommand { get; set; }
 
         public MangaReaderPageViewModel(IAppService appService, IMangaApiService mangaService) : base(appService)
         {
-            ToggleControlCommand = new DelegateCommand(ExecuteToggleControlCommand, CanExecuteToggleControlCommand);
-            LoadMoreCommand = new DelegateCommand(ExecuteLoadMoreCommand, CanExecuteLoadMoreCommand);
+            ToggleControlCommand = new DelegateCommand(ExecuteToggleControlCommand, CanExecuteCommand);
+            NextChapterCommand = new DelegateCommand(async () => await ExecuteNextChapterCommand(), CanExecuteCommand);
+            PrevChapterCommand = new DelegateCommand(async () => await ExecutePrevChapterCommand(), CanExecuteCommand);
 
             _mangaService = mangaService;
-        }
-
-        public async Task GoNextChapter()
-        {
-            await LoadManga(next: 1);
-        }
-
-        public async Task GoPrevChapter()
-        {
-            await LoadManga(previous: 1);
         }
 
         public async Task LoadManga(int next = 0, int previous = 0)
@@ -85,32 +86,24 @@ namespace OnePiece.App.ViewModels
             IsBusy = false;
         }
 
-        public bool CanExecuteToggleControlCommand()
+        public bool CanExecuteCommand()
         {
             return IsNotBusy;
         }
 
         public void ExecuteToggleControlCommand()
         {
-            IsBusy = true;
-
             IsControlVisible = !IsControlVisible;
-
-            IsBusy = false;
         }
 
-        public bool CanExecuteLoadMoreCommand()
+        public async Task ExecuteNextChapterCommand()
         {
-            return IsNotBusy;
+            await LoadManga(next: 1);
         }
 
-        public async void ExecuteLoadMoreCommand()
+        public async Task ExecutePrevChapterCommand()
         {
-            //IsBusy = true;
-
-            //LoadManga();
-
-            //IsBusy = false;
+            await LoadManga(previous: 1);
         }
     }
 }

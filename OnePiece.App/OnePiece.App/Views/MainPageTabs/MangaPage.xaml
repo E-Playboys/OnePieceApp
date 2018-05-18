@@ -1,70 +1,73 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-<controls:TabContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<controls:TabContentPage x:Class="OnePiece.App.Views.MangaPage"
+                         xmlns="http://xamarin.com/schemas/2014/forms"
+                         xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                          xmlns:controls="clr-namespace:OnePiece.App.Controls;assembly=OnePiece.App"
-                         xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
-                         prism:ViewModelLocator.AutowireViewModel="True"
-                         xmlns:flv="clr-namespace:DLToolkit.Forms.Controls;assembly=DLToolkit.Forms.Controls.FlowListView"
-                         xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
-                         xmlns:iconize="clr-namespace:FormsPlugin.Iconize;assembly=FormsPlugin.Iconize"
                          xmlns:converters="clr-namespace:OnePiece.App.Converters;assembly=OnePiece.App"
+                         xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+                         xmlns:flv="clr-namespace:DLToolkit.Forms.Controls;assembly=DLToolkit.Forms.Controls.FlowListView"
+                         xmlns:iconize="clr-namespace:FormsPlugin.Iconize;assembly=FormsPlugin.Iconize"
                          xmlns:pc="clr-namespace:PanCardView;assembly=PanCardView"
                          xmlns:pccontrols="clr-namespace:PanCardView.Controls;assembly=PanCardView"
-                         x:Class="OnePiece.App.Views.MangaPage"
-                         Icon="typcn-book" Title="Manga">
+                         xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+                         Title="Manga"
+                         prism:ViewModelLocator.AutowireViewModel="True"
+                         Icon="typcn-book">
 
   <ScrollView VerticalOptions="FillAndExpand">
+    <ActivityIndicator IsRunning="{Binding IsBusy}" VerticalOptions="CenterAndExpand" />
+    <StackLayout BackgroundColor="White" IsVisible="{Binding IsBusy, Converter={x:Static converters:InverseBoolConverter.Instance}}" Spacing="10">
+      <pc:CarouselView Items="{Binding FeaturedMangas}">
+        <pc:CarouselView.ItemTemplate>
+          <DataTemplate>
+            <ContentView>
+              <Frame Padding="0"
+                     CornerRadius="0"
+                     HasShadow="false"
+                     HeightRequest="200"
+                     HorizontalOptions="FillAndExpand"
+                     IsClippedToBounds="true"
+                     VerticalOptions="FillAndExpand">
+                <ffimage:CachedImage Aspect="AspectFill" Source="{Binding Cover}" />
+              </Frame>
+            </ContentView>
+          </DataTemplate>
+        </pc:CarouselView.ItemTemplate>
 
-    <ActivityIndicator IsRunning="{Binding IsBusy}" VerticalOptions="CenterAndExpand"/>
+        <pccontrols:IndicatorsControl />
+      </pc:CarouselView>
 
-      <StackLayout Spacing="10" IsVisible="{Binding IsBusy, Converter={x:Static converters:InverseBoolConverter.Instance}}" BackgroundColor="White">
-        <pc:CarouselView Items="{Binding FeaturedMangas}" >
-          <pc:CarouselView.ItemTemplate>
-            <DataTemplate>
-              <ContentView>
-                <Frame
-                    VerticalOptions="FillAndExpand"
-                    HorizontalOptions="FillAndExpand"
-                    HeightRequest="200"
-                    Padding="0"
-                    HasShadow="false"
-                    IsClippedToBounds="true"
-                    CornerRadius="0">
+      <flv:FlowListView x:Name="MangaListView"
+                        FlowColumnCount="3"
+                        FlowColumnExpand="None"
+                        FlowItemTappedCommand="{Binding ItemTappedCommand}"
+                        FlowItemsSource="{Binding Mangas}"
+                        FlowLastTappedItem="{Binding LastTappedItem}"
+                        FlowUseAbsoluteLayoutInternally="false"
+                        HorizontalOptions="FillAndExpand"
+                        IsPullToRefreshEnabled="true"
+                        IsRefreshing="{Binding IsBusy}"
+                        RefreshCommand="{Binding RefreshCommand}"
+                        RowHeight="210"
+                        SeparatorVisibility="None">
+        <x:Arguments>
+          <ListViewCachingStrategy>RecycleElement</ListViewCachingStrategy>
+        </x:Arguments>
+        <flv:FlowListView.FlowColumnTemplate>
+          <DataTemplate>
+            <StackLayout Padding="5" Spacing="0" WidthRequest="75">
+              <ffimage:CachedImage Aspect="AspectFill" Source="{Binding Poster}" />
+              <Label FontSize="14" Style="{StaticResource CommonLabel}" Text="{Binding ChapterNumber, StringFormat='Chapter: {0}'}" VerticalOptions="Center" />
+              <Label FontSize="12" Style="{StaticResource CommonSecondaryLabel}" Text="{Binding ViewCount, StringFormat='{0} views'}" VerticalOptions="Center" />
+            </StackLayout>
+          </DataTemplate>
+        </flv:FlowListView.FlowColumnTemplate>
+      </flv:FlowListView>
 
-                  <ffimage:CachedImage Source="{Binding Cover}" Aspect="AspectFill"/>
-
-                </Frame>
-              </ContentView>
-            </DataTemplate>
-          </pc:CarouselView.ItemTemplate>
-
-          <pccontrols:IndicatorsControl/>
-        </pc:CarouselView>
-
-        <flv:FlowListView x:Name="MangaListView" FlowColumnCount="3" SeparatorVisibility="None" RowHeight="210"
-                                       FlowUseAbsoluteLayoutInternally="false" FlowColumnExpand="None"
-                                       FlowItemTappedCommand="{Binding ItemTappedCommand}" FlowItemsSource="{Binding Mangas}"
-                                       RefreshCommand="{Binding RefreshCommand}"
-                                       IsRefreshing="{Binding IsBusy}"
-                                       IsPullToRefreshEnabled="true"
-                                       FlowLastTappedItem="{Binding LastTappedItem}" HorizontalOptions="FillAndExpand">
-                      <x:Arguments>
-                        <ListViewCachingStrategy>RecycleElement</ListViewCachingStrategy>
-                      </x:Arguments>
-                      <flv:FlowListView.FlowColumnTemplate>
-                        <DataTemplate>
-                          <StackLayout WidthRequest="75" Padding="5" Spacing="0">
-                            <ffimage:CachedImage Source="{Binding Poster}" Aspect="AspectFill" />
-                            <Label Text="{Binding ChapterNumber, StringFormat='Chapter: {0}'}" FontSize="14" Style="{StaticResource CommonLabel}" VerticalOptions="Center"/>
-                            <Label Text="{Binding ViewCount, StringFormat='{0} views'}" FontSize="12" Style="{StaticResource CommonSecondaryLabel}" VerticalOptions="Center"/>
-                          </StackLayout>
-                        </DataTemplate>
-                      </flv:FlowListView.FlowColumnTemplate>
-                    </flv:FlowListView>
-                  
-        <Picker x:Name="ChapterPicker" Title="Chapters" VerticalOptions="CenterAndExpand" IsVisible="false"></Picker>
-      </StackLayout>
+      <Picker x:Name="ChapterPicker" Title="Chapters" IsVisible="false" VerticalOptions="CenterAndExpand" />
+    </StackLayout>
   </ScrollView>
-  
+
   <!--<StackLayout>
     <controls:ExtendedFlowListView x:Name="MangaListView" FlowColumnCount="3" SeparatorVisibility="None" HasUnevenRows="true"
                                    FlowItemTappedCommand="{Binding ItemTappedCommand}" FlowItemsSource="{Binding MangaChapters}"

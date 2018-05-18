@@ -1,63 +1,115 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
-          xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-          xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
-          xmlns:controls="clr-namespace:OnePiece.App.Controls;assembly=OnePiece.App"
-          xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
-          xmlns:iconize="clr-namespace:FormsPlugin.Iconize;assembly=FormsPlugin.Iconize"
-          xmlns:mm="clr-namespace:Plugin.MediaManager.Forms;assembly=Plugin.MediaManager.Forms"
-          xmlns:converters="clr-namespace:OnePiece.App.Converters;assembly=OnePiece.App"
-          x:Class="OnePiece.App.Views.Templates.VideoPlayerView">
-    
-    <Grid x:Name="Main" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" ColumnSpacing="0" RowSpacing="0">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView x:Class="OnePiece.App.Views.Templates.VideoPlayerView"
+             xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:OnePiece.App.Controls;assembly=OnePiece.App"
+             xmlns:converters="clr-namespace:OnePiece.App.Converters;assembly=OnePiece.App"
+             xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:iconize="clr-namespace:FormsPlugin.Iconize;assembly=FormsPlugin.Iconize"
+             xmlns:mm="clr-namespace:Plugin.MediaManager.Forms;assembly=Plugin.MediaManager.Forms"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms">
 
-        <mm:VideoView x:Name="VideoView" 
-                             Grid.Row="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" 
-                             AspectMode="AspectFill">
-            <mm:VideoView.GestureRecognizers>
-                <TapGestureRecognizer Tapped="VideoView_Tapped" />
-            </mm:VideoView.GestureRecognizers>
-        </mm:VideoView>
+  <Grid x:Name="Main"
+        ColumnSpacing="0"
+        HorizontalOptions="FillAndExpand"
+        RowSpacing="0"
+        VerticalOptions="FillAndExpand">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="*" />
+    </Grid.RowDefinitions>
 
-        <StackLayout x:Name="VideoControl" Grid.Row="0" VerticalOptions="End" HeightRequest="50" Orientation="Horizontal" Spacing="10" Padding="10,0,10,0">
-            <iconize:IconLabel x:Name="PlayButton" Text="md-play-circle-filled" FontSize="40" TextColor="#ffca28" VerticalOptions="CenterAndExpand" HorizontalOptions="Center">
-                <iconize:IconLabel.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="PlayPauseClicked"/>
-                </iconize:IconLabel.GestureRecognizers>
-            </iconize:IconLabel>
+    <mm:VideoView x:Name="VideoView"
+                  Grid.Row="0"
+                  AspectMode="AspectFill"
+                  HorizontalOptions="FillAndExpand"
+                  VerticalOptions="FillAndExpand">
+      <mm:VideoView.GestureRecognizers>
+        <TapGestureRecognizer Tapped="VideoView_Tapped" />
+      </mm:VideoView.GestureRecognizers>
+    </mm:VideoView>
 
-            <iconize:IconLabel x:Name="PauseButton" IsVisible="False" Text="md-pause-circle-filled" FontSize="40" TextColor="#ffca28" VerticalOptions="CenterAndExpand" HorizontalOptions="Center">
-                <iconize:IconLabel.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="PlayPauseClicked"/>
-                </iconize:IconLabel.GestureRecognizers>
-            </iconize:IconLabel>
+    <StackLayout x:Name="VideoControl"
+                 Grid.Row="0"
+                 Padding="10,0,10,0"
+                 HeightRequest="50"
+                 Orientation="Horizontal"
+                 Spacing="10"
+                 VerticalOptions="End">
+      <iconize:IconLabel x:Name="PlayButton"
+                         FontSize="40"
+                         HorizontalOptions="Center"
+                         Text="md-play-circle-filled"
+                         TextColor="#ffca28"
+                         VerticalOptions="CenterAndExpand">
+        <iconize:IconLabel.GestureRecognizers>
+          <TapGestureRecognizer Tapped="PlayPauseClicked" />
+        </iconize:IconLabel.GestureRecognizers>
+      </iconize:IconLabel>
 
-            <Label x:Name="Position" Text="00:00" VerticalOptions="CenterAndExpand" HorizontalOptions="Start" TextColor="White" FontSize="14"></Label>
+      <iconize:IconLabel x:Name="PauseButton"
+                         FontSize="40"
+                         HorizontalOptions="Center"
+                         IsVisible="False"
+                         Text="md-pause-circle-filled"
+                         TextColor="#ffca28"
+                         VerticalOptions="CenterAndExpand">
+        <iconize:IconLabel.GestureRecognizers>
+          <TapGestureRecognizer Tapped="PlayPauseClicked" />
+        </iconize:IconLabel.GestureRecognizers>
+      </iconize:IconLabel>
 
-            <controls:Seeker x:Name="ProgressBar" TouchDown="ProgressBar_TouchDown" TouchUp="ProgressBar_TouchUp" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" />
+      <Label x:Name="Position"
+             FontSize="14"
+             HorizontalOptions="Start"
+             Text="00:00"
+             TextColor="White"
+             VerticalOptions="CenterAndExpand" />
 
-            <Label x:Name="Duration" Text="00:00" VerticalOptions="CenterAndExpand" HorizontalOptions="End" TextColor="White" FontSize="14"></Label>
+      <controls:Seeker x:Name="ProgressBar"
+                       HorizontalOptions="FillAndExpand"
+                       TouchDown="ProgressBar_TouchDown"
+                       TouchUp="ProgressBar_TouchUp"
+                       VerticalOptions="CenterAndExpand" />
 
-            <iconize:IconLabel x:Name="QualityButton" Text="md-hd" FontSize="24" TextColor="White" VerticalOptions="CenterAndExpand" HorizontalOptions="Center">
-                <iconize:IconLabel.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="FullScreenClicked"/>
-                </iconize:IconLabel.GestureRecognizers>
-            </iconize:IconLabel>
+      <Label x:Name="Duration"
+             FontSize="14"
+             HorizontalOptions="End"
+             Text="00:00"
+             TextColor="White"
+             VerticalOptions="CenterAndExpand" />
 
-            <iconize:IconLabel IsVisible="{Binding IsFullScreen, Converter={x:Static converters:InverseBoolConverter.Instance}}" Text="md-fullscreen" FontSize="24" TextColor="White" VerticalOptions="CenterAndExpand" HorizontalOptions="Center">
-                <iconize:IconLabel.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="FullScreenClicked"/>
-                </iconize:IconLabel.GestureRecognizers>
-            </iconize:IconLabel>
+      <iconize:IconLabel x:Name="QualityButton"
+                         FontSize="24"
+                         HorizontalOptions="Center"
+                         Text="md-hd"
+                         TextColor="White"
+                         VerticalOptions="CenterAndExpand">
+        <iconize:IconLabel.GestureRecognizers>
+          <TapGestureRecognizer Tapped="FullScreenClicked" />
+        </iconize:IconLabel.GestureRecognizers>
+      </iconize:IconLabel>
 
-            <iconize:IconLabel IsVisible="{Binding IsFullScreen}" Text="md-fullscreen-exit" FontSize="24" TextColor="White" VerticalOptions="CenterAndExpand" HorizontalOptions="Center">
-                <iconize:IconLabel.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="FullScreenExitClicked"/>
-                </iconize:IconLabel.GestureRecognizers>
-            </iconize:IconLabel>
-        </StackLayout>
-    </Grid>
+      <iconize:IconLabel FontSize="24"
+                         HorizontalOptions="Center"
+                         IsVisible="{Binding IsFullScreen, Converter={x:Static converters:InverseBoolConverter.Instance}}"
+                         Text="md-fullscreen"
+                         TextColor="White"
+                         VerticalOptions="CenterAndExpand">
+        <iconize:IconLabel.GestureRecognizers>
+          <TapGestureRecognizer Tapped="FullScreenClicked" />
+        </iconize:IconLabel.GestureRecognizers>
+      </iconize:IconLabel>
+
+      <iconize:IconLabel FontSize="24"
+                         HorizontalOptions="Center"
+                         IsVisible="{Binding IsFullScreen}"
+                         Text="md-fullscreen-exit"
+                         TextColor="White"
+                         VerticalOptions="CenterAndExpand">
+        <iconize:IconLabel.GestureRecognizers>
+          <TapGestureRecognizer Tapped="FullScreenExitClicked" />
+        </iconize:IconLabel.GestureRecognizers>
+      </iconize:IconLabel>
+    </StackLayout>
+  </Grid>
 </ContentView>
