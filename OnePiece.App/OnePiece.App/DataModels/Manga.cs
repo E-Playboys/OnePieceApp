@@ -30,6 +30,8 @@ namespace OnePiece.App.DataModels
 
         public MangaType Type { get; set; }
 
+        public string PagesJson { get; set; }
+
         public List<MangaPage> MangaPages { get; set; }
     }
 

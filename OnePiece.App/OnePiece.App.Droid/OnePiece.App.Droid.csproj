@@ -141,15 +141,14 @@
       <HintPath>..\..\packages\Newtonsoft.Json.11.0.2\lib\netstandard2.0\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="PanCardView, Version=1.0.6710.42304, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\CardsView.1.4.3\lib\MonoAndroid10\PanCardView.dll</HintPath>
+    <Reference Include="PanCardView, Version=1.0.6712.22501, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\CardsView.1.4.4\lib\MonoAndroid10\PanCardView.dll</HintPath>
     </Reference>
     <Reference Include="PanCardView.Droid, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\CardsView.1.4.3\lib\MonoAndroid10\PanCardView.Droid.dll</HintPath>
+      <HintPath>..\..\packages\CardsView.1.4.4\lib\MonoAndroid10\PanCardView.Droid.dll</HintPath>
     </Reference>
-    <Reference Include="Plugin.DeviceInfo">
-      <HintPath>..\..\packages\Acr.DeviceInfo.6.1.0\lib\monoandroid80\Plugin.DeviceInfo.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Plugin.DeviceInfo, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Acr.DeviceInfo.6.2.0\lib\monoandroid80\Plugin.DeviceInfo.dll</HintPath>
     </Reference>
     <Reference Include="Plugin.Iconize, Version=1.0.10.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Xam.Plugin.Iconize.1.0.10\lib\MonoAndroid10\Plugin.Iconize.dll</HintPath>

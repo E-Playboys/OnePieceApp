@@ -79,7 +79,7 @@
         <iconize:IconImage Icon="md-apps" IconColor="#E01722" IconSize="25" />
         <Label FontAttributes="Bold"
                HorizontalOptions="CenterAndExpand"
-               Text="{Binding Manga.Title}"
+               Text="{Binding Manga.ChapterNumber, StringFormat='Chapter: {0}'}"
                TextColor="White"
                VerticalOptions="Center" />
         <iconize:IconImage Icon="md-bookmark-border" IconColor="#E01722" IconSize="25" />

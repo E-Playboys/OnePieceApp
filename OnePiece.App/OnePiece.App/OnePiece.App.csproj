@@ -191,11 +191,11 @@
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Newtonsoft.Json.11.0.2\lib\portable-net45+win8+wp8+wpa81\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="PanCardView, Version=1.0.6710.42304, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\CardsView.1.4.3\lib\portable-win+net45+wp80+win81+wpa81\PanCardView.dll</HintPath>
+    <Reference Include="PanCardView, Version=1.0.6712.22501, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\CardsView.1.4.4\lib\portable-win+net45+wp80+win81+wpa81\PanCardView.dll</HintPath>
     </Reference>
     <Reference Include="Plugin.DeviceInfo, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Acr.DeviceInfo.6.1.0\lib\netstandard1.0\Plugin.DeviceInfo.dll</HintPath>
+      <HintPath>..\..\packages\Acr.DeviceInfo.6.2.0\lib\netstandard1.0\Plugin.DeviceInfo.dll</HintPath>
     </Reference>
     <Reference Include="Plugin.Iconize, Version=1.0.10.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Xam.Plugin.Iconize.1.0.10\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Plugin.Iconize.dll</HintPath>

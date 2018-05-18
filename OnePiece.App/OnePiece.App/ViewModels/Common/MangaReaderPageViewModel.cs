@@ -29,7 +29,7 @@ namespace OnePiece.App.ViewModels
             set { SetProperty(ref _mangaPages, value); }
         }
 
-        public int TotalPage => MangaPages.Count;
+        public int TotalPage { get; set; }
 
         public int CurrentMangaChapterNumber { get; set; }
 
@@ -79,8 +79,12 @@ namespace OnePiece.App.ViewModels
                 Manga = manga;
                 CurrentMangaChapterNumber = manga.ChapterNumber;
 
+                var pages = manga.PagesJson?.Split('|').Where(x => !string.IsNullOrEmpty(x));
+
+                TotalPage = pages.Count();
+
                 MangaPages.Clear();
-                MangaPages.AddRange(manga.MangaPages);
+                MangaPages.AddRange(pages.Select(x => new MangaPage { Url = x }));
             }
 
             IsBusy = false;

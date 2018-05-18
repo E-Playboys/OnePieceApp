@@ -165,11 +165,11 @@
       <HintPath>..\..\packages\Xam.FormsPlugin.Iconize.1.0.10\lib\Xamarin.iOS10\FormsPlugin.Iconize.iOS.dll</HintPath>
     </Reference>
     <Reference Include="OpenTK-1.0" />
-    <Reference Include="PanCardView, Version=1.0.6710.42304, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\CardsView.1.4.3\lib\Xamarin.iOS10\PanCardView.dll</HintPath>
+    <Reference Include="PanCardView, Version=1.0.6712.22501, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\CardsView.1.4.4\lib\Xamarin.iOS10\PanCardView.dll</HintPath>
     </Reference>
     <Reference Include="Plugin.DeviceInfo, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Acr.DeviceInfo.6.1.0\lib\xamarinios10\Plugin.DeviceInfo.dll</HintPath>
+      <HintPath>..\..\packages\Acr.DeviceInfo.6.2.0\lib\xamarinios10\Plugin.DeviceInfo.dll</HintPath>
     </Reference>
     <Reference Include="Plugin.Iconize, Version=1.0.10.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Xam.Plugin.Iconize.1.0.10\lib\Xamarin.iOS10\Plugin.Iconize.dll</HintPath>

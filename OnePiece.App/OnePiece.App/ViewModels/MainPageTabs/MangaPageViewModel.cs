@@ -76,23 +76,21 @@ namespace OnePiece.App.ViewModels
                 Take = takeCount
             });
 
-            //var screenWidth = App.ScreenWidth;
-            //foreach (var chapter in chapters)
-            //{
-            //    chapter.CoverImageWidth = (screenWidth - 30) / 3;
-            //}
+            foreach (var chapter in chapters)
+            {
+                var pages = chapter.PagesJson?.Split('|').Where(x => !string.IsNullOrEmpty(x));
+                if (pages.Any())
+                {
+                    var poster = string.IsNullOrEmpty(chapter.Poster) ? pages.FirstOrDefault() : chapter.Poster;
+                    chapter.Poster = poster.Replace("upload/", "upload/c_thumb,w_300/");
+                }
+            }
 
             Mangas.Clear();
             Mangas.AddRange(chapters);
 
             FeaturedMangas.Clear();
             FeaturedMangas.AddRange(chapters.OrderByDescending(x => x.ChapterNumber).Take(3));
-        }
-
-        public async Task LoadChapterPicker()
-        {
-            //var allChapters = await _mangaService.ListChaptersAsync(new ListMangasRq());
-            //ChapterNameIdMap = allChapters.ToDictionary(r => r.ChapterNum, r => r.Id);
         }
 
         public bool CanExecuteRefreshCommand()

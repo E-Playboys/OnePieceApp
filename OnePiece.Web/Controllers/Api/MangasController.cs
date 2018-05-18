@@ -23,7 +23,7 @@ namespace OnePiece.Web.Controllers.Api
         [Route("List")]
         public async Task<IActionResult> List(ListRequest rq)
         {
-            var mangas = await _dbContext.Manga
+            var mangas = await _dbContext.Manga.OrderByDescending(x => x.ChapterNumber)
                 .Skip(rq.Skip).Take(rq.Take).ToListAsync();
 
             return Json(mangas);
