@@ -38,31 +38,6 @@
           </controls:PinchToZoomContainer>
         </DataTemplate>
       </cards:CardsView.ItemTemplate>
-
-      <cardsControls:IndicatorsControl Margin="0,0,0,0"
-                                       AbsoluteLayout.LayoutBounds="0,1,1,.1"
-                                       AbsoluteLayout.LayoutFlags="All"
-                                       BackgroundColor="#E0000000"
-                                       IsVisible="{Binding BindingContext.IsControlVisible, Source={x:Reference CurrentPage}}"
-                                       Spacing="0">
-        <cardsControls:IndicatorsControl.SelectedIndicatorStyle>
-          <Style TargetType="Frame">
-            <Setter Property="BackgroundColor" Value="#E01722" />
-          </Style>
-        </cardsControls:IndicatorsControl.SelectedIndicatorStyle>
-        <cardsControls:IndicatorsControl.UnselectedIndicatorStyle>
-          <Style TargetType="Frame">
-            <Setter Property="BackgroundColor" Value="Transparent" />
-          </Style>
-        </cardsControls:IndicatorsControl.UnselectedIndicatorStyle>
-        <cardsControls:IndicatorsControl.ItemTemplate>
-          <DataTemplate>
-            <Grid Padding="2" HeightRequest="60" WidthRequest="40">
-              <ffimage:CachedImage Source="{Binding Url}" />
-            </Grid>
-          </DataTemplate>
-        </cardsControls:IndicatorsControl.ItemTemplate>
-      </cardsControls:IndicatorsControl>
     </cards:CardsView>
 
     <StackLayout x:Name="TopBar"
@@ -117,5 +92,34 @@
                           VerticalOptions="Center"
                           WidthRequest="40" />
     </StackLayout>
+
+    <ScrollView x:Name="Thumbnail" Orientation="Horizontal" VerticalOptions="End">
+      <cardsControls:IndicatorsControl Margin="0,0,0,0"
+                                       AbsoluteLayout.LayoutFlags="None"
+                                       BackgroundColor="#E0000000"
+                                       BindingContext="{Binding ., Source={x:Reference MangaPagesView}}"
+                                       HorizontalOptions="FillAndExpand"
+                                       IsVisible="{Binding BindingContext.IsControlVisible, Source={x:Reference CurrentPage}}"
+                                       Spacing="0"
+                                       UseParentAsBindingContext="False">
+        <cardsControls:IndicatorsControl.SelectedIndicatorStyle>
+          <Style TargetType="Frame">
+            <Setter Property="BackgroundColor" Value="#E01722" />
+          </Style>
+        </cardsControls:IndicatorsControl.SelectedIndicatorStyle>
+        <cardsControls:IndicatorsControl.UnselectedIndicatorStyle>
+          <Style TargetType="Frame">
+            <Setter Property="BackgroundColor" Value="Transparent" />
+          </Style>
+        </cardsControls:IndicatorsControl.UnselectedIndicatorStyle>
+        <cardsControls:IndicatorsControl.ItemTemplate>
+          <DataTemplate>
+            <Grid Padding="2" HeightRequest="60" WidthRequest="40">
+              <ffimage:CachedImage Source="{Binding Url}" />
+            </Grid>
+          </DataTemplate>
+        </cardsControls:IndicatorsControl.ItemTemplate>
+      </cardsControls:IndicatorsControl>
+    </ScrollView>
   </Grid>
 </pages:PopupPage>

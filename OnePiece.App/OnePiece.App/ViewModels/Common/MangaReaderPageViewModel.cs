@@ -29,7 +29,11 @@ namespace OnePiece.App.ViewModels
             set { SetProperty(ref _mangaPages, value); }
         }
 
-        public int TotalPage { get; set; }
+        private int _totalPage;
+        public int TotalPage {
+            get => _totalPage;
+            set => SetProperty(ref _totalPage, value);
+        }
 
         public int CurrentMangaChapterNumber { get; set; }
 
