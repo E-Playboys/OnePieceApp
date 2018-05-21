@@ -15,10 +15,42 @@
   <Grid BackgroundColor="Black" RowSpacing="0">
     <ActivityIndicator IsRunning="{Binding IsBusy}" VerticalOptions="CenterAndExpand" />
 
-    <cards:CardsView x:Name="MangaPagesView"
+    <controls:ExtendedListView x:Name="ListView"
+                               CurrentIndex="{Binding CurrentIndex}"
+                               HasUnevenRows="true"
+                               HorizontalOptions="FillAndExpand"
+                               IsVisible="{Binding IsCardsViewVisible, Converter={x:Static converters:InverseBoolConverter.Instance}}"
+                               ItemsSource="{Binding MangaPages}"
+                               SeparatorVisibility="None"
+                               VerticalOptions="FillAndExpand">
+      <x:Arguments>
+        <ListViewCachingStrategy>RecycleElement</ListViewCachingStrategy>
+      </x:Arguments>
+      <controls:ExtendedListView.ItemTemplate>
+        <DataTemplate>
+          <ViewCell>
+            <controls:PinchToZoomContainer>
+              <controls:PinchToZoomContainer.Content>
+                <ffimage:CachedImage Aspect="AspectFit"
+                                     BackgroundColor="White"
+                                     HorizontalOptions="FillAndExpand"
+                                     Source="{Binding Url}"
+                                     VerticalOptions="FillAndExpand">
+                  <ffimage:CachedImage.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding BindingContext.ToggleControlCommand, Source={x:Reference CurrentPage}}" />
+                  </ffimage:CachedImage.GestureRecognizers>
+                </ffimage:CachedImage>
+              </controls:PinchToZoomContainer.Content>
+            </controls:PinchToZoomContainer>
+          </ViewCell>
+        </DataTemplate>
+      </controls:ExtendedListView.ItemTemplate>
+    </controls:ExtendedListView>
+
+    <cards:CardsView x:Name="CardsView"
                      CurrentIndex="{Binding CurrentIndex}"
                      HorizontalOptions="FillAndExpand"
-                     IsVisible="{Binding IsBusy, Converter={x:Static converters:InverseBoolConverter.Instance}}"
+                     IsVisible="{Binding IsCardsViewVisible}"
                      Items="{Binding MangaPages}"
                      VerticalOptions="FillAndExpand">
       <cards:CardsView.ItemTemplate>
@@ -45,19 +77,31 @@
                  IsVisible="{Binding IsControlVisible}"
                  Spacing="0"
                  VerticalOptions="Start">
-      <StackLayout Padding="10" Orientation="Horizontal">
-        <iconize:IconImage Icon="md-chevron-left" IconColor="#E01722" IconSize="25">
-          <iconize:IconImage.GestureRecognizers>
-            <TapGestureRecognizer Tapped="OnClose" />
-          </iconize:IconImage.GestureRecognizers>
-        </iconize:IconImage>
-        <iconize:IconImage Icon="md-apps" IconColor="#E01722" IconSize="25" />
+      <StackLayout Padding="0" Orientation="Horizontal">
+        <iconize:IconButton BackgroundColor="Transparent"
+                            Command="{Binding BindingContext.ToggleCardsViewCommand, Source={x:Reference CurrentPage}}"
+                            FontSize="25"
+                            IsVisible="{Binding IsCardsViewVisible}"
+                            Text="md-view-stream"
+                            TextColor="#E01722"
+                            WidthRequest="50" />
+        <iconize:IconButton BackgroundColor="Transparent"
+                            Command="{Binding BindingContext.ToggleCardsViewCommand, Source={x:Reference CurrentPage}}"
+                            FontSize="25"
+                            IsVisible="{Binding IsCardsViewVisible, Converter={x:Static converters:InverseBoolConverter.Instance}}"
+                            Text="md-view-array"
+                            TextColor="#E01722"
+                            WidthRequest="50" />
         <Label FontAttributes="Bold"
                HorizontalOptions="CenterAndExpand"
                Text="{Binding Manga.ChapterNumber, StringFormat='Chapter: {0}'}"
                TextColor="White"
                VerticalOptions="Center" />
-        <iconize:IconImage Icon="md-bookmark-border" IconColor="#E01722" IconSize="25" />
+        <iconize:IconButton BackgroundColor="Transparent"
+                            FontSize="25"
+                            Text="md-bookmark-border"
+                            TextColor="#E01722"
+                            WidthRequest="50" />
       </StackLayout>
     </StackLayout>
 
@@ -93,13 +137,12 @@
                           WidthRequest="40" />
     </StackLayout>
 
-    <ScrollView x:Name="Thumbnail" Orientation="Horizontal" VerticalOptions="End">
+    <ScrollView x:Name="Thumbnail" IsVisible="{Binding IsControlVisible}" Orientation="Horizontal" VerticalOptions="End">
       <cardsControls:IndicatorsControl Margin="0,0,0,0"
                                        AbsoluteLayout.LayoutFlags="None"
                                        BackgroundColor="#E0000000"
-                                       BindingContext="{Binding ., Source={x:Reference MangaPagesView}}"
+                                       BindingContext="{Binding ., Source={x:Reference CardsView}}"
                                        HorizontalOptions="FillAndExpand"
-                                       IsVisible="{Binding BindingContext.IsControlVisible, Source={x:Reference CurrentPage}}"
                                        Spacing="0"
                                        UseParentAsBindingContext="False">
         <cardsControls:IndicatorsControl.SelectedIndicatorStyle>

@@ -53,6 +53,13 @@ namespace OnePiece.App.ViewModels
             set => SetProperty(ref _currentPageNumber, value);
         }
 
+        private bool _isCardsViewVisible;
+        public bool IsCardsViewVisible
+        {
+            get { return _isCardsViewVisible; }
+            set { SetProperty(ref _isCardsViewVisible, value); }
+        }
+
         private bool _isControlVisible;
         public bool IsControlVisible
         {
@@ -61,12 +68,14 @@ namespace OnePiece.App.ViewModels
         }
 
         public DelegateCommand ToggleControlCommand { get; set; }
+        public DelegateCommand ToggleCardsViewCommand { get; set; }
         public DelegateCommand NextChapterCommand { get; set; }
         public DelegateCommand PrevChapterCommand { get; set; }
 
         public MangaReaderPageViewModel(IAppService appService, IMangaApiService mangaService) : base(appService)
         {
             ToggleControlCommand = new DelegateCommand(ExecuteToggleControlCommand, CanExecuteCommand);
+            ToggleCardsViewCommand = new DelegateCommand(ExecuteToggleCardsViewCommand, CanExecuteCommand);
             NextChapterCommand = new DelegateCommand(async () => await ExecuteNextChapterCommand(), CanExecuteCommand);
             PrevChapterCommand = new DelegateCommand(async () => await ExecutePrevChapterCommand(), CanExecuteCommand);
 
@@ -102,6 +111,11 @@ namespace OnePiece.App.ViewModels
         public void ExecuteToggleControlCommand()
         {
             IsControlVisible = !IsControlVisible;
+        }
+
+        public void ExecuteToggleCardsViewCommand()
+        {
+            IsCardsViewVisible = !IsCardsViewVisible;
         }
 
         public async Task ExecuteNextChapterCommand()
