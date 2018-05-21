@@ -9,6 +9,7 @@ using System.Threading;
 using Plugin.MediaManager.Forms;
 using OnePiece.App.DataModels;
 using System.Runtime.CompilerServices;
+using Plugin.MediaManager.Abstractions.Enums;
 
 namespace OnePiece.App.Views.Templates
 {
@@ -57,13 +58,20 @@ namespace OnePiece.App.Views.Templates
 
             CrossMediaManager.Current.StatusChanged += (sender, e) =>
             {
-                if(e.Status == Plugin.MediaManager.Abstractions.Enums.MediaPlayerStatus.Playing)
+                if(e.Status == MediaPlayerStatus.Playing)
                 {
+                    ActivityIndicator.IsRunning = false;
+
                     PauseButton.IsVisible = true;
                     PlayButton.IsVisible = false;
                 }
-                else
+                else 
                 {
+                    if(e.Status == MediaPlayerStatus.Loading || e.Status == MediaPlayerStatus.Buffering)
+                    {
+                        ActivityIndicator.IsRunning = true;
+                    }
+
                     PauseButton.IsVisible = false;
                     PlayButton.IsVisible = true;
                 }

@@ -60,7 +60,7 @@ namespace OnePiece.App.ViewModels
         }
 
         public DelegateCommand RefreshDataCommand { get; set; }
-
+        public DelegateCommand<Anime> SelectAnimeCommand { get; set; }
         public DelegateCommand PlayVideoCommand { get; set; }
 
         public VideoListPageViewModel(IAppService appService, ISeasonApiService seasonService, IAnimeApiService animeService) : base(appService)
@@ -69,7 +69,8 @@ namespace OnePiece.App.ViewModels
             _animeService = animeService;
 
             RefreshDataCommand = new DelegateCommand(async () => await ExecuteRefreshDataCommandAsync());
-            PlayVideoCommand = new DelegateCommand(() => ExecutePlayVideoCommandAsync());
+            SelectAnimeCommand = new DelegateCommand<Anime>(async(anime) => await ExecuteSelectAnimeCommandAsync(anime));
+            PlayVideoCommand = new DelegateCommand(async() => await ExecutePlayVideoCommandAsync());
         }
 
         private async Task ExecuteRefreshDataCommandAsync()
@@ -77,7 +78,12 @@ namespace OnePiece.App.ViewModels
             await LoadAsync(true);
         }
 
-        private async void ExecutePlayVideoCommandAsync()
+        private async Task ExecuteSelectAnimeCommandAsync(Anime anime)
+        {
+            await PopupNavigation.PushAsync(new VideoPlayerPage(anime, DataSource.ToLower()));
+        }
+
+        private async Task ExecutePlayVideoCommandAsync()
         {
             await PopupNavigation.PushAsync(new VideoPlayerPage(FeaturedVideo, DataSource.ToLower()));
         }

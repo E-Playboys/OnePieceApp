@@ -7,6 +7,7 @@
              xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:iconize="clr-namespace:FormsPlugin.Iconize;assembly=FormsPlugin.Iconize"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             x:Name="CurrentPage"
              prism:ViewModelLocator.AutowireViewModel="True">
   <ContentPage.ToolbarItems>
     <iconize:IconToolbarItem Command="{Binding RefreshDataCommand}" Icon="md-refresh" IconColor="{StaticResource IconToolbarItemColor}" />
@@ -139,6 +140,10 @@
                   <controls:HorizontalListView.ItemTemplate>
                     <DataTemplate>
                       <StackLayout WidthRequest="200">
+                        <StackLayout.GestureRecognizers>
+                          <TapGestureRecognizer Command="{Binding BindingContext.SelectAnimeCommand, Source={x:Reference CurrentPage}}" CommandParameter="{Binding .}" />
+                        </StackLayout.GestureRecognizers>
+
                         <ffimage:CachedImage Aspect="AspectFit" Source="{Binding Cover}" />
                         <Label FontSize="14" HorizontalOptions="FillAndExpand" Style="{StaticResource CommonLabel}" Text="{Binding Title}" />
                         <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal">
@@ -158,6 +163,10 @@
           <controls:VerticalListView.ItemTemplate>
             <DataTemplate>
               <StackLayout Margin="0,0,0,1" Padding="10" BackgroundColor="White">
+                <StackLayout.GestureRecognizers>
+                  <TapGestureRecognizer Command="{Binding BindingContext.SelectAnimeCommand, Source={x:Reference CurrentPage}}" CommandParameter="{Binding .}" />
+                </StackLayout.GestureRecognizers>
+
                 <Label Grid.Row="0" FontSize="16" Style="{StaticResource CommonLabel}" Text="{Binding Title}" />
                 <ffimage:CachedImage Source="{Binding Cover}" />
                 <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal">

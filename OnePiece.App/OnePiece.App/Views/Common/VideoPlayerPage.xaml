@@ -9,6 +9,7 @@
                  xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
                  xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
                  xmlns:templates="clr-namespace:OnePiece.App.Views.Templates;assembly=OnePiece.App"
+                 x:Name="CurrentPage"
                  prism:ViewModelLocator.AutowireViewModel="True">
   <Grid RowSpacing="0">
     <Grid.RowDefinitions>
@@ -35,6 +36,10 @@
             <controls:HorizontalListView.ItemTemplate>
               <DataTemplate>
                 <StackLayout WidthRequest="200">
+                  <StackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding BindingContext.SelectAnimeCommand, Source={x:Reference CurrentPage}}" CommandParameter="{Binding .}" />
+                  </StackLayout.GestureRecognizers>
+
                   <ff:CachedImage Aspect="AspectFill" Source="{Binding Cover}" />
                   <Label FontSize="14" HorizontalOptions="FillAndExpand" Style="{StaticResource CommonLabel}" Text="{Binding Title}" />
                   <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal">

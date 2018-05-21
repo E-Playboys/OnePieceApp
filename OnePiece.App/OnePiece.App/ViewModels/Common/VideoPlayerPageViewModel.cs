@@ -8,6 +8,7 @@ using OnePiece.App.DataServices.Anime;
 using OnePiece.App.DataServices.Season;
 using OnePiece.App.Services;
 using OnePiece.App.Utilities;
+using Prism.Commands;
 
 namespace OnePiece.App.ViewModels
 {
@@ -50,9 +51,12 @@ namespace OnePiece.App.ViewModels
             get { return _videoInfoProperties ?? (_videoInfoProperties = new ObservableRangeCollection<InfoProperty>()); }
             set { _videoInfoProperties = value; }
         }
+        public DelegateCommand<Anime> SelectAnimeCommand { get; set; }
 
         public VideoPlayerPageViewModel(IAppService appService, IAnimeApiService animeService, ISeasonApiService seasonService) : base(appService)
         {
+            SelectAnimeCommand = new DelegateCommand<Anime>((anime) => Anime = anime);
+
             VideoInfoProperties.AddRange(new List<InfoProperty>()
             {
                 new InfoProperty()
