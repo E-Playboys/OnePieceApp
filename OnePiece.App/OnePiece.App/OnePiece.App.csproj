@@ -105,6 +105,7 @@
     <Compile Include="Utilities\ObservableCollectionEx.cs" />
     <Compile Include="Utilities\ObservableRangeCollection.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="ViewModels\Common\SeasonPageViewModel.cs" />
     <Compile Include="ViewModels\Common\VideoListPageViewModel.cs" />
     <Compile Include="ViewModels\Common\VideoPlayerPageViewModel.cs" />
     <Compile Include="ViewModels\MainPageTabs\MangaPageViewModel.cs" />
@@ -112,6 +113,9 @@
     <Compile Include="ViewModels\MainPageTabs\NewsFeedPageViewModel.cs" />
     <Compile Include="ViewModels\MainPageTabs\VideoPageViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
+    <Compile Include="Views\Common\SeasonPage.xaml.cs">
+      <DependentUpon>SeasonPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Common\VideoListPage.xaml.cs">
       <DependentUpon>VideoListPage.xaml</DependentUpon>
     </Compile>
@@ -382,7 +386,12 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Common\SeasonPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

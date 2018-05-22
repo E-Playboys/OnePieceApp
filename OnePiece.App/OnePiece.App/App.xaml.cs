@@ -44,6 +44,7 @@ namespace OnePiece.App
             containerRegistry.RegisterForNavigation<AnimePage>();
             containerRegistry.RegisterForNavigation<MangaPage>();
             containerRegistry.RegisterForNavigation<VideoPage>();
+            containerRegistry.RegisterForNavigation<VideoListPage>();
             containerRegistry.RegisterForNavigation<VideoPlayerPage>();
 
             containerRegistry.Register<IAppService, AppService>();

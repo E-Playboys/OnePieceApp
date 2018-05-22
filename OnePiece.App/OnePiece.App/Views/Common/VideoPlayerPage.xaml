@@ -83,6 +83,10 @@
             <controls:HorizontalListView.ItemTemplate>
               <DataTemplate>
                 <StackLayout WidthRequest="100">
+                  <StackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding BindingContext.SelectSeasonCommand, Source={x:Reference CurrentPage}}" CommandParameter="{Binding .}" />
+                  </StackLayout.GestureRecognizers>
+
                   <ff:CachedImage Aspect="AspectFill" HeightRequest="150" Source="{Binding Avatar}" WidthRequest="100" />
                   <Label FontSize="14" HorizontalOptions="FillAndExpand" Style="{StaticResource CommonLabel}" Text="{Binding Title}" />
                 </StackLayout>

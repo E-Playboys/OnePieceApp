@@ -17,6 +17,8 @@ namespace OnePiece.App.Views
         {
             InitializeComponent();
 
+            CloseWhenBackgroundIsClicked = false;
+
             _context = BindingContext as VideoPlayerPageViewModel;
             if (_context != null)
             {

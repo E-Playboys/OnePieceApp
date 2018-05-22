@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:PopupPage x:Class="OnePiece.App.Views.SeasonPage"
+                 xmlns="http://xamarin.com/schemas/2014/forms"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                 xmlns:controls="clr-namespace:OnePiece.App.Controls;assembly=OnePiece.App"
+                 xmlns:converters="clr-namespace:OnePiece.App.Converters;assembly=OnePiece.App"
+                 xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+                 xmlns:iconize="clr-namespace:FormsPlugin.Iconize;assembly=FormsPlugin.Iconize"
+                 xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+                 xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+                 x:Name="CurrentPage"
+                 prism:ViewModelLocator.AutowireViewModel="True"
+                 BackgroundColor="#dcdcdc">
+    <ContentPage.ToolbarItems>
+        <iconize:IconToolbarItem Command="{Binding RefreshDataCommand}" Icon="md-refresh" IconColor="{StaticResource IconToolbarItemColor}" />
+    </ContentPage.ToolbarItems>
+
+    <Grid VerticalOptions="FillAndExpand">
+
+        <ScrollView>
+            <StackLayout Spacing="0">
+                <Grid BackgroundColor="White" ColumnSpacing="10" RowSpacing="0">
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding PlayVideoCommand}" />
+                    </Grid.GestureRecognizers>
+
+                    <ffimage:CachedImage x:Name="VideoCover"
+                                         Aspect="AspectFill"
+                                         DownsampleToViewSize="true"
+                                         Source="{Binding Season.Avatar}"
+                                         Style="{StaticResource FeaturedVideoThumbnail}" />
+                    <controls:GradientStackLayout EndColor="Black" Opacity="0.7" StartColor="Transparent" />
+
+                    <StackLayout Padding="10" VerticalOptions="EndAndExpand">
+                        <Label FontSize="12" Text="{Binding Season.SeasonNumber, StringFormat='Season {0}'}" TextColor="White" />
+                        <Label FontAttributes="Bold" FontSize="16" Text="{Binding Season.Title}" TextColor="White" />
+                    </StackLayout>
+                </Grid>
+
+                <StackLayout Margin="0,0,0,10" Padding="10" BackgroundColor="White">
+                    <StackLayout Orientation="Horizontal">
+                        <Label BackgroundColor="#ffca28"
+                               FontAttributes="Bold"
+                               FontSize="12"
+                               HeightRequest="20"
+                               HorizontalOptions="Start"
+                               HorizontalTextAlignment="Center"
+                               Text="Episode"
+                               TextColor="Black"
+                               VerticalOptions="Center"
+                               VerticalTextAlignment="Center"
+                               WidthRequest="50" />
+                        <Label FontSize="14"
+                               HorizontalOptions="Start"
+                               Style="{StaticResource CommonLabel}"
+                               Text="886-902"
+                               VerticalOptions="Center"
+                               VerticalTextAlignment="Center" />
+                        <iconize:IconLabel FontSize="18"
+                                           HorizontalOptions="EndAndExpand"
+                                           Text="md-alarm"
+                                           TextColor="#ffca28"
+                                           VerticalOptions="Center"
+                                           VerticalTextAlignment="Center" />
+                        <Label FontSize="14"
+                               HorizontalOptions="End"
+                               Style="{StaticResource CommonLabel}"
+                               Text="7 Jun, 2017 - Present"
+                               VerticalOptions="Center"
+                               VerticalTextAlignment="Center" />
+                    </StackLayout>
+                    <Label FontSize="12" Style="{StaticResource CommonSecondaryLabel}" Text="Giới thiệu" />
+                    <Label FontSize="14" Style="{StaticResource CommonLabel}" Text="{Binding Season.Description}" />
+                </StackLayout>
+
+                <controls:VerticalListView ItemsSource="{Binding Animes}">
+                    <controls:VerticalListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout Margin="0,0,0,1" Padding="10" BackgroundColor="White">
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding BindingContext.SelectAnimeCommand, Source={x:Reference CurrentPage}}" CommandParameter="{Binding .}" />
+                                </StackLayout.GestureRecognizers>
+
+                                <Label Grid.Row="0" FontSize="16" Style="{StaticResource CommonLabel}" Text="{Binding Title}" />
+                                <ffimage:CachedImage Source="{Binding Cover}" />
+                                <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal">
+                                    <Label FontSize="14" HorizontalOptions="Start" Style="{StaticResource CommonLabel}" Text="{Binding EpisodeNumber, StringFormat='Episode {0}'}" />
+                                    <Label FontSize="12" HorizontalOptions="EndAndExpand" Style="{StaticResource CommonSecondaryLabel}" Text="{Binding ViewCount, StringFormat='{0} views'}" />
+                                </StackLayout>
+                            </StackLayout>
+                        </DataTemplate>
+                    </controls:VerticalListView.ItemTemplate>
+                </controls:VerticalListView>
+
+            </StackLayout>
+        </ScrollView>
+
+        <ActivityIndicator IsRunning="{Binding IsBusy}" VerticalOptions="CenterAndExpand" />
+    </Grid>
+</pages:PopupPage>

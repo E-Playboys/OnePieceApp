@@ -20,6 +20,8 @@ namespace OnePiece.App.Views
         {
             InitializeComponent();
 
+            CloseWhenBackgroundIsClicked = true;
+
             _context = BindingContext as MangaReaderPageViewModel;
             if (_context != null)
             {

@@ -28,16 +28,23 @@ namespace OnePiece.App.DataServices
 
         public async Task<TResult> GetAsync<TResult>(string uri, string token = "")
         {
-            var httpClient = CreateHttpClient(token);
-            var response = await httpClient.GetAsync(uri);
+            try
+            {
+                var httpClient = CreateHttpClient(token);
+                var response = await httpClient.GetAsync(uri);
 
-            await HandleResponse(response);
-            var serialized = await response.Content.ReadAsStringAsync();
+                await HandleResponse(response);
+                var serialized = await response.Content.ReadAsStringAsync();
 
-            var result = await Task.Run(() =>
-                JsonConvert.DeserializeObject<TResult>(serialized, _serializerSettings));
+                var result = await Task.Run(() =>
+                    JsonConvert.DeserializeObject<TResult>(serialized, _serializerSettings));
 
-            return result;
+                return result;
+            }
+            catch (Exception ex)
+            {
+                return default(TResult);
+            }
         }
 
         public async Task PostAsync(string uri, object data, string token = "", string header = "")

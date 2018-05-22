@@ -41,8 +41,11 @@ namespace OnePiece.App.Views
         {
             base.OnAppearing();
 
-            _viewModel.IsMultiSeason = IsMultiSeason;
-            _viewModel.DataSource = DataSource;
+            if(DataSource != null)
+            {
+                _viewModel.IsMultiSeason = IsMultiSeason;
+                _viewModel.DataSource = DataSource;
+            }
 
             if (_isDataLoaded)
                 return;

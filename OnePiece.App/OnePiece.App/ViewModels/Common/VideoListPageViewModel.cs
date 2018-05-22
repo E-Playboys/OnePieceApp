@@ -15,6 +15,8 @@ using Prism.Commands;
 using Plugin.MediaManager;
 using Plugin.MediaManager.Abstractions.Enums;
 using Rg.Plugins.Popup.Services;
+using Prism.Navigation;
+using FormsPlugin.Iconize;
 
 namespace OnePiece.App.ViewModels
 {
@@ -61,6 +63,7 @@ namespace OnePiece.App.ViewModels
 
         public DelegateCommand RefreshDataCommand { get; set; }
         public DelegateCommand<Anime> SelectAnimeCommand { get; set; }
+        public DelegateCommand<Season> SelectSeasonCommand { get; set; }
         public DelegateCommand PlayVideoCommand { get; set; }
 
         public VideoListPageViewModel(IAppService appService, ISeasonApiService seasonService, IAnimeApiService animeService) : base(appService)
@@ -70,6 +73,9 @@ namespace OnePiece.App.ViewModels
 
             RefreshDataCommand = new DelegateCommand(async () => await ExecuteRefreshDataCommandAsync());
             SelectAnimeCommand = new DelegateCommand<Anime>(async(anime) => await ExecuteSelectAnimeCommandAsync(anime));
+            SelectSeasonCommand = new DelegateCommand<Season>(async (season) => {
+                await PopupNavigation.PushAsync(new SeasonPage(season));
+            });
             PlayVideoCommand = new DelegateCommand(async() => await ExecutePlayVideoCommandAsync());
         }
 
@@ -123,8 +129,11 @@ namespace OnePiece.App.ViewModels
                     animes = await _animeService.ListMoviesAsync(new DataServices.ListRequest { Skip = refresh ? 0 : Animes.Count });
                 }
 
-                Animes.Clear();
-                Animes.AddRange(animes);
+                if(animes != null)
+                {
+                    Animes.Clear();
+                    Animes.AddRange(animes);
+                }
             }
 
             IsBusy = false;

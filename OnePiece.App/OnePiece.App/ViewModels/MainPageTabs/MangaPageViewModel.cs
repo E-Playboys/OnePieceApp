@@ -57,9 +57,7 @@ namespace OnePiece.App.ViewModels
 
         public async Task OpenChapter(int chapterNumber)
         {
-            var mangaReaderPage = new MangaReaderPage(chapterNumber) {
-                CloseWhenBackgroundIsClicked = false
-            };
+            var mangaReaderPage = new MangaReaderPage(chapterNumber);
             await PopupNavigation.PushAsync(mangaReaderPage);
         }
 

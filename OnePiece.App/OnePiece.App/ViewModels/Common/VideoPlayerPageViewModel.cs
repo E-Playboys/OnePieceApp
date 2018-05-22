@@ -3,12 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FormsPlugin.Iconize;
 using OnePiece.App.DataModels;
 using OnePiece.App.DataServices.Anime;
 using OnePiece.App.DataServices.Season;
 using OnePiece.App.Services;
 using OnePiece.App.Utilities;
+using OnePiece.App.Views;
 using Prism.Commands;
+using Prism.Navigation;
+using Rg.Plugins.Popup.Services;
 
 namespace OnePiece.App.ViewModels
 {
@@ -51,11 +55,16 @@ namespace OnePiece.App.ViewModels
             get { return _videoInfoProperties ?? (_videoInfoProperties = new ObservableRangeCollection<InfoProperty>()); }
             set { _videoInfoProperties = value; }
         }
+
         public DelegateCommand<Anime> SelectAnimeCommand { get; set; }
+        public DelegateCommand<Season> SelectSeasonCommand { get; set; }
 
         public VideoPlayerPageViewModel(IAppService appService, IAnimeApiService animeService, ISeasonApiService seasonService) : base(appService)
         {
             SelectAnimeCommand = new DelegateCommand<Anime>((anime) => Anime = anime);
+            SelectSeasonCommand = new DelegateCommand<Season>(async(season) => {
+                await PopupNavigation.PushAsync(new SeasonPage(season));
+            });
 
             VideoInfoProperties.AddRange(new List<InfoProperty>()
             {
