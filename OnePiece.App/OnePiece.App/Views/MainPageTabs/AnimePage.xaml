@@ -7,7 +7,7 @@
             Title="Anime"
             prism:ViewModelLocator.AutowireViewModel="True"
             Icon="typcn-film">
-  <views:VideoListPage Title="Story" DataSource="stories" IsMultiSeason="True" />
-  <views:VideoListPage Title="TV Special" DataSource="tvspecials" />
-  <views:VideoListPage Title="Movie" DataSource="movies" />
+    <views:VideoListPage Title="Story" DataSource="stories" IsMultiSeason="True" />
+    <views:VideoListPage Title="TV Special" DataSource="tvspecials" />
+    <views:VideoListPage Title="Movie" DataSource="movies" />
 </TabbedPage>

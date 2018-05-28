@@ -23,7 +23,7 @@ namespace OnePiece.Web.Controllers
         // GET: Media
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Media.Include(m => m.Anime).Include(m => m.Manga).Include(m => m.NewsFeed);
+            var applicationDbContext = _context.Medias.Include(m => m.Anime).Include(m => m.Manga).Include(m => m.NewsFeed);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -35,7 +35,7 @@ namespace OnePiece.Web.Controllers
                 return NotFound();
             }
 
-            var media = await _context.Media
+            var media = await _context.Medias
                 .Include(m => m.Anime)
                 .Include(m => m.Manga)
                 .Include(m => m.NewsFeed)
@@ -54,7 +54,7 @@ namespace OnePiece.Web.Controllers
             ViewData["MediaTypeSelectList"] = MediaType.Gif.ToSelectList(MediaType.Gif);
             ViewData["MediaQualitySelectList"] = MediaQuality.P1080.ToSelectList(MediaQuality.P1080);
             ViewData["AnimeSelectList"] = new SelectList(_context.Episodes, "Id", "EpisodeNumber");
-            ViewData["MangaSelectList"] = new SelectList(_context.Manga, "Id", "ChapterNumber");
+            ViewData["MangaSelectList"] = new SelectList(_context.Mangas, "Id", "ChapterNumber");
             ViewData["NewsFeedSelectList"] = new SelectList(_context.Feeds, "Id", "Title");
             return View();
         }
@@ -76,7 +76,7 @@ namespace OnePiece.Web.Controllers
             ViewData["MediaTypeSelectList"] = MediaType.Gif.ToSelectList(media.Type);
             ViewData["MediaQualitySelectList"] = MediaQuality.P1080.ToSelectList(media.Quality);
             ViewData["AnimeSelectList"] = new SelectList(_context.Episodes, "Id", "EpisodeNumber", media.AnimeId);
-            ViewData["MangaSelectList"] = new SelectList(_context.Manga, "Id", "ChapterNumber", media.MangaId);
+            ViewData["MangaSelectList"] = new SelectList(_context.Mangas, "Id", "ChapterNumber", media.MangaId);
             ViewData["NewsFeedSelectList"] = new SelectList(_context.Feeds, "Id", "Title", media.NewsFeedId);
             return View(media);
         }
@@ -89,7 +89,7 @@ namespace OnePiece.Web.Controllers
                 return NotFound();
             }
 
-            var media = await _context.Media.SingleOrDefaultAsync(m => m.Id == id);
+            var media = await _context.Medias.SingleOrDefaultAsync(m => m.Id == id);
             if (media == null)
             {
                 return NotFound();
@@ -98,7 +98,7 @@ namespace OnePiece.Web.Controllers
             ViewData["MediaTypeSelectList"] = MediaType.Gif.ToSelectList(media.Type);
             ViewData["MediaQualitySelectList"] = MediaQuality.P1080.ToSelectList(media.Quality);
             ViewData["AnimeSelectList"] = new SelectList(_context.Episodes, "Id", "EpisodeNumber", media.AnimeId);
-            ViewData["MangaSelectList"] = new SelectList(_context.Manga, "Id", "ChapterNumber", media.MangaId);
+            ViewData["MangaSelectList"] = new SelectList(_context.Mangas, "Id", "ChapterNumber", media.MangaId);
             ViewData["NewsFeedSelectList"] = new SelectList(_context.Feeds, "Id", "Title", media.NewsFeedId);
             return View(media);
         }
@@ -139,7 +139,7 @@ namespace OnePiece.Web.Controllers
             ViewData["MediaTypeSelectList"] = MediaType.Gif.ToSelectList(media.Type);
             ViewData["MediaQualitySelectList"] = MediaQuality.P1080.ToSelectList(media.Quality);
             ViewData["AnimeSelectList"] = new SelectList(_context.Episodes, "Id", "EpisodeNumber", media.AnimeId);
-            ViewData["MangaSelectList"] = new SelectList(_context.Manga, "Id", "ChapterNumber", media.MangaId);
+            ViewData["MangaSelectList"] = new SelectList(_context.Mangas, "Id", "ChapterNumber", media.MangaId);
             ViewData["NewsFeedSelectList"] = new SelectList(_context.Feeds, "Id", "Title", media.NewsFeedId);
             return View(media);
         }
@@ -152,7 +152,7 @@ namespace OnePiece.Web.Controllers
                 return NotFound();
             }
 
-            var media = await _context.Media
+            var media = await _context.Medias
                 .Include(m => m.Anime)
                 .Include(m => m.Manga)
                 .Include(m => m.NewsFeed)
@@ -170,15 +170,15 @@ namespace OnePiece.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var media = await _context.Media.SingleOrDefaultAsync(m => m.Id == id);
-            _context.Media.Remove(media);
+            var media = await _context.Medias.SingleOrDefaultAsync(m => m.Id == id);
+            _context.Medias.Remove(media);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool MediaExists(int id)
         {
-            return _context.Media.Any(e => e.Id == id);
+            return _context.Medias.Any(e => e.Id == id);
         }
     }
 }

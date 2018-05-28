@@ -3,7 +3,7 @@
     public class AppSettings
     {
 #if DEBUG
-        public const string WEB_API_URL = "http://10.164.0.235:1412/api";
+        public const string WEB_API_URL = "http://10.164.0.46:1412/api";
 #else
         public const string WEB_API_URL = "";
 #endif

@@ -10,16 +10,16 @@
                         prism:ViewModelLocator.AutowireViewModel="True"
                         BackgroundColor="#dcdcdc">
 
-  <views:NewsFeedPage />
-  <views:AnimePage />
-  <views:MangaPage />
-  <ContentPage Title="Video" Icon="typcn-social-youtube">
-    <StackLayout>
-      <Label Text="Đang phát triển..." />
-    </StackLayout>
-  </ContentPage>
+    <views:NewsFeedPage />
+    <views:AnimePage />
+    <views:MangaPage />
+    <ContentPage Title="Video" Icon="typcn-social-youtube">
+        <StackLayout>
+            <Label Text="Đang phát triển..." />
+        </StackLayout>
+    </ContentPage>
 
-  <!--<controls:TabNavigationPage Icon="typcn-news" Title="News Feed">
+    <!--<controls:TabNavigationPage Icon="typcn-news" Title="News Feed">
     <x:Arguments>
       <views:NewsFeedPage/>
     </x:Arguments>

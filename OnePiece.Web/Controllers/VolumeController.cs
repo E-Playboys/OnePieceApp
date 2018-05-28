@@ -7,27 +7,25 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using OnePiece.Web.Data;
 using OnePiece.Web.Data.Entities;
-using OnePiece.Web.Utilities;
 
 namespace OnePiece.Web.Controllers
 {
-    public class MangaController : Controller
+    public class VolumeController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public MangaController(ApplicationDbContext context)
+        public VolumeController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: Mangas
+        // GET: Volume
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Mangas.Include(m => m.Season);
-            return View(await applicationDbContext.ToListAsync());
+            return View(await _context.Volumes.ToListAsync());
         }
 
-        // GET: Mangas/Details/5
+        // GET: Volume/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -35,44 +33,39 @@ namespace OnePiece.Web.Controllers
                 return NotFound();
             }
 
-            var manga = await _context.Mangas
-                .Include(m => m.Season)
+            var volume = await _context.Volumes
                 .SingleOrDefaultAsync(m => m.Id == id);
-            if (manga == null)
+            if (volume == null)
             {
                 return NotFound();
             }
 
-            return View(manga);
+            return View(volume);
         }
 
-        // GET: Mangas/Create
+        // GET: Volume/Create
         public IActionResult Create()
         {
-            ViewData["SeasonSelectList"] = new SelectList(_context.Seasons, "Id", "SeasonNumber");
-            ViewData["MangaTypeSelectList"] = MangaType.BlackWhite.ToSelectList(MangaType.BlackWhite);
             return View();
         }
 
-        // POST: Mangas/Create
+        // POST: Volume/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Manga manga)
+        public async Task<IActionResult> Create([Bind("VolumeNumber,Title,TitleEng,Description,DescriptionEng,Poster,ChapterRange,Id")] Volume volume)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(manga);
+                _context.Add(volume);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["SeasonSelectList"] = new SelectList(_context.Seasons, "Id", "SeasonNumber", manga.SeasonId);
-            ViewData["MangaTypeSelectList"] = MangaType.BlackWhite.ToSelectList(MangaType.BlackWhite);
-            return View(manga);
+            return View(volume);
         }
 
-        // GET: Mangas/Edit/5
+        // GET: Volume/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -80,24 +73,22 @@ namespace OnePiece.Web.Controllers
                 return NotFound();
             }
 
-            var manga = await _context.Mangas.SingleOrDefaultAsync(m => m.Id == id);
-            if (manga == null)
+            var volume = await _context.Volumes.SingleOrDefaultAsync(m => m.Id == id);
+            if (volume == null)
             {
                 return NotFound();
             }
-            ViewData["SeasonSelectList"] = new SelectList(_context.Seasons, "Id", "SeasonNumber", manga.SeasonId);
-            ViewData["MangaTypeSelectList"] = MangaType.BlackWhite.ToSelectList(MangaType.BlackWhite);
-            return View(manga);
+            return View(volume);
         }
 
-        // POST: Mangas/Edit/5
+        // POST: Volume/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, Manga manga)
+        public async Task<IActionResult> Edit(int id, [Bind("VolumeNumber,Title,TitleEng,Description,DescriptionEng,Poster,ChapterRange,Id")] Volume volume)
         {
-            if (id != manga.Id)
+            if (id != volume.Id)
             {
                 return NotFound();
             }
@@ -106,12 +97,12 @@ namespace OnePiece.Web.Controllers
             {
                 try
                 {
-                    _context.Update(manga);
+                    _context.Update(volume);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!MangaExists(manga.Id))
+                    if (!VolumeExists(volume.Id))
                     {
                         return NotFound();
                     }
@@ -122,12 +113,10 @@ namespace OnePiece.Web.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["SeasonSelectList"] = new SelectList(_context.Seasons, "Id", "SeasonNumber", manga.SeasonId);
-            ViewData["MangaTypeSelectList"] = MangaType.BlackWhite.ToSelectList(MangaType.BlackWhite);
-            return View(manga);
+            return View(volume);
         }
 
-        // GET: Mangas/Delete/5
+        // GET: Volume/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -135,31 +124,30 @@ namespace OnePiece.Web.Controllers
                 return NotFound();
             }
 
-            var manga = await _context.Mangas
-                .Include(m => m.Season)
+            var volume = await _context.Volumes
                 .SingleOrDefaultAsync(m => m.Id == id);
-            if (manga == null)
+            if (volume == null)
             {
                 return NotFound();
             }
 
-            return View(manga);
+            return View(volume);
         }
 
-        // POST: Mangas/Delete/5
+        // POST: Volume/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var manga = await _context.Mangas.SingleOrDefaultAsync(m => m.Id == id);
-            _context.Mangas.Remove(manga);
+            var volume = await _context.Volumes.SingleOrDefaultAsync(m => m.Id == id);
+            _context.Volumes.Remove(volume);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool MangaExists(int id)
+        private bool VolumeExists(int id)
         {
-            return _context.Mangas.Any(e => e.Id == id);
+            return _context.Volumes.Any(e => e.Id == id);
         }
     }
 }

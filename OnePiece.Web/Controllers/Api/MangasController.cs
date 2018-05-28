@@ -23,7 +23,7 @@ namespace OnePiece.Web.Controllers.Api
         [Route("List")]
         public async Task<IActionResult> List(ListRequest rq)
         {
-            var mangas = await _dbContext.Manga.OrderByDescending(x => x.ChapterNumber)
+            var mangas = await _dbContext.Mangas.OrderByDescending(x => x.ChapterNumber)
                 .Skip(rq.Skip).Take(rq.Take).ToListAsync();
 
             return Json(mangas);
@@ -33,7 +33,7 @@ namespace OnePiece.Web.Controllers.Api
         [Route("Get")]
         public async Task<IActionResult> Get(int id)
         {
-            var manga = await _dbContext.Manga.Where(x => x.Id == id).Include(x => x.MangaPages).FirstOrDefaultAsync();
+            var manga = await _dbContext.Mangas.Where(x => x.Id == id).Include(x => x.MangaPages).FirstOrDefaultAsync();
 
             return Json(manga);
         }
@@ -42,7 +42,7 @@ namespace OnePiece.Web.Controllers.Api
         [Route("GetByChapterNumber")]
         public async Task<IActionResult> GetByChapterNumber(int chapterNumber, int next, int previous)
         {
-            var query = _dbContext.Manga.Include(x => x.MangaPages).AsQueryable();
+            var query = _dbContext.Mangas.Include(x => x.MangaPages).AsQueryable();
 
             if(next > 0)
             {

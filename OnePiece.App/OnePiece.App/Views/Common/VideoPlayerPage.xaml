@@ -11,91 +11,91 @@
                  xmlns:templates="clr-namespace:OnePiece.App.Views.Templates;assembly=OnePiece.App"
                  x:Name="CurrentPage"
                  prism:ViewModelLocator.AutowireViewModel="True">
-  <Grid RowSpacing="0">
-    <Grid.RowDefinitions>
-      <RowDefinition Height="Auto" />
-      <RowDefinition Height="*" />
-    </Grid.RowDefinitions>
+    <Grid RowSpacing="0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
 
-    <StackLayout Grid.Row="0">
-      <templates:VideoPlayerView x:Name="VideoView"
-                                 Anime="{Binding Anime}"
-                                 BackgroundColor="#E01722"
-                                 HorizontalOptions="FillAndExpand"
-                                 IsFullScreen="False"
-                                 VerticalOptions="FillAndExpand" />
-    </StackLayout>
-    <ScrollView Grid.Row="1">
-      <StackLayout Padding="1" BackgroundColor="#dcdcdc" Spacing="0">
-        <StackLayout Margin="0,0,0,10" Style="{StaticResource VideoPlayerPanel}">
-          <Label Style="{StaticResource VideoPlayerTitle}" Text="{Binding Anime.Title}" />
-          <Label Style="{StaticResource VideoPlayerSubTitle}" Text="{Binding Anime.EpisodeNumber, StringFormat='Episode {0}'}" />
+        <StackLayout Grid.Row="0">
+            <templates:VideoPlayerView x:Name="VideoView"
+                                       Anime="{Binding Anime}"
+                                       BackgroundColor="#E01722"
+                                       HorizontalOptions="FillAndExpand"
+                                       IsFullScreen="False"
+                                       VerticalOptions="FillAndExpand" />
         </StackLayout>
-        <StackLayout Style="{StaticResource VideoPlayerPanel}">
-          <controls:HorizontalListView Grid.Row="1" ItemsSource="{Binding Animes}">
-            <controls:HorizontalListView.ItemTemplate>
-              <DataTemplate>
-                <StackLayout WidthRequest="200">
-                  <StackLayout.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding BindingContext.SelectAnimeCommand, Source={x:Reference CurrentPage}}" CommandParameter="{Binding .}" />
-                  </StackLayout.GestureRecognizers>
-
-                  <ff:CachedImage Aspect="AspectFill" Source="{Binding Cover}" />
-                  <Label FontSize="14" HorizontalOptions="FillAndExpand" Style="{StaticResource CommonLabel}" Text="{Binding Title}" />
-                  <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal">
-                    <Label FontSize="12" HorizontalOptions="Start" Style="{StaticResource CommonLabel}" Text="{Binding EpisodeNumber, StringFormat='Episode {0}'}" />
-                    <Label FontSize="12" HorizontalOptions="EndAndExpand" Style="{StaticResource CommonSecondaryLabel}" Text="{Binding ViewCount, StringFormat='{0} views'}" />
-                  </StackLayout>
+        <ScrollView Grid.Row="1">
+            <StackLayout Padding="1" BackgroundColor="#dcdcdc" Spacing="0">
+                <StackLayout Margin="0,0,0,10" Style="{StaticResource VideoPlayerPanel}">
+                    <Label Style="{StaticResource VideoPlayerTitle}" Text="{Binding Anime.Title}" />
+                    <Label Style="{StaticResource VideoPlayerSubTitle}" Text="{Binding Anime.EpisodeNumber, StringFormat='Episode {0}'}" />
                 </StackLayout>
-              </DataTemplate>
-            </controls:HorizontalListView.ItemTemplate>
-          </controls:HorizontalListView>
-        </StackLayout>
-        <StackLayout Style="{StaticResource VideoPlayerPanel}">
-          <Label Style="{StaticResource VideoPlayerPanelHeader}" Text="Giới thiệu" />
-          <Label Style="{StaticResource VideoPlayerContent}" Text="{Binding Anime.Description}" />
-        </StackLayout>
-        <StackLayout Style="{StaticResource VideoPlayerPanel}">
-          <Label Style="{StaticResource VideoPlayerPanelHeader}" Text="Thông tin" />
-          <controls:ExtendedListView ItemsSource="{Binding VideoInfoProperties}" RowHeight="30">
-            <x:Arguments>
-              <ListViewCachingStrategy>RecycleElement</ListViewCachingStrategy>
-            </x:Arguments>
-            <controls:ExtendedListView.ItemTemplate>
-              <DataTemplate>
-                <ViewCell>
-                  <Grid ColumnSpacing="20">
-                    <Grid.ColumnDefinitions>
-                      <ColumnDefinition Width="*" />
-                      <ColumnDefinition Width="2*" />
-                    </Grid.ColumnDefinitions>
-                    <Label Grid.Column="0" HorizontalOptions="End" Style="{StaticResource VideoPlayerInfoProperty}" Text="{Binding PropertyName}" />
-                    <Label Grid.Column="1" HorizontalOptions="Start" Style="{StaticResource VideoPlayerContent}" Text="{Binding PropertyValue}" />
-                  </Grid>
-                </ViewCell>
-              </DataTemplate>
-            </controls:ExtendedListView.ItemTemplate>
-          </controls:ExtendedListView>
-        </StackLayout>
-        <StackLayout Style="{StaticResource VideoPlayerPanelNoLine}">
-          <Label Style="{StaticResource VideoPlayerPanelHeader}" Text="Seasons" />
-          <controls:HorizontalListView ItemsSource="{Binding Seasons}">
-            <controls:HorizontalListView.ItemTemplate>
-              <DataTemplate>
-                <StackLayout WidthRequest="100">
-                  <StackLayout.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding BindingContext.SelectSeasonCommand, Source={x:Reference CurrentPage}}" CommandParameter="{Binding .}" />
-                  </StackLayout.GestureRecognizers>
+                <StackLayout Style="{StaticResource VideoPlayerPanel}">
+                    <controls:HorizontalListView Grid.Row="1" ItemsSource="{Binding Animes}">
+                        <controls:HorizontalListView.ItemTemplate>
+                            <DataTemplate>
+                                <StackLayout WidthRequest="200">
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding BindingContext.SelectAnimeCommand, Source={x:Reference CurrentPage}}" CommandParameter="{Binding .}" />
+                                    </StackLayout.GestureRecognizers>
 
-                  <ff:CachedImage Aspect="AspectFill" HeightRequest="150" Source="{Binding Avatar}" WidthRequest="100" />
-                  <Label FontSize="14" HorizontalOptions="FillAndExpand" Style="{StaticResource CommonLabel}" Text="{Binding Title}" />
+                                    <ff:CachedImage Aspect="AspectFill" Source="{Binding Cover}" />
+                                    <Label FontSize="14" HorizontalOptions="FillAndExpand" Style="{StaticResource CommonLabel}" Text="{Binding Title}" />
+                                    <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal">
+                                        <Label FontSize="12" HorizontalOptions="Start" Style="{StaticResource CommonLabel}" Text="{Binding EpisodeNumber, StringFormat='Episode {0}'}" />
+                                        <Label FontSize="12" HorizontalOptions="EndAndExpand" Style="{StaticResource CommonSecondaryLabel}" Text="{Binding ViewCount, StringFormat='{0} views'}" />
+                                    </StackLayout>
+                                </StackLayout>
+                            </DataTemplate>
+                        </controls:HorizontalListView.ItemTemplate>
+                    </controls:HorizontalListView>
                 </StackLayout>
-              </DataTemplate>
-            </controls:HorizontalListView.ItemTemplate>
-          </controls:HorizontalListView>
-        </StackLayout>
-      </StackLayout>
-    </ScrollView>
-  </Grid>
+                <StackLayout Style="{StaticResource VideoPlayerPanel}">
+                    <Label Style="{StaticResource VideoPlayerPanelHeader}" Text="Giới thiệu" />
+                    <Label Style="{StaticResource VideoPlayerContent}" Text="{Binding Anime.Description}" />
+                </StackLayout>
+                <StackLayout Style="{StaticResource VideoPlayerPanel}">
+                    <Label Style="{StaticResource VideoPlayerPanelHeader}" Text="Thông tin" />
+                    <controls:ExtendedListView ItemsSource="{Binding VideoInfoProperties}" RowHeight="30">
+                        <x:Arguments>
+                            <ListViewCachingStrategy>RecycleElement</ListViewCachingStrategy>
+                        </x:Arguments>
+                        <controls:ExtendedListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <Grid ColumnSpacing="20">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="2*" />
+                                        </Grid.ColumnDefinitions>
+                                        <Label Grid.Column="0" HorizontalOptions="End" Style="{StaticResource VideoPlayerInfoProperty}" Text="{Binding PropertyName}" />
+                                        <Label Grid.Column="1" HorizontalOptions="Start" Style="{StaticResource VideoPlayerContent}" Text="{Binding PropertyValue}" />
+                                    </Grid>
+                                </ViewCell>
+                            </DataTemplate>
+                        </controls:ExtendedListView.ItemTemplate>
+                    </controls:ExtendedListView>
+                </StackLayout>
+                <StackLayout Style="{StaticResource VideoPlayerPanelNoLine}">
+                    <Label Style="{StaticResource VideoPlayerPanelHeader}" Text="Seasons" />
+                    <controls:HorizontalListView ItemsSource="{Binding Seasons}">
+                        <controls:HorizontalListView.ItemTemplate>
+                            <DataTemplate>
+                                <StackLayout WidthRequest="100">
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding BindingContext.SelectSeasonCommand, Source={x:Reference CurrentPage}}" CommandParameter="{Binding .}" />
+                                    </StackLayout.GestureRecognizers>
+
+                                    <ff:CachedImage Aspect="AspectFill" HeightRequest="150" Source="{Binding Avatar}" WidthRequest="100" />
+                                    <Label FontSize="14" HorizontalOptions="FillAndExpand" Style="{StaticResource CommonLabel}" Text="{Binding Title}" />
+                                </StackLayout>
+                            </DataTemplate>
+                        </controls:HorizontalListView.ItemTemplate>
+                    </controls:HorizontalListView>
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </Grid>
 
 </pages:PopupPage>

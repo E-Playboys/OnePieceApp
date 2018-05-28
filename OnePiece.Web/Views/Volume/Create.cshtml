@@ -1,21 +1,22 @@
-﻿@model OnePiece.Web.Data.Entities.Season
+﻿@model OnePiece.Web.Data.Entities.Volume
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Edit</h2>
+<h2>Create</h2>
 
-<h4>Season</h4>
+<h4>Volume</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit">
+        <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="SeasonNumber" class="control-label"></label>
-                <input asp-for="SeasonNumber" class="form-control" />
-                <span asp-validation-for="SeasonNumber" class="text-danger"></span>
+                <label asp-for="VolumeNumber" class="control-label"></label>
+                <input asp-for="VolumeNumber" class="form-control" />
+                <span asp-validation-for="VolumeNumber" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Title" class="control-label"></label>
@@ -38,18 +39,17 @@
                 <span asp-validation-for="DescriptionEng" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Cover" class="control-label"></label>
-                <input asp-for="Cover" class="form-control" />
-                <span asp-validation-for="Cover" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="Poster" class="control-label"></label>
                 <input asp-for="Poster" class="form-control" />
                 <span asp-validation-for="Poster" class="text-danger"></span>
             </div>
-            <input type="hidden" asp-for="Id" />
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <label asp-for="ChapterRange" class="control-label"></label>
+                <input asp-for="ChapterRange" class="form-control" />
+                <span asp-validation-for="ChapterRange" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
             </div>
         </form>
     </div>
@@ -59,3 +59,6 @@
     <a asp-action="Index">Back to List</a>
 </div>
 
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

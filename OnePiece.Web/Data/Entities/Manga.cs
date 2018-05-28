@@ -33,6 +33,10 @@ namespace OnePiece.Web.Data.Entities
         public int SeasonId { get; set; }
 
         public Season Season { get; set; }
+
+        public int? VolumeId { get; set; }
+
+        public Volume Volume { get; set; }
     }
 
     public enum MangaType

@@ -6,33 +6,33 @@
                          xmlns:converters="clr-namespace:OnePiece.App.Converters;assembly=OnePiece.App"
                          xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
                          prism:ViewModelLocator.AutowireViewModel="True">
-  <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-    <ActivityIndicator IsRunning="{Binding IsBusy}" VerticalOptions="CenterAndExpand" />
-    <controls:ExtendedListView AllowSelectItem="False"
-                               IsVisible="{Binding IsBusy, Converter={x:Static converters:InverseBoolConverter.Instance}}"
-                               ItemClickCommand="{Binding ViewVideoCommand}"
-                               ItemsSource="{Binding Videos}"
-                               RowHeight="80">
-      <x:Arguments>
-        <ListViewCachingStrategy>RecycleElement</ListViewCachingStrategy>
-      </x:Arguments>
-      <controls:ExtendedListView.ItemTemplate>
-        <DataTemplate>
-          <ViewCell>
-            <Grid BackgroundColor="White">
-              <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="80" />
-                <ColumnDefinition Width="*" />
-              </Grid.ColumnDefinitions>
+    <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+        <ActivityIndicator IsRunning="{Binding IsBusy}" VerticalOptions="CenterAndExpand" />
+        <controls:ExtendedListView AllowSelectItem="False"
+                                   IsVisible="{Binding IsBusy, Converter={x:Static converters:InverseBoolConverter.Instance}}"
+                                   ItemClickCommand="{Binding ViewVideoCommand}"
+                                   ItemsSource="{Binding Videos}"
+                                   RowHeight="80">
+            <x:Arguments>
+                <ListViewCachingStrategy>RecycleElement</ListViewCachingStrategy>
+            </x:Arguments>
+            <controls:ExtendedListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid BackgroundColor="White">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="80" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
 
-              <StackLayout Grid.Column="0" BackgroundColor="Blue" />
-              <StackLayout Grid.Column="1">
-                <Label Text="{Binding Title}" />
-              </StackLayout>
-            </Grid>
-          </ViewCell>
-        </DataTemplate>
-      </controls:ExtendedListView.ItemTemplate>
-    </controls:ExtendedListView>
-  </Grid>
+                            <StackLayout Grid.Column="0" BackgroundColor="Blue" />
+                            <StackLayout Grid.Column="1">
+                                <Label Text="{Binding Title}" />
+                            </StackLayout>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </controls:ExtendedListView.ItemTemplate>
+        </controls:ExtendedListView>
+    </Grid>
 </controls:TabContentPage>

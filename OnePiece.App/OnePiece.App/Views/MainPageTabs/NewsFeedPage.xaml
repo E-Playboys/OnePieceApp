@@ -8,24 +8,24 @@
                          Title="News Feed"
                          prism:ViewModelLocator.AutowireViewModel="True"
                          Icon="typcn-news">
-  <StackLayout BackgroundColor="#dcdcdc">
-    <controls:ExtendedListView x:Name="NewsFeedListView"
-                               HasUnevenRows="true"
-                               HorizontalOptions="FillAndExpand"
-                               IsPullToRefreshEnabled="true"
-                               IsRefreshing="{Binding IsBusy}"
-                               ItemsSource="{Binding NewsFeeds}"
-                               RefreshCommand="{Binding RefreshCommand}"
-                               SeparatorVisibility="None"
-                               VerticalOptions="FillAndExpand">
-      <x:Arguments>
-        <ListViewCachingStrategy>RecycleElement</ListViewCachingStrategy>
-      </x:Arguments>
-      <controls:ExtendedListView.ItemTemplate>
-        <DataTemplate>
-          <templates:NewsFeedViewCell />
-        </DataTemplate>
-      </controls:ExtendedListView.ItemTemplate>
-    </controls:ExtendedListView>
-  </StackLayout>
+    <StackLayout BackgroundColor="#dcdcdc">
+        <controls:ExtendedListView x:Name="NewsFeedListView"
+                                   HasUnevenRows="true"
+                                   HorizontalOptions="FillAndExpand"
+                                   IsPullToRefreshEnabled="true"
+                                   IsRefreshing="{Binding IsBusy}"
+                                   ItemsSource="{Binding NewsFeeds}"
+                                   RefreshCommand="{Binding RefreshCommand}"
+                                   SeparatorVisibility="None"
+                                   VerticalOptions="FillAndExpand">
+            <x:Arguments>
+                <ListViewCachingStrategy>RecycleElement</ListViewCachingStrategy>
+            </x:Arguments>
+            <controls:ExtendedListView.ItemTemplate>
+                <DataTemplate>
+                    <templates:NewsFeedViewCell />
+                </DataTemplate>
+            </controls:ExtendedListView.ItemTemplate>
+        </controls:ExtendedListView>
+    </StackLayout>
 </controls:TabContentPage>

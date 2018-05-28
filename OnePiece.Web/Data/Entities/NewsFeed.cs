@@ -24,6 +24,7 @@ namespace OnePiece.Web.Data.Entities
     {
         Anime,
         Manga,
-        Season
+        Season,
+        Article
     }
 }

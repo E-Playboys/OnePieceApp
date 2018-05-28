@@ -12,9 +12,10 @@ using System;
 namespace OnePiece.Web.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180523132249_ChangeMangaTableName")]
+    partial class ChangeMangaTableName
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -287,13 +288,9 @@ namespace OnePiece.Web.Migrations
 
                     b.Property<int?>("ViewCount");
 
-                    b.Property<int?>("VolumeId");
-
                     b.HasKey("Id");
 
                     b.HasIndex("SeasonId");
-
-                    b.HasIndex("VolumeId");
 
                     b.ToTable("Mangas");
                 });
@@ -377,13 +374,9 @@ namespace OnePiece.Web.Migrations
 
                     b.Property<string>("Avatar");
 
-                    b.Property<string>("ChapterRange");
-
                     b.Property<string>("Description");
 
                     b.Property<string>("DescriptionEng");
-
-                    b.Property<string>("EpisodeRange");
 
                     b.Property<int>("SeasonNumber");
 
@@ -394,30 +387,6 @@ namespace OnePiece.Web.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Seasons");
-                });
-
-            modelBuilder.Entity("OnePiece.Web.Data.Entities.Volume", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("ChapterRange");
-
-                    b.Property<string>("Description");
-
-                    b.Property<string>("DescriptionEng");
-
-                    b.Property<string>("Poster");
-
-                    b.Property<string>("Title");
-
-                    b.Property<string>("TitleEng");
-
-                    b.Property<int>("VolumeNumber");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Volumes");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -478,10 +447,6 @@ namespace OnePiece.Web.Migrations
                         .WithMany("Chapters")
                         .HasForeignKey("SeasonId")
                         .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("OnePiece.Web.Data.Entities.Volume", "Volume")
-                        .WithMany("Chapters")
-                        .HasForeignKey("VolumeId");
                 });
 
             modelBuilder.Entity("OnePiece.Web.Data.Entities.MangaPage", b =>

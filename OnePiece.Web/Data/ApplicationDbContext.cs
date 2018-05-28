@@ -17,11 +17,15 @@ namespace OnePiece.Web.Data
 
         public DbSet<Season> Seasons { get; set; }
 
-        public DbSet<Manga> Manga { get; set; }
+        public DbSet<Manga> Mangas { get; set; }
 
         public DbSet<MangaPage> MangaPages { get; set; }
 
-        public DbSet<Media> Media { get; set; }
+        public DbSet<Media> Medias { get; set; }
+
+        public DbSet<Article> Articles { get; set; }
+
+        public DbSet<Volume> Volumes { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)

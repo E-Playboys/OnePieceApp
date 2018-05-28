@@ -2,9 +2,9 @@
 
 namespace OnePiece.Web.Data.Entities
 {
-    public class Season : BaseEntity
+    public class Volume : BaseEntity
     {
-        public int SeasonNumber { get; set; }
+        public int VolumeNumber { get; set; }
 
         public string Title { get; set; }
 
@@ -14,16 +14,18 @@ namespace OnePiece.Web.Data.Entities
 
         public string DescriptionEng { get; set; }
 
-        public string Cover { get; set; }
-
         public string Poster { get; set; }
-
-        public string EpisodeRange { get; set; }
 
         public string ChapterRange { get; set; }
 
-        public List<Anime> Episodes { get; set; }
-
         public List<Manga> Chapters { get; set; }
+
+        public VolumeType VolumeType { get; set; }
+    }
+
+    public enum VolumeType
+    {
+        Anime,
+        Manga
     }
 }

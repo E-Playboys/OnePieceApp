@@ -11,73 +11,73 @@
           xmlns:templates="clr-namespace:OnePiece.App.Views.Templates;assembly=OnePiece.App"
           xmlns:transformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
           prism:ViewModelLocator.AutowireViewModel="True">
-  <Grid Margin="1,0,1,1" Padding="10" BackgroundColor="White" RowSpacing="0">
-    <Grid.RowDefinitions>
-      <RowDefinition Height="Auto" />
-      <RowDefinition Height="Auto" />
-    </Grid.RowDefinitions>
+    <Grid Margin="1,0,1,1" Padding="10" BackgroundColor="White" RowSpacing="0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
 
-    <ListView x:Name="MediaPanel"
-              Grid.Row="0"
-              Margin="0,0,0,10"
-              BackgroundColor="LightGray"
-              HorizontalOptions="FillAndExpand"
-              ItemsSource="{Binding Medias}"
-              VerticalOptions="FillAndExpand">
-      <x:Arguments>
-        <ListViewCachingStrategy>RecycleElement</ListViewCachingStrategy>
-      </x:Arguments>
-      <ListView.ItemTemplate>
-        <DataTemplate>
-          <templates:CachedImageViewCell />
-        </DataTemplate>
-      </ListView.ItemTemplate>
-    </ListView>
+        <ListView x:Name="MediaPanel"
+                  Grid.Row="0"
+                  Margin="0,0,0,10"
+                  BackgroundColor="LightGray"
+                  HorizontalOptions="FillAndExpand"
+                  ItemsSource="{Binding Medias}"
+                  VerticalOptions="FillAndExpand">
+            <x:Arguments>
+                <ListViewCachingStrategy>RecycleElement</ListViewCachingStrategy>
+            </x:Arguments>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <templates:CachedImageViewCell />
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
 
-    <Grid Grid.Row="1" ColumnSpacing="0" RowSpacing="0">
-      <Grid.RowDefinitions>
-        <RowDefinition Height="Auto" />
-        <RowDefinition Height="Auto" />
-      </Grid.RowDefinitions>
-      <Grid.ColumnDefinitions>
-        <ColumnDefinition Width="40" />
-        <ColumnDefinition Width="*" />
-      </Grid.ColumnDefinitions>
+        <Grid Grid.Row="1" ColumnSpacing="0" RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="40" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
 
-      <forms:CachedImage x:Name="Avatar"
-                         Grid.Row="0"
-                         Grid.RowSpan="2"
-                         Grid.Column="0"
-                         Aspect="AspectFill"
-                         HeightRequest="40"
-                         Source="icon"
-                         VerticalOptions="Start"
-                         WidthRequest="40">
-        <forms:CachedImage.Transformations>
-          <transformations:CircleTransformation />
-        </forms:CachedImage.Transformations>
-      </forms:CachedImage>
+            <forms:CachedImage x:Name="Avatar"
+                               Grid.Row="0"
+                               Grid.RowSpan="2"
+                               Grid.Column="0"
+                               Aspect="AspectFill"
+                               HeightRequest="40"
+                               Source="icon"
+                               VerticalOptions="Start"
+                               WidthRequest="40">
+                <forms:CachedImage.Transformations>
+                    <transformations:CircleTransformation />
+                </forms:CachedImage.Transformations>
+            </forms:CachedImage>
 
-      <Label Grid.Row="0"
-             Grid.Column="1"
-             Margin="10,0,0,0"
-             FontSize="16"
-             IsVisible="{Binding Title, Converter={x:Static converters:IsVisibleConverter.Instance}}"
-             Opacity="0.87"
-             Text="{Binding Title}"
-             TextColor="Black"
-             VerticalOptions="Center" />
-      <Label Grid.Row="1"
-             Grid.Column="1"
-             Margin="10,0,0,0"
-             FontSize="14"
-             IsVisible="{Binding Description, Converter={x:Static converters:IsVisibleConverter.Instance}}"
-             Opacity="0.54"
-             Text="{Binding Description}"
-             TextColor="Black"
-             VerticalOptions="Center" />
-      <!--<Label Grid.Row="0" Grid.Column="1" Text="Troy" FontSize="12" FontAttributes="Bold" Margin="10,0,0,0" TextColor="#D8DADA" VerticalOptions="Center" HorizontalOptions="Start" />
+            <Label Grid.Row="0"
+                   Grid.Column="1"
+                   Margin="10,0,0,0"
+                   FontSize="16"
+                   IsVisible="{Binding Title, Converter={x:Static converters:IsVisibleConverter.Instance}}"
+                   Opacity="0.87"
+                   Text="{Binding Title}"
+                   TextColor="Black"
+                   VerticalOptions="Center" />
+            <Label Grid.Row="1"
+                   Grid.Column="1"
+                   Margin="10,0,0,0"
+                   FontSize="14"
+                   IsVisible="{Binding Description, Converter={x:Static converters:IsVisibleConverter.Instance}}"
+                   Opacity="0.54"
+                   Text="{Binding Description}"
+                   TextColor="Black"
+                   VerticalOptions="Center" />
+            <!--<Label Grid.Row="0" Grid.Column="1" Text="Troy" FontSize="12" FontAttributes="Bold" Margin="10,0,0,0" TextColor="#D8DADA" VerticalOptions="Center" HorizontalOptions="Start" />
             <Label Grid.Row="0" Grid.Column="2" Text="just now" FontSize="12" TextColor="#D8DADA" Margin="10,0,0,0" VerticalOptions="Center" HorizontalOptions="End" />-->
+        </Grid>
     </Grid>
-  </Grid>
 </ViewCell>

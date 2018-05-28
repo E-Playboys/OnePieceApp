@@ -1,93 +1,93 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <unity:PrismApplication x:Class="OnePiece.App.App" xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:unity="clr-namespace:Prism.Unity;assembly=Prism.Unity.Forms">
-  <Application.Resources>
-    <ResourceDictionary>
-      <Style x:Key="CommonLabel" TargetType="Label">
-        <Setter Property="TextColor" Value="Black" />
-        <Setter Property="Opacity" Value="0.87" />
-        <Setter Property="VerticalTextAlignment" Value="Center" />
-      </Style>
+    <Application.Resources>
+        <ResourceDictionary>
+            <Style x:Key="CommonLabel" TargetType="Label">
+                <Setter Property="TextColor" Value="Black" />
+                <Setter Property="Opacity" Value="0.87" />
+                <Setter Property="VerticalTextAlignment" Value="Center" />
+            </Style>
 
-      <Style x:Key="CommonSecondaryLabel" BasedOn="{StaticResource CommonLabel}" TargetType="Label">
-        <Setter Property="Opacity" Value="0.54" />
-      </Style>
+            <Style x:Key="CommonSecondaryLabel" BasedOn="{StaticResource CommonLabel}" TargetType="Label">
+                <Setter Property="Opacity" Value="0.54" />
+            </Style>
 
-      <Style x:Key="VideoListItemTitle" TargetType="Label">
-        <Setter Property="FontAttributes" Value="Bold" />
-      </Style>
+            <Style x:Key="VideoListItemTitle" TargetType="Label">
+                <Setter Property="FontAttributes" Value="Bold" />
+            </Style>
 
-      <Style x:Key="VideoListItemDescription" TargetType="Label" />
+            <Style x:Key="VideoListItemDescription" TargetType="Label" />
 
-      <Style x:Key="VideoListItemThumbnail" TargetType="Image">
-        <Setter Property="BackgroundColor" Value="Black" />
-      </Style>
+            <Style x:Key="VideoListItemThumbnail" TargetType="Image">
+                <Setter Property="BackgroundColor" Value="Black" />
+            </Style>
 
-      <Style x:Key="SeasonListItemTitle" TargetType="Label">
-        <Setter Property="FontAttributes" Value="Bold" />
-      </Style>
+            <Style x:Key="SeasonListItemTitle" TargetType="Label">
+                <Setter Property="FontAttributes" Value="Bold" />
+            </Style>
 
-      <Style x:Key="SeasonListItemDescription" TargetType="Label" />
+            <Style x:Key="SeasonListItemDescription" TargetType="Label" />
 
-      <Style x:Key="SeasonListItemThumbnail" TargetType="Image">
-        <Setter Property="BackgroundColor" Value="Black" />
-      </Style>
+            <Style x:Key="SeasonListItemThumbnail" TargetType="Image">
+                <Setter Property="BackgroundColor" Value="Black" />
+            </Style>
 
-      <Style x:Key="FeaturedVideoTitle" BasedOn="{StaticResource VideoListItemTitle}" TargetType="Label">
-        <Setter Property="TextColor" Value="White" />
-        <Setter Property="FontSize" Value="16" />
-      </Style>
+            <Style x:Key="FeaturedVideoTitle" BasedOn="{StaticResource VideoListItemTitle}" TargetType="Label">
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="FontSize" Value="16" />
+            </Style>
 
-      <Style x:Key="FeaturedVideoDescription" BasedOn="{StaticResource VideoListItemDescription}" TargetType="Label">
-        <Setter Property="TextColor" Value="White" />
-      </Style>
+            <Style x:Key="FeaturedVideoDescription" BasedOn="{StaticResource VideoListItemDescription}" TargetType="Label">
+                <Setter Property="TextColor" Value="White" />
+            </Style>
 
-      <Style x:Key="MangaTitle" BasedOn="{StaticResource VideoListItemTitle}" TargetType="Label">
-        <Setter Property="TextColor" Value="Black" />
-        <Setter Property="FontSize" Value="16" />
-        <Setter Property="Opacity" Value="0.87" />
-      </Style>
+            <Style x:Key="MangaTitle" BasedOn="{StaticResource VideoListItemTitle}" TargetType="Label">
+                <Setter Property="TextColor" Value="Black" />
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="Opacity" Value="0.87" />
+            </Style>
 
-      <Style x:Key="MangaDescription" BasedOn="{StaticResource MangaTitle}" TargetType="Label">
-        <Setter Property="FontSize" Value="12" />
-        <Setter Property="Opacity" Value="0.54" />
-      </Style>
+            <Style x:Key="MangaDescription" BasedOn="{StaticResource MangaTitle}" TargetType="Label">
+                <Setter Property="FontSize" Value="12" />
+                <Setter Property="Opacity" Value="0.54" />
+            </Style>
 
-      <Style x:Key="FeaturedVideoThumbnail" BasedOn="{StaticResource VideoListItemThumbnail}" TargetType="Image" />
+            <Style x:Key="FeaturedVideoThumbnail" BasedOn="{StaticResource VideoListItemThumbnail}" TargetType="Image" />
 
-      <Style x:Key="VideoPlayerTitle" BasedOn="{StaticResource CommonLabel}" TargetType="Label">
-        <Setter Property="FontSize" Value="16" />
-      </Style>
+            <Style x:Key="VideoPlayerTitle" BasedOn="{StaticResource CommonLabel}" TargetType="Label">
+                <Setter Property="FontSize" Value="16" />
+            </Style>
 
-      <Style x:Key="VideoPlayerSubTitle" BasedOn="{StaticResource CommonLabel}" TargetType="Label">
-        <Setter Property="FontSize" Value="14" />
-      </Style>
+            <Style x:Key="VideoPlayerSubTitle" BasedOn="{StaticResource CommonLabel}" TargetType="Label">
+                <Setter Property="FontSize" Value="14" />
+            </Style>
 
-      <Style x:Key="VideoPlayerPanel" TargetType="StackLayout">
-        <Setter Property="BackgroundColor" Value="White" />
-        <Setter Property="Padding" Value="10" />
-        <Setter Property="Margin" Value="0,0,0,1" />
-      </Style>
+            <Style x:Key="VideoPlayerPanel" TargetType="StackLayout">
+                <Setter Property="BackgroundColor" Value="White" />
+                <Setter Property="Padding" Value="10" />
+                <Setter Property="Margin" Value="0,0,0,1" />
+            </Style>
 
-      <Style x:Key="VideoPlayerPanelNoLine" BasedOn="{StaticResource VideoPlayerPanel}" TargetType="StackLayout">
-        <Setter Property="Margin" Value="0" />
-      </Style>
+            <Style x:Key="VideoPlayerPanelNoLine" BasedOn="{StaticResource VideoPlayerPanel}" TargetType="StackLayout">
+                <Setter Property="Margin" Value="0" />
+            </Style>
 
-      <Style x:Key="VideoPlayerPanelHeader" BasedOn="{StaticResource CommonLabel}" TargetType="Label">
-        <Setter Property="FontSize" Value="16" />
-      </Style>
+            <Style x:Key="VideoPlayerPanelHeader" BasedOn="{StaticResource CommonLabel}" TargetType="Label">
+                <Setter Property="FontSize" Value="16" />
+            </Style>
 
-      <Style x:Key="VideoPlayerInfoProperty" BasedOn="{StaticResource CommonLabel}" TargetType="Label">
-        <Setter Property="FontSize" Value="12" />
-      </Style>
+            <Style x:Key="VideoPlayerInfoProperty" BasedOn="{StaticResource CommonLabel}" TargetType="Label">
+                <Setter Property="FontSize" Value="12" />
+            </Style>
 
-      <Style x:Key="VideoPlayerContent" BasedOn="{StaticResource CommonSecondaryLabel}" TargetType="Label">
-        <Setter Property="FontSize" Value="12" />
-      </Style>
+            <Style x:Key="VideoPlayerContent" BasedOn="{StaticResource CommonSecondaryLabel}" TargetType="Label">
+                <Setter Property="FontSize" Value="12" />
+            </Style>
 
-      <OnPlatform x:Key="IconToolbarItemColor" x:TypeArguments="Color">
-        <OnPlatform.iOS>Default</OnPlatform.iOS>
-        <OnPlatform.Android>White</OnPlatform.Android>
-      </OnPlatform>
-    </ResourceDictionary>
-  </Application.Resources>
+            <OnPlatform x:Key="IconToolbarItemColor" x:TypeArguments="Color">
+                <OnPlatform.iOS>Default</OnPlatform.iOS>
+                <OnPlatform.Android>White</OnPlatform.Android>
+            </OnPlatform>
+        </ResourceDictionary>
+    </Application.Resources>
 </unity:PrismApplication>

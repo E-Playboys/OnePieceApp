@@ -48,7 +48,7 @@ namespace OnePiece.Web.Controllers
         // GET: MangaPage/Create
         public IActionResult Create()
         {
-            ViewData["MangaId"] = new SelectList(_context.Manga, "Id", "Id");
+            ViewData["MangaId"] = new SelectList(_context.Mangas, "Id", "Id");
             return View();
         }
 
@@ -65,7 +65,7 @@ namespace OnePiece.Web.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["MangaId"] = new SelectList(_context.Manga, "Id", "Id", mangaPage.MangaId);
+            ViewData["MangaId"] = new SelectList(_context.Mangas, "Id", "Id", mangaPage.MangaId);
             return View(mangaPage);
         }
 
@@ -82,7 +82,7 @@ namespace OnePiece.Web.Controllers
             {
                 return NotFound();
             }
-            ViewData["MangaId"] = new SelectList(_context.Manga, "Id", "ChapterNumber", mangaPage.MangaId);
+            ViewData["MangaId"] = new SelectList(_context.Mangas, "Id", "ChapterNumber", mangaPage.MangaId);
             return View(mangaPage);
         }
 
@@ -118,7 +118,7 @@ namespace OnePiece.Web.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["MangaId"] = new SelectList(_context.Manga, "Id", "Id", mangaPage.MangaId);
+            ViewData["MangaId"] = new SelectList(_context.Mangas, "Id", "Id", mangaPage.MangaId);
             return View(mangaPage);
         }
 
