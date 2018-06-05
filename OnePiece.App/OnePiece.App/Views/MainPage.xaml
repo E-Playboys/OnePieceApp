@@ -13,11 +13,7 @@
     <views:NewsFeedPage />
     <views:AnimePage />
     <views:MangaPage />
-    <ContentPage Title="Video" Icon="typcn-social-youtube">
-        <StackLayout>
-            <Label Text="Đang phát triển..." />
-        </StackLayout>
-    </ContentPage>
+    <views:PersonalPage />
 
     <!--<controls:TabNavigationPage Icon="typcn-news" Title="News Feed">
     <x:Arguments>

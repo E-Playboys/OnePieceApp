@@ -13,6 +13,7 @@ using OnePiece.App.DataServices.Anime;
 using OnePiece.App.DataServices.Manga;
 using OnePiece.App.DataServices.NewsFeed;
 using OnePiece.App.DataServices.Season;
+using OnePiece.App.LocalData;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace OnePiece.App
@@ -54,6 +55,8 @@ namespace OnePiece.App
             containerRegistry.Register<ISeasonApiService, SeasonApiService>();
             containerRegistry.Register<IAnimeApiService, AnimeApiService>();
             containerRegistry.Register<IMangaApiService, MangaApiService>();
+
+            containerRegistry.RegisterSingleton<IAppDataStorage, AppDataStorage>();
         }
 
         protected override void OnStart()

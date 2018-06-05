@@ -20,6 +20,10 @@ namespace OnePiece.Web.Data.Entities
 
         public List<Manga> Chapters { get; set; }
 
+        public string EpisodeRange { get; set; }
+
+        public List<Anime> Episodes { get; set; }
+
         public VolumeType VolumeType { get; set; }
     }
 

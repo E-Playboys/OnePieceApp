@@ -19,6 +19,17 @@ namespace OnePiece.Web.Controllers.Api
         }
 
         [HttpGet]
+        [Route("Get")]
+        public async Task<IActionResult> Get(int id)
+        {
+            var anime = await _dbContext.Episodes.Where(x => x.Id == id)
+                .Include(x => x.Medias)
+                .FirstOrDefaultAsync();
+
+            return Json(anime);
+        }
+
+        [HttpGet]
         [Route("ListBySeason")]
         public async Task<IActionResult> ListBySeason(ListEpisodeBySeasonRequest rq)
         {

@@ -61,7 +61,7 @@ namespace OnePiece.App.ViewModels
 
         private async Task ExecuteSelectAnimeCommandAsync(Anime anime)
         {
-            await PopupNavigation.PushAsync(new VideoPlayerPage(anime, "stories"));
+            await PopupNavigation.PushAsync(new VideoPlayerPage(anime.Id, "stories"));
         }
 
         public async Task LoadAsync(bool refresh = false)

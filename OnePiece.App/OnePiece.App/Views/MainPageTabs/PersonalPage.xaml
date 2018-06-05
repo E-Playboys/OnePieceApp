@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<controls:TabContentPage x:Class="OnePiece.App.Views.PersonalPage"
+                         xmlns="http://xamarin.com/schemas/2014/forms"
+                         xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                         xmlns:controls="clr-namespace:OnePiece.App.Controls;assembly=OnePiece.App"
+                         xmlns:converters="clr-namespace:OnePiece.App.Converters;assembly=OnePiece.App"
+                         xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+                         xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+                         x:Name="CurrentPage"
+                         Title="Personal"
+                         prism:ViewModelLocator.AutowireViewModel="True"
+                         Icon="typcn-folder">
+    <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+        <ActivityIndicator IsRunning="{Binding IsBusy}" VerticalOptions="CenterAndExpand" />
+        <StackLayout Padding="1" BackgroundColor="#dcdcdc" Spacing="0">
+            <StackLayout Style="{StaticResource VideoPlayerPanel}">
+                <Label Style="{StaticResource VideoPlayerPanelHeader}" Text="Recent Animes" />
+                <controls:HorizontalListView ItemsSource="{Binding RecentAnimes}">
+                    <controls:HorizontalListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout WidthRequest="200">
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding BindingContext.SelectAnimeCommand, Source={x:Reference CurrentPage}}" CommandParameter="{Binding .}" />
+                                </StackLayout.GestureRecognizers>
+
+                                <ffimage:CachedImage Aspect="AspectFit" Source="{Binding Cover}" />
+                                <Label FontSize="14" HorizontalOptions="FillAndExpand" Style="{StaticResource CommonLabel}" Text="{Binding Title}" />
+                                <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal">
+                                    <Label FontSize="12" HorizontalOptions="Start" Style="{StaticResource CommonLabel}" Text="{Binding EpisodeNumber, StringFormat='Episode {0}'}" />
+                                    <Label FontSize="12" HorizontalOptions="EndAndExpand" Style="{StaticResource CommonSecondaryLabel}" Text="{Binding ViewCount, StringFormat='{0} views'}" />
+                                </StackLayout>
+                            </StackLayout>
+                        </DataTemplate>
+                    </controls:HorizontalListView.ItemTemplate>
+                </controls:HorizontalListView>
+            </StackLayout>
+        </StackLayout>
+    </Grid>
+</controls:TabContentPage>

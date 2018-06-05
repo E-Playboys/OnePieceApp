@@ -217,9 +217,13 @@ namespace OnePiece.Web.Migrations
 
                     b.Property<int?>("ViewCount");
 
+                    b.Property<int?>("VolumeId");
+
                     b.HasKey("Id");
 
                     b.HasIndex("SeasonId");
+
+                    b.HasIndex("VolumeId");
 
                     b.ToTable("Episodes");
                 });
@@ -375,15 +379,17 @@ namespace OnePiece.Web.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Avatar");
-
                     b.Property<string>("ChapterRange");
+
+                    b.Property<string>("Cover");
 
                     b.Property<string>("Description");
 
                     b.Property<string>("DescriptionEng");
 
                     b.Property<string>("EpisodeRange");
+
+                    b.Property<string>("Poster");
 
                     b.Property<int>("SeasonNumber");
 
@@ -407,6 +413,8 @@ namespace OnePiece.Web.Migrations
 
                     b.Property<string>("DescriptionEng");
 
+                    b.Property<string>("EpisodeRange");
+
                     b.Property<string>("Poster");
 
                     b.Property<string>("Title");
@@ -414,6 +422,8 @@ namespace OnePiece.Web.Migrations
                     b.Property<string>("TitleEng");
 
                     b.Property<int>("VolumeNumber");
+
+                    b.Property<int>("VolumeType");
 
                     b.HasKey("Id");
 
@@ -470,6 +480,10 @@ namespace OnePiece.Web.Migrations
                     b.HasOne("OnePiece.Web.Data.Entities.Season", "Season")
                         .WithMany("Episodes")
                         .HasForeignKey("SeasonId");
+
+                    b.HasOne("OnePiece.Web.Data.Entities.Volume")
+                        .WithMany("Episodes")
+                        .HasForeignKey("VolumeId");
                 });
 
             modelBuilder.Entity("OnePiece.Web.Data.Entities.Manga", b =>

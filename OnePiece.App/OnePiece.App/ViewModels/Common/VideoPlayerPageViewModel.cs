@@ -7,6 +7,7 @@ using FormsPlugin.Iconize;
 using OnePiece.App.DataModels;
 using OnePiece.App.DataServices.Anime;
 using OnePiece.App.DataServices.Season;
+using OnePiece.App.LocalData;
 using OnePiece.App.Services;
 using OnePiece.App.Utilities;
 using OnePiece.App.Views;
@@ -18,8 +19,11 @@ namespace OnePiece.App.ViewModels
 {
     public class VideoPlayerPageViewModel : BaseViewModel
     {
+        private readonly IAppDataStorage _appDataStorage;
         private readonly ISeasonApiService _seasonService;
         private readonly IAnimeApiService _animeService;
+
+        public int AnimeId { get; set; }
 
         private Anime _anime;
         public Anime Anime
@@ -59,7 +63,7 @@ namespace OnePiece.App.ViewModels
         public DelegateCommand<Anime> SelectAnimeCommand { get; set; }
         public DelegateCommand<Season> SelectSeasonCommand { get; set; }
 
-        public VideoPlayerPageViewModel(IAppService appService, IAnimeApiService animeService, ISeasonApiService seasonService) : base(appService)
+        public VideoPlayerPageViewModel(IAppService appService, IAppDataStorage appDataStorage, IAnimeApiService animeService, ISeasonApiService seasonService) : base(appService)
         {
             SelectAnimeCommand = new DelegateCommand<Anime>((anime) => Anime = anime);
             SelectSeasonCommand = new DelegateCommand<Season>(async(season) => {
@@ -106,6 +110,7 @@ namespace OnePiece.App.ViewModels
             });
             _seasonService = seasonService;
             _animeService = animeService;
+            _appDataStorage = appDataStorage;
         }
 
         public async Task LoadAsync()
@@ -114,6 +119,14 @@ namespace OnePiece.App.ViewModels
                 return;
 
             IsBusy = true;
+
+            var anime = await _animeService.GetAsync(AnimeId);
+            if(anime != null)
+            {
+                Anime = anime;
+
+                _appDataStorage.SaveAnime(new Models.Anime() { Id = Anime.Id, Title = Anime.Title, EpisodeNumber = Anime.EpisodeNumber, Cover = Anime.Cover, ViewCount = Anime.ViewCount });
+            }
 
             List<Anime> animes = null;
             switch (AnimeType.ToLower())
