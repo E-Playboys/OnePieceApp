@@ -1,5 +1,5 @@
 ﻿using Newtonsoft.Json;
-using OnePiece.App.Models;
+using OnePiece.App.DataModels;
 using SQLite;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +14,9 @@ namespace OnePiece.App.LocalData
 
         List<Anime> GetAnimes();
         void SaveAnime(Anime anime);
+
+        List<Manga> GetMangas();
+        void SaveManga(Manga manga);
     }
 
     public class AppDataStorage : IAppDataStorage
@@ -28,6 +31,7 @@ namespace OnePiece.App.LocalData
             _dbContext = sqliteProvider.GetConnection("AppDb");
             _dbContext.CreateTable<AppData>();
             _dbContext.CreateTable<Anime>();
+            _dbContext.CreateTable<Manga>();
         }
 
         public AppData GetAppData()
@@ -65,6 +69,27 @@ namespace OnePiece.App.LocalData
             else
             {
                 _dbContext.Update(anime);
+            }
+        }
+
+        public List<Manga> GetMangas()
+        {
+            var mangas = _dbContext.Table<Manga>().ToList();
+
+            return mangas;
+        }
+
+        public void SaveManga(Manga manga)
+        {
+            var mangas = _dbContext.Table<Manga>().ToList();
+
+            if (!mangas.Any(x => x.Id == manga.Id))
+            {
+                _dbContext.Insert(manga);
+            }
+            else
+            {
+                _dbContext.Update(manga);
             }
         }
     }

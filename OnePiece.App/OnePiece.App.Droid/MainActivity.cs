@@ -33,7 +33,7 @@ namespace OnePiece.App.Droid
             base.OnCreate(bundle);
 
             UserDialogs.Init(this);
-            FFImageLoading.Forms.Droid.CachedImageRenderer.Init(true);
+            FFImageLoading.Forms.Platform.CachedImageRenderer.Init(true);
             IconControls.Init(Resource.Id.toolbar, Resource.Id.sliding_tabs);
             Plugin.Iconize.Iconize
                 .With(new MaterialModule())

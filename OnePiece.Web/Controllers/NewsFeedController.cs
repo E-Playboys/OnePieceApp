@@ -56,7 +56,7 @@ namespace OnePiece.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Title,TitleEng,Description,DescriptionEng,LinkTo,LinkToId,Id")] NewsFeed newsFeed)
+        public async Task<IActionResult> Create([Bind("Title,TitleEng,Description,DescriptionEng,ColumnCount,LinkTo,LinkToId,Id")] NewsFeed newsFeed)
         {
             if (ModelState.IsValid)
             {
@@ -92,7 +92,7 @@ namespace OnePiece.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Title,TitleEng,Description,DescriptionEng,LinkTo,LinkToId,Id")] NewsFeed newsFeed)
+        public async Task<IActionResult> Edit(int id, [Bind("Title,TitleEng,Description,DescriptionEng,ColumnCount,LinkTo,LinkToId,Id")] NewsFeed newsFeed)
         {
             if (id != newsFeed.Id)
             {

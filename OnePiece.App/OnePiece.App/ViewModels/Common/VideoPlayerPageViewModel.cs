@@ -23,8 +23,6 @@ namespace OnePiece.App.ViewModels
         private readonly ISeasonApiService _seasonService;
         private readonly IAnimeApiService _animeService;
 
-        public int AnimeId { get; set; }
-
         private Anime _anime;
         public Anime Anime
         {
@@ -120,13 +118,7 @@ namespace OnePiece.App.ViewModels
 
             IsBusy = true;
 
-            var anime = await _animeService.GetAsync(AnimeId);
-            if(anime != null)
-            {
-                Anime = anime;
-
-                _appDataStorage.SaveAnime(new Models.Anime() { Id = Anime.Id, Title = Anime.Title, EpisodeNumber = Anime.EpisodeNumber, Cover = Anime.Cover, ViewCount = Anime.ViewCount });
-            }
+            _appDataStorage.SaveAnime(Anime);
 
             List<Anime> animes = null;
             switch (AnimeType.ToLower())

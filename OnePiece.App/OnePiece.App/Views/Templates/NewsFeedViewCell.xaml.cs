@@ -22,7 +22,8 @@ namespace OnePiece.App.Views.Templates
                 var media = context.Medias.FirstOrDefault();
                 if(media != null)
                 {
-                    MediaPanel.RowHeight = (Convert.ToInt32(App.ScreenWidth) * media.Height / media.Width) - 10; 
+                    var columnCount = context.ColumnCount > 0 ? context.ColumnCount : 1;
+                    MediaPanel.RowHeight = (Convert.ToInt32(App.ScreenWidth / columnCount) * media.Height / media.Width) - 10; 
                 }
             }
         }

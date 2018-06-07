@@ -13,7 +13,7 @@ namespace OnePiece.App.Views
     {
         private readonly VideoPlayerPageViewModel _context;
 
-        public VideoPlayerPage(int animeId, string animeType)
+        public VideoPlayerPage(Anime anime, string animeType)
         {
             InitializeComponent();
 
@@ -22,7 +22,7 @@ namespace OnePiece.App.Views
             _context = BindingContext as VideoPlayerPageViewModel;
             if (_context != null)
             {
-                _context.AnimeId = animeId;
+                _context.Anime = anime;
                 _context.AnimeType = animeType;
             }
         }

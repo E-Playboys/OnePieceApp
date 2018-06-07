@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SQLite;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,7 @@ namespace OnePiece.App.DataModels
 {
     public class Anime
     {
+        [PrimaryKey]
         public int Id { get; set; }
 
         public int EpisodeNumber { get; set; }
@@ -36,6 +38,9 @@ namespace OnePiece.App.DataModels
 
         public string Poster { get; set; }
 
+        public string Links { get; set; }
+
+        [Ignore]
         public List<Media> Medias { get; set; }
 
         public int? SeasonId { get; set; }

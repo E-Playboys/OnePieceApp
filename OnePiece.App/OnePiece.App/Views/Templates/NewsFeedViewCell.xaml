@@ -4,7 +4,8 @@
           xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
           xmlns:controls="clr-namespace:OnePiece.App.Controls;assembly=OnePiece.App"
           xmlns:converters="clr-namespace:OnePiece.App.Converters;assembly=OnePiece.App"
-          xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+          xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+          xmlns:flv="clr-namespace:DLToolkit.Forms.Controls;assembly=DLToolkit.Forms.Controls.FlowListView"
           xmlns:iconize="clr-namespace:FormsPlugin.Iconize;assembly=FormsPlugin.Iconize"
           xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
           xmlns:rox="clr-namespace:Rox;assembly=Rox.Xamarin.Video.Portable"
@@ -17,7 +18,7 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <ListView x:Name="MediaPanel"
+        <!--<ListView x:Name="MediaPanel"
                   Grid.Row="0"
                   Margin="0,0,0,10"
                   BackgroundColor="LightGray"
@@ -32,7 +33,31 @@
                     <templates:CachedImageViewCell />
                 </DataTemplate>
             </ListView.ItemTemplate>
-        </ListView>
+        </ListView>-->
+
+        <flv:FlowListView x:Name="MediaPanel"
+                          Grid.Row="0"
+                          Margin="0,0,0,10"
+                          BackgroundColor="LightGray"
+                          FlowColumnCount="{Binding ColumnCount}"
+                          FlowColumnExpand="None"
+                          FlowItemsSource="{Binding Medias}"
+                          FlowUseAbsoluteLayoutInternally="false"
+                          HorizontalOptions="FillAndExpand"
+                          SeparatorVisibility="None">
+            <x:Arguments>
+                <ListViewCachingStrategy>RecycleElement</ListViewCachingStrategy>
+            </x:Arguments>
+            <flv:FlowListView.FlowColumnTemplate>
+                <DataTemplate>
+                    <ff:CachedImage x:Name="CachedImage"
+                                    Aspect="AspectFill"
+                                    HorizontalOptions="FillAndExpand"
+                                    Source="{Binding Url}"
+                                    VerticalOptions="FillAndExpand" />
+                </DataTemplate>
+            </flv:FlowListView.FlowColumnTemplate>
+        </flv:FlowListView>
 
         <Grid Grid.Row="1" ColumnSpacing="0" RowSpacing="0">
             <Grid.RowDefinitions>
@@ -44,19 +69,19 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <forms:CachedImage x:Name="Avatar"
-                               Grid.Row="0"
-                               Grid.RowSpan="2"
-                               Grid.Column="0"
-                               Aspect="AspectFill"
-                               HeightRequest="40"
-                               Source="icon"
-                               VerticalOptions="Start"
-                               WidthRequest="40">
-                <forms:CachedImage.Transformations>
+            <ff:CachedImage x:Name="Avatar"
+                            Grid.Row="0"
+                            Grid.RowSpan="2"
+                            Grid.Column="0"
+                            Aspect="AspectFill"
+                            HeightRequest="40"
+                            Source="icon"
+                            VerticalOptions="Start"
+                            WidthRequest="40">
+                <ff:CachedImage.Transformations>
                     <transformations:CircleTransformation />
-                </forms:CachedImage.Transformations>
-            </forms:CachedImage>
+                </ff:CachedImage.Transformations>
+            </ff:CachedImage>
 
             <Label Grid.Row="0"
                    Grid.Column="1"

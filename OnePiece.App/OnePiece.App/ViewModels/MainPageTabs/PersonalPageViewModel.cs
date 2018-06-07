@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OnePiece.App.LocalData;
-using OnePiece.App.Models;
+using OnePiece.App.DataModels;
 using OnePiece.App.Services;
 using Prism.Commands;
 using OnePiece.App.Views;
@@ -25,17 +25,31 @@ namespace OnePiece.App.ViewModels
             set { SetProperty(ref _recentAnimes, value); }
         }
 
+        private ObservableRangeCollection<Manga> _recentMangas;
+        public ObservableRangeCollection<Manga> RecentMangas
+        {
+            get { return _recentMangas ?? (_recentMangas = new ObservableRangeCollection<Manga>()); }
+            set { SetProperty(ref _recentMangas, value); }
+        }
+
         public DelegateCommand<Anime> SelectAnimeCommand { get; set; }
+        public DelegateCommand<Manga> SelectMangaCommand { get; set; }
 
         public PersonalPageViewModel(IAppService appService, IAppDataStorage appDataStorage) : base(appService)
         {
             _appDataStorage = appDataStorage;
             SelectAnimeCommand = new DelegateCommand<Anime>(async (anime) => await ExecuteSelectAnimeCommandAsync(anime));
+            SelectMangaCommand = new DelegateCommand<Manga>(async (manga) => await ExecuteSelectMangaCommandAsync(manga));
         }
 
         private async Task ExecuteSelectAnimeCommandAsync(Anime anime)
         {
-            await PopupNavigation.PushAsync(new VideoPlayerPage(anime.Id, "stories"));
+            await PopupNavigation.PushAsync(new VideoPlayerPage(anime, "stories"));
+        }
+
+        private async Task ExecuteSelectMangaCommandAsync(Manga manga)
+        {
+            await PopupNavigation.PushAsync(new MangaReaderPage(manga.ChapterNumber));
         }
 
         public void LoadData()
@@ -48,6 +62,14 @@ namespace OnePiece.App.ViewModels
             {
                 RecentAnimes.Clear();
                 RecentAnimes.AddRange(animes);
+            }
+
+            var mangas = _appDataStorage.GetMangas();
+
+            if (mangas != null)
+            {
+                RecentMangas.Clear();
+                RecentMangas.AddRange(mangas);
             }
 
             IsBusy = false;

@@ -34,6 +34,23 @@
                     </controls:HorizontalListView.ItemTemplate>
                 </controls:HorizontalListView>
             </StackLayout>
+            <StackLayout Style="{StaticResource VideoPlayerPanel}">
+                <Label Style="{StaticResource VideoPlayerPanelHeader}" Text="Recent Mangas" />
+                <controls:HorizontalListView ItemsSource="{Binding RecentMangas}">
+                    <controls:HorizontalListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout Padding="5" Spacing="0" WidthRequest="100">
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding BindingContext.SelectMangaCommand, Source={x:Reference CurrentPage}}" CommandParameter="{Binding .}" />
+                                </StackLayout.GestureRecognizers>
+                                <ffimage:CachedImage Aspect="AspectFill" HeightRequest="150" Source="{Binding Poster}" />
+                                <Label FontSize="14" Style="{StaticResource CommonLabel}" Text="{Binding ChapterNumber, StringFormat='Chapter: {0}'}" VerticalOptions="Center" />
+                                <Label FontSize="12" Style="{StaticResource CommonSecondaryLabel}" Text="{Binding ViewCount, StringFormat='{0} views'}" VerticalOptions="Center" />
+                            </StackLayout>
+                        </DataTemplate>
+                    </controls:HorizontalListView.ItemTemplate>
+                </controls:HorizontalListView>
+            </StackLayout>
         </StackLayout>
     </Grid>
 </controls:TabContentPage>

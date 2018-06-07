@@ -89,7 +89,7 @@ namespace OnePiece.App.Views.Templates
             }
             if (propertyName == "Anime")
             {
-                VideoView.Source = Anime.Medias[0]?.Url;
+                VideoView.Source = Anime.Links;
                 PlaybackController.Play();
             }
         }

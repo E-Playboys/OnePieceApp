@@ -234,7 +234,7 @@ namespace OnePiece.App.Droid.Renderers
             {
                 // As we show and hide pages manually OnAppearing and OnDisappearing
                 // workflow methods won't be called by the framework. Calling them manually...
-                var basePage = _currentPage as TabNavigationPage;
+                var basePage = _currentPage as TabContentPage;
                 basePage?.SendAppearing();
             }
 
@@ -245,7 +245,7 @@ namespace OnePiece.App.Droid.Renderers
         {
             if (_currentPage != null)
             {
-                var basePage = _currentPage as TabNavigationPage;
+                var basePage = _currentPage as TabContentPage;
                 basePage?.SendDisappearing();
 
                 var renderer = Platform.GetRenderer(_currentPage);

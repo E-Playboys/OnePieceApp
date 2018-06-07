@@ -24,7 +24,7 @@ namespace OnePiece.App.iOS
         {
             App.ScreenWidth = (int)UIScreen.MainScreen.Bounds.Width;
 
-            FFImageLoading.Forms.Touch.CachedImageRenderer.Init();
+            FFImageLoading.Forms.Platform.CachedImageRenderer.Init();
             Plugin.Iconize.Iconize.With(new Plugin.Iconize.Fonts.MaterialModule()).With(new Plugin.Iconize.Fonts.TypiconsModule());
             FormsPlugin.Iconize.iOS.IconControls.Init();
             Rox.VideoIos.Init();

@@ -5,7 +5,7 @@
 #if DEBUG
         public const string WEB_API_URL = "http://10.164.0.49:1412/api";
 #else
-        public const string WEB_API_URL = "";
+        public const string WEB_API_URL = "http://opwk.azurewebsites.net/api";
 #endif
     }
 }

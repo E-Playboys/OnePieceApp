@@ -4,12 +4,12 @@ namespace OnePiece.App.Controls
 {
     public class TabContentPage : ContentPage
     {
-        public void SendAppearing()
+        public new void SendAppearing()
         {
             OnAppearing();
         }
 
-        public void SendDisappearing()
+        public new void SendDisappearing()
         {
             OnDisappearing();
         }

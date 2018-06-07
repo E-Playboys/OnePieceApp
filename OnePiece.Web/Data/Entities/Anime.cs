@@ -35,6 +35,8 @@ namespace OnePiece.Web.Data.Entities
 
         public string Source { get; set; }
 
+        public string Links { get; set; }
+
         public List<Media> Medias { get; set; }
 
         public int? SeasonId { get; set; }

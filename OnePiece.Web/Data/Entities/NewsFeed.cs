@@ -15,6 +15,8 @@ namespace OnePiece.Web.Data.Entities
 
         public List<Media> Medias { get; set; }
 
+        public int ColumnCount { get; set; }
+
         public LinkTo? LinkTo { get; set; }
 
         public int? LinkToId { get; set; }

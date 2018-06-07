@@ -70,6 +70,11 @@
         <span asp-validation-for="Cover" class="text-danger"></span>
       </div>
       <div class="form-group">
+        <label asp-for="Links" class="control-label"></label>
+        <textarea asp-for="Links" class="form-control"></textarea>
+        <span asp-validation-for="Links" class="text-danger"></span>
+      </div>
+      <div class="form-group">
         <label asp-for="Type" class="control-label"></label>
         <select asp-for="Type" class="form-control" asp-items="ViewBag.AnimeTypeSelectList"></select>
         <span asp-validation-for="Type" class="text-danger"></span>

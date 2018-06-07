@@ -11,15 +11,5 @@ namespace OnePiece.App.Controls
         {
             _root = root as TabContentPage;
         }
-
-        public void SendAppearing()
-        {
-            _root?.SendAppearing();
-        }
-
-        public void SendDisappearing()
-        {
-            _root?.SendDisappearing();
-        }
     }
 }

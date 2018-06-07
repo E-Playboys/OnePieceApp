@@ -8,11 +8,13 @@ using System.Threading.Tasks;
 using OnePiece.App.DataServices.Manga;
 using Plugin.DeviceInfo;
 using OnePiece.App.Utilities;
+using OnePiece.App.LocalData;
 
 namespace OnePiece.App.ViewModels
 {
     public class MangaReaderPageViewModel : BaseViewModel
     {
+        private readonly IAppDataStorage _appDataStorage;
         private readonly IMangaApiService _mangaService;
 
         private Manga _manga;
@@ -72,13 +74,14 @@ namespace OnePiece.App.ViewModels
         public DelegateCommand NextChapterCommand { get; set; }
         public DelegateCommand PrevChapterCommand { get; set; }
 
-        public MangaReaderPageViewModel(IAppService appService, IMangaApiService mangaService) : base(appService)
+        public MangaReaderPageViewModel(IAppService appService, IAppDataStorage appDataStorage, IMangaApiService mangaService) : base(appService)
         {
             ToggleControlCommand = new DelegateCommand(ExecuteToggleControlCommand, CanExecuteCommand);
             ToggleCardsViewCommand = new DelegateCommand(ExecuteToggleCardsViewCommand, CanExecuteCommand);
             NextChapterCommand = new DelegateCommand(async () => await ExecuteNextChapterCommand(), CanExecuteCommand);
             PrevChapterCommand = new DelegateCommand(async () => await ExecutePrevChapterCommand(), CanExecuteCommand);
 
+            _appDataStorage = appDataStorage;
             _mangaService = mangaService;
         }
 
@@ -89,6 +92,8 @@ namespace OnePiece.App.ViewModels
             var manga = await _mangaService.GetByChapterNumberAsync(CurrentMangaChapterNumber, next, previous);
             if(manga != null)
             {
+                _appDataStorage.SaveManga(manga);
+
                 Manga = manga;
                 CurrentMangaChapterNumber = manga.ChapterNumber;
 

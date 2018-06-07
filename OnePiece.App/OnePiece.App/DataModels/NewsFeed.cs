@@ -18,6 +18,8 @@ namespace OnePiece.App.DataModels
 
         public string DescriptionEng { get; set; }
 
+        public int ColumnCount { get; set; }
+
         public List<Media> Medias { get; set; }
 
         public LinkTo LinkTo { get; set; }
