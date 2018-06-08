@@ -6,8 +6,9 @@
              xmlns:converters="clr-namespace:OnePiece.App.Converters;assembly=OnePiece.App"
              xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:iconize="clr-namespace:FormsPlugin.Iconize;assembly=FormsPlugin.Iconize"
-             xmlns:mm="clr-namespace:Plugin.MediaManager.Forms;assembly=Plugin.MediaManager.Forms"
-             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms">
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             xmlns:videoLibrary="clr-namespace:OnePiece.App.Controls.VideoLibrary;assembly=OnePiece.App"
+             x:Name="VideoPlayerView">
 
     <Grid x:Name="Main"
           ColumnSpacing="0"
@@ -18,7 +19,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <mm:VideoView x:Name="VideoView"
+        <!--<mm:VideoView x:Name="VideoView"
                       Grid.Row="0"
                       AspectMode="AspectFill"
                       HorizontalOptions="FillAndExpand"
@@ -26,18 +27,39 @@
             <mm:VideoView.GestureRecognizers>
                 <TapGestureRecognizer Tapped="VideoView_Tapped" />
             </mm:VideoView.GestureRecognizers>
-        </mm:VideoView>
+        </mm:VideoView>-->
 
-        <ActivityIndicator x:Name="ActivityIndicator" Grid.Row="0" VerticalOptions="CenterAndExpand" />
+        <videoLibrary:VideoPlayer x:Name="VideoPlayer"
+                                  Grid.Row="0"
+                                  AreTransportControlsEnabled="False"
+                                  HorizontalOptions="FillAndExpand"
+                                  Source="{Binding Anime.Links}"
+                                  VerticalOptions="FillAndExpand">
+            <videoLibrary:VideoPlayer.GestureRecognizers>
+                <TapGestureRecognizer Tapped="VideoView_Tapped" />
+            </videoLibrary:VideoPlayer.GestureRecognizers>
+        </videoLibrary:VideoPlayer>
+
+        <ActivityIndicator Grid.Row="0" IsVisible="False" VerticalOptions="CenterAndExpand">
+            <ActivityIndicator.Triggers>
+                <DataTrigger Binding="{Binding Source={x:Reference VideoPlayer}, Path=Status}" TargetType="ActivityIndicator" Value="{x:Static videoLibrary:VideoStatus.NotReady}">
+                    <Setter Property="IsVisible" Value="True" />
+                    <Setter Property="IsRunning" Value="True" />
+                </DataTrigger>
+            </ActivityIndicator.Triggers>
+        </ActivityIndicator>
+
+        <!--<ActivityIndicator x:Name="ActivityIndicator" Grid.Row="0" VerticalOptions="CenterAndExpand" />-->
 
         <StackLayout x:Name="VideoControl"
                      Grid.Row="0"
                      Padding="10,0,10,0"
+                     BindingContext="{x:Reference VideoPlayer}"
                      HeightRequest="50"
                      Orientation="Horizontal"
                      Spacing="10"
                      VerticalOptions="End">
-            <iconize:IconLabel x:Name="PlayButton"
+            <iconize:IconLabel x:Name="PlayPauseButton"
                                FontSize="40"
                                HorizontalOptions="Center"
                                Text="md-play-circle-filled"
@@ -46,9 +68,14 @@
                 <iconize:IconLabel.GestureRecognizers>
                     <TapGestureRecognizer Tapped="PlayPauseClicked" />
                 </iconize:IconLabel.GestureRecognizers>
+                <iconize:IconLabel.Triggers>
+                    <DataTrigger Binding="{Binding Status}" TargetType="iconize:IconLabel" Value="{x:Static videoLibrary:VideoStatus.Playing}">
+                        <Setter Property="Text" Value="md-pause-circle-filled" />
+                    </DataTrigger>
+                </iconize:IconLabel.Triggers>
             </iconize:IconLabel>
 
-            <iconize:IconLabel x:Name="PauseButton"
+            <!--<iconize:IconLabel x:Name="PauseButton"
                                FontSize="40"
                                HorizontalOptions="Center"
                                IsVisible="False"
@@ -58,25 +85,35 @@
                 <iconize:IconLabel.GestureRecognizers>
                     <TapGestureRecognizer Tapped="PlayPauseClicked" />
                 </iconize:IconLabel.GestureRecognizers>
-            </iconize:IconLabel>
+            </iconize:IconLabel>-->
 
             <Label x:Name="Position"
                    FontSize="14"
                    HorizontalOptions="Start"
-                   Text="00:00"
+                   Text="{Binding Path=Position, StringFormat='{0:h\\:mm\\:ss}'}"
                    TextColor="White"
                    VerticalOptions="CenterAndExpand" />
 
-            <controls:Seeker x:Name="ProgressBar"
+            <!--<controls:Seeker x:Name="ProgressBar"
                              HorizontalOptions="FillAndExpand"
+                             Maximum="{Binding Path=Duration}"
                              TouchDown="ProgressBar_TouchDown"
                              TouchUp="ProgressBar_TouchUp"
-                             VerticalOptions="CenterAndExpand" />
+                             VerticalOptions="CenterAndExpand"
+                             Value="{Binding Path=Position}" />-->
+
+            <videoLibrary:PositionSlider HorizontalOptions="FillAndExpand" Position="{Binding Path=Position}" VerticalOptions="CenterAndExpand" Duration="{Binding Path=Duration}">
+                <videoLibrary:PositionSlider.Triggers>
+                    <DataTrigger Binding="{Binding Status}" TargetType="videoLibrary:PositionSlider" Value="{x:Static videoLibrary:VideoStatus.NotReady}">
+                        <Setter Property="IsEnabled" Value="False" />
+                    </DataTrigger>
+                </videoLibrary:PositionSlider.Triggers>
+            </videoLibrary:PositionSlider>
 
             <Label x:Name="Duration"
                    FontSize="14"
                    HorizontalOptions="End"
-                   Text="00:00"
+                   Text="{Binding Path=TimeToEnd, StringFormat='{0:h\\:mm\\:ss}'}"
                    TextColor="White"
                    VerticalOptions="CenterAndExpand" />
 
@@ -87,22 +124,28 @@
                                TextColor="White"
                                VerticalOptions="CenterAndExpand">
                 <iconize:IconLabel.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="FullScreenClicked" />
+                    <TapGestureRecognizer Tapped="ToggleFullScreenClicked" />
                 </iconize:IconLabel.GestureRecognizers>
             </iconize:IconLabel>
 
-            <iconize:IconLabel FontSize="24"
+            <iconize:IconLabel BindingContext="{x:Reference VideoPlayerView}"
+                               FontSize="24"
                                HorizontalOptions="Center"
-                               IsVisible="{Binding IsFullScreen, Converter={x:Static converters:InverseBoolConverter.Instance}}"
                                Text="md-fullscreen"
                                TextColor="White"
                                VerticalOptions="CenterAndExpand">
                 <iconize:IconLabel.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="FullScreenClicked" />
+                    <TapGestureRecognizer Tapped="ToggleFullScreenClicked" />
                 </iconize:IconLabel.GestureRecognizers>
+
+                <iconize:IconLabel.Triggers>
+                    <DataTrigger Binding="{Binding IsFullScreen}" TargetType="iconize:IconLabel" Value="True">
+                        <Setter Property="Text" Value="md-fullscreen-exit" />
+                    </DataTrigger>
+                </iconize:IconLabel.Triggers>
             </iconize:IconLabel>
 
-            <iconize:IconLabel FontSize="24"
+            <!--<iconize:IconLabel FontSize="24"
                                HorizontalOptions="Center"
                                IsVisible="{Binding IsFullScreen}"
                                Text="md-fullscreen-exit"
@@ -111,7 +154,7 @@
                 <iconize:IconLabel.GestureRecognizers>
                     <TapGestureRecognizer Tapped="FullScreenExitClicked" />
                 </iconize:IconLabel.GestureRecognizers>
-            </iconize:IconLabel>
+            </iconize:IconLabel>-->
         </StackLayout>
     </Grid>
 </ContentView>

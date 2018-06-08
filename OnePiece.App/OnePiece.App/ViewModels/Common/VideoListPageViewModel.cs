@@ -1,22 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using OnePiece.App.DataModels;
-using OnePiece.App.DataServices;
 using OnePiece.App.DataServices.Anime;
 using OnePiece.App.DataServices.Season;
 using OnePiece.App.Services;
 using OnePiece.App.Utilities;
 using OnePiece.App.Views;
 using Prism.Commands;
-using Plugin.MediaManager;
-using Plugin.MediaManager.Abstractions.Enums;
 using Rg.Plugins.Popup.Services;
-using Prism.Navigation;
-using FormsPlugin.Iconize;
 
 namespace OnePiece.App.ViewModels
 {

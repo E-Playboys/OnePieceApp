@@ -1,22 +1,18 @@
-﻿using System;
-using Acr.UserDialogs;
+﻿using Acr.UserDialogs;
 using Android.App;
 using Android.Content.PM;
 using Android.OS;
 using Android.Views;
-using Felipecsl.GifImageViewLibrary;
 using FormsPlugin.Iconize.Droid;
 using OnePiece.App.Droid.Helpers;
 using OnePiece.App.Droid.Renderers;
 using Plugin.Iconize.Fonts;
-using Prism.Unity;
 using XLabs.Ioc;
-using XLabs.Forms;
 using XLabs.Platform.Device;
-using Plugin.MediaManager;
 using Prism;
-using Unity;
 using Prism.Ioc;
+using System.Threading.Tasks;
+using Android.Content;
 
 namespace OnePiece.App.Droid
 {
@@ -25,6 +21,8 @@ namespace OnePiece.App.Droid
     {
         protected override void OnCreate(Bundle bundle)
         {
+            Current = this;
+
             App.ScreenWidth = (int)(Resources.DisplayMetrics.WidthPixels / Resources.DisplayMetrics.Density);
 
             TabLayoutResource = Resource.Layout.Tabbar;
@@ -55,6 +53,31 @@ namespace OnePiece.App.Droid
             if (!Resolver.IsSet)
             {
                 this.SetIoc();
+            }
+        }
+
+        // Field, properties, and method for Video Picker
+        public static MainActivity Current { private set; get; }
+
+        public static readonly int PickImageId = 1000;
+
+        public TaskCompletionSource<string> PickImageTaskCompletionSource { set; get; }
+
+        protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
+        {
+            base.OnActivityResult(requestCode, resultCode, data);
+
+            if (requestCode == PickImageId)
+            {
+                if ((resultCode == Result.Ok) && (data != null))
+                {
+                    // Set the filename as the completion of the Task
+                    PickImageTaskCompletionSource.SetResult(data.DataString);
+                }
+                else
+                {
+                    PickImageTaskCompletionSource.SetResult(null);
+                }
             }
         }
 

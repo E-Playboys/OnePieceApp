@@ -93,6 +93,8 @@
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
     <Compile Include="Providers\SQLiteProvider.cs" />
+    <Compile Include="Renderers\VideoLibrary\VideoPicker.cs" />
+    <Compile Include="Renderers\VideoLibrary\VideoPlayerRenderer.cs" />
     <Compile Include="Renderers\GradientStackLayoutRenderer.cs" />
     <Compile Include="Renderers\LinkLabelRenderer.cs" />
     <Compile Include="Renderers\SeekerRenderer.cs" />
